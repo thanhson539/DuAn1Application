@@ -1,0 +1,36 @@
+package md18202.nhom2.duan1application.DAO;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import md18202.nhom2.duan1application.DBHelper;
+import md18202.nhom2.duan1application.Model.LoaiSanPham;
+
+public class LoaiSanPhamDAO {
+
+    DBHelper dbHelper;
+
+    public LoaiSanPhamDAO(Context context) {
+        dbHelper = new DBHelper(context);
+    }
+
+    public ArrayList<LoaiSanPham> getDsLoaiSanPham(){
+        ArrayList<LoaiSanPham> listResult = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from LOAISANPHAM", null);
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                listResult.add(new LoaiSanPham(
+                        cursor.getString(1), //loaiSanPham_id
+                        cursor.getString(2)  //tenLoai
+                ));
+            }while (cursor.moveToNext());
+        }
+        return listResult;
+    }
+}
