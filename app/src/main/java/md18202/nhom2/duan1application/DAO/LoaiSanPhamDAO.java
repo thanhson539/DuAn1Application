@@ -26,8 +26,8 @@ public class LoaiSanPhamDAO {
             cursor.moveToFirst();
             do {
                 listResult.add(new LoaiSanPham(
-                        cursor.getString(1), //loaiSanPham_id
-                        cursor.getString(2)  //tenLoai
+                        cursor.getInt(0),    //loaiSanPham_id
+                        cursor.getString(1)  //tenLoai
                 ));
             }while (cursor.moveToNext());
         }

@@ -23,11 +23,11 @@ public class HoaDonChiTietDAO {
             cursor.moveToFirst();
             do {
                 listResult.add(new HoaDonChiTiet(
-                        cursor.getString(1), //hoaDonChiTiet_id
-                        cursor.getString(2), //hoaDon_id
-                        cursor.getString(3), //sanPham_id
-                        cursor.getInt(4),    //trangThaiDonHang
-                        cursor.getInt(5)     //trangThaiThanhToan
+                        cursor.getInt(0), //hoaDonChiTiet_id
+                        cursor.getInt(1), //hoaDon_id
+                        cursor.getInt(2), //sanPham_id
+                        cursor.getInt(3), //trangThaiDonHang
+                        cursor.getInt(4)  //trangThaiThanhToan
                 ));
             }while (cursor.moveToNext());
         }

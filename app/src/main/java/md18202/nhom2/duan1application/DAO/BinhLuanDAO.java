@@ -24,7 +24,8 @@ public class BinhLuanDAO {
             cursor.moveToFirst();
             do {
                 listResult.add(new BinhLuan(
-                        cursor.getString(1), //nguoiDung_id
+                        cursor.getInt(0),    //binhLuan_id
+                        cursor.getInt(1),    //nguoiDung_id
                         cursor.getString(2), //noiDung
                         cursor.getString(3)  //thoiGian
                 ));

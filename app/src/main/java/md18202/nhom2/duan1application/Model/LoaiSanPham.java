@@ -1,23 +1,23 @@
 package md18202.nhom2.duan1application.Model;
 
 public class LoaiSanPham {
-    private String loaiSanPham;
+    private int loaiSanPham_id;
     private String tenLoai;
 
-    public LoaiSanPham(String loaiSanPham, String tenLoai) {
-        this.loaiSanPham = loaiSanPham;
+    public LoaiSanPham(int loaiSanPham_id, String tenLoai) {
+        this.loaiSanPham_id = loaiSanPham_id;
         this.tenLoai = tenLoai;
     }
 
     public LoaiSanPham() {
     }
 
-    public String getLoaiSanPham() {
-        return loaiSanPham;
+    public int getLoaiSanPham_id() {
+        return loaiSanPham_id;
     }
 
-    public void setLoaiSanPham(String loaiSanPham) {
-        this.loaiSanPham = loaiSanPham;
+    public void setLoaiSanPham_id(int loaiSanPham_id) {
+        this.loaiSanPham_id = loaiSanPham_id;
     }
 
     public String getTenLoai() {

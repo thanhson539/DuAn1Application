@@ -24,13 +24,13 @@ public class SanPhamDAO {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
-                        cursor.getString(1), //sanPham_id
-                        cursor.getString(2), //loaiSanPham_id
-                        cursor.getString(3), //tenSanPham
-                        cursor.getString(4), //anhSanPham
-                        cursor.getInt(5),    //giaSanPham
-                        cursor.getString(6), //moTa
-                        cursor.getInt(7)     //soLuongConLai
+                        cursor.getInt(0), //sanPham_id
+                        cursor.getInt(1), //loaiSanPham_id
+                        cursor.getString(2), //tenSanPham
+                        cursor.getString(3), //anhSanPham
+                        cursor.getInt(4),    //giaSanPham
+                        cursor.getString(5), //moTa
+                        cursor.getInt(6)     //soLuongConLai
                 ));
             }while (cursor.moveToNext());
         }

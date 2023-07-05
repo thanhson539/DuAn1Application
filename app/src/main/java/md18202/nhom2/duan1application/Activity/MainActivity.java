@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application;
+package md18202.nhom2.duan1application.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +20,7 @@ import md18202.nhom2.duan1application.Model.HoaDonChiTiet;
 import md18202.nhom2.duan1application.Model.LoaiSanPham;
 import md18202.nhom2.duan1application.Model.NguoiDung;
 import md18202.nhom2.duan1application.Model.SanPham;
+import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<HoaDonChiTiet> listHoaDonChiTiet = hoaDonChiTietDAO.getDsHoaDonChiTiet();
 
         Toast.makeText(this, listNguoiDung.size() + "", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, listHoaDon.size() + "", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, listBinhLuan.size() + "", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, listLoaiSanPham.size() + "", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, listSanPham.size() + "", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, listHoaDonChiTiet.size() + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, listHoaDon.size() + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, listBinhLuan.size() + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, listLoaiSanPham.size() + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, listSanPham.size() + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, listHoaDonChiTiet.size() + "", Toast.LENGTH_SHORT).show();
     }
 }

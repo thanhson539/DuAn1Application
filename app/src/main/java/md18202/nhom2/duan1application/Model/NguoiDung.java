@@ -1,7 +1,7 @@
 package md18202.nhom2.duan1application.Model;
 
 public class NguoiDung {
-    private String nguoiDung_id;
+    private int nguoiDung_id;
     private String hoTen;
     private String soDienThoai;
     private String email;
@@ -9,7 +9,7 @@ public class NguoiDung {
     private String matKhau;
     private int loaiTaiKhoan;
 
-    public NguoiDung(String nguoiDung_id, String hoTen, String soDienThoai, String email, String taiKhoan, String matKhau, int loaiTaiKhoan) {
+    public NguoiDung(int nguoiDung_id, String hoTen, String soDienThoai, String email, String taiKhoan, String matKhau, int loaiTaiKhoan) {
         this.nguoiDung_id = nguoiDung_id;
         this.hoTen = hoTen;
         this.soDienThoai = soDienThoai;
@@ -22,11 +22,11 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
-    public String getNguoiDung_id() {
+    public int getNguoiDung_id() {
         return nguoiDung_id;
     }
 
-    public void setNguoiDung_id(String nguoiDung_id) {
+    public void setNguoiDung_id(int nguoiDung_id) {
         this.nguoiDung_id = nguoiDung_id;
     }
 

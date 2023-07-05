@@ -1,12 +1,12 @@
 package md18202.nhom2.duan1application.Model;
 
 public class HoaDon {
-    private String hoaDon_id;
-    private String nguoiDung_id;
+    private int hoaDon_id;
+    private int nguoiDung_id;
     private String thoiGian;
     private int tongTien;
 
-    public HoaDon(String hoaDon_id, String nguoiDung_id, String thoiGian, int tongTien) {
+    public HoaDon(int hoaDon_id, int nguoiDung_id, String thoiGian, int tongTien) {
         this.hoaDon_id = hoaDon_id;
         this.nguoiDung_id = nguoiDung_id;
         this.thoiGian = thoiGian;
@@ -16,19 +16,19 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public String getHoaDon_id() {
+    public int getHoaDon_id() {
         return hoaDon_id;
     }
 
-    public void setHoaDon_id(String hoaDon_id) {
+    public void setHoaDon_id(int hoaDon_id) {
         this.hoaDon_id = hoaDon_id;
     }
 
-    public String getNguoiDung_id() {
+    public int getNguoiDung_id() {
         return nguoiDung_id;
     }
 
-    public void setNguoiDung_id(String nguoiDung_id) {
+    public void setNguoiDung_id(int nguoiDung_id) {
         this.nguoiDung_id = nguoiDung_id;
     }
 

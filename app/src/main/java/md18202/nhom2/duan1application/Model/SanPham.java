@@ -1,15 +1,15 @@
 package md18202.nhom2.duan1application.Model;
 
 public class SanPham {
-    private String sanPham_id;
-    private String loaiSanPham_id;
+    private int sanPham_id;
+    private int loaiSanPham_id;
     private String tenSanPham;
     private String anhSanPham;
     private int giaSanPham;
     private String moTa;
     private int soLuongConLai;
 
-    public SanPham(String sanPham_id, String loaiSanPham_id, String tenSanPham, String anhSanPham, int giaSanPham, String moTa, int soLuongConLai) {
+    public SanPham(int sanPham_id, int loaiSanPham_id, String tenSanPham, String anhSanPham, int giaSanPham, String moTa, int soLuongConLai) {
         this.sanPham_id = sanPham_id;
         this.loaiSanPham_id = loaiSanPham_id;
         this.tenSanPham = tenSanPham;
@@ -22,19 +22,19 @@ public class SanPham {
     public SanPham() {
     }
 
-    public String getSanPham_id() {
+    public int getSanPham_id() {
         return sanPham_id;
     }
 
-    public void setSanPham_id(String sanPham_id) {
+    public void setSanPham_id(int sanPham_id) {
         this.sanPham_id = sanPham_id;
     }
 
-    public String getLoaiSanPham_id() {
+    public int getLoaiSanPham_id() {
         return loaiSanPham_id;
     }
 
-    public void setLoaiSanPham_id(String loaiSanPham_id) {
+    public void setLoaiSanPham_id(int loaiSanPham_id) {
         this.loaiSanPham_id = loaiSanPham_id;
     }
 

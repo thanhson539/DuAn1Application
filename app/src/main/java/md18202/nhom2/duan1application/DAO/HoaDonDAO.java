@@ -25,10 +25,10 @@ public class HoaDonDAO {
             cursor.moveToFirst();
             do {
                 listResult.add(new HoaDon(
-                        cursor.getString(1), //hoaDon_id
-                        cursor.getString(2), //nguoiDung_id
-                        cursor.getString(3), //ngayMua
-                        cursor.getInt(4)     //tongTien
+                        cursor.getInt(0),    //hoaDon_id
+                        cursor.getInt(1),    //nguoiDung_id
+                        cursor.getString(2), //ngayMua
+                        cursor.getInt(3)     //tongTien
                 ));
             }while (cursor.moveToNext());
         }
