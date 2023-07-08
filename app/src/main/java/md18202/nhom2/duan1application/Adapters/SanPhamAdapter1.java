@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import md18202.nhom2.duan1application.Model.SanPham;
+import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myViewHolder> {

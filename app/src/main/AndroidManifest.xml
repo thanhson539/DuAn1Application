@@ -13,16 +13,16 @@
         android:theme="@style/Theme.DuAn1Application"
         tools:targetApi="31" >
         <activity
-            android:name=".Activity.DangKyTaiKhoanActivity"
+            android:name=".Activities.DangKyTaiKhoanActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DangNhapActivity"
+            android:name=".Activities.DangNhapActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.ManHinhChaoActivity"
+            android:name=".Activities.ManHinhChaoActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

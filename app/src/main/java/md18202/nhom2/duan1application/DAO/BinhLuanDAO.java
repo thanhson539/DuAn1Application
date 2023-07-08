@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import md18202.nhom2.duan1application.DBHelper;
-import md18202.nhom2.duan1application.Model.BinhLuan;
+import md18202.nhom2.duan1application.Databases.DBHelper;
+import md18202.nhom2.duan1application.Models.BinhLuan;
 
 public class BinhLuanDAO {
     DBHelper dbHelper;

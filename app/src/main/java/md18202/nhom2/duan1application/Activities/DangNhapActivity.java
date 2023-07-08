@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application.Activity;
+package md18202.nhom2.duan1application.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

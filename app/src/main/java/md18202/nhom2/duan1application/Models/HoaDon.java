@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application.Model;
+package md18202.nhom2.duan1application.Models;
 
 public class HoaDon {
     private int hoaDon_id;

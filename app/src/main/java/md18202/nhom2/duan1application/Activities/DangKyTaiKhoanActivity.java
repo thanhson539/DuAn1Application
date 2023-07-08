@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application.Activity;
+package md18202.nhom2.duan1application.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
-import md18202.nhom2.duan1application.Model.NguoiDung;
 import md18202.nhom2.duan1application.R;
 
 public class DangKyTaiKhoanActivity extends AppCompatActivity {

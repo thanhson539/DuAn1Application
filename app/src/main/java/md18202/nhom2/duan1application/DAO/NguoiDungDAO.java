@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import md18202.nhom2.duan1application.DBHelper;
-import md18202.nhom2.duan1application.Model.NguoiDung;
+import md18202.nhom2.duan1application.Databases.DBHelper;
+import md18202.nhom2.duan1application.Models.NguoiDung;
 
 public class NguoiDungDAO {
     DBHelper dbHelper;

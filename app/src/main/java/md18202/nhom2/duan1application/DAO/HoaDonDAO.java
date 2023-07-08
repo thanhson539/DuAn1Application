@@ -4,11 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import md18202.nhom2.duan1application.DBHelper;
-import md18202.nhom2.duan1application.Model.HoaDon;
+import md18202.nhom2.duan1application.Databases.DBHelper;
+import md18202.nhom2.duan1application.Models.HoaDon;
 
 public class HoaDonDAO {
     DBHelper dbHelper;

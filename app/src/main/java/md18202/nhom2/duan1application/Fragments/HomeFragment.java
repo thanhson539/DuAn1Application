@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import md18202.nhom2.duan1application.Adapters.SanPhamAdapter1;
 import md18202.nhom2.duan1application.Adapters.SanPhamAdapter2;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
-import md18202.nhom2.duan1application.Model.SanPham;
+import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class HomeFragment extends Fragment {

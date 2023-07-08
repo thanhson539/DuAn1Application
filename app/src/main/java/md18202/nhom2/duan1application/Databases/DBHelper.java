@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application;
+package md18202.nhom2.duan1application.Databases;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

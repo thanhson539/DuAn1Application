@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application.Model;
+package md18202.nhom2.duan1application.Models;
 
 public class SanPham {
     private int sanPham_id;
