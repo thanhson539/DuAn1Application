@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
             android:layout_height="350dp"
-            android:src="@drawable/frame1_img3"/>
+            android:src="@drawable/frame1_san_pham1"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,25 +49,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/frame1_img1"/>
+                android:src="@drawable/frame1_cham_sang"/>
             <ImageView
                 android:id="@+id/imgIcon2_frame1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/frame1_img2"/>
+                android:src="@drawable/frame1_cham_toi"/>
             <ImageView
                 android:id="@+id/imgIcon3_frame1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/frame1_img2"/>
+                android:src="@drawable/frame1_cham_toi"/>
             <ImageView
                 android:id="@+id/imgIcon4_frame1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/frame1_img2"/>
+                android:src="@drawable/frame1_cham_toi"/>
         </LinearLayout>
         <Button
             android:id="@+id/btnGetStarted"

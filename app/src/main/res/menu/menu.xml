@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuTrangChu"
+        android:title="Trang chủ"
+        android:icon="@drawable/frame4_home"/>
+    <item
+        android:id="@+id/menuThongBao"
+        android:title="Thông báo"
+        android:icon="@drawable/frame4_thong_bao"/>
+    <item
+        android:id="@+id/menuYeuThich"
+        android:title="Yêu thích"
+        android:icon="@drawable/frame4_trai_tim"/>
+    <item
+        android:title="DANH MỤC SẢN PHẨM">
+        <menu>
+            <item
+                android:id="@+id/menuVoCoNgan"
+                android:title="Vớ cổ ngắn"
+                android:icon="@drawable/frame4_mui_ten"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/menuVoCoCao"
+                android:title="Vớ cổ cao"
+                android:icon="@drawable/frame4_mui_ten"
+                app:showAsAction="always"/>
+            <item
+                android:id="@+id/menuVoCoTrung"
+                android:title="Vớ cổ trung"
+                android:icon="@drawable/frame4_mui_ten"
+                app:showAsAction="always"/>
+            <item
+                android:id="@+id/menuVoLuoi"
+                android:title="Vớ lười"
+                android:icon="@drawable/frame4_mui_ten"/>
+            <item
+                android:id="@+id/menuVoBasic"
+                android:title="Vớ basic nam/nữ"
+                android:icon="@drawable/frame4_mui_ten"/>
+            <item
+                android:id="@+id/menuVoHoaTiet"
+                android:title="Vớ họa tiết"
+                android:icon="@drawable/frame4_mui_ten"/>
+            <item
+                android:id="@+id/menuBtsMoi2023"
+                android:title="BTS mới 2023"
+                android:icon="@drawable/frame4_mui_ten"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menuLienHe"
+        android:title="Liên hệ"
+        android:icon="@drawable/frame4_lien_he"/>
+</menu>

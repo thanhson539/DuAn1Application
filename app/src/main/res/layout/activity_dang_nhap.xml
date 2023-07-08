@@ -11,7 +11,7 @@
         android:id="@+id/imgSanPham1_frame2"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@drawable/frame2_img1" />
+        android:src="@drawable/frame2_san_pham1" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="15dp"
-                    android:src="@drawable/frame2_img2" />
+                    android:src="@drawable/frame2_person" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -80,7 +80,7 @@
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="15dp"
-                    android:src="@drawable/frame2_img4" />
+                    android:src="@drawable/frame2_hien_pass" />
 
             </RelativeLayout>
 

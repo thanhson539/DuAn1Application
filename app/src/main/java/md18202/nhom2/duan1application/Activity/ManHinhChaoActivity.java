@@ -38,32 +38,32 @@ public class ManHinhChaoActivity extends AppCompatActivity implements View.OnCli
         int id = v.getId();
         if (id == R.id.imgIcon1_frame1) {
             //Icon1
-            imgSanPham_frame1.setImageResource(R.drawable.frame1_img3);
-            imgIcon1_frame1.setImageResource(R.drawable.frame1_img1);
-            imgIcon2_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon3_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon4_frame1.setImageResource(R.drawable.frame1_img2);
+            imgSanPham_frame1.setImageResource(R.drawable.frame1_san_pham1);
+            imgIcon1_frame1.setImageResource(R.drawable.frame1_cham_sang);
+            imgIcon2_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon3_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon4_frame1.setImageResource(R.drawable.frame1_cham_toi);
         } else if (id == R.id.imgIcon2_frame1) {
             //Icon2
-            imgSanPham_frame1.setImageResource(R.drawable.frame1_img4);
-            imgIcon1_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon2_frame1.setImageResource(R.drawable.frame1_img1);
-            imgIcon3_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon4_frame1.setImageResource(R.drawable.frame1_img2);
+            imgSanPham_frame1.setImageResource(R.drawable.frame1_san_pham2);
+            imgIcon1_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon2_frame1.setImageResource(R.drawable.frame1_cham_sang);
+            imgIcon3_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon4_frame1.setImageResource(R.drawable.frame1_cham_toi);
         } else if (id == R.id.imgIcon3_frame1) {
             //Icon3
-            imgSanPham_frame1.setImageResource(R.drawable.frame1_img5);
-            imgIcon1_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon2_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon3_frame1.setImageResource(R.drawable.frame1_img1);
-            imgIcon4_frame1.setImageResource(R.drawable.frame1_img2);
+            imgSanPham_frame1.setImageResource(R.drawable.frame1_san_pham3);
+            imgIcon1_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon2_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon3_frame1.setImageResource(R.drawable.frame1_cham_sang);
+            imgIcon4_frame1.setImageResource(R.drawable.frame1_cham_toi);
         } else if (id == R.id.imgIcon4_frame1) {
             //Icon4
-            imgSanPham_frame1.setImageResource(R.drawable.frame1_img6);
-            imgIcon1_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon2_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon3_frame1.setImageResource(R.drawable.frame1_img2);
-            imgIcon4_frame1.setImageResource(R.drawable.frame1_img1);
+            imgSanPham_frame1.setImageResource(R.drawable.frame1_san_pham4);
+            imgIcon1_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon2_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon3_frame1.setImageResource(R.drawable.frame1_cham_toi);
+            imgIcon4_frame1.setImageResource(R.drawable.frame1_cham_sang);
         } else if (id == R.id.btnGetStarted) {
             //btnGetStarted
             Intent intent = new Intent(this, DangNhapActivity.class);

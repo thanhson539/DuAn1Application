@@ -11,7 +11,7 @@
         android:id="@+id/imgSanPham1_frame3"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/frame3_img1" />
+        android:src="@drawable/frame3_san_pham1" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
