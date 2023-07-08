@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.header_menu);
 
-        //set fragmentHome mac dinh
+        //set fragmentHome mặc định
         fragmentManager = getSupportFragmentManager();
         fragment = new HomeFragment();
         fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4,fragment).commit();
