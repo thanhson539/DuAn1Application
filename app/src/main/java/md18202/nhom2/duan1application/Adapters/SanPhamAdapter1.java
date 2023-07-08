@@ -32,7 +32,7 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_san_pham, parent, false);
+        View view = inflater.inflate(R.layout.item_san_pham1, parent, false);
         return new myViewHolder(view);
     }
 
