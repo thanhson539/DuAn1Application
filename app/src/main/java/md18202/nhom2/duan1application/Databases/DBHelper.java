@@ -107,7 +107,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(9, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap5', 10000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',56)," +
                 "(10, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap6', 32000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',53)," +
 
-                "(2, 2, 'Vớ nam cổ cao 01', 'sanpham_co_ngan2', 18000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
+
+                // vo co cao
+                "(2, 2, 'Vớ nam cổ cao 01', 'sanpham_cocao1', 18000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
+                "(11, 2, 'Vớ nam cổ cao 01', 'sanpham_cocao2', 28000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
+                "(12, 2, 'Vớ nam cổ cao 01', 'sanpham_cocao3', 13000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
+                "(13, 2, 'Vớ nam cổ cao 01', 'sanpham_cocao4', 16000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
+                "(14, 2, 'Vớ nam cổ cao 01', 'sanpham_cocao5', 19000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
+                "(15, 2, 'Vớ nam cổ cao 01', 'sanpham_cocao6', 24000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
+               
+
+
                 "(3, 3, 'Vỡ nam thể thao cổ trung 01', 'sanpham_co_ngan3', 17000, 'Vớ thể thao nam cổ trung, êm chân thoát mát',40)," +
                 "(4, 4, 'Vỡ lười nam nữ 01', 'sanpham_hoa_tiet2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60)," +
                 "(5, 5, 'Vớ nữ họa tiết ô vuông 01', 'sanpham_hoa_tiet3', 25000, 'Vớ nũ họa tiết cá tính',45)");
