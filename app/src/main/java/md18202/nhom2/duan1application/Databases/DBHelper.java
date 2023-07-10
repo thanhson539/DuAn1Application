@@ -99,7 +99,14 @@ public class DBHelper extends SQLiteOpenHelper {
         * Cấu trúc cột: sanPham_id, loaiSanPham_id, tenSanPham, anhSanPham, giaSanPham, moTa, soLuongConLai*/
 
         db.execSQL("insert into SANPHAM values" +
-                "(1, 1, 'Vỡ nữ cố thấp 01', 'sanpham_co_ngan1', 15000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',50)," +
+                // vo co thap
+                "(1, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap1', 15000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',51)," +
+                "(6, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap2', 25000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',50)," +
+                "(7, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap3', 5000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',40)," +
+                "(8, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap4', 65000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',45)," +
+                "(9, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap5', 10000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',56)," +
+                "(10, 1, 'Vỡ nữ cố thấp 01', 'sanpham_cothap6', 32000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',53)," +
+
                 "(2, 2, 'Vớ nam cổ cao 01', 'sanpham_co_ngan2', 18000, 'Vớ nam cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
                 "(3, 3, 'Vỡ nam thể thao cổ trung 01', 'sanpham_co_ngan3', 17000, 'Vớ thể thao nam cổ trung, êm chân thoát mát',40)," +
                 "(4, 4, 'Vỡ lười nam nữ 01', 'sanpham_hoa_tiet2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60)," +
