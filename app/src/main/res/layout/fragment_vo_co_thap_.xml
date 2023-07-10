@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:context=".Fragments.VoCoCao_Fragment">
     <ImageView
+        android:background="#EEEEEE"
         android:src="@drawable/sanpham_cothap_xoaphong"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
