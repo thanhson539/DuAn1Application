@@ -16,6 +16,9 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
+import md18202.nhom2.duan1application.Fragments.VoCoCao_Fragment;
+import md18202.nhom2.duan1application.Fragments.VoCoThap_Fragment;
+import md18202.nhom2.duan1application.Fragments.VoCoTrung_Fragment;
 import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,10 +62,22 @@ public class MainActivity extends AppCompatActivity {
                 fragmentManager = getSupportFragmentManager();
                 if (menuId == R.id.menuTrangChu){
                     fragment = new HomeFragment();
-                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                    drawerLayout_frame4.closeDrawer(GravityCompat.START);
-                    toolbar_frame4.setTitle(item.getTitle());
+
+                }else if (menuId == R.id.menuVoCoTrung){
+                    fragment = new VoCoTrung_Fragment();
+                } else if (menuId == R.id.menuVoCoCao) {
+                    fragment = new VoCoCao_Fragment();
+                }else if (menuId == R.id.menuVoCoNgan){
+                    fragment = new VoCoThap_Fragment();
                 }
+                else {
+                    fragment = new HomeFragment();
+                }if (fragment != null){
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }
+
+                drawerLayout_frame4.closeDrawer(GravityCompat.START);
+                toolbar_frame4.setTitle(item.getTitle());
                 return false;
             }
         });
