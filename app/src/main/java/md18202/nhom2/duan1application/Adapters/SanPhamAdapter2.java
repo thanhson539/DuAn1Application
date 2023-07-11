@@ -2,6 +2,8 @@ package md18202.nhom2.duan1application.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import md18202.nhom2.duan1application.Activities.ChiTietSanPhamActivity;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
@@ -50,6 +54,18 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
                 Toast.makeText(context, "Chưa code chức năng mua hàng", Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SanPham sanPham = list.get(holder.getAdapterPosition());
+                Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("sanPham",sanPham);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -63,12 +79,14 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imgSanPham_itemGrid, imgGioHang_itemGrid;
         TextView tvGiaSanPham_itemGrid;
+        CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imgSanPham_itemGrid = itemView.findViewById(R.id.imgSanPham_itemGrid);
             imgGioHang_itemGrid = itemView.findViewById(R.id.imgGioHang_itemGrid);
             tvGiaSanPham_itemGrid = itemView.findViewById(R.id.tvGiaSanPham_itemGrid);
+            cardView = itemView.findViewById(R.id.cardView);
         }
     }
 }

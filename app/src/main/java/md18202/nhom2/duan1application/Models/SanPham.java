@@ -1,6 +1,8 @@
 package md18202.nhom2.duan1application.Models;
 
-public class SanPham {
+import java.io.Serializable;
+
+public class SanPham implements Serializable {
     private int sanPham_id;
     private int loaiSanPham_id;
     private String tenSanPham;
