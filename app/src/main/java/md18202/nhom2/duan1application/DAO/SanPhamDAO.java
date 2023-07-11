@@ -87,7 +87,7 @@ public class SanPhamDAO {
             do {
                 listResult.add(new SanPham(
                         cursor.getInt(0), //sanPham_id
-                        cursor.getInt(1), //loaiSanPham_id
+                        cursor.getInt(1), //loaiSanPham_id=
                         cursor.getString(2), //tenSanPham
                         cursor.getString(3), //anhSanPham
                         cursor.getInt(4),    //giaSanPham
