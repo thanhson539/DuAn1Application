@@ -37,7 +37,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         int resourceId = getResources().getIdentifier(srcImg, "drawable", getPackageName());
         Picasso.get().load(resourceId).into(imgAnh_sanpham_chitiet);
         tvTen_sanpham_chitiet.setText(sanPham.getTenSanPham());
-        tvGia_sanpham_chitiet.setText(""+sanPham.getGiaSanPham());
+        tvGia_sanpham_chitiet.setText(""+sanPham.getGiaSanPham() + " VND");
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

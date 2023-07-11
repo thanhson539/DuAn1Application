@@ -93,7 +93,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(2, 'Vớ cổ cao')," +
                 "(3, 'Vớ cổ trung')," +
                 "(4, 'Vớ lười')," +
-                "(5, 'Vớ họa tiết')");
+                "(5, 'Vớ họa tiết')," +
+                "(6, 'Vớ basic nam/nữ')");
 
         /*4: Bảng 'SANPHAM'
         * Cấu trúc cột: sanPham_id, loaiSanPham_id, tenSanPham, anhSanPham, giaSanPham, moTa, soLuongConLai*/
