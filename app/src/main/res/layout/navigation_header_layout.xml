@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="#EAD1CE">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgAvatar_header"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/avatar_thanh_son"
-        app:civ_border_color="#CFCFCF"
-        app:civ_border_width="2dp" />
+    android:padding="15dp"
+    android:background="#EAD1CE"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/linear_thong_tin_header"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:layout_toRightOf="@+id/imgAvatar_header"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Hi, Nguyễn Thanh Sơn"
             android:textSize="20sp" />
 
@@ -37,11 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="0963943774"
+            android:gravity="center"
             android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Thành viên từ: 10/07/2023"
             android:textSize="16sp" />
     </LinearLayout>
@@ -49,8 +39,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="35dp"
-        android:layout_toRightOf="@+id/linear_thong_tin_header"
         android:src="@drawable/header_mui_ten" />
-</RelativeLayout>
+</LinearLayout>
