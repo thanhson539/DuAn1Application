@@ -2,6 +2,8 @@ package md18202.nhom2.duan1application.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import md18202.nhom2.duan1application.Activities.ChiTietSanPhamActivity;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
@@ -51,6 +54,15 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
                 //code here
             }
         });
+        if (list.get(position).getIsYeuThich() == 1){
+            holder.imgYeuThich_item.setImageResource(R.drawable.frame4_trai_tim);
+        }
+
+        //Sự kiện yêu thích cho sản phẩm
+        setImgYeuThich(list.get(position).getIsYeuThich(), holder.imgYeuThich_item);
+
+        //Xem chi tiết sản phẩm
+        xemChiTiet(holder.tvChiTiet_item, list.get(position));
     }
 
     @Override
@@ -62,14 +74,43 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgSanPham_item;
+        ImageView imgSanPham_item, imgYeuThich_item;
         TextView tvTenSanPham_item, tvGiaSanPham_item, tvChiTiet_item;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             imgSanPham_item = itemView.findViewById(R.id.imgSanPham_item);
+            imgYeuThich_item= itemView.findViewById(R.id.imgYeuThich_item);
             tvTenSanPham_item = itemView.findViewById(R.id.tvTenSanPham_item);
             tvGiaSanPham_item = itemView.findViewById(R.id.tvGiaSanPham_item);
             tvChiTiet_item = itemView.findViewById(R.id.tvChiTiet_item);
         }
+    }
+
+    public void setImgYeuThich(int isYeuThich, ImageView imgYeuThich){
+        int isYeuThichDefault = 0;
+        if (isYeuThich == 1){
+            imgYeuThich.setImageResource(R.drawable.frame4_trai_tim);
+        }
+        imgYeuThich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgYeuThich.setImageResource(R.drawable.frame4_trai_tim2);
+                //code chuc năng cập nhật isYeuThich
+                Toast.makeText(context, "code chuc năng cập nhật isYeuThich", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void xemChiTiet(TextView textView, SanPham sanPham){
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("sanPham",sanPham);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 }
