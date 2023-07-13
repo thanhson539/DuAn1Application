@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:background="#EAD1CE"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imgSanPham_item"
@@ -30,27 +30,34 @@
                 android:id="@+id/tvTenSanPham_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text="Tên sản phẩm"/>
+                android:text="Tên sản phẩm"
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/tvGiaSanPham_item"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Giá sản phẩm"
+                android:textColor="#4E352F"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#4E352F"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvChiTiet_item"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chi tiết"
-                android:textSize="16sp"
-                android:textColor="#5C6BA0"/>
+                android:layout_marginTop="5dp"
+                android:text="Xem chi tiết >>"
+                android:textColor="#5C6BA0"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imgYeuThich_item"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:src="@drawable/frame4_trai_tim2" />
         </LinearLayout>
 
     </LinearLayout>

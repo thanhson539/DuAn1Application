@@ -19,12 +19,14 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     TextView tvTen_sanpham_chitiet, tvGia_sanpham_chitiet;
     Button btnChon_mua;
     SanPham sanPham;
+    ImageView imgYeuThich_frameSPChiTiet2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_san_pham);
         imgAnh_sanpham_chitiet = findViewById(R.id.imgAnh_sanpham_chitiet);
         imgBack = findViewById(R.id.imgBack);
+        imgYeuThich_frameSPChiTiet2 = findViewById(R.id.imgYeuThich_frameSPChiTiet2);
         tvTen_sanpham_chitiet = findViewById(R.id.tvTen_sanpham_chitiet);
         tvGia_sanpham_chitiet = findViewById(R.id.tvGia_sanpham_chitiet);
         btnChon_mua = findViewById(R.id.btnChon_mua);
@@ -42,6 +44,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        // Chức năng yêu thích
+        sanPhamYeuThich(imgYeuThich_frameSPChiTiet2);
+    }
+
+    public void sanPhamYeuThich(ImageView imageView){
+        imgYeuThich_frameSPChiTiet2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //code here
             }
         });
     }

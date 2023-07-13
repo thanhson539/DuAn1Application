@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/linear_thong_tin_header"
-        android:layout_width="350dp"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Thành viên từ: 10/07/2023"
+            android:text="hoasua050399@gmail.com"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -41,5 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         android:src="@drawable/header_mui_ten" />
 </LinearLayout>
