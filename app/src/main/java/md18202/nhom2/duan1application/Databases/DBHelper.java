@@ -26,7 +26,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String createBinhLuan = "create table BINHLUAN(" +
                 "binhLuan_id integer primary key autoincrement," +
-                "nguoiDung_id text references NGUOIDUNG(nguoiDung_id)," +
+                "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
+                "sanPham_id integer references SANPHAM(sanPham_id)," +
                 "noiDung text not null," +
                 "thoiGian text not null)";
         db.execSQL(createBinhLuan);
@@ -80,11 +81,11 @@ public class DBHelper extends SQLiteOpenHelper {
          * Cấu trúc cột: binhLuan_id, nguoiDung_id, noiDung, thoiGian */
 
         db.execSQL("insert into BINHLUAN values" +
-                "(1,1,'Thanh Son da comment ve san pham nay', '13:00 - 03/07/2023')," +
-                "(2,2,'Duy Tien da comment ve san pham nay', '14:00 - 04/07/2023')," +
-                "(3,3,'Dinh Long da comment ve san pham nay', '15:00 - 05/07/2023')," +
-                "(4,4,'Minh Quan da comment ve san pham nay', '16:00 - 06/07/2023')," +
-                "(5,5,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
+                "(1,1, 3,'Thanh Son da comment ve san pham nay', '13:00 - 03/07/2023')," +
+                "(2,2, 3,'Duy Tien da comment ve san pham nay', '14:00 - 04/07/2023')," +
+                "(3,3, 4,'Dinh Long da comment ve san pham nay', '15:00 - 05/07/2023')," +
+                "(4,4, 1,'Minh Quan da comment ve san pham nay', '16:00 - 06/07/2023')," +
+                "(5,5, 2,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
 
         /*3: Bảng 'LOAISANPHAM'
         * Cấu trúc cột: loaiSanPham_id, tenLoai */
