@@ -6,9 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView_frame4;
     private FragmentManager fragmentManager;
     private Fragment fragment;
+    private TextView txtNameNav, txtsdtU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar_frame4 = findViewById(R.id.toolbar_frame4);
         frameLayout_frame4 = findViewById(R.id.frameLayout_frame4);
         navigationView_frame4 = findViewById(R.id.navigationView_frame4);
+        View headerLayout = navigationView_frame4.getHeaderView(0);
+        txtNameNav = headerLayout.findViewById(R.id.txtNameU);
+        txtsdtU = headerLayout.findViewById(R.id.sdtU);
 
         //Xử lý cho toolbar
         setSupportActionBar(toolbar_frame4);
@@ -53,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
 
         //Action của navigationView
         setActionForNavigationView(navigationView_frame4);
+        //CHuyển qua chi tiết người dùng
+        headerLayout.setOnClickListener(new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChiTietNguoiDung.class);
+                startActivity(intent);
+                drawerLayout_frame4.closeDrawer(GravityCompat.START);
+            }
+        });
     }
     public void setActionForNavigationView(NavigationView navigationView){
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -81,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        //Hiển thị thông tin sharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
+        String hoten = sharedPreferences.getString("hoTen","");
+        String sdtU = sharedPreferences.getString("sdt","");
+        txtNameNav.setText("Hi!"+hoten);
+        txtsdtU.setText(sdtU);
+
+
+
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

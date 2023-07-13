@@ -3,20 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="#EAD1CE">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgAvatar_header"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/avatar_thanh_son"
-        app:civ_border_color="#CFCFCF"
-        app:civ_border_width="2dp" />
+    android:background="#EAD1CE"
+    android:gravity="left"
+    >
 
     <LinearLayout
         android:id="@+id/linear_thong_tin_header"
@@ -24,16 +13,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
-        android:layout_toRightOf="@+id/imgAvatar_header"
+        android:layout_marginLeft="20dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtNameU"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hi, Nguyễn Thanh Sơn"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/sdtU"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="0963943774"
