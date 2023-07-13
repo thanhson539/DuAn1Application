@@ -37,7 +37,6 @@ public class SanPhamDAO {
         return listResult;
     }
 
-
     public ArrayList<SanPham> getDsVoCoThap(){
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
