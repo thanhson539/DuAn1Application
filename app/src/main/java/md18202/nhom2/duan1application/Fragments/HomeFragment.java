@@ -38,8 +38,9 @@ public class HomeFragment extends Fragment {
     private SanPhamDAO sanPhamDAO;
     ArrayList<SanPham> listtemporary;
     ArrayList<SanPham> oriList;
-private TextInputEditText edTimkiem;
-private  SanPhamAdapter2 searchResultsAdapter;
+    private TextInputEditText edTimkiem;
+    private SanPhamAdapter2 searchResultsAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ private  SanPhamAdapter2 searchResultsAdapter;
 
         recyclerView_frame4 = view.findViewById(R.id.recyclerView_frame4);
         sanPhamDAO = new SanPhamDAO(getContext());
-        edTimkiem  =view.findViewById(R.id.edTimKiem);
+        edTimkiem = view.findViewById(R.id.edTimKiem);
 
 
         oriList = sanPhamDAO.getDsSanPham();
@@ -61,7 +62,6 @@ private  SanPhamAdapter2 searchResultsAdapter;
                 onSearchButtonClick(v);
             }
         });
-
 
 
         //load Data
@@ -84,10 +84,10 @@ private  SanPhamAdapter2 searchResultsAdapter;
         String searchText = edTimkiem.getText().toString().toLowerCase();
 
         ArrayList<SanPham> searchResults = new ArrayList<>();
-        oriList =sanPhamDAO.getDsSanPham();
+        oriList = sanPhamDAO.getDsSanPham();
         for (SanPham sanPham : oriList) {
             int giaSanPham = sanPham.getGiaSanPham();
-            String tenSanPham =  sanPham.getTenSanPham().toLowerCase();
+            String tenSanPham = sanPham.getTenSanPham().toLowerCase();
             String normalizedMaSach = normalizeString(tenSanPham);
 //            if (giaSanPham == Integer.parseInt(searchText) || ten.contains(searchText)) {
 //                searchResults.add(sanPham);
@@ -100,11 +100,10 @@ private  SanPhamAdapter2 searchResultsAdapter;
                 }
             } else {
                 // Tìm kiếm theo tên sản phẩm
-                if ( normalizedMaSach.toLowerCase().replace("đ", "d").contains(searchText.toLowerCase())) {
+                if (normalizedMaSach.toLowerCase().replace("đ", "d").contains(searchText.toLowerCase())) {
                     searchResults.add(sanPham);
                 }
             }
-
 
 
         }
@@ -122,6 +121,7 @@ private  SanPhamAdapter2 searchResultsAdapter;
             return false;
         }
     }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.timkiem, menu);
@@ -155,8 +155,6 @@ private  SanPhamAdapter2 searchResultsAdapter;
                 }
 
 
-
-
                 // Tạo adapter mới với danh sách tìm kiếm
                 SanPhamAdapter2 phieuMuonAdapter = new SanPhamAdapter2(getContext(), oriList);
                 // Gán adapter mới cho RecyclerView hoặc ListView của bạn
@@ -174,13 +172,10 @@ private  SanPhamAdapter2 searchResultsAdapter;
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(normalizedString).replaceAll("").toLowerCase();
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
-
-
-
-    //nnnnnnnnn
 }
