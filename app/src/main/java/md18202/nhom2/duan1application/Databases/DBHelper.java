@@ -26,7 +26,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String createBinhLuan = "create table BINHLUAN(" +
                 "binhLuan_id integer primary key autoincrement," +
-                "nguoiDung_id text references NGUOIDUNG(nguoiDung_id)," +
+                "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
+                "sanPham_id integer references SANPHAM(sanPham_id)," +
                 "noiDung text not null," +
                 "thoiGian text not null)";
         db.execSQL(createBinhLuan);
@@ -50,7 +51,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "anhSanPham text not null," +
                 "giaSanPham integer not null," +
                 "moTa text not null," +
-                "soLuongConLai integer not null)";
+                "soLuongConLai integer not null," +
+                "isYeuThich integer not null)";
         db.execSQL(createSanPham);
 
         String createHoaDonChiTiet = "create table HOADONCHITIET(" +
@@ -73,17 +75,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(2, 'Nguyen Duy Tien', '0123456789', 'nguyenduytienbgg3@gmail.com','duytienbgg3','123456', 0)," +
                 "(3, 'Phi Dinh Long', '0123456789', 'philongpdl@gmail.com','philongpdl','123456', 0)," +
                 "(4, 'Hoang Minh Quan', '0123456789', 'mquann139@gmail.com','mquann139','123456', 0)," +
-                "(5, 'Ha Manh Dung', '0123456789', 'hmdung26@gmail.com','hmdung26','123456', 0)");
+                "(5, 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0)");
 
         /*2: Bang 'BINHLUAN'
          * Cấu trúc cột: binhLuan_id, nguoiDung_id, noiDung, thoiGian */
 
         db.execSQL("insert into BINHLUAN values" +
-                "(1,1,'Thanh Son da comment ve san pham nay', '13:00 - 03/07/2023')," +
-                "(2,2,'Duy Tien da comment ve san pham nay', '14:00 - 04/07/2023')," +
-                "(3,3,'Dinh Long da comment ve san pham nay', '15:00 - 05/07/2023')," +
-                "(4,4,'Minh Quan da comment ve san pham nay', '16:00 - 06/07/2023')," +
-                "(5,5,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
+                "(1,1, 3,'Thanh Son da comment ve san pham nay', '13:00 - 03/07/2023')," +
+                "(2,2, 3,'Duy Tien da comment ve san pham nay', '14:00 - 04/07/2023')," +
+                "(3,3, 4,'Dinh Long da comment ve san pham nay', '15:00 - 05/07/2023')," +
+                "(4,4, 1,'Minh Quan da comment ve san pham nay', '16:00 - 06/07/2023')," +
+                "(5,5, 2,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
 
         /*3: Bảng 'LOAISANPHAM'
         * Cấu trúc cột: loaiSanPham_id, tenLoai */
@@ -97,35 +99,35 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(6, 'Vớ basic nam/nữ')");
 
         /*4: Bảng 'SANPHAM'
-        * Cấu trúc cột: sanPham_id, loaiSanPham_id, tenSanPham, anhSanPham, giaSanPham, moTa, soLuongConLai*/
+        * Cấu trúc cột: sanPham_id, loaiSanPham_id, tenSanPham, anhSanPham, giaSanPham, moTa, soLuongConLai, isYeuThich*/
 
         db.execSQL("insert into SANPHAM values" +
                 // vo co thap
-                "(1, 1, 'Vỡ nam nữ cố thấp 01', 'sanpham_cothap1', 15000, 'Vớ nam nữ cổ thấp chất liệu trơn thoáng mát',51)," +
-                "(6, 1, 'Vỡ nữ cố thấp 02', 'sanpham_cothap2', 25000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',50)," +
-                "(7, 1, 'Vỡ nữ cố thấp 03', 'sanpham_cothap3', 5000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',40)," +
-                "(8, 1, 'Vỡ nữ cố thấp 04', 'sanpham_cothap4', 65000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',45)," +
-                "(9, 1, 'Vỡ nữ cố thấp 06', 'sanpham_cothap5', 10000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',56)," +
-                "(10, 1, 'Vỡ nữ cố thấp 06', 'sanpham_cothap6', 32000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',53)," +
+                "(1, 1, 'Vỡ nam nữ cố thấp 01', 'sanpham_cothap1', 15000, 'Vớ nam nữ cổ thấp chất liệu trơn thoáng mát',51, 0)," +
+                "(6, 1, 'Vỡ nữ cố thấp 02', 'sanpham_cothap2', 25000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',50, 1)," +
+                "(7, 1, 'Vỡ nữ cố thấp 03', 'sanpham_cothap3', 5000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',40, 0)," +
+                "(8, 1, 'Vỡ nữ cố thấp 04', 'sanpham_cothap4', 65000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',45, 0)," +
+                "(9, 1, 'Vỡ nữ cố thấp 06', 'sanpham_cothap5', 10000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',56, 0)," +
+                "(10, 1, 'Vỡ nữ cố thấp 06', 'sanpham_cothap6', 32000, 'Vớ nữ cổ thấp chất liệu trơn thoáng mát',53, 1)," +
 
 
                 // vo co cao
-                "(2, 2, 'Vớ nam nữ cổ cao 01', 'sanpham_cocao1', 18000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',30)," +
-                "(11, 2, 'Vớ nũ cổ cao 02', 'sanpham_cocao2', 28000, 'Vớ nữ cổ cao chất liệu cotton khử mùi, thoáng mát',34)," +
-                "(12, 2, 'Vớ nam nữ cổ cao 03', 'sanpham_cocao3', 13000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',31)," +
-                "(13, 2, 'Vớ nam nữ cổ cao 04', 'sanpham_cocao4', 16000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',36)," +
-                "(14, 2, 'Vớ nam nữ cổ cao 05', 'sanpham_cocao5', 19000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',39)," +
-                "(15, 2, 'Vớ nam nữ cổ cao 06', 'sanpham_cocao6', 24000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',33)," +
+                "(2, 2, 'Vớ nam nữ cổ cao 01', 'sanpham_cocao1', 18000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',30, 1)," +
+                "(11, 2, 'Vớ nũ cổ cao 02', 'sanpham_cocao2', 28000, 'Vớ nữ cổ cao chất liệu cotton khử mùi, thoáng mát',34, 0)," +
+                "(12, 2, 'Vớ nam nữ cổ cao 03', 'sanpham_cocao3', 13000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',31, 1)," +
+                "(13, 2, 'Vớ nam nữ cổ cao 04', 'sanpham_cocao4', 16000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',36, 0)," +
+                "(14, 2, 'Vớ nam nữ cổ cao 05', 'sanpham_cocao5', 19000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',39, 0)," +
+                "(15, 2, 'Vớ nam nữ cổ cao 06', 'sanpham_cocao6', 24000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',33, 0)," +
 
 
 
-                "(3, 3, 'Vỡ nữ thể thao cổ trung 01', 'sanpham_cotrung1', 17000, 'Vớ nữ cổ trung, êm chân thoát mát',40)," +
-                "(16, 3, 'Vỡ nữ thể thao cổ trung 02', 'sanpham_cotrung2', 16000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',41)," +
-                "(17, 3, 'Vỡ nữ thể thao cổ trung 03', 'sanpham_cotrung3', 15000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',42)," +
-                "(18, 3, 'Vỡ nữ thể thao cổ trung 04', 'sanpham_cotrung4', 14000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',45)," +
+                "(3, 3, 'Vỡ nữ thể thao cổ trung 01', 'sanpham_cotrung1', 17000, 'Vớ nữ cổ trung, êm chân thoát mát',40, 0)," +
+                "(16, 3, 'Vỡ nữ thể thao cổ trung 02', 'sanpham_cotrung2', 16000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',41, 0)," +
+                "(17, 3, 'Vỡ nữ thể thao cổ trung 03', 'sanpham_cotrung3', 15000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',42, 1)," +
+                "(18, 3, 'Vỡ nữ thể thao cổ trung 04', 'sanpham_cotrung4', 14000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',45, 0)," +
 
-                "(4, 4, 'Vỡ lười nam nữ 01', 'sanpham_hoa_tiet2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60)," +
-                "(5, 5, 'Vớ nữ họa tiết ô vuông 01', 'sanpham_hoa_tiet3', 25000, 'Vớ nũ họa tiết cá tính',45)");
+                "(4, 4, 'Vỡ lười nam nữ 01', 'sanpham_hoa_tiet2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
+                "(5, 5, 'Vớ nữ họa tiết ô vuông 01', 'sanpham_hoa_tiet3', 25000, 'Vớ nũ họa tiết cá tính',45, 0)");
 
         /*5: Bảng 'HOADON'
         *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien */

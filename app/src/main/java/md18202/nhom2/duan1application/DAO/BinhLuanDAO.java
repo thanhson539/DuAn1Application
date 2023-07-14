@@ -1,5 +1,6 @@
 package md18202.nhom2.duan1application.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,18 +17,21 @@ public class BinhLuanDAO {
         dbHelper = new DBHelper(context);
     }
 
-    public ArrayList<BinhLuan> getDsBinhLuan(){
+    @SuppressLint("Range")
+    public ArrayList<BinhLuan> getDsBinhLuan(int sanPham_id){
         ArrayList<BinhLuan> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from BINHLUAN", null);
+        Cursor cursor = sqLiteDatabase.rawQuery("select BINHLUAN.binhLuan_id, BINHLUAN.nguoiDung_id, BINHLUAN.sanPham_id, BINHLUAN.noiDung, BINHLUAN.thoiGian, NGUOIDUNG.hoTen as tenNguoiDung from BINHLUAN inner join NGUOIDUNG on BINHLUAN.nguoiDung_id = NGUOIDUNG.nguoiDung_id where BINHLUAN.sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
                 listResult.add(new BinhLuan(
-                        cursor.getInt(0),    //binhLuan_id
-                        cursor.getInt(1),    //nguoiDung_id
-                        cursor.getString(2), //noiDung
-                        cursor.getString(3)  //thoiGian
+                        cursor.getInt(cursor.getColumnIndex("binhLuan_id")),    //binhLuan_id
+                        cursor.getInt(cursor.getColumnIndex("nguoiDung_id")),    //nguoiDung_id
+                        cursor.getInt(cursor.getColumnIndex("sanPham_id")),    //sanPham_id
+                        cursor.getString(cursor.getColumnIndex("noiDung")), //noiDung
+                        cursor.getString(cursor.getColumnIndex("thoiGian")), //thoiGian
+                        cursor.getString(cursor.getColumnIndex("tenNguoiDung")) //ten nguoi dung
                 ));
             }while (cursor.moveToNext());
         }

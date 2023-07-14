@@ -6,9 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,6 +24,7 @@ import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.VoCoCao_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoThap_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoTrung_Fragment;
+import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView_frame4;
     private FragmentManager fragmentManager;
     private Fragment fragment;
+    private TextView txtNameNav, txtsdtU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar_frame4 = findViewById(R.id.toolbar_frame4);
         frameLayout_frame4 = findViewById(R.id.frameLayout_frame4);
         navigationView_frame4 = findViewById(R.id.navigationView_frame4);
+        View headerLayout = navigationView_frame4.getHeaderView(0);
+        txtNameNav = headerLayout.findViewById(R.id.txtNameU);
+        txtsdtU = headerLayout.findViewById(R.id.sdtU);
 
         //Xử lý cho toolbar
         setSupportActionBar(toolbar_frame4);
@@ -49,30 +59,45 @@ public class MainActivity extends AppCompatActivity {
         //set fragmentHome mặc định
         fragmentManager = getSupportFragmentManager();
         fragment = new HomeFragment();
-        fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4,fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
 
         //Action của navigationView
         setActionForNavigationView(navigationView_frame4);
+        //CHuyển qua chi tiết người dùng
+        headerLayout.setOnClickListener(new  View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChiTietNguoiDung.class);
+                startActivity(intent);
+                drawerLayout_frame4.closeDrawer(GravityCompat.START);
+            }
+        });
     }
-    public void setActionForNavigationView(NavigationView navigationView){
+
+    public void setActionForNavigationView(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menuId = item.getItemId();
                 fragmentManager = getSupportFragmentManager();
-                if (menuId == R.id.menuTrangChu){
+                if (menuId == R.id.menuTrangChu) {
                     fragment = new HomeFragment();
-
-                }else if (menuId == R.id.menuVoCoTrung){
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuVoCoTrung) {
                     fragment = new VoCoTrung_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuVoCoCao) {
                     fragment = new VoCoCao_Fragment();
-                }else if (menuId == R.id.menuVoCoNgan){
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuVoCoNgan) {
                     fragment = new VoCoThap_Fragment();
-                }
-                else {
-                    fragment = new HomeFragment();
-                }if (fragment != null){
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuYeuThich) {
+                    fragment = new YeuThich_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuYeuThich) {
+                    fragment = new YeuThich_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 
@@ -81,7 +106,17 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        //Hiển thị thông tin sharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
+        String hoten = sharedPreferences.getString("hoTen","");
+        String sdtU = sharedPreferences.getString("sdt","");
+        txtNameNav.setText("Hi!"+hoten);
+        txtsdtU.setText(sdtU);
+
+
+
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

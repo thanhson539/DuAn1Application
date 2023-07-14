@@ -16,6 +16,7 @@ public class NguoiDungDAO {
     SharedPreferences sharedPreferences;
     public NguoiDungDAO(Context context){
         dbHelper = new DBHelper(context);
+        sharedPreferences = context.getSharedPreferences("NGUOIDUNG",Context.MODE_PRIVATE);
     }
 
     public ArrayList<NguoiDung> getDsNguoiDung(){
@@ -55,6 +56,12 @@ public class NguoiDungDAO {
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from NGUOIDUNG where taikhoan = ? and matkhau = ?", new String[]{taikhoan, matkhau});
         if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            //Lưu Thông tin
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("hoTen",cursor.getString(1));
+            editor.putString("sdt",cursor.getString(2));
+            editor.commit();
             return true;
         }
         return false;
