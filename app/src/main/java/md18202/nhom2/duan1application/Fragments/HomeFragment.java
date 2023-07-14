@@ -179,4 +179,8 @@ private  SanPhamAdapter2 searchResultsAdapter;
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
+
+
+
+    //nnnnnnnnn
 }
