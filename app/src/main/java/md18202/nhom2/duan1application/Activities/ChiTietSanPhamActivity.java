@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +23,10 @@ import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
-    ImageView imgAnh_sanpham_chitiet, imgBack;
+    ImageView imgAnh_sanpham_chitiet, imgBack, imgBinh_luan;
     TextView tvTen_sanpham_chitiet, tvGia_sanpham_chitiet;
     RecyclerView recyclerView_binh_luan;
+    EditText edBinh_luan;
     Button btnChon_mua;
     SanPham sanPham;
     ImageView imgYeuThich_frameSPChiTiet2;
@@ -37,10 +39,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chi_tiet_san_pham);
         imgAnh_sanpham_chitiet = findViewById(R.id.imgAnh_sanpham_chitiet);
         imgBack = findViewById(R.id.imgBack);
+        imgBinh_luan = findViewById(R.id.imgBinh_luan);
         imgYeuThich_frameSPChiTiet2 = findViewById(R.id.imgYeuThich_frameSPChiTiet2);
         tvTen_sanpham_chitiet = findViewById(R.id.tvTen_sanpham_chitiet);
         tvGia_sanpham_chitiet = findViewById(R.id.tvGia_sanpham_chitiet);
         btnChon_mua = findViewById(R.id.btnChon_mua);
+        edBinh_luan = findViewById(R.id.edBinh_luan);
         recyclerView_binh_luan = findViewById(R.id.recycler_view_binh_luan);
         binhLuanDAO = new BinhLuanDAO(this);
 
@@ -65,6 +69,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
         // Chức năng yêu thích
         sanPhamYeuThich(imgYeuThich_frameSPChiTiet2);
+        binhLuan(edBinh_luan, imgBinh_luan);
     }
 
     public void sanPhamYeuThich(ImageView imageView){
@@ -75,6 +80,19 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void binhLuan(EditText edBinh_luan, ImageView imgBinh_luan){
+        imgBinh_luan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //đẩy code của người dùng vào database
+                //nguoiDung_id lay tu home
+                //sanPham_id lay tu sanPham
+                //noiDung lay tu edBinh_luan
+                //thoiGian lay tu thoi gian thuc new Date(), new Time()
+            }
+        });
     }
 
     @Override
