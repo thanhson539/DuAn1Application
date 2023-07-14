@@ -75,12 +75,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
 
-        btnChon_mua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ChiTietSanPhamActivity.this, "Chon mua", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
