@@ -1,5 +1,6 @@
 package md18202.nhom2.duan1application.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.Databases.DBHelper;
 import md18202.nhom2.duan1application.Models.LoaiSanPham;
+import md18202.nhom2.duan1application.Models.SanPham;
 
 public class LoaiSanPhamDAO {
 
@@ -31,5 +33,13 @@ public class LoaiSanPhamDAO {
             }while (cursor.moveToNext());
         }
         return listResult;
+    }
+
+    public long SuaLoaiSP(LoaiSanPham loaiSanPham){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values  =new ContentValues();
+        values.put("tenLoai", loaiSanPham.getTenLoai());
+        return  db.update("LOAISANPHAM", values, "loaiSanPham_id=?", new String[]{String.valueOf(loaiSanPham.getLoaiSanPham_id())});
+
     }
 }

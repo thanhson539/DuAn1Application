@@ -22,6 +22,8 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
+import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
+import md18202.nhom2.duan1application.Fragments.SanPham_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoCao_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoThap_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoTrung_Fragment;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView_frame4;
     private FragmentManager fragmentManager;
     private Fragment fragment;
-    private TextView txtNameNav, txtsdtU;
+    private TextView txtNameNav, txtsdtU , txtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         View headerLayout = navigationView_frame4.getHeaderView(0);
         txtNameNav = headerLayout.findViewById(R.id.txtNameU);
         txtsdtU = headerLayout.findViewById(R.id.sdtU);
-
+        txtEmail = headerLayout.findViewById(R.id.txtEmail);
         //Xử lý cho toolbar
         setSupportActionBar(toolbar_frame4);
         ActionBar actionBar = getSupportActionBar();
@@ -100,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
                 } else if (menuId == R.id.menuYeuThich) {
                     fragment = new YeuThich_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuLoaiSanPham) {
+                    fragment  = new Loai_San_Pham_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuSanPham) {
+                    fragment = new SanPham_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 
                 drawerLayout_frame4.closeDrawer(GravityCompat.START);
@@ -111,9 +119,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
         String hoten = sharedPreferences.getString("hoTen","");
         String sdtU = sharedPreferences.getString("sdt","");
+        String email= sharedPreferences.getString("email","");
         txtNameNav.setText("Hi!"+hoten);
         txtsdtU.setText(sdtU);
-
+        txtEmail.setText(email);
 
 
     }
