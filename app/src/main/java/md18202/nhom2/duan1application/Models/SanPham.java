@@ -10,6 +10,7 @@ public class SanPham implements Serializable {
     private int giaSanPham;
     private String moTa;
     private int soLuongConLai;
+    private int isYeuThich;
 
     public SanPham(int sanPham_id, int loaiSanPham_id, String tenSanPham, String anhSanPham, int giaSanPham, String moTa, int soLuongConLai) {
         this.sanPham_id = sanPham_id;
@@ -21,7 +22,27 @@ public class SanPham implements Serializable {
         this.soLuongConLai = soLuongConLai;
     }
 
+    //Contructor cho chuc nang lay san pham yeu thich
+    public SanPham(int sanPham_id, int loaiSanPham_id, String tenSanPham, String anhSanPham, int giaSanPham, String moTa, int soLuongConLai, int isYeuThich) {
+        this.sanPham_id = sanPham_id;
+        this.loaiSanPham_id = loaiSanPham_id;
+        this.tenSanPham = tenSanPham;
+        this.anhSanPham = anhSanPham;
+        this.giaSanPham = giaSanPham;
+        this.moTa = moTa;
+        this.soLuongConLai = soLuongConLai;
+        this.isYeuThich = isYeuThich;
+    }
+
     public SanPham() {
+    }
+
+    public int getIsYeuThich() {
+        return isYeuThich;
+    }
+
+    public void setIsYeuThich(int isYeuThich) {
+        this.isYeuThich = isYeuThich;
     }
 
     public int getSanPham_id() {

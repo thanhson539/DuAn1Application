@@ -70,14 +70,6 @@ private  SanPhamAdapter2 searchResultsAdapter;
         return view;
     }
 
-    public void loadData(RecyclerView recyclerView) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        ArrayList<SanPham> list = sanPhamDAO.getDsSanPham();
-        SanPhamAdapter1 adapter = new SanPhamAdapter1(getContext(), list);
-        recyclerView.setAdapter(adapter);
-    }
-
     public void loadDataGridLayout(RecyclerView recyclerView) {
         int numColumns = 2;
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));

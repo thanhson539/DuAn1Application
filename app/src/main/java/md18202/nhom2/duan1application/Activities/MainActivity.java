@@ -20,6 +20,7 @@ import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.VoCoCao_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoThap_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoTrung_Fragment;
+import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuVoCoNgan) {
                     fragment = new VoCoThap_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuYeuThich) {
+                    fragment = new YeuThich_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 
