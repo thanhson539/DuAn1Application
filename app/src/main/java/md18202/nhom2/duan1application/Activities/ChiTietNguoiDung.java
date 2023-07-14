@@ -14,7 +14,7 @@ import md18202.nhom2.duan1application.R;
 
 public class ChiTietNguoiDung extends AppCompatActivity {
     SharedPreferences sharedPreferences;
-    TextView txtNameUct,txtsdtct;
+    TextView txtNameUct,txtsdtct,txtemailUct,txttkUct,txtloaitkUct;
     Button btnLogout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,13 +23,27 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         //Ánh Xạ
         txtNameUct = findViewById(R.id.txtNameUct);
         txtsdtct = findViewById(R.id.sdtUct);
+        txtemailUct = findViewById(R.id.emailUct);
+        txttkUct = findViewById(R.id.taikhoanUct);
+        txtloaitkUct = findViewById(R.id.loaitkUct);
         btnLogout = findViewById(R.id.btnLogout);
         //Chức năng hiển thị thông tin User
         sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
         String hotenct = sharedPreferences.getString("hoTen", "");
         String sdtUct = sharedPreferences.getString("sdt", "");
+        String emailUct = sharedPreferences.getString("email","");
+        String taikhoanUct = sharedPreferences.getString("taikhoan","");
+        Integer loaitkUct = sharedPreferences.getInt("loaitaikhoan",0);
         txtNameUct.setText(hotenct);
         txtsdtct.setText(sdtUct);
+        txtemailUct.setText(emailUct);
+        txttkUct.setText(taikhoanUct);
+        if(loaitkUct == 1){
+            txtloaitkUct.setText("admin");
+        }else {
+            txtloaitkUct.setText("User");
+        }
+
         //Chức năng Logout
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
