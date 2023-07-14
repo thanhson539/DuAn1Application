@@ -47,13 +47,7 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
 
         holder.tvTenSanPham_item.setText(list.get(position).getTenSanPham());
         holder.tvGiaSanPham_item.setText(String.valueOf(list.get(position).getGiaSanPham()) + " vnđ");
-        holder.tvChiTiet_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Code thêm chứu năng xem thông tin chi tiết sản phẩm", Toast.LENGTH_SHORT).show();
-                //code here
-            }
-        });
+
         if (list.get(position).getIsYeuThich() == 1){
             holder.imgYeuThich_item.setImageResource(R.drawable.frame4_trai_tim);
         }
