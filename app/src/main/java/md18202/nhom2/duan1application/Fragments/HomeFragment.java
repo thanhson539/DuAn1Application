@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
 
             if (isNumeric(searchText)) {
                 // Tìm kiếm theo giá sản phẩm
-                if (giaSanPham == Integer.parseInt(searchText)) {
+                if (giaSanPham <= Integer.parseInt(searchText)) {
                     searchResults.add(sanPham);
                 }
             } else {
@@ -122,60 +122,67 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.timkiem, menu);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        MenuItem menuItem = menu.findItem(R.id.idmenu);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setIconified(true);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
 
 
-        // list lưu tạm
-        listtemporary = sanPhamDAO.getDsSanPham();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                oriList = new ArrayList<>();
-                for (SanPham sanPham : listtemporary) {
-                    String maSach = String.valueOf(sanPham.getGiaSanPham());
-                    String normalizedMaSach = normalizeString(maSach);
-
-                    if (normalizedMaSach.toLowerCase().contains(newText.toLowerCase()) ||
-                            normalizedMaSach.toLowerCase().replace("đ", "d").contains(newText.toLowerCase())) {
-                        oriList.add(sanPham);
-                    }
-                }
-
-
-                // Tạo adapter mới với danh sách tìm kiếm
-                SanPhamAdapter2 phieuMuonAdapter = new SanPhamAdapter2(getContext(), oriList);
-                // Gán adapter mới cho RecyclerView hoặc ListView của bạn
-                recyclerView_frame4.setAdapter(phieuMuonAdapter);
-                return true;
-            }
-        });
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    private String normalizeString(String input) {
+    // loại bỏ dấu và chữ hoa
+        private String normalizeString(String input) {
         //ó ý nghĩa là chuẩn hóa chuỗi input và loại bỏ các dấu diacritic trong chuỗi đó.
         String normalizedString = Normalizer.normalize(input, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(normalizedString).replaceAll("").toLowerCase();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
-    }
 }
+
+//    @Override
+//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//        inflater.inflate(R.menu.timkiem, menu);
+//        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+//        MenuItem menuItem = menu.findItem(R.id.idmenu);
+//        SearchView searchView = (SearchView) menuItem.getActionView();
+//        searchView.setIconified(true);
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+//        searchView.setMaxWidth(Integer.MAX_VALUE);
+//
+//
+//        // list lưu tạm
+//        listtemporary = sanPhamDAO.getDsSanPham();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                oriList = new ArrayList<>();
+//                for (SanPham sanPham : listtemporary) {
+//                    String maSach = String.valueOf(sanPham.getGiaSanPham());
+//                    String normalizedMaSach = normalizeString(maSach);
+//
+//                    if (normalizedMaSach.toLowerCase().contains(newText.toLowerCase()) ||
+//                            normalizedMaSach.toLowerCase().replace("đ", "d").contains(newText.toLowerCase())) {
+//                        oriList.add(sanPham);
+//                    }
+//                }
+//
+//
+//                // Tạo adapter mới với danh sách tìm kiếm
+//                SanPhamAdapter2 phieuMuonAdapter = new SanPhamAdapter2(getContext(), oriList);
+//                // Gán adapter mới cho RecyclerView hoặc ListView của bạn
+//                recyclerView_frame4.setAdapter(phieuMuonAdapter);
+//                return true;
+//            }
+//        });
+//
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+
+//
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        setHasOptionsMenu(true);
+//        super.onCreate(savedInstanceState);
+//    }
+
