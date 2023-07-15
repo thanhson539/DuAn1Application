@@ -43,10 +43,6 @@
                 android:id="@+id/menuVoHoaTiet"
                 android:title="Vớ họa tiết"
                 android:icon="@drawable/frame4_mui_ten"/>
-            <item
-                android:id="@+id/menuBtsMoi2023"
-                android:title="BTS mới 2023"
-                android:icon="@drawable/frame4_mui_ten"/>
         </menu>
     </item>
     <item
