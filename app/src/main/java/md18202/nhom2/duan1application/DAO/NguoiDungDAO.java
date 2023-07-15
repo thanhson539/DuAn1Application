@@ -61,6 +61,9 @@ public class NguoiDungDAO {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("hoTen",cursor.getString(1));
             editor.putString("sdt",cursor.getString(2));
+            editor.putString("email",cursor.getString(3));
+            editor.putString("taikhoan",cursor.getString(4));
+            editor.putInt("loaitaikhoan",cursor.getInt(6));
             editor.commit();
             return true;
         }

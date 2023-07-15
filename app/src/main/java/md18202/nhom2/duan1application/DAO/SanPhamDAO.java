@@ -1,5 +1,6 @@
 package md18202.nhom2.duan1application.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -179,6 +180,18 @@ public class SanPhamDAO {
             } while (cursor.moveToNext());
         }
         return listResult;
+    }
+
+
+    public long SuaSanPham(SanPham sanPham){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("tenSanPham", sanPham.getTenSanPham());
+        contentValues.put("giaSanPham", sanPham.getGiaSanPham());
+        contentValues.put("moTa", sanPham.getMoTa());
+        contentValues.put("soLuongConLai", sanPham.getSoLuongConLai());
+        return db.update("SANPHAM", contentValues,"sanPham_id=?", new String[]{String.valueOf(sanPham.getLoaiSanPham_id())});
+
     }
 
 }

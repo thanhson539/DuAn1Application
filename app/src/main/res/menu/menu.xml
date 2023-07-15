@@ -65,10 +65,12 @@
                 android:icon="@drawable/frame4_mui_ten"
                 app:showAsAction="always"/>
             <item
+                android:id="@+id/menuLoaiSanPham"
                 android:title="Quản lý loại sản phẩm"
                 android:icon="@drawable/frame4_mui_ten"
                 app:showAsAction="always"/>
             <item
+                android:id="@+id/menuSanPham"
                 android:title="Quản lý sản phẩm"
                 android:icon="@drawable/frame4_mui_ten"/>
             <item
