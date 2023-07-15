@@ -69,4 +69,19 @@ public class NguoiDungDAO {
         }
         return false;
     }
+
+    public boolean doiMatKhau(String taikhoan, String matkhaucu, String matkhaumoi){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from NGUOIDUNG where taikhoan = ? and matkhau = ?",new String[]{taikhoan,matkhaucu});
+        if (cursor.getCount() > 0){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("matkhau",matkhaumoi);
+            long check = sqLiteDatabase.update("NGUOIDUNG",contentValues,"taikhoan = ?", new String[]{taikhoan});
+            if(check == -1)
+                return false;
+
+            return true;
+        }
+        return false;
+    }
 }

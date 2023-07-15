@@ -5,12 +5,31 @@
     android:layout_height="match_parent"
     android:background="#EAD1CE"
     android:orientation="vertical">
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thông Tin Người Dùng"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
     <TextView
         android:id="@+id/txtNameUct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ten nguoi dung"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"/>
     <TextView
         android:id="@+id/sdtUct"
         android:layout_width="match_parent"
@@ -35,130 +54,36 @@
         android:layout_height="wrap_content"
         android:text="loai tai khoan"
         android:textSize="20sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/btnThongTin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đổi Thông Tin"/>
+    <Button
+        android:id="@+id/btnDoiMatKhau"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi Mật Khẩu"/>
+
             <Button
                 android:id="@+id/btnLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đăng Xuất"/>
-
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="160dp"-->
-<!--        android:background="#EAD1CE"-->
-<!--        android:gravity="left"-->
-<!--        android:layout_marginLeft="20dp">-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/linear_thong_tin_header"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginBottom="15dp"-->
-
-<!--            android:orientation="vertical">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/txtNameUct"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Hi, Nguyễn Thanh Sơn"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sdtUct"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="0963943774"-->
-<!--                android:textSize="16sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Thành viên từ: 10/07/2023"-->
-<!--                android:textSize="16sp" />-->
-<!--        </LinearLayout>-->
+                android:text="Đăng Xuất"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"/>
+    </LinearLayout>
 
 
-<!--    </RelativeLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center"-->
-<!--        android:background="#8B787676"-->
-<!--        android:layout_marginTop="80dp">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Quản lý đơn hàng"-->
-<!--            />-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/header_mui_ten"-->
-<!--            />-->
-
-<!--    </LinearLayout>-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center"-->
-<!--        android:background="#8B787676"-->
-<!--        android:layout_marginTop="40dp">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Quản lý đơn hàng"-->
-<!--            />-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/header_mui_ten"-->
-<!--            />-->
-
-<!--    </LinearLayout>-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center"-->
-<!--        android:background="#8B787676"-->
-<!--        android:layout_marginTop="40dp">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Quản lý đơn hàng"-->
-<!--            />-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:src="@drawable/header_mui_ten"-->
-<!--            />-->
-
-<!--    </LinearLayout>-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center"-->
-
-<!--        android:layout_marginTop="20dp">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btnLogout"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Đăng Xuất"/>-->
-
-<!--    </LinearLayout>-->
 
 
 </LinearLayout>
