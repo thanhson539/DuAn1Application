@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,7 +48,10 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
         holder.tvGia.setText("Giá Tiền: " + String.valueOf(list.get(position).getGiaSanPham()));
         holder.tvMota.setText("Mô Tă Sản Phẩm: " + list.get(position).getMoTa());
         holder.tvSoLuong.setText("Số Lượng Còn: " + String.valueOf(list.get(position).getSoLuongConLai()));
-
+//        Picasso.get().load(list.get(position).getAnhSanPham()).into(holder.imgSanPham);
+        String srcImg = list.get(position).getAnhSanPham();
+        int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
+        Picasso.get().load(resourceId).into(holder.imgSanPham);
     }
 
     @Override
@@ -58,7 +64,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
 
     public class MyViewHover extends RecyclerView.ViewHolder {
         TextView tvID, tvTen, tvGia, tvMota, tvSoLuong;
-
+        ImageView imgSanPham;
         public MyViewHover(@NonNull View itemView) {
             super(itemView);
             tvID = itemView.findViewById(R.id.idLoaiSanPham);
@@ -66,7 +72,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
             tvGia = itemView.findViewById(R.id.idGiaSanPham);
             tvMota = itemView.findViewById(R.id.idMoTaSanPham);
             tvSoLuong = itemView.findViewById(R.id.idSoLuongSanpham);
-
+            imgSanPham  =itemView.findViewById(R.id.imgSanPhamADM);
 
             // sửa thông tin
             itemView.setOnClickListener(new View.OnClickListener() {
