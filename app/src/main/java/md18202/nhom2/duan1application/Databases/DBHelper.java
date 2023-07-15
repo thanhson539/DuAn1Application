@@ -125,6 +125,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(14, 3, 'Vỡ nữ thể thao cổ trung 02', 'sanpham_cotrung2', 16000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',41, 0)," +
                 "(15, 3, 'Vỡ nữ thể thao cổ trung 03', 'sanpham_cotrung3', 15000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',42, 1)," +
                 "(16, 3, 'Vỡ nữ thể thao cổ trung 04', 'sanpham_cotrung4', 14000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',45, 0)," +
+                // vo luoi
+                //Không dùng ảnh có độ phân giải cao Quân nhé. Vì nó sẽ ko load được và bị chết app - Anh Sơn gửi đến Quân
+//                "(17, 4, 'Vớ lười nam nữ 01', 'sanpham_voluoi1', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
+//                "(18, 4, 'Vớ lười nam nữ 02', 'sanpham_voluoi2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
+                "(19, 4, 'Vớ lười nam nữ 03', 'sanpham_voluoi3', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
+                "(20, 4, 'Vớ lười nam nữ 04', 'sanpham_voluoi4', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
+                "(21, 4, 'Vớ lười nam nữ 05', 'sanpham_voluoi5', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
 
                 "(17, 4, 'Vỡ lười nam nữ 01', 'sanpham_hoa_tiet2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
                 "(18, 5, 'Vớ nữ họa tiết ô vuông 01', 'sanpham_hoa_tiet3', 25000, 'Vớ nũ họa tiết cá tính',45, 0)");
