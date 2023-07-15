@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
 
             if (isNumeric(searchText)) {
                 // Tìm kiếm theo giá sản phẩm
-                if (giaSanPham == Integer.parseInt(searchText)) {
+                if (giaSanPham <= Integer.parseInt(searchText)) {
                     searchResults.add(sanPham);
                 }
             } else {
