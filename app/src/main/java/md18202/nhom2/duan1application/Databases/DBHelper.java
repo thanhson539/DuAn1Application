@@ -141,11 +141,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(26, 5, 'Vớ basic nam nữ 05', 'sanpham_vobasic5', 20000, 'Vớ basic nam/nũ chất liệu cao cấp',60, 0)," +
 
                 // vo hoa tiet
-                "(27, 6, 'Vớ họa tiết nam nữ 01', 'sanpham_hoa_tiet1', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
-                "(28, 6, 'Vớ họa tiết nam nữ 02', 'sanpham_hoa_tiet2', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
-                "(29, 6, 'Vớ họa tiết nam nữ 03', 'sanpham_hoa_tiet3', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
-                "(30, 6, 'Vớ họa tiết nam nữ 04', 'sanpham_hoa_tiet4', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
-                "(31, 6, 'Vớ họa tiết nam nữ 05', 'sanpham_hoa_tiet5', 25000, 'Vớ họa tiết cá tính',45, 0)");
+                "(27, 6, 'Vớ họa tiết nam nữ 01', 'sanpham_vohoatiet1', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
+                "(28, 6, 'Vớ họa tiết nam nữ 02', 'sanpham_vohoatiet2', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
+                "(29, 6, 'Vớ họa tiết nam nữ 03', 'sanpham_vohoatiet3', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
+                "(30, 6, 'Vớ họa tiết nam nữ 04', 'sanpham_vohoatiet4', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)");
 
         /*5: Bảng 'HOADON'
         *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien */
