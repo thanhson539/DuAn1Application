@@ -127,8 +127,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(16, 3, 'Vớ nữ thể thao cổ trung 04', 'sanpham_cotrung4', 14000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',45, 0)," +
 
                 // vo luoi
-                "(17, 4, 'Vớ lười nam nữ 01', 'sanpham_voluoi1', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
-                "(18, 4, 'Vớ lười nam nữ 02', 'sanpham_voluoi2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
+                //Không dùng ảnh có độ phân giải cao Quân nhé. Vì nó sẽ ko load được và bị chết app - Anh Sơn gửi đến Quân
+//                "(17, 4, 'Vớ lười nam nữ 01', 'sanpham_voluoi1', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
+//                "(18, 4, 'Vớ lười nam nữ 02', 'sanpham_voluoi2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
                 "(19, 4, 'Vớ lười nam nữ 03', 'sanpham_voluoi3', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
                 "(20, 4, 'Vớ lười nam nữ 04', 'sanpham_voluoi4', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
                 "(21, 4, 'Vớ lười nam nữ 05', 'sanpham_voluoi5', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
