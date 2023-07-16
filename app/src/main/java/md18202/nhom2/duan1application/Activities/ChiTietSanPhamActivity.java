@@ -111,9 +111,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 int sanPham_id = sanPham.getSanPham_id();
                 //noiDung lay tu edBinh_luan
                 if(edBinh_luan.getText().length() == 0){
-                    imgBinh_luan.setVisibility(View.GONE);
-                }else{
-                    imgBinh_luan.setVisibility(View.VISIBLE);
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Binh luan trong tron a", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 String binh_luan = edBinh_luan.getText().toString();
                 //thoiGian lay tu thoi gian thuc new Date(), new Time()
