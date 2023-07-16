@@ -59,6 +59,7 @@ public class NguoiDungDAO {
             cursor.moveToFirst();
             //Lưu Thông tin
             SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("nguoiDung_id", cursor.getInt(0));
             editor.putString("hoTen",cursor.getString(1));
             editor.putString("sdt",cursor.getString(2));
             editor.putString("email",cursor.getString(3));
