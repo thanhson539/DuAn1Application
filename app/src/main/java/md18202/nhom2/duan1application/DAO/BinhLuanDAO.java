@@ -49,4 +49,18 @@ public class BinhLuanDAO {
 
         return sqLiteDatabase.insert("BINHLUAN", null, values);
     }
+
+    public long upDateBinhLuan(BinhLuan binhLuan){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("noiDung", binhLuan.getNoiDung());
+        values.put("thoiGian", binhLuan.getThoiGian());
+
+        return sqLiteDatabase.update("BINHLUAN", values, "binhLuan_id = ?", new String[]{String.valueOf(binhLuan.getBinhLuan_id())});
+    }
+
+    public long deleteBinhLuan(String binhLuan_id){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        return sqLiteDatabase.delete("BINHLUAN", "binhLuan_id = ?", new String[]{binhLuan_id});
+    }
 }
