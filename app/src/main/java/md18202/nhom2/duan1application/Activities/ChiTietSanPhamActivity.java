@@ -59,10 +59,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         recyclerView_binh_luan = findViewById(R.id.recycler_view_binh_luan);
         binhLuanDAO = new BinhLuanDAO(this);
 
+        //lay san pham tu ben adapter san pham 2, khi click vao san pham se lay san pham do va truyen qua chi tiet san pham
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         sanPham = (SanPham) bundle.getSerializable("sanPham");
 
+        //set anh cho san pham
         String srcImg = sanPham.getAnhSanPham();
         int resourceId = getResources().getIdentifier(srcImg, "drawable", getPackageName());
         Picasso.get().load(resourceId).into(imgAnh_sanpham_chitiet);
@@ -97,16 +99,22 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_binh_luan);
         EditText edBinh_luan = dialog.findViewById(R.id.edBinh_luan);
         ImageView imgBinh_luan = dialog.findViewById(R.id.imgBinh_luan);
+
+        //day binh luan cua nguoi dung vao database
         imgBinh_luan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //đẩy code của người dùng vào database
                 //nguoiDung_id lay tu home
                 sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
                 int getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
                 //sanPham_id lay tu sanPham
                 int sanPham_id = sanPham.getSanPham_id();
                 //noiDung lay tu edBinh_luan
+                if(edBinh_luan.getText().length() == 0){
+                    imgBinh_luan.setVisibility(View.GONE);
+                }else{
+                    imgBinh_luan.setVisibility(View.VISIBLE);
+                }
                 String binh_luan = edBinh_luan.getText().toString();
                 //thoiGian lay tu thoi gian thuc new Date(), new Time()
                 Calendar calendar = Calendar.getInstance();
@@ -122,7 +130,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         binhLuan.setThoiGian(currentTime);
                         if(binhLuanDAO.themBinhLuan(binhLuan) > 0){
                             getDsBinhLuan(sanPham_id);
-                            Toast.makeText(ChiTietSanPhamActivity.this, "nguoi dung id: "+getNguoiDung_id, Toast.LENGTH_LONG).show();
+                            Toast.makeText(ChiTietSanPhamActivity.this, "Da binh luan", Toast.LENGTH_LONG).show();
                         }else {
                             Toast.makeText(ChiTietSanPhamActivity.this, "Them binh luan khong thanh cong", Toast.LENGTH_SHORT).show();
                         }

@@ -15,8 +15,9 @@
         android:paddingLeft="10dp" />
     <ImageView
         android:id="@+id/imgBinh_luan"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/frame4_mui_ten"/>
 </LinearLayout>
