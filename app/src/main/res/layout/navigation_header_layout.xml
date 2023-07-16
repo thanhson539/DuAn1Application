@@ -9,7 +9,7 @@
         android:id="@+id/linear_thong_tin_header"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="35dp"
         android:orientation="vertical">
 
         <TextView
