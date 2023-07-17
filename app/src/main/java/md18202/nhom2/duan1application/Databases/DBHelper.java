@@ -120,21 +120,33 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(12, 2, 'Vớ nam nữ cổ cao 06', 'sanpham_cocao6', 24000, 'Vớ nam nữ cổ cao chất liệu cotton khử mùi, thoáng mát',33, 0)," +
 
 
-
+                // vo co trung
                 "(13, 3, 'Vỡ nữ thể thao cổ trung 01', 'sanpham_cotrung1', 17000, 'Vớ nữ cổ trung, êm chân thoát mát',40, 0)," +
                 "(14, 3, 'Vỡ nữ thể thao cổ trung 02', 'sanpham_cotrung2', 16000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',41, 0)," +
                 "(15, 3, 'Vỡ nữ thể thao cổ trung 03', 'sanpham_cotrung3', 15000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',42, 1)," +
                 "(16, 3, 'Vỡ nữ thể thao cổ trung 04', 'sanpham_cotrung4', 14000, 'Vớ thể thao nữ cổ trung, êm chân thoát mát',45, 0)," +
+
                 // vo luoi
                 //Không dùng ảnh có độ phân giải cao Quân nhé. Vì nó sẽ ko load được và bị chết app - Anh Sơn gửi đến Quân.
-//                "(17, 4, 'Vớ lười nam nữ 01', 'sanpham_voluoi1', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
-//                "(18, 4, 'Vớ lười nam nữ 02', 'sanpham_voluoi2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
                 "(19, 4, 'Vớ lười nam nữ 03', 'sanpham_voluoi3', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
                 "(20, 4, 'Vớ lười nam nữ 04', 'sanpham_voluoi4', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
                 "(21, 4, 'Vớ lười nam nữ 05', 'sanpham_voluoi5', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
 
                 "(17, 4, 'Vỡ lười nam nữ 01', 'sanpham_hoa_tiet2', 20000, 'Vớ lười nam/nũ chất liệu cao cấp',60, 0)," +
-                "(18, 5, 'Vớ nữ họa tiết ô vuông 01', 'sanpham_hoa_tiet3', 25000, 'Vớ nũ họa tiết cá tính',45, 0)");
+                "(18, 5, 'Vớ nữ họa tiết ô vuông 01', 'sanpham_hoa_tiet3', 25000, 'Vớ nũ họa tiết cá tính',45, 0)," +
+
+                //vo basic
+                "(22, 5, 'Vớ basic nam nữ 01', 'sanpham_vobasic1', 20000, 'Vớ basic nam/nũ chất liệu cao cấp',60, 0)," +
+                "(23, 5, 'Vớ basic nam nữ 02', 'sanpham_vobasic2', 20000, 'Vớ basic nam/nũ chất liệu cao cấp',60, 0)," +
+                "(24, 5, 'Vớ basic nam nữ 03', 'sanpham_vobasic3', 20000, 'Vớ basic nam/nũ chất liệu cao cấp',60, 0)," +
+                "(25, 5, 'Vớ basic nam nữ 04', 'sanpham_vobasic4', 20000, 'Vớ basic nam/nũ chất liệu cao cấp',60, 0)," +
+                "(26, 5, 'Vớ basic nam nữ 05', 'sanpham_vobasic5', 20000, 'Vớ basic nam/nũ chất liệu cao cấp',60, 0)," +
+
+                // vo hoa tiet
+                "(27, 6, 'Vớ họa tiết nam nữ 01', 'sanpham_vohoatiet1', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
+                "(28, 6, 'Vớ họa tiết nam nữ 02', 'sanpham_vohoatiet2', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
+                "(29, 6, 'Vớ họa tiết nam nữ 03', 'sanpham_vohoatiet3', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)," +
+                "(30, 6, 'Vớ họa tiết nam nữ 04', 'sanpham_vohoatiet4', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0)");
 
         /*5: Bảng 'HOADON'
         *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien */
