@@ -159,8 +159,19 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_binh_luan"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                <EditText
+                    android:id="@+id/edDialog_binh_luan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="leave a comment"
+                    android:paddingLeft="10dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"/>
+
             </LinearLayout>
 
 

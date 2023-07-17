@@ -1,6 +1,7 @@
 package md18202.nhom2.duan1application.DAO;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -36,5 +37,30 @@ public class BinhLuanDAO {
             }while (cursor.moveToNext());
         }
         return listResult;
+    }
+
+    public long themBinhLuan(BinhLuan binhLuan){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nguoiDung_id", binhLuan.getNguoiDung_id());
+        values.put("sanPham_id", binhLuan.getSanPham_id());
+        values.put("noiDung", binhLuan.getNoiDung());
+        values.put("thoiGian", binhLuan.getThoiGian());
+
+        return sqLiteDatabase.insert("BINHLUAN", null, values);
+    }
+
+    public long upDateBinhLuan(BinhLuan binhLuan){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("noiDung", binhLuan.getNoiDung());
+        values.put("thoiGian", binhLuan.getThoiGian());
+
+        return sqLiteDatabase.update("BINHLUAN", values, "binhLuan_id = ?", new String[]{String.valueOf(binhLuan.getBinhLuan_id())});
+    }
+
+    public long deleteBinhLuan(String binhLuan_id){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        return sqLiteDatabase.delete("BINHLUAN", "binhLuan_id = ?", new String[]{binhLuan_id});
     }
 }
