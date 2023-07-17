@@ -11,30 +11,53 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/edSuaTenSP"
-        android:layout_marginTop="10dp"
-        android:hint="Nhập Vào Tên"
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/edSuaGiaSP"
-        android:layout_marginTop="10dp"
-        android:hint="Nhập Vào Gia"
-        android:inputType="number"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edSuaTenSP"
+            android:layout_marginTop="10dp"
+            android:hint="Nhập Vào Tên"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+ <com.google.android.material.textfield.TextInputLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+ <com.google.android.material.textfield.TextInputEditText
+     android:id="@+id/edSuaGiaSP"
+     android:layout_marginTop="10dp"
+     android:hint="Nhập Vào Giá"
+     android:inputType="number"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"/>
+ </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/edSuaMoTaSP"
-        android:layout_marginTop="10dp"
-        android:hint="Nhập Mô Tả "
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edSuaMoTaSP"
+            android:layout_marginTop="10dp"
+            android:hint="Nhập Vào Mổ Tả Sản Phẩm"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/edSuaSoluongSP"
-        android:layout_marginTop="10dp"
-        android:inputType="number"
-        android:hint="Nhập Số Lượng"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edSuaSoluongSP"
+            android:layout_marginTop="10dp"
+            android:hint="Nhập Vào Số Lượng"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 </LinearLayout>

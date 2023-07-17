@@ -4,15 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     app:cardCornerRadius="25dp"
-    android:layout_marginTop="15dp"
+    android:layout_margin="15dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:background="#E2BCB7"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imgSanPhamADM"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/sanpham_cothap_xoaphong"
             android:layout_width="120dp"
             android:layout_height="150dp"/>

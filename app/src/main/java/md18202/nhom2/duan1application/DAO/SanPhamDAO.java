@@ -39,6 +39,34 @@ public class SanPhamDAO {
     }
 
 
+
+    public ArrayList<SanPham> getDsSanPhamADM() {
+        ArrayList<SanPham> listResult = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+
+        // Include the category name (tenLoai) in the SQL query
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT sp.sanPham_id, lp.tenLoai, sp.tenSanPham, sp.anhSanPham, sp.giaSanPham, sp.moTa, sp.soLuongConLai FROM SANPHAM sp INNER JOIN LOAISANPHAM lp ON sp.loaiSanPham_id = lp.loaiSanPham_id", null);
+
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                listResult.add(new SanPham(
+                        cursor.getInt(0),          // sanPham_id
+                        cursor.getString(1),       // tenLoaiSanPham (category name)
+                        cursor.getString(2),       // tenSanPham
+                        cursor.getString(3),       // anhSanPham
+                        cursor.getInt(4),          // giaSanPham
+                        cursor.getString(5),       // moTa
+                        cursor.getInt(6)           // soLuongConLai
+                ));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close(); // Close the cursor after use
+        return listResult;
+    }
+
+
     public ArrayList<SanPham> getDsVoCoThap(){
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();

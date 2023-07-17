@@ -175,7 +175,7 @@ public class ChiTietNguoiDung extends AppCompatActivity {
                     boolean check = nguoiDungDAO.doiMatKhau(taikhoan, oldPass, newPass);
                     if (check){
                         Toast.makeText(ChiTietNguoiDung.this,"Đổi mật khẩu thành công",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ChiTietNguoiDung.this,DangKyTaiKhoanActivity.class);
+                        Intent intent = new Intent(ChiTietNguoiDung.this,DangNhapActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }else {Toast.makeText(ChiTietNguoiDung.this,"Đổi Mật Khẩu Không Thành Công",Toast.LENGTH_SHORT).show();}

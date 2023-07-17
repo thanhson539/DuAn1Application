@@ -13,10 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="15dp"
-        android:id="@+id/edTenLoaiSp"
-        android:hint="Nhập Vào Tên"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edTenLoaiSp"
+            android:layout_width="match_parent"
+            android:hint="Nhập Vào Tên"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
 </LinearLayout>

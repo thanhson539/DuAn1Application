@@ -43,7 +43,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHover holder, int position) {
-        holder.tvID.setText("Loại: " + String.valueOf(list.get(position).getLoaiSanPham_id()));
+        holder.tvID.setText("Loại: " + String.valueOf(list.get(position).getTenloaisanpham()));
         holder.tvTen.setText("Tên Sản Phẩm: " + list.get(position).getTenSanPham());
         holder.tvGia.setText("Giá Tiền: " + String.valueOf(list.get(position).getGiaSanPham()));
         holder.tvMota.setText("Mô Tă Sản Phẩm: " + list.get(position).getMoTa());
