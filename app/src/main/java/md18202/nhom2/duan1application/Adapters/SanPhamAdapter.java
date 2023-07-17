@@ -65,6 +65,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
     public class MyViewHover extends RecyclerView.ViewHolder {
         TextView tvID, tvTen, tvGia, tvMota, tvSoLuong;
         ImageView imgSanPham;
+
         public MyViewHover(@NonNull View itemView) {
             super(itemView);
             tvID = itemView.findViewById(R.id.idLoaiSanPham);
@@ -72,7 +73,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
             tvGia = itemView.findViewById(R.id.idGiaSanPham);
             tvMota = itemView.findViewById(R.id.idMoTaSanPham);
             tvSoLuong = itemView.findViewById(R.id.idSoLuongSanpham);
-            imgSanPham  =itemView.findViewById(R.id.imgSanPhamADM);
+            imgSanPham = itemView.findViewById(R.id.imgSanPhamADM);
 
             // sửa thông tin
             itemView.setOnClickListener(new View.OnClickListener() {

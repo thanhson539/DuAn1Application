@@ -194,4 +194,13 @@ public class SanPhamDAO {
 
     }
 
+    public boolean changeIsYeuThich(int sanPham_id, int newIsYeuThich){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("sanPham_id", sanPham_id);
+        contentValues.put("isYeuThich", newIsYeuThich);
+        long check = sqLiteDatabase.update("SANPHAM", contentValues,"sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
+        return check > 0;
+    }
+
 }
