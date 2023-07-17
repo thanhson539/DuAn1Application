@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi Thông Tin Người Dùng"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+        android:id="@+id/edtCUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tên Người Dùng"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/edtCUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email Người Dùng"
+        />
+    <EditText
+        android:id="@+id/edtCUserSdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Số điện thoại"/>
+
+    <EditText
+        android:id="@+id/edtCheckUserPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập mật khẩu của bạn để đổi thông tin"
+
+        android:inputType="textPassword"
+        android:layout_marginTop="40dp"/>
+
+</LinearLayout>

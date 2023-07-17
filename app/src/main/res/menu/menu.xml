@@ -43,10 +43,6 @@
                 android:id="@+id/menuVoHoaTiet"
                 android:title="Vớ họa tiết"
                 android:icon="@drawable/frame4_mui_ten"/>
-            <item
-                android:id="@+id/menuBtsMoi2023"
-                android:title="BTS mới 2023"
-                android:icon="@drawable/frame4_mui_ten"/>
         </menu>
     </item>
     <item
@@ -65,10 +61,12 @@
                 android:icon="@drawable/frame4_mui_ten"
                 app:showAsAction="always"/>
             <item
+                android:id="@+id/menuLoaiSanPham"
                 android:title="Quản lý loại sản phẩm"
                 android:icon="@drawable/frame4_mui_ten"
                 app:showAsAction="always"/>
             <item
+                android:id="@+id/menuSanPham"
                 android:title="Quản lý sản phẩm"
                 android:icon="@drawable/frame4_mui_ten"/>
             <item

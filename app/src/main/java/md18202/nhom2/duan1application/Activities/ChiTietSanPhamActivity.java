@@ -27,6 +27,7 @@ import java.util.Timer;
 import md18202.nhom2.duan1application.Adapters.BinhLuanAdapter;
 import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
+import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.Models.SanPham;
@@ -44,6 +45,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     List<BinhLuan> listBinhLuan;
     BinhLuanAdapter binhLuanAdapter;
     SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         int resourceId = getResources().getIdentifier(srcImg, "drawable", getPackageName());
         Picasso.get().load(resourceId).into(imgAnh_sanpham_chitiet);
         tvTen_sanpham_chitiet.setText(sanPham.getTenSanPham());
-        tvGia_sanpham_chitiet.setText(""+sanPham.getGiaSanPham() + " VND");
+        tvGia_sanpham_chitiet.setText("" + sanPham.getGiaSanPham() + " VND");
         getDsBinhLuan(sanPham.getSanPham_id());
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -82,13 +84,31 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         // Chức năng yêu thích
         sanPhamYeuThich(imgYeuThich_frameSPChiTiet2);
         binhLuanDialog(edDialog_binh_luan);
+        if (sanPham != null) {
+            Toast.makeText(this, "Id sản phẩm: " + sanPham.getSanPham_id() + " -IsYeuThich: " + sanPham.getIsYeuThich(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Null", Toast.LENGTH_SHORT).show();
+        }
+        int sanPham_id = sanPham.getSanPham_id();
+        int isYeuThich = sanPham.getIsYeuThich();
+        sanPhamYeuThich(sanPham_id, isYeuThich, imgYeuThich_frameSPChiTiet2);
     }
 
-    public void sanPhamYeuThich(ImageView imageView){
+    public void sanPhamYeuThich(int sanPham_id, int isYeuThich, ImageView imgIsYeuThich) {
+        if (isYeuThich == 1) {
+            imgIsYeuThich.setImageResource(R.drawable.frame4_trai_tim);
+        }
         imgYeuThich_frameSPChiTiet2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //code here
+                SanPhamDAO sanPhamDAO = new SanPhamDAO(getApplicationContext());
+                if (isYeuThich == 1) {
+                    imgIsYeuThich.setImageResource(R.drawable.frame4_trai_tim2);
+                    sanPhamDAO.changeIsYeuThich(sanPham_id, 0);
+                } else {
+                    imgIsYeuThich.setImageResource(R.drawable.frame4_trai_tim);
+                    sanPhamDAO.changeIsYeuThich(sanPham_id, 1);
+                }
             }
         });
 
@@ -155,7 +175,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         finish();
     }
 
-    public void getDsBinhLuan(int sanPhamId){
+    public void getDsBinhLuan(int sanPhamId) {
         listBinhLuan = binhLuanDAO.getDsBinhLuan(sanPhamId);
         Collections.reverse(listBinhLuan);
         binhLuanAdapter = new BinhLuanAdapter(listBinhLuan, ChiTietSanPhamActivity.this);

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="13/07/2023"
             android:textStyle="italic"
-            android:textSize="15sp"/>
+            android:textSize="17sp"/>
     </LinearLayout>
 
 

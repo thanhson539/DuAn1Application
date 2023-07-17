@@ -5,12 +5,24 @@ import java.io.Serializable;
 public class SanPham implements Serializable {
     private int sanPham_id;
     private int loaiSanPham_id;
+    private   String tenloaisanpham;
     private String tenSanPham;
     private String anhSanPham;
     private int giaSanPham;
     private String moTa;
     private int soLuongConLai;
     private int isYeuThich;
+
+
+    public SanPham(int sanPham_id, String tenloaisanpham, String tenSanPham, String anhSanPham, int giaSanPham, String moTa, int soLuongConLai) {
+        this.sanPham_id = sanPham_id;
+        this.tenloaisanpham = tenloaisanpham;
+        this.tenSanPham = tenSanPham;
+        this.anhSanPham = anhSanPham;
+        this.giaSanPham = giaSanPham;
+        this.moTa = moTa;
+        this.soLuongConLai = soLuongConLai;
+    }
 
     public SanPham(int sanPham_id, int loaiSanPham_id, String tenSanPham, String anhSanPham, int giaSanPham, String moTa, int soLuongConLai) {
         this.sanPham_id = sanPham_id;
@@ -99,5 +111,14 @@ public class SanPham implements Serializable {
 
     public void setSoLuongConLai(int soLuongConLai) {
         this.soLuongConLai = soLuongConLai;
+    }
+
+
+    public String getTenloaisanpham() {
+        return tenloaisanpham;
+    }
+
+    public void setTenloaisanpham(String tenloaisanpham) {
+        this.tenloaisanpham = tenloaisanpham;
     }
 }
