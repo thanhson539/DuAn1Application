@@ -4,24 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragments.VoCoCao_Fragment">
+    tools:context=".Fragments.Loai_San_Pham_Fragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#EEEEEE"
-        android:src="@drawable/sanpham_cotrung_xoaphong" />
-
+    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Vớ Cổ Trung"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:text="Loại Sản Phẩm " />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_vocotrung"
+        android:id="@+id/recycler_view_LoaiSanPham"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

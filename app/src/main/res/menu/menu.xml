@@ -43,14 +43,38 @@
                 android:id="@+id/menuVoHoaTiet"
                 android:title="Vớ họa tiết"
                 android:icon="@drawable/frame4_mui_ten"/>
-            <item
-                android:id="@+id/menuBtsMoi2023"
-                android:title="BTS mới 2023"
-                android:icon="@drawable/frame4_mui_ten"/>
         </menu>
     </item>
     <item
         android:id="@+id/menuLienHe"
         android:title="Liên hệ"
         android:icon="@drawable/frame4_lien_he"/>
+    <item
+        android:title="Quản lý dành cho admin">
+        <menu>
+            <item
+                android:title="Quản lý người dùng"
+                android:icon="@drawable/frame4_mui_ten"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:title="Quản lý hóa đơn"
+                android:icon="@drawable/frame4_mui_ten"
+                app:showAsAction="always"/>
+            <item
+                android:id="@+id/menuLoaiSanPham"
+                android:title="Quản lý loại sản phẩm"
+                android:icon="@drawable/frame4_mui_ten"
+                app:showAsAction="always"/>
+            <item
+                android:id="@+id/menuSanPham"
+                android:title="Quản lý sản phẩm"
+                android:icon="@drawable/frame4_mui_ten"/>
+            <item
+                android:title="Quản lý bình luận"
+                android:icon="@drawable/frame4_mui_ten"/>
+            <item
+                android:title="Thông kê doanh thu"
+                android:icon="@drawable/frame4_mui_ten"/>
+        </menu>
+    </item>
 </menu>

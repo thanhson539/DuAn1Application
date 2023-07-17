@@ -16,6 +16,7 @@ public class NguoiDungDAO {
     SharedPreferences sharedPreferences;
     public NguoiDungDAO(Context context){
         dbHelper = new DBHelper(context);
+        sharedPreferences = context.getSharedPreferences("NGUOIDUNG",Context.MODE_PRIVATE);
     }
 
     public ArrayList<NguoiDung> getDsNguoiDung(){
@@ -55,8 +56,49 @@ public class NguoiDungDAO {
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from NGUOIDUNG where taikhoan = ? and matkhau = ?", new String[]{taikhoan, matkhau});
         if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            //Lưu Thông tin
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("hoTen",cursor.getString(1));
+            editor.putString("sdt",cursor.getString(2));
+            editor.putString("email",cursor.getString(3));
+            editor.putString("taikhoan",cursor.getString(4));
+            editor.putString("matkhau",cursor.getString(5));
+            editor.putInt("loaitaikhoan",cursor.getInt(6));
+            editor.commit();
             return true;
         }
         return false;
     }
+
+    public boolean doiMatKhau(String taikhoan, String matkhaucu, String matkhaumoi){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from NGUOIDUNG where taikhoan = ? and matkhau = ?",new String[]{taikhoan,matkhaucu});
+        if (cursor.getCount() > 0){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("matkhau",matkhaumoi);
+            long check = sqLiteDatabase.update("NGUOIDUNG",contentValues,"taikhoan = ?", new String[]{taikhoan});
+            if(check == -1)
+                return false;
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean doiThongTinNguoiDung(String taikhoan, String hoTen, String email, String Sdt){
+      SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+      Cursor cursor = sqLiteDatabase.rawQuery("select * from NGUOIDUNG where taikhoan = ?", new String[]{taikhoan});
+      if (cursor.getCount() > 0){
+          ContentValues contentValues = new ContentValues();
+          contentValues.put("hoTen",hoTen);
+          contentValues.put("email",email);
+          contentValues.put("soDienThoai",Sdt);
+          long check = sqLiteDatabase.update("NGUOIDUNG",contentValues,"taikhoan = ?",new String[]{taikhoan});
+          if (check == -1)
+              return false;
+          return true;
+      }
+      return false;
+    };
 }
