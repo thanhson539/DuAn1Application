@@ -231,4 +231,17 @@ public class SanPhamDAO {
         return check > 0;
     }
 
+    public long insertSanPham(SanPham sanPham){
+        SQLiteDatabase db  = dbHelper.getWritableDatabase();
+        ContentValues values  = new ContentValues();
+        values.put("loaiSanPham_id" , sanPham.getLoaiSanPham_id());
+        values.put("tenSanPham", sanPham.getTenSanPham());
+        values.put("anhSanPham", sanPham.getAnhSanPham());
+        values.put("giaSanPham", sanPham.getGiaSanPham());
+        values.put("moTa", sanPham.getMoTa());
+        values.put("soLuongConLai", sanPham.getSoLuongConLai());
+        values.put("isYeuThich", sanPham.getIsYeuThich());
+        return db.insert("SANPHAM", null, values);
+    }
+
 }

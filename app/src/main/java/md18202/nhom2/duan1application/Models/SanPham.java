@@ -1,5 +1,7 @@
 package md18202.nhom2.duan1application.Models;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class SanPham implements Serializable {
@@ -8,6 +10,7 @@ public class SanPham implements Serializable {
     private   String tenloaisanpham;
     private String tenSanPham;
     private String anhSanPham;
+//    private Uri uriImageSP;
     private int giaSanPham;
     private String moTa;
     private int soLuongConLai;

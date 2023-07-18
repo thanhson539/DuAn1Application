@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
@@ -45,13 +48,29 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHover holder, int position) {
         holder.tvID.setText("Loại: " + String.valueOf(list.get(position).getTenloaisanpham()));
         holder.tvTen.setText("Tên Sản Phẩm: " + list.get(position).getTenSanPham());
+        holder.tvMota.setTextColor(Color.BLACK);
         holder.tvGia.setText("Giá Tiền: " + String.valueOf(list.get(position).getGiaSanPham()));
         holder.tvMota.setText("Mô Tă Sản Phẩm: " + list.get(position).getMoTa());
         holder.tvSoLuong.setText("Số Lượng Còn: " + String.valueOf(list.get(position).getSoLuongConLai()));
-//        Picasso.get().load(list.get(position).getAnhSanPham()).into(holder.imgSanPham);
+
+
         String srcImg = list.get(position).getAnhSanPham();
-        int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
-        Picasso.get().load(resourceId).into(holder.imgSanPham);
+
+        // Kiểm tra xem ảnh có phải là đường dẫn URI hay không
+        boolean isUri = srcImg.startsWith("content://");
+
+        if (isUri) {
+            // Nếu là đường dẫn URI, sử dụng Picasso để tải ảnh từ đường dẫn URI
+            Picasso.get().load(Uri.parse(srcImg)).into(holder.imgSanPham);
+        } else {
+            // Nếu không phải là đường dẫn URI, sử dụng cách khác để hiển thị ảnh (ví dụ: từ nguồn drawable)
+            int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
+            holder.imgSanPham.setImageResource(resourceId);
+        }
+
+
+
+
     }
 
     @Override
