@@ -2,10 +2,12 @@ package md18202.nhom2.duan1application.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment fragment;
     private TextView txtNameNav, txtsdtU , txtEmail;
+    boolean isSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,5 +145,37 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout_frame4.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout_frame4.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout_frame4.closeDrawer(GravityCompat.START);
+        } else {
+            if (isSelected) {
+                drawerLayout_frame4.openDrawer(GravityCompat.START); // nếu isSelected = true, hiển thị NavigationView khi ấn back
+                isSelected = false; // reset lại giá trị của biến isSelected
+            } else {
+                fragmentManager = getSupportFragmentManager();
+                fragment = new HomeFragment();
+                fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+            }
+        }
+    }
+
+    public void exit(){
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm")
+                .setMessage("Do you want to exit the application?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Kết thúc ứng dụng khi người dùng xác nhận thoát
+                        finish();
+                        System.exit(1);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }

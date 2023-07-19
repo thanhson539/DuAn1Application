@@ -149,6 +149,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                         binhLuan.setThoiGian(currentTime);
                         if(binhLuanDAO.themBinhLuan(binhLuan) > 0){
                             getDsBinhLuan(sanPham_id);
+                            dialog.cancel();
                             Toast.makeText(ChiTietSanPhamActivity.this, "Da binh luan", Toast.LENGTH_LONG).show();
                         }else {
                             Toast.makeText(ChiTietSanPhamActivity.this, "Them binh luan khong thanh cong", Toast.LENGTH_SHORT).show();

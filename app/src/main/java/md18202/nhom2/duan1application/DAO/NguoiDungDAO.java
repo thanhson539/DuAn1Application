@@ -65,7 +65,7 @@ public class NguoiDungDAO {
             editor.putString("email",cursor.getString(3));
             editor.putString("taikhoan",cursor.getString(4));
             editor.putString("matkhau",cursor.getString(5));
-            editor.putInt("loaitaikhoan",cursor.getInt(6));
+            editor.putInt("loaitaikh oan",cursor.getInt(6));
             editor.commit();
             return true;
         }

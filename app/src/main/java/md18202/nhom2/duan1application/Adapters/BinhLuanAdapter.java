@@ -62,8 +62,6 @@ public class BinhLuanAdapter extends RecyclerView.Adapter<BinhLuanAdapter.ViewHo
                 int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
                 if (nguoiDung_id == list.get(holder.getAdapterPosition()).getNguoiDung_id()){
                     optionDialog(holder.getAdapterPosition());
-                }else{
-                    copyPaste(holder.tvNoi_dung);
                 }
                 return true;
             }
@@ -186,37 +184,5 @@ public class BinhLuanAdapter extends RecyclerView.Adapter<BinhLuanAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public void copyPaste(TextView tvCopy){
-        // Tạo đối tượng AlertDialog.Builder
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        // Thiết lập tiêu đề cho hộp thoại
-        builder.setTitle("Lựa chọn");
-
-        // Thiết lập danh sách các lựa chọn
-        String[] options = {"Sao chep"};
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        // Xử lý khi người dùng chọn "Sao chep"
-                        // Lấy nội dung của TextView
-                        CharSequence text = tvCopy.getText();
-
-                        // Sao chép nội dung vào Clipboard
-                        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                        ClipData clip = ClipData.newPlainText("text", text);
-                        clipboard.setPrimaryClip(clip);
-                        Toast.makeText(context, "Da sao chep", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
-
-        // Tạo và hiển thị hộp thoại
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-    }
 }
