@@ -17,9 +17,13 @@
             android:id="@+id/imgNguoiDung"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/sanpham_cothap_xoaphong"
-            android:layout_width="120dp"
-            android:layout_height="150dp"/>
+            android:background="@drawable/img_user_qlnd"
+            android:src="@drawable/avatar_thanh_son"
+            android:scaleType="centerCrop"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+
+            />
 
 
         <LinearLayout
@@ -48,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+
 
 
     </LinearLayout>
