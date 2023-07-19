@@ -210,7 +210,6 @@ public class SanPhamDAO {
         return listResult;
     }
 
-
     public long SuaSanPham(SanPham sanPham){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
