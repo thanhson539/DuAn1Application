@@ -156,7 +156,9 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout_frame4.openDrawer(GravityCompat.START); // nếu isSelected = true, hiển thị NavigationView khi ấn back
                 isSelected = false; // reset lại giá trị của biến isSelected
             } else {
-                exit(); // nếu isSelected = false, thoát ứng dụng khi ấn back
+                fragmentManager = getSupportFragmentManager();
+                fragment = new HomeFragment();
+                fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
             }
         }
     }
