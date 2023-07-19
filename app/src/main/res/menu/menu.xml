@@ -53,6 +53,7 @@
         android:title="Quản lý dành cho admin">
         <menu>
             <item
+                android:id="@+id/menuQLNguoiDung"
                 android:title="Quản lý người dùng"
                 android:icon="@drawable/frame4_mui_ten"
                 app:showAsAction="ifRoom"/>
