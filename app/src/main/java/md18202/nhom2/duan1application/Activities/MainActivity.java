@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
+import md18202.nhom2.duan1application.Fragments.Ql_NguoiDung_Fragment;
 import md18202.nhom2.duan1application.Fragments.SanPham_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoBasic_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoCao_Fragment;
@@ -133,6 +134,9 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuVoHoaTiet) {
                     fragment = new VoHoaTiet_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }else if (menuId == R.id.menuQLNguoiDung){
+                    fragment = new Ql_NguoiDung_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 
