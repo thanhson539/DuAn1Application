@@ -10,10 +10,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView_frame4;
     private FragmentManager fragmentManager;
     private Fragment fragment;
-    private TextView txtNameNav, txtsdtU, txtEmail;
     boolean isSelected;
+    private ImageView imgAvatar_header, imgMuiTen_header;
+    private TextView tvName_header, tvPhoneNumber_header, tvEmail_header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +64,15 @@ public class MainActivity extends AppCompatActivity {
         toolbar_frame4 = findViewById(R.id.toolbar_frame4);
         frameLayout_frame4 = findViewById(R.id.frameLayout_frame4);
         navigationView_frame4 = findViewById(R.id.navigationView_frame4);
+
+        //Ánh xạ các widget headerLayout
         View headerLayout = navigationView_frame4.getHeaderView(0);
-        txtNameNav = headerLayout.findViewById(R.id.txtNameU);
-        txtsdtU = headerLayout.findViewById(R.id.sdtU);
-        txtEmail = headerLayout.findViewById(R.id.txtEmail);
+        imgAvatar_header = headerLayout.findViewById(R.id.imgAvatar_header);
+        imgMuiTen_header = headerLayout.findViewById(R.id.imgMuiTen_header);
+        tvName_header = headerLayout.findViewById(R.id.tvName_header);
+        tvPhoneNumber_header = headerLayout.findViewById(R.id.tvPhoneNumber_header);
+        tvEmail_header = headerLayout.findViewById(R.id.tvEmail_header);
+
         //Xử lý cho toolbar
         setSupportActionBar(toolbar_frame4);
         ActionBar actionBar = getSupportActionBar();
@@ -87,13 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout_frame4.closeDrawer(GravityCompat.START);
             }
         });
-
-        //check danh sach nguoi dunng
-        NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getApplicationContext());
-        ArrayList<NguoiDung> list = nguoiDungDAO.getDsNguoiDung();
-        if (list != null) {
-            Toast.makeText(this, list.size() + "", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public void setActionForNavigationView(NavigationView navigationView) {
@@ -139,16 +141,34 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         //Hiển thị thông tin sharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
-        String hoten = sharedPreferences.getString("hoTen", "");
-        String sdtU = sharedPreferences.getString("sdt", "");
+        String imgSrc = sharedPreferences.getString("imgSrc", "");
+        String hoTen = sharedPreferences.getString("hoTen", "");
+        String soDienThoai = sharedPreferences.getString("soDienThoai", "");
         String email = sharedPreferences.getString("email", "");
-        txtNameNav.setText("Hi!" + hoten);
-        txtsdtU.setText(sdtU);
-        txtEmail.setText(email);
 
+        //Set thong tin nguoi dung cho header layout
+        boolean isUri = imgSrc.startsWith("content://");
+        if (isUri){
+            Picasso.get().load(Uri.parse(imgSrc)).into(imgAvatar_header);
+        }else {
+            int idResource = this.getResources().getIdentifier(imgSrc,"drawable",this.getPackageName());
+            imgAvatar_header.setImageResource(idResource);
+        }
+        tvName_header.setText(hoTen);
+        tvPhoneNumber_header.setText(soDienThoai);
+        tvEmail_header.setText(email);
 
+        //Chuyen man hinh chi tiet
+        imgMuiTen_header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ChiTietNguoiDung.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
