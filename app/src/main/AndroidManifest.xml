@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1Application"
         tools:targetApi="31">
-        <activity android:name=".Activities.ChiTietNguoiDung"
-            android:exported="false"/>
+        <activity
+            android:name=".Activities.GioHangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ChiTietNguoiDung"
+            android:exported="false" />
         <activity
             android:name=".Activities.ChiTietSanPhamActivity"
             android:exported="false" />
