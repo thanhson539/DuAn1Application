@@ -56,7 +56,7 @@ public class ChiTietNguoiDung extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                showDialogChangePass();
+//                showDialogChangePass();
             }
         });
         //Chức năng Đổi thông tin người dùng
@@ -64,7 +64,7 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         btnChangeUserinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialogChangeUserInfo();
+//                showDialogChangeUserInfo();
             }
         });
 
@@ -87,107 +87,107 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         });
     }
     //Dialog đổi mật khẩu
-    private void showDialogChangeUserInfo() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialong_doithongtinnguoidung,null);
-        EditText edthoTen = view.findViewById(R.id.edtCUserName);
-        EditText edtEmail = view.findViewById(R.id.edtCUserEmail);
-        EditText edtSdt = view.findViewById(R.id.edtCUserSdt);
-        EditText checkpass = view.findViewById(R.id.edtCheckUserPass);
-
-        builder.setView(view);
-        //Hiển thị thông tin User Dialog
-        sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
-        String hotenUD = sharedPreferences.getString("hoTen", "");
-        String sdtUD = sharedPreferences.getString("sdt", "");
-        String emailUD = sharedPreferences.getString("email","");
-        edthoTen.setText(hotenUD);
-        edtSdt.setText(sdtUD);
-        edtEmail.setText(emailUD);
-
-        builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        builder.setNegativeButton("Cập Nhật", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-            String hoten = edthoTen.getText().toString();
-            String email = edtEmail.getText().toString();
-            String sdt = edtSdt.getText().toString();
-            String matkhau = checkpass.getText().toString();
-            SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
-            String taikhoan = sharedPreferences.getString("taikhoan","");
-            String matkhaucheck = sharedPreferences.getString("matkhau","");
-            if (matkhau.equals(matkhaucheck)){
-                NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(ChiTietNguoiDung.this);
-                boolean check = nguoiDungDAO.doiThongTinNguoiDung(taikhoan,hoten,email,sdt);
-                if (check){
-                    Toast.makeText(ChiTietNguoiDung.this,"Đổi Thông Tin Thành Công",Toast.LENGTH_SHORT).show();
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("hoTen", hoten);
-                    editor.putString("email", email);
-                    editor.putString("sdt", sdt);
-                    editor.apply();
-                    recreate();
-                }else {Toast.makeText(ChiTietNguoiDung.this,"Đổi thông tin Không Thành Công",Toast.LENGTH_SHORT).show();}
-
-            }else {Toast.makeText(ChiTietNguoiDung.this, "Nhập Mật Khẩu Không Đúng", Toast.LENGTH_LONG).show();}
-            }
-        });
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-    }
+//    private void showDialogChangeUserInfo() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        LayoutInflater inflater = getLayoutInflater();
+//        View view = inflater.inflate(R.layout.dialong_doithongtinnguoidung,null);
+//        EditText edthoTen = view.findViewById(R.id.edtCUserName);
+//        EditText edtEmail = view.findViewById(R.id.edtCUserEmail);
+//        EditText edtSdt = view.findViewById(R.id.edtCUserSdt);
+//        EditText checkpass = view.findViewById(R.id.edtCheckUserPass);
+//
+//        builder.setView(view);
+//        //Hiển thị thông tin User Dialog
+//        sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
+//        String hotenUD = sharedPreferences.getString("hoTen", "");
+//        String sdtUD = sharedPreferences.getString("sdt", "");
+//        String emailUD = sharedPreferences.getString("email","");
+//        edthoTen.setText(hotenUD);
+//        edtSdt.setText(sdtUD);
+//        edtEmail.setText(emailUD);
+//
+//        builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//            }
+//        });
+//
+//        builder.setNegativeButton("Cập Nhật", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//            String hoten = edthoTen.getText().toString();
+//            String email = edtEmail.getText().toString();
+//            String sdt = edtSdt.getText().toString();
+//            String matkhau = checkpass.getText().toString();
+//            SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
+//            String taikhoan = sharedPreferences.getString("taikhoan","");
+//            String matkhaucheck = sharedPreferences.getString("matkhau","");
+//            if (matkhau.equals(matkhaucheck)){
+//                NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(ChiTietNguoiDung.this);
+//                boolean check = nguoiDungDAO.doiThongTinNguoiDung(taikhoan,hoten,email,sdt);
+//                if (check){
+//                    Toast.makeText(ChiTietNguoiDung.this,"Đổi Thông Tin Thành Công",Toast.LENGTH_SHORT).show();
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("hoTen", hoten);
+//                    editor.putString("email", email);
+//                    editor.putString("sdt", sdt);
+//                    editor.apply();
+//                    recreate();
+//                }else {Toast.makeText(ChiTietNguoiDung.this,"Đổi thông tin Không Thành Công",Toast.LENGTH_SHORT).show();}
+//
+//            }else {Toast.makeText(ChiTietNguoiDung.this, "Nhập Mật Khẩu Không Đúng", Toast.LENGTH_LONG).show();}
+//            }
+//        });
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//
+//    }
 
     //Đổi Mật Khẩu
-    private void showDialogChangePass() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_doimatkhau,null);
-        EditText EdtOldPass = view.findViewById(R.id.edtOldPass);
-        EditText EdtNewPass = view.findViewById(R.id.edtNewPass);
-        EditText EdtReNewPass = view.findViewById(R.id.edtReNewPass);
-
-        builder.setView(view);
-
-        builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.setNegativeButton("Đổi", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String oldPass = EdtOldPass.getText().toString();
-                String newPass = EdtNewPass.getText().toString();
-                String reNewPass = EdtReNewPass.getText().toString();
-                if (newPass.equals(reNewPass)){
-                    SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
-                    String taikhoan = sharedPreferences.getString("taikhoan", "");
-                    NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(ChiTietNguoiDung.this);
-
-                    boolean check = nguoiDungDAO.doiMatKhau(taikhoan, oldPass, newPass);
-                    if (check){
-                        Toast.makeText(ChiTietNguoiDung.this,"Đổi mật khẩu thành công",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ChiTietNguoiDung.this,DangNhapActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }else {Toast.makeText(ChiTietNguoiDung.this,"Đổi Mật Khẩu Không Thành Công",Toast.LENGTH_SHORT).show();}
-                }else {
-                    Toast.makeText(ChiTietNguoiDung.this, "Nhập Mật Khẩu Mới Không Trùng", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-    }
+//    private void showDialogChangePass() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        LayoutInflater inflater = getLayoutInflater();
+//        View view = inflater.inflate(R.layout.dialog_doimatkhau,null);
+//        EditText EdtOldPass = view.findViewById(R.id.edtOldPass);
+//        EditText EdtNewPass = view.findViewById(R.id.edtNewPass);
+//        EditText EdtReNewPass = view.findViewById(R.id.edtReNewPass);
+//
+//        builder.setView(view);
+//
+//        builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//            }
+//        });
+//        builder.setNegativeButton("Đổi", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                String oldPass = EdtOldPass.getText().toString();
+//                String newPass = EdtNewPass.getText().toString();
+//                String reNewPass = EdtReNewPass.getText().toString();
+//                if (newPass.equals(reNewPass)){
+//                    SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
+//                    String taikhoan = sharedPreferences.getString("taikhoan", "");
+//                    NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(ChiTietNguoiDung.this);
+//
+//                    boolean check = nguoiDungDAO.doiMatKhau(taikhoan, oldPass, newPass);
+//                    if (check){
+//                        Toast.makeText(ChiTietNguoiDung.this,"Đổi mật khẩu thành công",Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(ChiTietNguoiDung.this,DangNhapActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                    }else {Toast.makeText(ChiTietNguoiDung.this,"Đổi Mật Khẩu Không Thành Công",Toast.LENGTH_SHORT).show();}
+//                }else {
+//                    Toast.makeText(ChiTietNguoiDung.this, "Nhập Mật Khẩu Mới Không Trùng", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+//
+//        AlertDialog alertDialog = builder.create();
+//        alertDialog.show();
+//
+//    }
 
 }

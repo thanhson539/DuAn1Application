@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +24,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
+import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
 import md18202.nhom2.duan1application.Fragments.SanPham_Fragment;
@@ -33,6 +37,7 @@ import md18202.nhom2.duan1application.Fragments.VoCoTrung_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoHoaTiet_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoLuoi_Fragment;
 import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
+import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView_frame4;
     private FragmentManager fragmentManager;
     private Fragment fragment;
-    private TextView txtNameNav, txtsdtU , txtEmail;
+    private TextView txtNameNav, txtsdtU, txtEmail;
     boolean isSelected;
 
     @Override
@@ -73,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         //Action của navigationView
         setActionForNavigationView(navigationView_frame4);
         //CHuyển qua chi tiết người dùng
-        headerLayout.setOnClickListener(new  View.OnClickListener(){
+        headerLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -82,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout_frame4.closeDrawer(GravityCompat.START);
             }
         });
+
+        //check danh sach nguoi dunng
+        NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getApplicationContext());
+        ArrayList<NguoiDung> list = nguoiDungDAO.getDsNguoiDung();
+        if (list != null) {
+            Toast.makeText(this, list.size() + "", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void setActionForNavigationView(NavigationView navigationView) {
@@ -106,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new YeuThich_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuLoaiSanPham) {
-                    fragment  = new Loai_San_Pham_Fragment();
+                    fragment = new Loai_San_Pham_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuSanPham) {
                     fragment = new SanPham_Fragment();
@@ -128,11 +140,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //Hiển thị thông tin sharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
-        String hoten = sharedPreferences.getString("hoTen","");
-        String sdtU = sharedPreferences.getString("sdt","");
-        String email= sharedPreferences.getString("email","");
-        txtNameNav.setText("Hi!"+hoten);
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        String hoten = sharedPreferences.getString("hoTen", "");
+        String sdtU = sharedPreferences.getString("sdt", "");
+        String email = sharedPreferences.getString("email", "");
+        txtNameNav.setText("Hi!" + hoten);
         txtsdtU.setText(sdtU);
         txtEmail.setText(email);
 
@@ -163,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void exit(){
+    public void exit() {
         new AlertDialog.Builder(this)
                 .setTitle("Confirm")
                 .setMessage("Do you want to exit the application?")

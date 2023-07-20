@@ -74,13 +74,20 @@ public class DangNhapActivity extends AppCompatActivity {
         if (taikhoan.equals("") || matkhau.equals("")) {
             Toast.makeText(this, "Không được bỏ trống", Toast.LENGTH_SHORT).show();
         } else {
-            if (nguoiDungDAO.kiemTraDangNhap(taikhoan, matkhau) == true) {
-                saveTaiKhoan(taikhoan, matkhau);
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+            int check = nguoiDungDAO.kiemTraDangNhap(taikhoan, matkhau);
+            switch (check){
+                case 0:
+                    Toast.makeText(this, "Tài khoản và mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    saveTaiKhoan(taikhoan, matkhau);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
+                    break;
+                case -1:
+                    Toast.makeText(this, "Tài khoản này hiện không khả dụng", Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     }
