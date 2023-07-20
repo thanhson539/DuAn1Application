@@ -78,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(2,'avatar_mac_dinh', 'Nguyen Duy Tien', '0123456789', 'nguyenduytienbgg3@gmail.com','duytienbgg3','123456', 0,0)," +
                 "(3,'avatar_mac_dinh', 'Phi Dinh Long', '0123456789', 'philongpdl@gmail.com','philongpdl','123456', 0,0)," +
                 "(4,'avatar_mac_dinh', 'Hoang Minh Quan', '0123456789', 'mquann139@gmail.com','mquann139','123456', 0,0)," +
-                "(5,'avatar_mac_dinh', 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0,1)");
+                "(5,'avatar_mac_dinh', 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0,0)");
 
         /*2: Bang 'BINHLUAN'
          * Cấu trúc cột: binhLuan_id, nguoiDung_id, noiDung, thoiGian */
