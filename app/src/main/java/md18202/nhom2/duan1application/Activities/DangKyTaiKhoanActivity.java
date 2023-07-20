@@ -58,16 +58,14 @@ public class DangKyTaiKhoanActivity extends AppCompatActivity {
     }
 
     public void themTaiKhoan() {
-        String imgSrc = null;
-        if (selectedImageUri != null){
-            imgSrc = String.valueOf(selectedImageUri);
-        }
+        String imgSrc = String.valueOf(selectedImageUri);
         String hoTen = edtName_frame3.getText().toString();
         String soDienThoai = edtPhoneNumber_frame3.getText().toString();
         String email = edtEmail_frame3.getText().toString();
         String taiKhoan = edtUsername_frame3.getText().toString();
         String matKhau = edtPassword_frame3.getText().toString();
-        if (validateForm(imgSrc, hoTen, soDienThoai, email, taiKhoan, matKhau)) {
+
+        if (validateForm(selectedImageUri, hoTen, soDienThoai, email, taiKhoan, matKhau)) {
             NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(this);
             NguoiDung nguoiDung = new NguoiDung(imgSrc, hoTen, soDienThoai, email, taiKhoan, matKhau, 0, 0);
             if(nguoiDungDAO.themTaiKhoan(nguoiDung)){
@@ -92,7 +90,7 @@ public class DangKyTaiKhoanActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
-    public boolean validateForm(String selectedImageUri, String name, String phoneNumber, String email, String username, String password) {
+    public boolean validateForm(Uri selectedImageUri, String name, String phoneNumber, String email, String username, String password) {
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getApplicationContext());
         boolean checkTonTai = nguoiDungDAO.checkTaiKhoanTonTai(username);
         if (name.isEmpty() || phoneNumber.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
@@ -104,7 +102,7 @@ public class DangKyTaiKhoanActivity extends AppCompatActivity {
         } else if (!Patterns.PHONE.matcher(phoneNumber).matches()) {
             Toast.makeText(this, "Số điện thoại không hợp lệ!", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (selectedImageUri.isEmpty()) {
+        } else if (selectedImageUri == null) {
             Toast.makeText(this, "Vui lòng thêm ảnh của bạn", Toast.LENGTH_SHORT).show();
             return false;
         } else if (checkTonTai) {
