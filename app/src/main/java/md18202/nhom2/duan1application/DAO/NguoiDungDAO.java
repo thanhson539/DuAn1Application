@@ -44,34 +44,8 @@ public class NguoiDungDAO {
         return listResult;
     }
 
-    public boolean themTaiKhoan(NguoiDung nguoiDung) {
 
-    public ArrayList<NguoiDung> getDsNguoiDungQL() {
-        ArrayList<NguoiDung> listResult = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-
-        // Include the category name (tenLoai) in the SQL query
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * from NGUOIDUNG", null);
-
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            do {
-                listResult.add(new NguoiDung(
-                        cursor.getInt(0), //nguoiDung_id
-                        cursor.getString(1), //hoTen
-                        cursor.getString(2), //soDienThoai
-                        cursor.getString(3), //email
-                        cursor.getString(4), //taiKhoan
-                        cursor.getString(5), //matKhau
-                        cursor.getInt(6)     //loaiTaiKhoan
-                ));
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close(); // Close the cursor after use
-        return listResult;
-    }
-    public boolean themTaiKhoan(String name, String phoneNumber, String email, String username, String password, int typeAccount){
+    public boolean themTaiKhoan(NguoiDung nguoiDung){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("imgSrc", nguoiDung.getImgSrc());

@@ -66,7 +66,7 @@ public class Ql_NguoiDung_Fragment extends Fragment {
     }
 
     private void loadListNguoiDung(RecyclerView recyclerView) {
-        ArrayList<NguoiDung> list = nguoiDungDAO.getDsNguoiDungQL();
+        ArrayList<NguoiDung> list = nguoiDungDAO.getDsNguoiDung();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         NguoiDungAdapter adapter = new NguoiDungAdapter(getContext(),list);
