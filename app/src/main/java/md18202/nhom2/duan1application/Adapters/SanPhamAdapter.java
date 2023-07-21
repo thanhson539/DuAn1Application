@@ -192,9 +192,9 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                             String mota = edMota.getText().toString().trim();
                             String soluong = edSoLuong.getText().toString().trim();
 
-                            String duongDanAnh = selectedImageUri.toString();
+  //                          String duongDanAnh = selectedImageUri.toString();
 
-                                imgSuaAnhSP.setImageURI(selectedImageUri);
+//                                imgSuaAnhSP.setImageURI(selectedImageUri);
 
 
 
@@ -213,7 +213,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                                 sanPham.setMoTa(mota);
                                 sanPham.setSoLuongConLai(soluongconai);
                                 sanPham.setLoaiSanPham_id(tenLoaiSP);
-                                sanPham.setAnhSanPham(duongDanAnh);
+//                                sanPham.setAnhSanPham(duongDanAnh);
                                 if (sanPhamDAO.SuaSanPham(sanPham) > 0) {
                                     Toast.makeText(context, "Sủa Thành Công", Toast.LENGTH_SHORT).show();
                                     list.clear();
