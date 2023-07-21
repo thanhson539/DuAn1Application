@@ -26,16 +26,18 @@ import java.util.Timer;
 
 import md18202.nhom2.duan1application.Adapters.BinhLuanAdapter;
 import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
+import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.Models.BinhLuan;
+import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
-    ImageView imgAnh_sanpham_chitiet, imgBack;
-    TextView tvTen_sanpham_chitiet, tvGia_sanpham_chitiet;
+    ImageView imgAnh_sanpham_chitiet, imgBack, imgGio_hang;
+    TextView tvTen_sanpham_chitiet, tvGia_sanpham_chitiet, tvSo_luong;
     RecyclerView recyclerView_binh_luan;
     Button btnChon_mua;
     EditText edDialog_binh_luan;
@@ -45,6 +47,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     List<BinhLuan> listBinhLuan;
     BinhLuanAdapter binhLuanAdapter;
     SharedPreferences sharedPreferences;
+    int getNguoiDung_id;
 
 
     @Override
@@ -54,12 +57,16 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         imgAnh_sanpham_chitiet = findViewById(R.id.imgAnh_sanpham_chitiet);
         imgBack = findViewById(R.id.imgBack);
         imgYeuThich_frameSPChiTiet2 = findViewById(R.id.imgYeuThich_frameSPChiTiet2);
+        imgGio_hang = findViewById(R.id.imgGio_hang);
         edDialog_binh_luan = findViewById(R.id.edDialog_binh_luan);
         tvTen_sanpham_chitiet = findViewById(R.id.tvTen_sanpham_chitiet);
         tvGia_sanpham_chitiet = findViewById(R.id.tvGia_sanpham_chitiet);
+        tvSo_luong = findViewById(R.id.tvSo_luong);
         btnChon_mua = findViewById(R.id.btnChon_mua);
         recyclerView_binh_luan = findViewById(R.id.recycler_view_binh_luan);
         binhLuanDAO = new BinhLuanDAO(this);
+        sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
+        getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
 
         //lay san pham tu ben adapter san pham 2, khi click vao san pham se lay san pham do va truyen qua chi tiet san pham
         Intent intent = getIntent();
@@ -72,6 +79,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         Picasso.get().load(resourceId).into(imgAnh_sanpham_chitiet);
         tvTen_sanpham_chitiet.setText(sanPham.getTenSanPham());
         tvGia_sanpham_chitiet.setText("" + sanPham.getGiaSanPham() + " VND");
+        tvSo_luong.setText(""+sanPham.getSoLuongConLai());
         getDsBinhLuan(sanPham.getSanPham_id());
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +100,21 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         int sanPham_id = sanPham.getSanPham_id();
         int isYeuThich = sanPham.getIsYeuThich();
         sanPhamYeuThich(sanPham_id, isYeuThich, imgYeuThich_frameSPChiTiet2);
+
+        imgGio_hang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnChon_mua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chonMua(getNguoiDung_id, sanPham_id, 1);
+            }
+        });
     }
 
     public void sanPhamYeuThich(int sanPham_id, int isYeuThich, ImageView imgIsYeuThich) {
@@ -125,8 +148,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //nguoiDung_id lay tu home
-                sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
-                int getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
+
                 //sanPham_id lay tu sanPham
                 int sanPham_id = sanPham.getSanPham_id();
                 //noiDung lay tu edBinh_luan
@@ -187,5 +209,18 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getDsBinhLuan(sanPham.getSanPham_id());
+    }
+
+    public void chonMua(int nguoiDung_id, int sanPham_id, int soLuong){
+        GioHangDAO gioHangDAO = new GioHangDAO(ChiTietSanPhamActivity.this);
+        GioHang gioHang = new GioHang();
+        gioHang.setNguoiDung_id(nguoiDung_id);
+        gioHang.setSanPham_id(sanPham_id);
+        gioHang.setSoLuong(soLuong);
+        if(gioHangDAO.themVaoGioHang(gioHang) > 0){
+            Toast.makeText(this, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Chua them vao gio hang", Toast.LENGTH_SHORT).show();
+        }
     }
 }
