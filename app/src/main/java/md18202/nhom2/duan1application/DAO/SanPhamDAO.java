@@ -20,7 +20,7 @@ public class SanPhamDAO {
     public ArrayList<SanPham> getDsSanPham(){
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM", null);
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where isXoaMem=0", null);
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
@@ -213,11 +213,13 @@ public class SanPhamDAO {
     public long SuaSanPham(SanPham sanPham){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("loaiSanPham_id", sanPham.getLoaiSanPham_id());
+        contentValues.put("anhSanPham", sanPham.getAnhSanPham());
         contentValues.put("tenSanPham", sanPham.getTenSanPham());
         contentValues.put("giaSanPham", sanPham.getGiaSanPham());
         contentValues.put("moTa", sanPham.getMoTa());
         contentValues.put("soLuongConLai", sanPham.getSoLuongConLai());
-        return db.update("SANPHAM", contentValues,"sanPham_id=?", new String[]{String.valueOf(sanPham.getLoaiSanPham_id())});
+        return db.update("SANPHAM", contentValues,"sanPham_id=?", new String[]{String.valueOf(sanPham.getSanPham_id())});
 
     }
 
@@ -228,6 +230,29 @@ public class SanPhamDAO {
         contentValues.put("isYeuThich", newIsYeuThich);
         long check = sqLiteDatabase.update("SANPHAM", contentValues,"sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
         return check > 0;
+    }
+
+    public long insertSanPham(SanPham sanPham){
+        SQLiteDatabase db  = dbHelper.getWritableDatabase();
+        ContentValues values  = new ContentValues();
+        values.put("loaiSanPham_id" , sanPham.getLoaiSanPham_id());
+        values.put("tenSanPham", sanPham.getTenSanPham());
+        values.put("anhSanPham", sanPham.getAnhSanPham());
+        values.put("giaSanPham", sanPham.getGiaSanPham());
+        values.put("moTa", sanPham.getMoTa());
+        values.put("soLuongConLai", sanPham.getSoLuongConLai());
+        values.put("isYeuThich", sanPham.getIsYeuThich());
+        values.put("isXoaMem", sanPham.getXoamen());
+        return db.insert("SANPHAM", null, values);
+    }
+
+
+
+    public int xoaMemSP(int xoamem){
+        SQLiteDatabase db  = dbHelper.getWritableDatabase();
+        ContentValues values  =  new ContentValues();
+        values.put("isXoaMem", 1);
+        return  db.update("SANPHAM", values, "sanPham_id=?", new String[]{String.valueOf(xoamem)});
     }
 
 }

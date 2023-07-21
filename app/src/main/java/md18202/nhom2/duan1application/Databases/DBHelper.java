@@ -16,12 +16,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String createNguoiDung = "create table NGUOIDUNG(" +
                 "nguoiDung_id integer primary key autoincrement," +
+                "imgSrc text not null," +
                 "hoTen text not null," +
                 "soDienThoai text not null," +
                 "email text not null," +
                 "taiKhoan text not null," +
                 "matKhau text not null," +
-                "loaiTaiKhoan integer not null)";
+                "loaiTaiKhoan integer not null," +
+                "isXoaMem integer not null)";
         db.execSQL(createNguoiDung);
 
         String createBinhLuan = "create table BINHLUAN(" +
@@ -79,11 +81,11 @@ public class DBHelper extends SQLiteOpenHelper {
          * - Giá trị tại cột 'loaiTaiKhoan': 1 --> admin, 0 --> người dùng */
 
         db.execSQL("insert into NGUOIDUNG values" +
-                "(1, 'Nguyen Thanh Son', '0963943774', 'hoasua050399@mail.com','thanhson539','123456', 1)," +
-                "(2, 'Nguyen Duy Tien', '0123456789', 'nguyenduytienbgg3@gmail.com','duytienbgg3','123456', 0)," +
-                "(3, 'Phi Dinh Long', '0123456789', 'philongpdl@gmail.com','philongpdl','123456', 0)," +
-                "(4, 'Hoang Minh Quan', '0123456789', 'mquann139@gmail.com','mquann139','123456', 0)," +
-                "(5, 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0)");
+                "(1,'avatar_thanh_son', 'Nguyen Thanh Son', '0963943774', 'hoasua050399@mail.com','thanhson539','123456', 1,0)," +
+                "(2,'avatar_mac_dinh', 'Nguyen Duy Tien', '0123456789', 'nguyenduytienbgg3@gmail.com','duytienbgg3','123456', 0,0)," +
+                "(3,'avatar_mac_dinh', 'Phi Dinh Long', '0123456789', 'philongpdl@gmail.com','philongpdl','123456', 0,0)," +
+                "(4,'avatar_mac_dinh', 'Hoang Minh Quan', '0123456789', 'mquann139@gmail.com','mquann139','123456', 0,0)," +
+                "(5,'avatar_mac_dinh', 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0,0)");
 
         /*2: Bang 'BINHLUAN'
          * Cấu trúc cột: binhLuan_id, nguoiDung_id, noiDung, thoiGian */
