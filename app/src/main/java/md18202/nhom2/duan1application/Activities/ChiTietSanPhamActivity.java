@@ -80,6 +80,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         tvTen_sanpham_chitiet.setText(sanPham.getTenSanPham());
         tvGia_sanpham_chitiet.setText("" + sanPham.getGiaSanPham() + " VND");
         tvSo_luong.setText(""+sanPham.getSoLuongConLai());
+        if(sanPham.getIsYeuThich() == 0){
+            imgYeuThich_frameSPChiTiet2.setImageResource(R.drawable.frame4_trai_tim);
+        }else {
+            imgYeuThich_frameSPChiTiet2.setImageResource(R.drawable.frame4_trai_tim2);
+        }
         getDsBinhLuan(sanPham.getSanPham_id());
 
         imgBack.setOnClickListener(new View.OnClickListener() {
