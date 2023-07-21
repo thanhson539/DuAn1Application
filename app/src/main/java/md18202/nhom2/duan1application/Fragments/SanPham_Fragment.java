@@ -55,7 +55,8 @@ public class SanPham_Fragment extends Fragment {
     private static final int REQUEST_CODE_GALLERY_PERMISSION = 100;
     private static final int REQUEST_CODE_PICK_IMAGE = 101;
 
-    private Uri selectedImageUri;
+    private Uri selectedImageUri = null; // Khởi tạo selectedImageUri bằng null hoặc một giá trị mặc định khác tùy theo yêu cầu của bạn.
+
    private ImageView imgThemAnh;
 
     public SanPham_Fragment() {
@@ -78,7 +79,7 @@ public class SanPham_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_san_pham_, container, false);
     }
 
@@ -100,13 +101,7 @@ public class SanPham_Fragment extends Fragment {
         loatDate(recyclerView);
     }
 
-    public void loatDate(RecyclerView recyclerView) {
-        ArrayList<SanPham> list = sanPhamDAO.getDsSanPhamADM();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        SanPhamAdapter adapter = new SanPhamAdapter(getContext(), list);
-        recyclerView.setAdapter(adapter);
-    }
+
 
 
     public void showDialogFloatButton() {
@@ -121,7 +116,7 @@ public class SanPham_Fragment extends Fragment {
         EditText edThemMoTa = view.findViewById(R.id.edSanPhamMoTaLoaiSP);
         EditText edThemSoLuong = view.findViewById(R.id.edSanPhamThemSoLuongSP);
 
-//        imgThemAnh.setFocusable(false);
+        imgThemAnh.setFocusable(false);
 
         getDataLoaiSanPham(spnLoaiSanPham);
 
@@ -189,6 +184,10 @@ public class SanPham_Fragment extends Fragment {
     }
 
 
+
+
+
+
     private void requestGalleryPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
@@ -226,11 +225,29 @@ public class SanPham_Fragment extends Fragment {
 
 //            Uri selectedImageUri = data.getData();
             selectedImageUri = data.getData();
-            // Tiếp tục xử lý hình ảnh tùy theo yêu cầu của bạn.
-            // Ví dụ: bạn có thể hiển thị hình ảnh đã chọn lên ImageView imgThemAnh
+
             imgThemAnh.setImageURI(selectedImageUri);
+            ((SanPhamAdapter) recyclerView.getAdapter()).setSelectedImageUri(selectedImageUri);
+
+
+
         }
     }
+
+
+    public void loatDate(RecyclerView recyclerView) {
+        ArrayList<SanPham> list = sanPhamDAO.getDsSanPhamADM();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        SanPhamAdapter adapter = new SanPhamAdapter(getContext(), list );
+        adapter.setActivity(getActivity());
+
+        if (selectedImageUri != null) {
+            adapter.setSelectedImageUri(selectedImageUri);
+        }
+        recyclerView.setAdapter(adapter);
+    }
+
 
     public void getDataLoaiSanPham(Spinner spnSach) {
         LoaiSanPhamDAO sachDao = new LoaiSanPhamDAO(getContext());

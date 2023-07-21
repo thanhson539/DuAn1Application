@@ -16,6 +16,15 @@ public class SanPham implements Serializable {
     private int soLuongConLai;
     private int isYeuThich;
 
+    private int xoamen;
+
+    public int getXoamen() {
+        return xoamen;
+    }
+
+    public void setXoamen(int xoamen) {
+        this.xoamen = xoamen;
+    }
 
     public SanPham(int sanPham_id, String tenloaisanpham, String tenSanPham, String anhSanPham, int giaSanPham, String moTa, int soLuongConLai) {
         this.sanPham_id = sanPham_id;
