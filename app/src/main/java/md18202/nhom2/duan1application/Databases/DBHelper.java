@@ -41,13 +41,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "soLuong integer not null)";
         db.execSQL(createGioHang);
 
-        String createHoaDon = "create table HOADON(" +
-                "hoaDon_id integer primary key autoincrement," +
-                "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
-                "ngayMua text not null," +
-                "tongTien integer not null)";
-        db.execSQL(createHoaDon);
-
         String createLoaiSanPham = "create table LOAISANPHAM(" +
                 "loaiSanPham_id integer primary key autoincrement," +
                 "tenLoai text not null)";
@@ -64,6 +57,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "isYeuThich integer not null," +
                 "isXoaMem integer not null)";
         db.execSQL(createSanPham);
+
+        String createHoaDon = "create table HOADON(" +
+                "hoaDon_id integer primary key autoincrement," +
+                "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
+                "ngayMua text not null," +
+                "tongTien integer not null)";
+        db.execSQL(createHoaDon);
 
         String createHoaDonChiTiet = "create table HOADONCHITIET(" +
                 "hoaDonChiTiet_id integer primary key autoincrement," +
