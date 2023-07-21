@@ -30,6 +30,14 @@ public class GioHangDAO{
         return sqLiteDatabase.insert("GIOHANG", null, values);
     }
 
+    public long suaSoLuong(GioHang gioHang){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("soLuong", gioHang.getSoLuong());
+
+        return sqLiteDatabase.update("GIOHANG", values, "gioHang_id = ?", new String[]{String.valueOf(gioHang.getGioHang_id())});
+    }
+
     public long xoaKhoiGioHang(int gioHang_id){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 

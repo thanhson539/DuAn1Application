@@ -3,6 +3,7 @@ package md18202.nhom2.duan1application.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +21,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.Activities.ChiTietSanPhamActivity;
+import md18202.nhom2.duan1application.DAO.GioHangDAO;
+import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyViewHolder> {
     private Context context;
     private ArrayList<SanPham> list;
+
 
     public SanPhamAdapter2(Context context, ArrayList<SanPham> list) {
         this.context = context;
@@ -66,6 +70,13 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
                 context.startActivity(intent);
             }
         });
+
+        holder.imgGioHang_itemGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chonMua(list.get(holder.getAdapterPosition()).getSanPham_id(), 1);
+            }
+        });
     }
 
     @Override
@@ -87,6 +98,21 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
             imgGioHang_itemGrid = itemView.findViewById(R.id.imgGioHang_itemGrid);
             tvGiaSanPham_itemGrid = itemView.findViewById(R.id.tvGiaSanPham_itemGrid);
             cardView = itemView.findViewById(R.id.cardView);
+        }
+    }
+
+    public void chonMua(int sanPham_id, int soLuong){
+        GioHangDAO gioHangDAO = new GioHangDAO(context);
+        GioHang gioHang = new GioHang();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG",context.MODE_PRIVATE);
+        int getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
+        gioHang.setNguoiDung_id(getNguoiDung_id);
+        gioHang.setSanPham_id(sanPham_id);
+        gioHang.setSoLuong(soLuong);
+        if(gioHangDAO.themVaoGioHang(gioHang) > 0){
+            Toast.makeText(context, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Chua them vao gio hang", Toast.LENGTH_SHORT).show();
         }
     }
 }
