@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import md18202.nhom2.duan1application.Activities.GioHangActivity;
@@ -28,10 +29,13 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
     GioHangActivity context;
     GioHangDAO gioHangDAO;
     SharedPreferences sharedPreferences;
+    int nguoiDung_id;
     public GioHangAdapter(List<GioHang> list, GioHangActivity context) {
         this.list = list;
         this.context = context;
         gioHangDAO = new GioHangDAO(context);
+        sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+        nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
         notifyDataSetChanged();
     }
 
@@ -95,8 +99,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
 
     public void getDsGioHang(){
         list.clear();
-        sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
-        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
         list = gioHangDAO.getDsGioHang(nguoiDung_id);
         tongTien(list);
         notifyDataSetChanged();

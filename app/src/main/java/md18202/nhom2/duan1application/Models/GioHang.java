@@ -12,6 +12,12 @@ public class GioHang {
     public GioHang() {
     }
 
+    public GioHang(int gioHang_id, int soLuong, int giaSanPham) {
+        this.gioHang_id = gioHang_id;
+        this.soLuong = soLuong;
+        this.giaSanPham = giaSanPham;
+    }
+
     public GioHang(int gioHang_id, int nguoiDung_id, int sanPham_id, int soLuong) {
         this.gioHang_id = gioHang_id;
         this.nguoiDung_id = nguoiDung_id;
