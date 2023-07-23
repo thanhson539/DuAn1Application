@@ -81,6 +81,13 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
             }
         });
 
+        edXa_phuong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showXaPhuong();
+            }
+        });
+
     }
 
     @Override
@@ -207,7 +214,7 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
         String[] finalXaPhuong = xaPhuong;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xã/Phường")
-                .setSingleChoiceItems(xaPhuong, tinh, new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(xaPhuong, xa, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         edXa_phuong.setText(""+ finalXaPhuong[which]);
