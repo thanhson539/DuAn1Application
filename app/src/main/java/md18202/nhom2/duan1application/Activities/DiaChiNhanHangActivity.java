@@ -120,7 +120,7 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
         }
         String[] finalQuanHuyen = quanHuyen;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Tỉnh/Thành Phố")
+        builder.setTitle("Quận/Huyện")
                 .setSingleChoiceItems(quanHuyen, huyen, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -134,14 +134,84 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
     }
 
     public void showXaPhuong(){
-        String thanhPho[] = {"Hòa Bình","Phú Thọ","Thái Bình","BẮc Giang","Nam Định"};
+        String[] xaPhuong = new String[0];
+        if (tinh == 0) {
+            //Hòa Bình
+            if(huyen==0){
+                //Đà Băc
+                xaPhuong = new String[]{"Thị Trấn Đà Bắc","Tu Lý","Cao Sơn","Đồng Chum","Toàn Sơn"};
+            } else if (huyen == 1) {
+                xaPhuong = new String[]{"Thị trấn Bo","Đú Sáng","Bình Sơn","Bắc Sơn","Nật Sơn"};
+            } else if (huyen == 2) {
+                xaPhuong = new String[]{"Ân Nghĩa","Mỹ Thành","Văn Sơn","Tân Lập","Yên Phú"};
+            } else if (huyen == 3) {
+                xaPhuong = new String[]{"Thị trấn Kỳ Sơn","Hợp Thịnh","Phúc Tiến","Mông Hóa","Độc Lập"};
+            } else if (huyen == 4) {
+                xaPhuong = new String[]{"Thị trấn Lương Sơn","Lâm Sơn","Hòa Sơn","Trường Sơn","Tân Vinh"};
+            }
+
+        }else if(tinh == 1){
+            //Phú Thọ
+            if(huyen==0){
+                //Đoan Hùng
+                xaPhuong = new String[]{"Thị trấn Đoan Hùng","Đông Khê","Nghinh Xuyên","Hùng Quan","Bằng Luân"};
+            } else if (huyen == 1) {
+                xaPhuong = new String[]{"Thị trấn Hạ Hoà","Đại Phạm","Hậu Bổng","Đan Hà","Hà Lương"};
+            } else if (huyen == 2) {
+                xaPhuong = new String[]{"Thị trấn Thanh Sơn","Sơn Hùng","Địch Quả","Giáp Lai","Thục Luyện"};
+            } else if (huyen == 3) {
+                xaPhuong = new String[]{"Đào Xá","Thạch Đồng","Xuân Lộc","Tân Phương","Sơn Thủy"};
+            } else if (huyen == 4) {
+                xaPhuong = new String[]{"Thị trấn Lâm Thao","Tiên Kiên","Hùng Sơn","Xuân Lũng","Xuân Huy"};
+            }
+        } else if (tinh == 2) {
+            //Thái Bình
+            if(huyen==0){
+                xaPhuong = new String[]{"Thị trấn Đông Hưng","Đô Lương","Đông Phương","Liên Giang","An Châu"};
+            } else if (huyen == 1) {
+                xaPhuong = new String[]{"Thị trấn Hưng Hà","Điệp Nông","Tân Lễ","Cộng Hòa","Dân Chủ"};
+            } else if (huyen == 2) {
+                xaPhuong = new String[]{"Thị trấn Diêm Điền","Thụy Tân","Thụy Trường","Hồng Quỳnh","Thụy Dũng"};
+            } else if (huyen == 3) {
+                xaPhuong = new String[]{"Thị trấn Tiền Hải","Đông Hải","Đông Trà","Đông Long","Đông Quí"};
+            } else if (huyen == 4) {
+                xaPhuong = new String[]{"Thị trấn Vũ Thư","Hồng Lý","Đồng Thanh","Xuân Hòa","Hiệp Hòa"};
+            }
+        } else if (tinh == 3) {
+            //Bắc Giang
+            if(huyen==0){
+                xaPhuong = new String[]{"Thị trấn Thắng","Đồng Tân","Thanh Vân","Hoàng Lương","Hoàng Vân"};
+            } else if (huyen == 1) {
+                xaPhuong = new String[]{"Thị trấn Đồi Ngô","Thị trấn Lục Nam","Đông Hưng","Tam Dị","Bảo Sơn"};
+            } else if (huyen == 2) {
+                xaPhuong = new String[]{"Thị trấn Kép","Thị trấn Vôi","Nghĩa Hòa","Nghĩa Hưng","Quang Thịnh"};
+            } else if (huyen == 3) {
+                xaPhuong = new String[]{"Thị trấn Chũ","Cấm Sơn","Tân Sơn","Phong Minh"," Phong Vân"};
+            } else if (huyen == 4) {
+                xaPhuong = new String[]{"Thị trấn An Châu","Thị trấn Thanh Sơn","Thạch Sơn","Vân Sơn","Hữu Sản"};
+            }
+        } else if (tinh == 4) {
+            //Nam Định
+            if(huyen==0){
+                xaPhuong = new String[]{"Thị trấn Ngô Đồng","Thị trấn Quất Lâm","Giao Hương","Hồng Thuận","Giao Thiện"};
+            } else if (huyen == 1) {
+                xaPhuong = new String[]{"Thị trấn Yên Định","Thị trấn Cồn","Thị trấn Thịnh Long","Hải Nam","Hải Trung"};
+            } else if (huyen == 2) {
+                xaPhuong = new String[]{"Thị trấn Mỹ Lộc","Mỹ Hà","Mỹ Tiến","Mỹ Thắng","Mỹ Trung"};
+            } else if (huyen == 3) {
+                xaPhuong = new String[]{"Thị trấn Nam Giang","Nam Mỹ","Điền Xá","Nghĩa An","Nam Thắng"};
+            } else if (huyen == 4) {
+                xaPhuong = new String[]{"Thị trấn Gôi","Minh Thuận","Hiển Khánh","Tân Khánh","Hợp Hưng"};
+            }
+        }
+        String[] finalXaPhuong = xaPhuong;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Tỉnh/Thành Phố")
-                .setSingleChoiceItems(thanhPho, tinh, new DialogInterface.OnClickListener() {
+        builder.setTitle("Xã/Phường")
+                .setSingleChoiceItems(xaPhuong, tinh, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        edTinh_thanh_pho.setText(""+thanhPho[which]);
-                        tinh = which;
+                        edXa_phuong.setText(""+ finalXaPhuong[which]);
+                        xa = which;
                         dialog.dismiss();
                     }
                 });
