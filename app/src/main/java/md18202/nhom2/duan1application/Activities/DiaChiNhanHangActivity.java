@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,8 +24,10 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
     Button btnThanh_toan;
     int tinh = 0;
     int huyen = 0;
-
     int xa = 0;
+    SharedPreferences sharedPreferences;
+    int nguoiDung_id;
+    String tenNguoiDung, soDienThoai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,15 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
         edXa_phuong = findViewById(R.id.edPhuong_xa);
         btnThanh_toan = findViewById(R.id.btnThanh_toan);
 
+        sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        nguoiDung_id = sharedPreferences.getInt("nguoiDUng_id", -1);
+        tenNguoiDung = sharedPreferences.getString("hoTen","");
+        soDienThoai = sharedPreferences.getString("soDienThoai","");
+
+        edTen_nguoi_nhan.setEnabled(false);
+        edSo_dien_thoai.setEnabled(false);
+        edTen_nguoi_nhan.setText(tenNguoiDung);
+        edSo_dien_thoai.setText(soDienThoai);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +97,15 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showXaPhuong();
+            }
+        });
+
+        btnThanh_toan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validate() > 0){
+                    Toast.makeText(DiaChiNhanHangActivity.this, "Thanh toán", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -227,5 +248,16 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
                 });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public int validate(){
+        int check =1;
+        if(edTen_nguoi_nhan.getText().length() == 0 || edSo_dien_thoai.getText().length() ==0
+        || edDia_chi.getText().length() == 0|| edTinh_thanh_pho.getText().length()==0
+        || edQuan_huyen.getText().length() ==0 || edXa_phuong.getText().length() == 0){
+            check = -1;
+            Toast.makeText(this, "Hãy nhập đầy đủ địa chỉ", Toast.LENGTH_SHORT).show();
+        }
+        return check;
     }
 }
