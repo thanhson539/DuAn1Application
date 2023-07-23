@@ -106,6 +106,8 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
                         edTinh_thanh_pho.setText(""+thanhPho[which]);
                         tinh = which;
                         dialog.dismiss();
+                        edQuan_huyen.setText("");
+                        edXa_phuong.setText("");
                     }
                 });
         AlertDialog alertDialog = builder.create();
@@ -134,6 +136,7 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
                         edQuan_huyen.setText("" + finalQuanHuyen[which]);
                         huyen = which;
                         dialog.dismiss();
+                        edXa_phuong.setText("");
                     }
                 });
         AlertDialog alertDialog = builder.create();
