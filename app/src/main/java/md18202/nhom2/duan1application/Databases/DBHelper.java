@@ -62,11 +62,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "hoaDon_id integer primary key autoincrement," +
                 "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
                 "ngayMua text not null," +
-                "tongTien integer not null)";
+                "tongTien integer not null," +
+                "diaChi text not null)";
         db.execSQL(createHoaDon);
 
         String createHoaDonChiTiet = "create table HOADONCHITIET(" +
-                "hoaDonChiTiet_id integer primary key autoincrement," +
                 "hoaDon_id integer references HOADON(hoaDon_id)," +
                 "sanPham_id integer references SANPHAM(sanPham_id)," +
                 "trangThaiDonHang integer not null," +

@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ public class GioHangActivity extends AppCompatActivity {
     int getNguoiDung_id;
     public TextView tvTotal;
     ImageView imgBack;
+    Button btnMua_hang;
     int total =0;
 
     @Override
@@ -36,6 +39,7 @@ public class GioHangActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_gio_hang);
         tvTotal = findViewById(R.id.tvTotal);
         imgBack = findViewById(R.id.imgBack);
+        btnMua_hang = findViewById(R.id.btnMua_hang);
         gioHangDAO = new GioHangDAO(GioHangActivity.this);
         sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
         getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
@@ -49,8 +53,18 @@ public class GioHangActivity extends AppCompatActivity {
             }
         });
 
-    }
+        btnMua_hang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GioHangActivity.this, DiaChiNhanHangActivity.class);
+                Bundle bundle = new Bundle();
+                startActivity(intent);
 
+            }
+        });
+
+    }
+/////////////////////////////////////////////////////////////////////////////////////////
     public void tongTien(List<GioHang> listGioHang){
         total = 0;
         for(GioHang gioHang: listGioHang){
