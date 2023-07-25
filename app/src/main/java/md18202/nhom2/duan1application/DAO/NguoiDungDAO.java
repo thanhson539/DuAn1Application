@@ -134,7 +134,6 @@ public class NguoiDungDAO {
 
         return check;
     };
-    public boolean actionIsXoaMem(int nguoiDung_id, int newIsXoaMem){
 
     public boolean actionIsXoaMem(int nguoiDung_id, int newIsXoaMem) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
