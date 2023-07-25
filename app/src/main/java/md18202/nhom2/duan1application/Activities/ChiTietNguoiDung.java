@@ -191,6 +191,8 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         TextView tvXoaTaiKhoan_dialog_update = view.findViewById(R.id.tvXoaTaiKhoan_dialog_update);
         Button btnCapNhat_dialog_update = view.findViewById(R.id.btnCapNhat_dialog_update);
         builder.setView(view);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
 
         //Get data nguoi dung tu sharePre da luu khi dang nhap
         SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
@@ -234,14 +236,49 @@ public class ChiTietNguoiDung extends AppCompatActivity {
                 String newEmail = edtNewEmail_update.getText().toString();
                 NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getApplicationContext());
                 boolean check = nguoiDungDAO.capNhatThongTinNguoiDung(newNguoiDung_id, newImgSrc, newName, newPhone, newEmail);
-                if (check){
+                if (check) {
                     Toast.makeText(ChiTietNguoiDung.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
                 }
             }
         });
 
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        //Xóa tài khoản người dùng
+        tvXoaTaiKhoan_dialog_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(ChiTietNguoiDung.this);
+                int nguoiDung_id_can_xoa = nguoiDung_id;
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(ChiTietNguoiDung.this);
+                builder1.setTitle("Thông báo!");
+                builder1.setMessage("Bạn thật sự muốn xóa tài khoản này?");
+                builder1.setNegativeButton("Xóa", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean check = nguoiDungDAO.actionIsXoaMem(nguoiDung_id_can_xoa, 1);
+                        if (check) {
+                            Toast.makeText(ChiTietNguoiDung.this, "Tài khoản của bạn đã xóa", Toast.LENGTH_SHORT).show();
+                            SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.clear();
+                            editor.apply();
+                            Intent intent = new Intent(ChiTietNguoiDung.this, DangNhapActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
+
+                builder1.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Đóng dialog
+                    }
+                });
+                AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+            }
+        });
     }
 
 //    Chưa hoàn thiện chức năng thêm ảnh

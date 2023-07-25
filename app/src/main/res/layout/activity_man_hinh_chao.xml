@@ -10,17 +10,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="30dp"
+            android:paddingLeft="15dp"
             android:layout_marginTop="50dp"
             android:textSize="30sp"
-            android:text="Wellcome to"/>
+            android:text="Xin chào bạn đến với"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:textSize="30sp"
             android:gravity="right"
-            android:paddingRight="50dp"
+            android:paddingRight="30dp"
             android:text="TIỆM VỚ 5CE"/>
         <ImageView
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Make your beuatiful everyday"/>
+            android:text="Làm cho bạn đẹp hơn mỗi ngày!"/>
         <LinearLayout
             android:layout_width="250dp"
             android:layout_gravity="center"
@@ -77,7 +77,7 @@
             android:textColor="#4E352F"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:text="GET STARTED"
+            android:text="BẮT ĐẦU"
             android:textSize="30sp"/>
     </LinearLayout>
 </RelativeLayout>
