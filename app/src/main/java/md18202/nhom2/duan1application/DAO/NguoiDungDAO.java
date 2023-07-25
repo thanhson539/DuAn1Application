@@ -60,6 +60,21 @@ public class NguoiDungDAO {
         return check > 0;
     }
 
+    public boolean themTaiKhoanQL(NguoiDung nguoiDung){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("imgSrc", nguoiDung.getImgSrc());
+        contentValues.put("hoTen", nguoiDung.getHoTen());
+        contentValues.put("soDienThoai", nguoiDung.getSoDienThoai());
+        contentValues.put("email", nguoiDung.getEmail());
+        contentValues.put("taiKhoan", nguoiDung.getTaiKhoan());
+        contentValues.put("matKhau", nguoiDung.getMatKhau());
+        contentValues.put("loaiTaiKhoan", nguoiDung.getLoaiTaiKhoan());
+        contentValues.put("isXoaMem", nguoiDung.getIsXoaMem());
+        long check = sqLiteDatabase.insert("NGUOIDUNG", null, contentValues);
+        return check > 0;
+    }
+
     public int kiemTraDangNhap(String taikhoan, String matkhau) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from NGUOIDUNG where taikhoan = ? and matkhau = ?", new String[]{taikhoan, matkhau});
@@ -104,6 +119,22 @@ public class NguoiDungDAO {
         long check = sqLiteDatabase.update("NGUOIDUNG", contentValues, "nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
         return check > 0;
     }
+
+    public long thayDoiThonTinQL(NguoiDung nguoiDung){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("imgSrc",nguoiDung.getImgSrc());
+        contentValues.put("hoTen", nguoiDung.getHoTen());
+        contentValues.put("soDienThoai", nguoiDung.getSoDienThoai());
+        contentValues.put("email", nguoiDung.getEmail());
+        contentValues.put("loaiTaiKhoan",nguoiDung.getLoaiTaiKhoan());
+        long check = sqLiteDatabase.update("NGUOIDUNG", contentValues, "nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung.getNguoiDung_id())});
+
+        // Đóng database sau khi cập nhật
+        sqLiteDatabase.close();
+
+        return check;
+    };
     public boolean actionIsXoaMem(int nguoiDung_id, int newIsXoaMem){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
