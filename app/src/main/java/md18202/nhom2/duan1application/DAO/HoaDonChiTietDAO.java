@@ -18,7 +18,9 @@ public class HoaDonChiTietDAO {
     public ArrayList<HoaDonChiTiet> getDsHoaDonChiTiet(){
         ArrayList<HoaDonChiTiet> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from HOADONCHITIET", null);
+        Cursor cursor = sqLiteDatabase.rawQuery("select hdct.hoaDon_id as hoaDon_id, hdct.sanPham_id as sanPham_id," +
+                "hdct.trangThaiThanhToan , hdct.trangThaiDonHang  from HOADONCHITIET hdct " +
+                "inner join HOADON hd on hdct.hoaDon_id = hd.hoaDon_id", null);
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
