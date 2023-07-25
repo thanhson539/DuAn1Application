@@ -5,18 +5,24 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 
@@ -26,6 +32,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.widget.Toast;
 
 import com.squareup.picasso.Transformation;
 
@@ -34,9 +41,14 @@ import com.squareup.picasso.Transformation;
 public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyViewHover> {
 
     private Context context;
+    private Activity activity;
     private ArrayList<NguoiDung> list;
     private NguoiDungDAO nguoidungdao;
 
+    private static final int REQUEST_PICK_IMAGE = 101;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
     public NguoiDungAdapter(Context context, ArrayList<NguoiDung> list) {
         this.context = context;
         this.list = list;
@@ -57,18 +69,16 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
             holder.txtLoaiNguoiDung.setText("Vai Trò : Admin");
         }else {holder.txtLoaiNguoiDung.setText("Vai Trò : Người Dùng");}
         String imgSrc = list.get(position).getImgSrc();
-        int resourceId = context.getResources().getIdentifier(imgSrc, "drawable", context.getPackageName());
+        boolean isUri = imgSrc.startsWith("content://");
 
-        if (resourceId != 0) {
-            Picasso.get()
-                    .load(resourceId) // Thay thế bằng đường dẫn hoặc resource ID của ảnh đại diện
-                    .transform(new CircleTransform())
-                    .into(holder.imgNguoiDung);
+        if (isUri) {
+            // Nếu là đường dẫn URI, sử dụng Picasso để tải ảnh từ đường dẫn URI
+            Picasso.get().load(Uri.parse(imgSrc)).transform(new CircleTransform()).into(holder.imgNguoiDung);
+        } else {
+            // Nếu không phải là đường dẫn URI, sử dụng cách khác để hiển thị ảnh (ví dụ: từ nguồn drawable)
+            int resourceId = context.getResources().getIdentifier(imgSrc, "drawable", context.getPackageName());
+            Picasso.get().load(resourceId).transform(new CircleTransform()).into(holder.imgNguoiDung);
         }
-        else {Picasso.get()
-                .load(R.drawable.avatar_thanh_son) // Thay thế bằng đường dẫn hoặc resource ID của ảnh đại diện
-                .transform(new CircleTransform())
-                .into(holder.imgNguoiDung);}
         holder.txtTenNguoiDung.setText("Họ Và Tên : "+ list.get(position).getHoTen());
         holder.txtSDTNguoiDung.setText("Số Điện Thoại : "+ list.get(position).getSoDienThoai());
         holder.txtEmailNguoiDung.setText("Email : " + list.get(position).getEmail());
@@ -114,17 +124,41 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
                     EditText edtSDT = view.findViewById(R.id.edtSuaSDTNguoiDung);
                     EditText edtEmail = view.findViewById(R.id.edtSuaEmailNguoiDung);
                     ImageView imgNguoiDung = view.findViewById(R.id.imgSuaNguoiDung);
+                    Spinner spinner_quyen = view.findViewById(R.id.Sp_Role_QlNDung);
+                    String[] roles = {"Admin", "Người Dùng"};
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, roles);
+
+
+
                     NguoiDung nguoiDung = list.get(getLayoutPosition());
 
                     edtTen.setText(nguoiDung.getHoTen());
                     edtSDT.setText(nguoiDung.getSoDienThoai());
                     edtEmail.setText(nguoiDung.getEmail());
+
                     String imgSrc = list.get(getLayoutPosition()).getImgSrc();
-                    int resourceId = context.getResources().getIdentifier(imgSrc, "drawable", context.getPackageName());
-                    Picasso.get()
-                            .load(resourceId) // Thay thế bằng đường dẫn hoặc resource ID của ảnh đại diện
-                            .transform(new CircleTransform())
-                            .into(imgNguoiDung);
+
+                    // Kiểm tra xem ảnh có phải là đường dẫn URI hay không
+                    boolean isUri = imgSrc.startsWith("content://");
+
+                    if (isUri) {
+                        // Nếu là đường dẫn URI, sử dụng Picasso để tải ảnh từ đường dẫn URI
+                        Picasso.get().load(Uri.parse(imgSrc)).transform(new CircleTransform()).into(imgNguoiDung);
+                    } else {
+                        // Nếu không phải là đường dẫn URI, sử dụng cách khác để hiển thị ảnh (ví dụ: từ nguồn drawable)
+                        int resourceId = context.getResources().getIdentifier(imgSrc, "drawable", context.getPackageName());
+                        Picasso.get().load(resourceId).transform(new CircleTransform()).into(imgNguoiDung);
+                    }
+                    spinner_quyen.setAdapter(adapter);
+
+                    imgNguoiDung.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (activity != null){
+                                pickImageFromGallery();
+                            }
+                        }
+                    });
 
                     builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                         @Override
@@ -134,6 +168,25 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
                     }).setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                        String tenNDung = edtTen.getText().toString();
+                        String SDTNDung = edtSDT.getText().toString();
+                        String emailNDung = edtEmail.getText().toString();
+
+                       nguoidungdao = new NguoiDungDAO(context);
+
+
+                            nguoiDung.setHoTen(tenNDung);
+                            nguoiDung.setSoDienThoai(SDTNDung);
+                            nguoiDung.setEmail(emailNDung);
+                            if (nguoidungdao.thayDoiThonTinQL(nguoiDung) > 0){
+                                Toast.makeText(context, "Sủa Thành Công", Toast.LENGTH_SHORT).show();
+                                list.clear();
+                                list = nguoidungdao.getDsNguoiDung();
+                                notifyDataSetChanged();
+                            }else {
+                                Toast.makeText(context, "Sửa Thất Bại", Toast.LENGTH_SHORT).show();
+                            }
+
 
                         }
                     });
@@ -143,6 +196,14 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
             });
 
         }
+
+        private void pickImageFromGallery() {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            if (activity != null) {
+                activity.startActivityForResult(intent, REQUEST_PICK_IMAGE);
+            }
+        }
+
 
         private void ShowDialogSuaTTNguoiDung() {
 
