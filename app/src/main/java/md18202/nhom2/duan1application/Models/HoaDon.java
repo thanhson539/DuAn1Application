@@ -22,6 +22,13 @@ public class HoaDon {
         this.diaChi = diaChi;
     }
 
+    public HoaDon(int nguoiDung_id, String thoiGian, int tongTien, String diaChi) {
+        this.nguoiDung_id = nguoiDung_id;
+        this.thoiGian = thoiGian;
+        this.tongTien = tongTien;
+        this.diaChi = diaChi;
+    }
+
     public HoaDon() {
     }
 

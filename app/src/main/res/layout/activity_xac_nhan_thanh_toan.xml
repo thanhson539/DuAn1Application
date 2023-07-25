@@ -448,12 +448,13 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnXac_nhan_dat_hang"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             android:backgroundTint="#D98276"
-            android:text="THANH TOÁN ĐƠN HÀNG"
+            android:text="Xác nhận đặt hàng"
             android:textColor="#4E352F"
             android:textSize="20dp" />
     </LinearLayout>

@@ -65,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "diaChi text not null)";
         db.execSQL(createHoaDon);
 
-        String createHoaDonChiTiet = "create table HOADONCHITIET(hoaDon_id integer not null, sanPham integer not null," +
+        String createHoaDonChiTiet = "create table HOADONCHITIET(hoaDon_id integer not null, sanPham_id integer not null," +
                 "trangThaiDonHang integer not null," +
                 "trangThaiThanhToan integer not null," +
                 "foreign key (hoaDon_id) references HOADON(hoaDon_id)," +
