@@ -61,14 +61,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 "hoaDon_id integer primary key autoincrement," +
                 "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
                 "ngayMua text not null," +
-                "tongTien integer not null)";
+                "tongTien integer not null," +
+                "diaChi text not null)";
         db.execSQL(createHoaDon);
 
-        String createHoaDonChiTiet = "create table HOADONCHITIET(" +
-                "hoaDon_id integer references HOADON(hoaDon_id)," +
-                "sanPham_id integer references SANPHAM(sanPham_id)," +
+        String createHoaDonChiTiet = "create table HOADONCHITIET(hoaDon_id integer not null, sanPham integer not null," +
                 "trangThaiDonHang integer not null," +
-                "trangThaiThanhToan integer not null)";
+                "trangThaiThanhToan integer not null," +
+                "foreign key (hoaDon_id) references HOADON(hoaDon_id)," +
+                "foreign key (sanPham_id) references SANPHAM(sanPham_id)," +
+                "primary key (hoaDon_id, sanPham_id))";
         db.execSQL(createHoaDonChiTiet);
 
         //DATA ẢO
@@ -168,11 +170,11 @@ public class DBHelper extends SQLiteOpenHelper {
         *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien */
 
         db.execSQL("insert into HOADON values" +
-                "(1, 1, '03/07/2023', 15000)," +
-                "(2, 2, '04/07/2023', 25000)," +
-                "(3, 3, '05/07/2023', 20000)," +
-                "(4, 4, '06/07/2023', 30000)," +
-                "(5, 5, '07/07/2023', 35000)");
+                "(1, 1, '03/07/2023', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
+                "(2, 2, '04/07/2023', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
+                "(3, 3, '05/07/2023', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
+                "(4, 4, '06/07/2023', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
+                "(5, 5, '07/07/2023', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
          * Cấu trúc bảng: hoaDon_id, sanPham_id, trangThaiDonHang, trangThaiThanhToan
