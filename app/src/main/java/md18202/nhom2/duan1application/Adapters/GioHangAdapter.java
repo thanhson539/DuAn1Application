@@ -138,6 +138,9 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         imgGiam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(gioHang.getSoLuong()==1){
+                    return;
+                }
                 gioHang.setSoLuong(gioHang.getSoLuong()-1);
                 if(gioHangDAO.suaSoLuong(gioHang) > 0){
                     tvSoLuong.setText(""+gioHang.getSoLuong());
