@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
@@ -36,8 +37,16 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import md18202.nhom2.duan1application.Adapters.SanPhamAdapter;
 import md18202.nhom2.duan1application.DAO.LoaiSanPhamDAO;
@@ -49,6 +58,7 @@ import md18202.nhom2.duan1application.R;
 
 public class SanPham_Fragment extends Fragment {
 
+
     private RecyclerView recyclerView;
     private SanPhamDAO sanPhamDAO;
     private FloatingActionButton floatbtnSanpham;
@@ -56,8 +66,15 @@ public class SanPham_Fragment extends Fragment {
     private static final int REQUEST_CODE_PICK_IMAGE = 101;
 
     private Uri selectedImageUri = null; // Khởi tạo selectedImageUri bằng null hoặc một giá trị mặc định khác tùy theo yêu cầu của bạn.
+    private Uri selectedImageUriSP = null;
+    private ImageView imgThemAnh;
+    ImageView imgSuaSP;
+    Spinner spnTen;
 
-   private ImageView imgThemAnh;
+    private String selectedImagePath = null;
+
+
+//    private ImageView imgThemAnh;
 
     public SanPham_Fragment() {
         // Required empty public constructor
@@ -98,10 +115,10 @@ public class SanPham_Fragment extends Fragment {
 
 
         sanPhamDAO = new SanPhamDAO(getContext());
-        loatDate(recyclerView);
+//        loatDate(recyclerView);
+
+
     }
-
-
 
 
     public void showDialogFloatButton() {
@@ -118,7 +135,18 @@ public class SanPham_Fragment extends Fragment {
 
         imgThemAnh.setFocusable(false);
 
-        getDataLoaiSanPham(spnLoaiSanPham);
+//        getDataLoaiSanPham(spnLoaiSanPham);
+
+
+        // mới
+//        selectedImagePath = getSavedImagePathFromSharedPreferences();
+
+        // Load the image from the internal storage if a path is available
+//        if (selectedImagePath != null) {
+//            selectedImageUri = Uri.parse(selectedImagePath);
+//            imgThemAnh.setImageURI(selectedImageUri);
+//        }
+
 
         imgThemAnh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,8 +184,8 @@ public class SanPham_Fragment extends Fragment {
                     Integer soLuong = Integer.parseInt(soluong);
                     HashMap<String, Object> hsTV = (HashMap<String, Object>) spnLoaiSanPham.getSelectedItem();
                     int loaisanpham_id = (int) hsTV.get("loaiSanPham_id");
-                    SanPhamDAO phamDAO   =new SanPhamDAO(getContext());
-                    SanPham sanPham  =new SanPham();
+                    SanPhamDAO phamDAO = new SanPhamDAO(getContext());
+                    SanPham sanPham = new SanPham();
                     sanPham.setMoTa(edMota);
                     sanPham.setGiaSanPham(giatien);
                     sanPham.setSoLuongConLai(soLuong);
@@ -166,10 +194,10 @@ public class SanPham_Fragment extends Fragment {
                     sanPham.setAnhSanPham(duongDanAnh);
 
                     sanPham.setIsYeuThich(0);
-                    if (phamDAO.insertSanPham(sanPham)>0){
+                    if (phamDAO.insertSanPham(sanPham) > 0) {
                         Toast.makeText(getContext(), "Thêm Thành công", Toast.LENGTH_SHORT).show();
-                        loatDate(recyclerView);
-                    }else {
+//                        loatDate(recyclerView);
+                    } else {
                         Toast.makeText(getContext(), "Thêm Thất Bại", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -177,15 +205,15 @@ public class SanPham_Fragment extends Fragment {
                     Toast.makeText(getContext(), "Bạn chưa chọn hình ảnh", Toast.LENGTH_SHORT).show();
                 }
 
+
             }
+
+
         });
+
         Dialog dialog = builder.create();
         dialog.show();
     }
-
-
-
-
 
 
     private void requestGalleryPermission() {
@@ -230,44 +258,130 @@ public class SanPham_Fragment extends Fragment {
             ((SanPhamAdapter) recyclerView.getAdapter()).setSelectedImageUri(selectedImageUri);
 
 
+            selectedImageUri = data.getData();
+            if (selectedImageUriSP != null && imgThemAnh != null) {
+                imgThemAnh.setImageURI(selectedImageUri);
+            }
+        }
 
+        selectedImageUriSP = data.getData();
+        if (selectedImageUriSP != null && imgSuaSP != null) {
+            imgSuaSP.setImageURI(selectedImageUriSP);
         }
     }
-
-
-    public void loatDate(RecyclerView recyclerView) {
-        ArrayList<SanPham> list = sanPhamDAO.getDsSanPhamADM();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        SanPhamAdapter adapter = new SanPhamAdapter(getContext(), list );
-        adapter.setActivity(getActivity());
-
-        if (selectedImageUri != null) {
-            adapter.setSelectedImageUri(selectedImageUri);
-        }
-        recyclerView.setAdapter(adapter);
-    }
-
-
-    public void getDataLoaiSanPham(Spinner spnSach) {
-        LoaiSanPhamDAO sachDao = new LoaiSanPhamDAO(getContext());
-        ArrayList<LoaiSanPham> list = sachDao.getDsLoaiSanPham();
-        ArrayList<HashMap<String, Object>> listHM = new ArrayList<>();
-        for (LoaiSanPham sc : list) {
-            HashMap<String, Object> hs = new HashMap<>();
-            hs.put("loaiSanPham_id", sc.getLoaiSanPham_id());
-            hs.put("tenLoai", sc.getTenLoai());
-            listHM.add(hs);
-        }
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getContext(), listHM,
-                android.R.layout.simple_list_item_1,
-                new String[]{"tenLoai"},
-                new int[]{android.R.id.text1});
-        spnSach.setAdapter(simpleAdapter);
-    }
-
-
-
 }
 
 
+//    private void saveImageToExternalStorage(Uri imageUri) {
+//        try {
+//            String imageFileName = "my_image.jpg"; // Đặt tên tập tin ảnh tùy ý
+//            File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), imageFileName);
+//            InputStream inputStream = getContext().getContentResolver().openInputStream(imageUri);
+//            OutputStream outputStream = new FileOutputStream(imageFile);
+//            byte[] buffer = new byte[1024];
+//            int bytesRead;
+//            while ((bytesRead = inputStream.read(buffer)) != -1) {
+//                outputStream.write(buffer, 0, bytesRead);
+//            }
+//            inputStream.close();
+//            outputStream.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//    public void loatDate(RecyclerView recyclerView) {
+//        ArrayList<SanPham> list = sanPhamDAO.getDsSanPhamADM();
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        recyclerView.setLayoutManager(layoutManager);
+//        SanPhamAdapter adapter = new SanPhamAdapter(getContext(), list);
+//        adapter.setActivity(getActivity());
+//
+//    } else
+//
+//    {
+//        Toast.makeText(getContext(), "Xoá Mền Thất Bại", Toast.LENGTH_SHORT).show();
+//    }
+//}
+//                }).setPositiveButton("Sửa",new DialogInterface.OnClickListener(){
+//@Override
+//public void onClick(DialogInterface dialog,int which){
+//
+//        String ten=edten.getText().toString().trim();
+//        String gia=edGia.getText().toString().trim();
+//        String mota=edMota.getText().toString().trim();
+//        String soluong=edSoLuong.getText().toString().trim();
+//
+//        String duongDanAnhh=selectedImageUriSP.toString();
+//
+//        imgSuaSP.setImageURI(selectedImageUri);
+////
+//
+//
+//        boolean check=ten.isEmpty()||gia.isEmpty()||mota.isEmpty()||soluong.isEmpty();
+//        if(check){
+//        Toast.makeText(getContext(),"Không Được Bỏ Chống",Toast.LENGTH_SHORT).show();
+//        }else{
+//        int soluongconai=Integer.parseInt(soluong);
+//        int giaban=Integer.parseInt(gia);
+//        sanPhamDAO=new SanPhamDAO(getContext());
+//
+//        HashMap<String, Object> hsTV=(HashMap<String, Object>)spnTen.getSelectedItem();
+//        int tenLoaiSP=(int)hsTV.get("loaiSanPham_id");
+//        sanPham.setAnhSanPham(duongDanAnhh);
+//        sanPham.setTenSanPham(ten);
+//        sanPham.setGiaSanPham(giaban);
+//        sanPham.setMoTa(mota);
+//        sanPham.setSoLuongConLai(soluongconai);
+//        sanPham.setLoaiSanPham_id(tenLoaiSP);
+//
+//        if(sanPhamDAO.SuaSanPham(sanPham)>0){
+//        Toast.makeText(getContext(),"Sủa Thành Công",Toast.LENGTH_SHORT).show();
+//        loatDate(recyclerView);
+//
+//        }else{
+//        Toast.makeText(getContext(),"Sửa Thất Bại",Toast.LENGTH_SHORT).show();
+//        }
+//        }
+//        }
+//
+//
+//        });
+//
+//        Dialog dialog=builder.create();
+//        dialog.show();
+//
+//
+//        }
+//        });
+//
+//
+//        if(selectedImageUri!=null){
+//        adapter.setSelectedImageUri(selectedImageUri);
+//        }
+//        recyclerView.setAdapter(adapter);
+//        }
+//
+//
+//public void getDataLoaiSanPham(Spinner spnSach){
+//        LoaiSanPhamDAO sachDao=new LoaiSanPhamDAO(getContext());
+//        ArrayList<LoaiSanPham> list=sachDao.getDsLoaiSanPham();
+//        ArrayList<HashMap<String, Object>>listHM=new ArrayList<>();
+//        for(LoaiSanPham sc:list){
+//        HashMap<String, Object> hs=new HashMap<>();
+//        hs.put("loaiSanPham_id",sc.getLoaiSanPham_id());
+//        hs.put("tenLoai",sc.getTenLoai());
+//        listHM.add(hs);
+//        }
+//        SimpleAdapter simpleAdapter=new SimpleAdapter(getContext(),listHM,
+//        android.R.layout.simple_list_item_1,
+//        new String[]{"tenLoai"},
+//        new int[]{android.R.id.text1});
+//        spnSach.setAdapter(simpleAdapter);
+//        }
+//
+//
+//        }
+//
+//

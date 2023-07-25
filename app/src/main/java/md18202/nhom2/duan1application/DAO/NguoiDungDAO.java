@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.Databases.DBHelper;
 import md18202.nhom2.duan1application.Models.NguoiDung;
-import md18202.nhom2.duan1application.Models.SanPham;
 
 public class NguoiDungDAO {
     DBHelper dbHelper;
@@ -45,7 +44,7 @@ public class NguoiDungDAO {
     }
 
 
-    public boolean themTaiKhoan(NguoiDung nguoiDung){
+    public boolean themTaiKhoan(NguoiDung nguoiDung) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("imgSrc", nguoiDung.getImgSrc());
@@ -79,22 +78,22 @@ public class NguoiDungDAO {
                 editor.putInt("isXoaMem", cursor.getInt(8));
                 editor.commit();
                 return 1; //Dang nhap thanh cong
-            }else {
+            } else {
                 return -1; //Tai khoan da xoa mem
             }
         }
         return 0; //Tai khoan hoac mat khau khong chinh xac
     }
 
-    public boolean doiMatKhau(int nguoiDung_id, String newPassword){
+    public boolean doiMatKhau(int nguoiDung_id, String newPassword) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("matKhau", newPassword);
-        long check =  sqLiteDatabase.update("NGUOIDUNG", contentValues, "nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
+        long check = sqLiteDatabase.update("NGUOIDUNG", contentValues, "nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
         return check > 0;
     }
 
-    public boolean thayDoiThongTin(int nguoiDung_id, String imgSrc, String hoTen, String soDienThoai, String email){
+    public boolean thayDoiThongTin(int nguoiDung_id, String imgSrc, String hoTen, String soDienThoai, String email) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("imgSrc", imgSrc);
@@ -104,7 +103,8 @@ public class NguoiDungDAO {
         long check = sqLiteDatabase.update("NGUOIDUNG", contentValues, "nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
         return check > 0;
     }
-    public boolean actionIsXoaMem(int nguoiDung_id, int newIsXoaMem){
+
+    public boolean actionIsXoaMem(int nguoiDung_id, int newIsXoaMem) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("isXoaMem", newIsXoaMem);
@@ -112,12 +112,22 @@ public class NguoiDungDAO {
         return check > 0;
     }
 
-    public boolean checkTaiKhoanTonTai(String username){
+    public boolean checkTaiKhoanTonTai(String username) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from NGUOIDUNG where taiKhoan = ?", new String[]{String.valueOf(username)});
-        if (cursor.getCount()!=0){
+        if (cursor.getCount() != 0) {
             return true; //Tài khoản đã tồn tại
         }
         return false; //Tài khoản chưa tồn tại
+    }
+
+    public boolean capNhatThongTinNguoiDung(int nguoiDung_id, String newImgSrc, String newName, String newPhone, String newEmail) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("imgSrc", newImgSrc);
+        contentValues.put("hoTen", newName);
+        contentValues.put("email", newEmail);
+        long check = sqLiteDatabase.update("NGUOIDUNG",contentValues,"nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
+        return check > 0;
     }
 }
