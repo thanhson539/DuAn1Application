@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,10 @@ public class ChiTietNguoiDung extends AppCompatActivity {
     private ImageView imgAvatar_chiTiet, imgEdit_chiTiet;
     private TextView tvName_chiTiet, tvPhoneNumber_chiTiet, tvEmail_chiTiet, tvDoiMatKhau_chiTiet, tvLoaiTaiKhoan_chiTiet;
     private Button btnLogout_chiTiet;
-    public boolean isVisiblePassword = false;
+
+    private Uri selectedImageUri;
+    private static final int PICK_IMAGE_REQUEST = 1;
+
 
 
     @Override
@@ -108,6 +112,14 @@ public class ChiTietNguoiDung extends AppCompatActivity {
                 finish(); // Đóng màn hình ChiTietNguoiDungActivity
             }
         });
+
+        //Cập nhật thông tin người dùng
+        imgEdit_chiTiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateNguoiDunng(imgEdit_chiTiet);
+            }
+        });
     }
 
     public void doiMatKhau(int nguoiDung_id) {
@@ -163,5 +175,66 @@ public class ChiTietNguoiDung extends AppCompatActivity {
             return false;
         }
         return false;
+    }
+
+    public void updateNguoiDunng(ImageView imgEdit_chiTiet) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChiTietNguoiDung.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_cap_nhat_nguoi_dung, null);
+        ImageView imgNewAvt_update = view.findViewById(R.id.imgNewAvt_update);
+        EditText edtNewName_update = view.findViewById(R.id.edtNewName_update);
+        EditText edtNewPhome_update = view.findViewById(R.id.edtNewPhome_update);
+        EditText edtNewEmail_update = view.findViewById(R.id.edtNewEmail_update);
+        TextView tvXoaTaiKhoan_dialog_update = view.findViewById(R.id.tvXoaTaiKhoan_dialog_update);
+        Button btnCapNhat_dialog_update = view.findViewById(R.id.btnCapNhat_dialog_update);
+        builder.setView(view);
+
+        //Get data nguoi dung tu sharePre da luu khi dang nhap
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+        String imgSrc = sharedPreferences.getString("imgSrc", "");
+        String hoTen = sharedPreferences.getString("hoTen", "");
+        String soDienThoai = sharedPreferences.getString("soDienThoai", "");
+        String email = sharedPreferences.getString("email", "");
+        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
+
+        //Set data cho cac widget
+        boolean isUri = imgSrc.startsWith("content://");
+        if (isUri) {
+            Picasso.get().load(Uri.parse(imgSrc)).into(imgNewAvt_update);
+        } else {
+            int idResource = this.getResources().getIdentifier(imgSrc, "drawable", this.getPackageName());
+            imgNewAvt_update.setImageResource(idResource);
+        }
+        edtNewName_update.setText(hoTen);
+        edtNewPhome_update.setText(soDienThoai);
+        edtNewEmail_update.setText(email);
+
+        //Get link Uri mới khi người dùng chọn ảnh mới
+        imgNewAvt_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+    //Hàm này ko dùng được cho dialog
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            selectedImageUri = data.getData();
+//            imgNewAvt.setImageURI(selectedImageUri);
+        }
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 }
