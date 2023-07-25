@@ -157,6 +157,7 @@ public class NguoiDungDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put("imgSrc", newImgSrc);
         contentValues.put("hoTen", newName);
+        contentValues.put("soDienThoai", newPhone);
         contentValues.put("email", newEmail);
         long check = sqLiteDatabase.update("NGUOIDUNG",contentValues,"nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
         return check > 0;
