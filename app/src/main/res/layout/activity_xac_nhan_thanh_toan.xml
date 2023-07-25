@@ -20,6 +20,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/imgBack"
                 android:layout_width="28dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="15dp"
@@ -222,6 +223,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tvNguoi_nhan_hang"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -230,6 +232,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvSdt_nguoi_nhan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -239,6 +242,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvDia_chi_nhan_hang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -373,6 +377,7 @@
                 android:textColor="#9B7E76" />
 
             <TextView
+                android:id="@+id/tvGia_tam_tinh"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -431,6 +436,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tvThanh_tien"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

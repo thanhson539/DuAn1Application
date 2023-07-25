@@ -1,7 +1,6 @@
 package md18202.nhom2.duan1application.Models;
 
 public class GioHang {
-    private int gioHang_id;
     private int nguoiDung_id;
     private int sanPham_id;
     private int soLuong;
@@ -12,35 +11,24 @@ public class GioHang {
     public GioHang() {
     }
 
-    public GioHang(int gioHang_id, int soLuong, int giaSanPham) {
-        this.gioHang_id = gioHang_id;
+    public GioHang(int soLuong, int giaSanPham) {
         this.soLuong = soLuong;
         this.giaSanPham = giaSanPham;
     }
 
-    public GioHang(int gioHang_id, int nguoiDung_id, int sanPham_id, int soLuong) {
-        this.gioHang_id = gioHang_id;
+    public GioHang(int nguoiDung_id, int sanPham_id, int soLuong) {
         this.nguoiDung_id = nguoiDung_id;
         this.sanPham_id = sanPham_id;
         this.soLuong = soLuong;
     }
 
-    public GioHang(int gioHang_id, int nguoiDung_id, int sanPham_id, int soLuong, int giaSanPham, String tenSanPham, String anhSanPham) {
-        this.gioHang_id = gioHang_id;
+    public GioHang(int nguoiDung_id, int sanPham_id, int soLuong, int giaSanPham, String tenSanPham, String anhSanPham) {
         this.nguoiDung_id = nguoiDung_id;
         this.sanPham_id = sanPham_id;
         this.soLuong = soLuong;
         this.giaSanPham = giaSanPham;
         this.tenSanPham = tenSanPham;
         this.anhSanPham = anhSanPham;
-    }
-
-    public int getGioHang_id() {
-        return gioHang_id;
-    }
-
-    public void setGioHang_id(int gioHang_id) {
-        this.gioHang_id = gioHang_id;
     }
 
     public int getNguoiDung_id() {

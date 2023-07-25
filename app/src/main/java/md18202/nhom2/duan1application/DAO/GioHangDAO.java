@@ -35,27 +35,26 @@ public class GioHangDAO{
         ContentValues values = new ContentValues();
         values.put("soLuong", gioHang.getSoLuong());
 
-        return sqLiteDatabase.update("GIOHANG", values, "gioHang_id = ?", new String[]{String.valueOf(gioHang.getGioHang_id())});
+        return sqLiteDatabase.update("GIOHANG", values, "sanPham_id = ? and nguoiDung_id = ?", new String[]{String.valueOf(gioHang.getSanPham_id()), String.valueOf(gioHang.getNguoiDung_id())});
     }
 
-    public long xoaKhoiGioHang(int gioHang_id){
+    public long xoaKhoiGioHang(int sanPham_id, int nguoiDung_id){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 
-        return sqLiteDatabase.delete("GIOHANG", "gioHang_id = ?", new String[]{String.valueOf(gioHang_id)});
+        return sqLiteDatabase.delete("GIOHANG", "sanPham_id = ? and nguoiDung_id = ?", new String[]{String.valueOf(sanPham_id), String.valueOf(nguoiDung_id)});
     }
 
     @SuppressLint("Range")
     public ArrayList<GioHang> getDsGioHang(int nguoiDung_id){
         ArrayList<GioHang> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select GIOHANG.gioHang_id, GIOHANG.nguoiDung_id, GIOHANG.sanPham_id, GIOHANG.soLuong, (SANPHAM.giaSanPham * GIOHANG.soLuong) as giaSanPham," +
+        Cursor cursor = sqLiteDatabase.rawQuery("select GIOHANG.nguoiDung_id, GIOHANG.sanPham_id, GIOHANG.soLuong as soLuong, (SANPHAM.giaSanPham * GIOHANG.soLuong) as giaSanPham," +
                 " SANPHAM.tenSanPham as tenSanPham, SANPHAM.anhSanPham as anhSanPham from GIOHANG inner join NGUOIDUNG on GIOHANG.nguoiDung_id = NGUOIDUNG.nguoiDung_id" +
-                " inner join SANPHAM on GIOHANG.sanPham_id = SANPHAM.sanPham_id where GIOHANG.nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
+                " inner join SANPHAM on GIOHANG.sanPham_id = SANPHAM.sanPham_id where GIOHANG.nguoiDung_id = ?" , new String[]{String.valueOf(nguoiDung_id)});
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
                 listResult.add(new GioHang(
-                        cursor.getInt(cursor.getColumnIndex("gioHang_id")),
                         cursor.getInt(cursor.getColumnIndex("nguoiDung_id")),
                         cursor.getInt(cursor.getColumnIndex("sanPham_id")),
                         cursor.getInt(cursor.getColumnIndex("soLuong")),

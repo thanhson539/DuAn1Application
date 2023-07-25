@@ -34,11 +34,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "thoiGian text not null)";
         db.execSQL(createBinhLuan);
 
-        String createGioHang = "create table GIOHANG(" +
-                "gioHang_id integer primary key autoincrement," +
-                "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
-                "sanPham_id integer references SANPHAM(sanPham_id)," +
-                "soLuong integer not null)";
+        String createGioHang = "create table GIOHANG(nguoiDung_id integer , sanPham_id integer ,soLuong integer not null," +
+                "foreign key (nguoiDung_id) references NGUOIDUNG(nguoiDung_id)," +
+                "foreign key (sanPham_id)  references SANPHAM(sanPham_id)," +
+                "primary key(nguoiDung_id, sanPham_id))";
         db.execSQL(createGioHang);
 
         String createLoaiSanPham = "create table LOAISANPHAM(" +
@@ -62,8 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "hoaDon_id integer primary key autoincrement," +
                 "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
                 "ngayMua text not null," +
-                "tongTien integer not null," +
-                "diaChi text not null)";
+                "tongTien integer not null)";
         db.execSQL(createHoaDon);
 
         String createHoaDonChiTiet = "create table HOADONCHITIET(" +
@@ -98,12 +96,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5,5, 2,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
 
         /*2: Bang 'GIOHANG'
-         * Cấu trúc cột: gioHang_id, nguoiDung_id, sanPham_id, soLuong */
+         * Cấu trúc cột:nguoiDung_id, sanPham_id, soLuong */
 
         db.execSQL("insert into GIOHANG values" +
-                "(1,3, 1,2)," +
-                "(2,3, 2,1)," +
-                "(3,3, 3,3)");
+                "(3, 1,2)," +
+                "(3, 2,1)," +
+                "(3, 3,3)");
 
         /*3: Bảng 'LOAISANPHAM'
         * Cấu trúc cột: loaiSanPham_id, tenLoai */
@@ -177,7 +175,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5, 5, '07/07/2023', 35000)");
 
         /*6: Bảng 'HOADONCHITIET':
-         * Cấu trúc bảng: hoaDonChiTiet_id, hoaDon_id, sanPham_id, trangThaiDonHang, trangThaiThanhToan
+         * Cấu trúc bảng: hoaDon_id, sanPham_id, trangThaiDonHang, trangThaiThanhToan
          * Ghi chú:
          * Trang thai don hang:
          * - 0: Order thanh con
@@ -188,11 +186,11 @@ public class DBHelper extends SQLiteOpenHelper {
          * - 0: Chua thanh toan
          * - 1: Da thanh toan */
         db.execSQL("insert into HOADONCHITIET values" +
-                "(1, 1, 1, 1, 0)," +
-                "(2, 2, 2, 2, 1)," +
-                "(3, 3, 3, 0, 0)," +
-                "(4, 4, 4, 1, 0)," +
-                "(5, 5, 5, 2, 0)");
+                "(1, 1, 1, 0)," +
+                "(2, 2, 2, 1)," +
+                "(3, 3, 0, 0)," +
+                "(4, 4, 1, 0)," +
+                "(5, 5, 2, 0)");
     }
 
     @Override

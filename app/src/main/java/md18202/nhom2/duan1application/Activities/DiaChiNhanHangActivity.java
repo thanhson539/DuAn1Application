@@ -105,7 +105,17 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validate() > 0){
+                    String diaChi = edDia_chi.getText().toString() +" - "+edXa_phuong.getText().toString()
+                    +" - "+edQuan_huyen.getText().toString()+" - "+edTinh_thanh_pho.getText().toString();
+                    Intent getTongTien = getIntent();
+                    int tongTien = getTongTien.getIntExtra("tongTien", 0);
                     Intent intent = new Intent(DiaChiNhanHangActivity.this, XacNhanThanhToanActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("diaChi", diaChi);
+                    bundle.putInt("tongTien", tongTien);
+                    bundle.putString("sdt", edSo_dien_thoai.getText().toString());
+                    bundle.putString("nguoiNhan", edTen_nguoi_nhan.getText().toString());
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }

@@ -225,7 +225,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         if(gioHangDAO.themVaoGioHang(gioHang) > 0){
             Toast.makeText(this, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this, "Chua them vao gio hang", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mặt hàng này đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -56,8 +56,11 @@ public class GioHangActivity extends AppCompatActivity {
         btnMua_hang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listGioHang = gioHangDAO.getDsGioHang(getNguoiDung_id);
                 Intent intent = new Intent(GioHangActivity.this, DiaChiNhanHangActivity.class);
                 Bundle bundle = new Bundle();
+                bundle.putInt("tongTien", tongTien(listGioHang));
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -65,12 +68,13 @@ public class GioHangActivity extends AppCompatActivity {
 
     }
 /////////////////////////////////////////////////////////////////////////////////////////
-    public void tongTien(List<GioHang> listGioHang){
+    public int tongTien(List<GioHang> listGioHang){
         total = 0;
         for(GioHang gioHang: listGioHang){
             total += gioHang.getGiaSanPham();
         }
         tvTotal.setText(""+total);
+        return total;
     }
 
     @Override

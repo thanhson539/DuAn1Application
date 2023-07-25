@@ -112,7 +112,7 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
         if(gioHangDAO.themVaoGioHang(gioHang) > 0){
             Toast.makeText(context, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Chua them vao gio hang", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Mặt hàng này đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
         }
     }
 }
