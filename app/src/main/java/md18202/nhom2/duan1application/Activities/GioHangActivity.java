@@ -59,6 +59,10 @@ public class GioHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 listGioHang = gioHangDAO.getDsGioHang(getNguoiDung_id);
+                if(listGioHang.size() ==0){
+                    return;
+                }
+
                 Intent intent = new Intent(GioHangActivity.this, DiaChiNhanHangActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("tongTien", tongTien(listGioHang));
