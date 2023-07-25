@@ -1,6 +1,8 @@
 package md18202.nhom2.duan1application.Models;
 
-public class GioHang {
+import java.io.Serializable;
+
+public class GioHang implements Serializable {
     private int nguoiDung_id;
     private int sanPham_id;
     private int soLuong;

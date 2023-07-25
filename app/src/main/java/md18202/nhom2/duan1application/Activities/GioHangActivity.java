@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.List;
 
 import md18202.nhom2.duan1application.Adapters.GioHangAdapter;
@@ -27,7 +28,7 @@ public class GioHangActivity extends AppCompatActivity {
     List<GioHang> listGioHang;
     SharedPreferences sharedPreferences;
     int getNguoiDung_id;
-    public TextView tvTotal;
+    public TextView tvTotal, tvThong_bao;
     ImageView imgBack;
     Button btnMua_hang;
     int total =0;
@@ -38,6 +39,7 @@ public class GioHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         recyclerView = findViewById(R.id.recycler_view_gio_hang);
         tvTotal = findViewById(R.id.tvTotal);
+        tvThong_bao = findViewById(R.id.tvThong_bao);
         imgBack = findViewById(R.id.imgBack);
         btnMua_hang = findViewById(R.id.btnMua_hang);
         gioHangDAO = new GioHangDAO(GioHangActivity.this);
@@ -60,6 +62,7 @@ public class GioHangActivity extends AppCompatActivity {
                 Intent intent = new Intent(GioHangActivity.this, DiaChiNhanHangActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("tongTien", tongTien(listGioHang));
+                bundle.putSerializable("listGioHang", (Serializable) listGioHang);
                 intent.putExtras(bundle);
                 startActivity(intent);
 
@@ -89,6 +92,9 @@ public class GioHangActivity extends AppCompatActivity {
 
     public void getDsGioHang(){
         listGioHang = gioHangDAO.getDsGioHang(getNguoiDung_id);
+        if(listGioHang.size() == 0){
+            tvThong_bao.setVisibility(View.VISIBLE);
+        }
         gioHangAdapter = new GioHangAdapter(listGioHang, this);
         recyclerView.setAdapter(gioHangAdapter);
         tongTien(listGioHang);

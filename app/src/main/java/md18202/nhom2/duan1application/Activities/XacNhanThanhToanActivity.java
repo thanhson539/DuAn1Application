@@ -13,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
+import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonDAO;
+import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.HoaDon;
 import md18202.nhom2.duan1application.R;
 
@@ -46,6 +49,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         String diaChi = intent.getStringExtra("diaChi");
         String tenNguoiNhan = intent.getStringExtra("nguoiNhan");
         String sdt = intent.getStringExtra("sdt");
+        List<GioHang> listGioHang = (List<GioHang>) intent.getSerializableExtra("listGioHang");
 
         tvNguoi_nhan_hang.setText(tenNguoiNhan);
         tvSdt_nguoi_nhan.setText(sdt);
@@ -74,6 +78,12 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                 hoaDon.setTongTien(tongTien);
                 hoaDon.setDiaChi(diaChi);
                 if(hoaDonDAO.themHoaDon(hoaDon) > 0){
+                    GioHangDAO gioHangDAO = new GioHangDAO(XacNhanThanhToanActivity.this);
+                    for(GioHang gioHang:listGioHang){
+                        gioHangDAO.xoaKhoiGioHang(gioHang.getSanPham_id(), nguoiDung_id);
+                        startActivity(new Intent(XacNhanThanhToanActivity.this, MainActivity.class));
+                        finish();
+                    }
                     Toast.makeText(XacNhanThanhToanActivity.this, "Đã thêm đơn hàng", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(XacNhanThanhToanActivity.this, "Thêm đơn hàng thất bại", Toast.LENGTH_SHORT).show();

@@ -16,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.List;
+
+import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.R;
 
 public class DiaChiNhanHangActivity extends AppCompatActivity {
@@ -107,14 +111,16 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
                 if(validate() > 0){
                     String diaChi = edDia_chi.getText().toString() +" - "+edXa_phuong.getText().toString()
                     +" - "+edQuan_huyen.getText().toString()+" - "+edTinh_thanh_pho.getText().toString();
-                    Intent getTongTien = getIntent();
-                    int tongTien = getTongTien.getIntExtra("tongTien", 0);
+                    Intent getIntent = getIntent();
+                    int tongTien = getIntent.getIntExtra("tongTien", 0);
+                    List<GioHang> listGioHang = (List<GioHang>) getIntent.getSerializableExtra("listGioHang");
                     Intent intent = new Intent(DiaChiNhanHangActivity.this, XacNhanThanhToanActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("diaChi", diaChi);
                     bundle.putInt("tongTien", tongTien);
                     bundle.putString("sdt", edSo_dien_thoai.getText().toString());
                     bundle.putString("nguoiNhan", edTen_nguoi_nhan.getText().toString());
+                    bundle.putSerializable("listGioHang", (Serializable) listGioHang);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

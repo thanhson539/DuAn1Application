@@ -33,6 +33,18 @@
                 android:layout_marginLeft="30dp"/>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvThong_bao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chưa có sản phẩm nào trong giỏ hàng"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#4E352F"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:visibility="gone"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_gio_hang"
             android:layout_width="match_parent"

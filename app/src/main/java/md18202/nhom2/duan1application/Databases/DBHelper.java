@@ -98,12 +98,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5,5, 2,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
 
         /*2: Bang 'GIOHANG'
-         * Cấu trúc cột:nguoiDung_id, sanPham_id, soLuong */
+         * Cấu trúc cột:nguoiDung_id, sanPham_id, soLuong, trangThai
+         * 0- chua mua
+         * 1- da mua */
 
         db.execSQL("insert into GIOHANG values" +
-                "(3, 1,2)," +
-                "(3, 2,1)," +
-                "(3, 3,3)");
+                "(3, 1, 2)," +
+                "(3, 2, 1)," +
+                "(3, 3, 3)");
 
         /*3: Bảng 'LOAISANPHAM'
         * Cấu trúc cột: loaiSanPham_id, tenLoai */
