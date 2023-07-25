@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -104,7 +105,8 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(validate() > 0){
-                    Toast.makeText(DiaChiNhanHangActivity.this, "Thanh toán", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DiaChiNhanHangActivity.this, XacNhanThanhToanActivity.class);
+                    startActivity(intent);
                 }
             }
         });
