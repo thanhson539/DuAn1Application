@@ -117,7 +117,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         btnChon_mua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chonMua(getNguoiDung_id, sanPham_id, 1);
+                chonMua(getNguoiDung_id, sanPham_id);
             }
         });
     }
@@ -216,12 +216,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         getDsBinhLuan(sanPham.getSanPham_id());
     }
 
-    public void chonMua(int nguoiDung_id, int sanPham_id, int soLuong){
+    public void chonMua(int nguoiDung_id, int sanPham_id){
         GioHangDAO gioHangDAO = new GioHangDAO(ChiTietSanPhamActivity.this);
         GioHang gioHang = new GioHang();
         gioHang.setNguoiDung_id(nguoiDung_id);
         gioHang.setSanPham_id(sanPham_id);
-        gioHang.setSoLuong(soLuong);
+        gioHang.setSoLuong(1);
+        gioHang.setTrangThaiMua(0);
         if(gioHangDAO.themVaoGioHang(gioHang) > 0){
             Toast.makeText(this, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
         }else{

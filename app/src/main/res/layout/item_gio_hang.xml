@@ -52,8 +52,8 @@
                     android:layout_height="30dp"
                     android:src="@drawable/plus"
                     android:layout_marginLeft="25dp"/>
-                <ImageView
-                    android:id="@+id/imgCancel_so_luong"
+                <CheckBox
+                    android:id="@+id/ckbMua_hang"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/cancel"

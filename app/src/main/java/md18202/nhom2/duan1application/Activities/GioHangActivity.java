@@ -30,7 +30,7 @@ public class GioHangActivity extends AppCompatActivity {
     int getNguoiDung_id;
     public TextView tvTotal, tvThong_bao;
     ImageView imgBack;
-    Button btnMua_hang;
+    public Button btnMua_hang;
     int total =0;
 
     @Override
@@ -52,24 +52,6 @@ public class GioHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-            }
-        });
-
-        btnMua_hang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listGioHang = gioHangDAO.getDsGioHang(getNguoiDung_id);
-                if(listGioHang.size() ==0){
-                    return;
-                }
-
-                Intent intent = new Intent(GioHangActivity.this, DiaChiNhanHangActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("tongTien", tongTien(listGioHang));
-                bundle.putSerializable("listGioHang", (Serializable) listGioHang);
-                intent.putExtras(bundle);
-                startActivity(intent);
-
             }
         });
 

@@ -6,6 +6,7 @@ public class GioHang implements Serializable {
     private int nguoiDung_id;
     private int sanPham_id;
     private int soLuong;
+    private int trangThaiMua;
     private int giaSanPham;
     private String tenSanPham;
     private String anhSanPham;
@@ -24,10 +25,11 @@ public class GioHang implements Serializable {
         this.soLuong = soLuong;
     }
 
-    public GioHang(int nguoiDung_id, int sanPham_id, int soLuong, int giaSanPham, String tenSanPham, String anhSanPham) {
+    public GioHang(int nguoiDung_id, int sanPham_id, int soLuong, int trangThaiMua, int giaSanPham, String tenSanPham, String anhSanPham) {
         this.nguoiDung_id = nguoiDung_id;
         this.sanPham_id = sanPham_id;
         this.soLuong = soLuong;
+        this.trangThaiMua = trangThaiMua;
         this.giaSanPham = giaSanPham;
         this.tenSanPham = tenSanPham;
         this.anhSanPham = anhSanPham;
@@ -55,6 +57,14 @@ public class GioHang implements Serializable {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public int getTrangThaiMua() {
+        return trangThaiMua;
+    }
+
+    public void setTrangThaiMua(int trangThaiMua) {
+        this.trangThaiMua = trangThaiMua;
     }
 
     public int getGiaSanPham() {

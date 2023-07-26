@@ -2,10 +2,13 @@ package md18202.nhom2.duan1application.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import md18202.nhom2.duan1application.Activities.DiaChiNhanHangActivity;
 import md18202.nhom2.duan1application.Activities.GioHangActivity;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.Models.GioHang;
@@ -62,7 +67,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                 xoaSanPhamKhoiGioHang(holder.getAdapterPosition());
             }
         });
-        suaSoLuong(holder.getAdapterPosition(), holder.imgPlus, holder.imgMinus, holder.imgCancel_so_luong, holder.tvSo_luong_mua, holder.tvGia_san_pham);
+        suaSoLuong(holder.getAdapterPosition(), holder.imgPlus, holder.imgMinus, holder.ckbMua_hang, holder.tvSo_luong_mua);
     }
 
     @Override
@@ -74,7 +79,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvSo_luong_mua, tvTen_san_pham, tvGia_san_pham;
-        ImageView imgAnh_san_pham, imgMinus, imgPlus, imgCancel, imgCancel_so_luong;
+        ImageView imgAnh_san_pham, imgMinus, imgPlus, imgCancel;
+        CheckBox ckbMua_hang;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvSo_luong_mua = itemView.findViewById(R.id.tvSo_luong_mua);
@@ -84,7 +90,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
             imgMinus = itemView.findViewById(R.id.imgMinus);
             imgPlus = itemView.findViewById(R.id.imgPlus);
             imgCancel = itemView.findViewById(R.id.imgCancel);
-            imgCancel_so_luong = itemView.findViewById(R.id.imgCancel_so_luong);
+            ckbMua_hang = itemView.findViewById(R.id.ckbMua_hang);
         }
     }
 
@@ -100,33 +106,21 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         }
     }
 
-
-    public void getSoLuong(int viTri, TextView tvGiaSanPham){
-        list.clear();
-        list = gioHangDAO.getDsGioHang(nguoiDung_id);
-        tvGiaSanPham.setText(""+list.get(viTri).getGiaSanPham());
-        notifyDataSetChanged();
-        tongTien(list);
-    }
-
-    public void tongTien(List<GioHang> listGioHang){
+    public int tongTien(List<GioHang> listGioHang){
         int total = 0;
         for(GioHang gioHang: listGioHang){
             total += gioHang.getGiaSanPham();
         }
         context.tvTotal.setText(""+total);
+        return total;
     }
 
-    public void suaSoLuong(int viTri, ImageView imgThem, ImageView imgGiam, ImageView imgJust1, TextView tvSoLuong, TextView tvGiaSanPham){
+    public void suaSoLuong(int viTri, ImageView imgThem, ImageView imgGiam, CheckBox ckbMua_hang, TextView tvSoLuong){
         GioHang gioHang = list.get(viTri);
         imgThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvSoLuong.setText(""+(gioHang.getSoLuong()+1));
-                gioHang.setSoLuong(gioHang.getSoLuong()+1);
-                if(gioHangDAO.suaSoLuong(gioHang) > 0){
-                    getSoLuong(viTri, tvGiaSanPham);
-                }
+                tvSoLuong.setText(tvSoLuong.getText().toString()+1);
             }
         });
         imgGiam.setOnClickListener(new View.OnClickListener() {
@@ -135,21 +129,34 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                 if(tvSoLuong.getText().toString().matches("1")){
                     return;
                 }
-                tvSoLuong.setText(""+(gioHang.getSoLuong()-1));
-                gioHang.setSoLuong(gioHang.getSoLuong()-1);
-                if(gioHangDAO.suaSoLuong(gioHang) > 0){
-                    getSoLuong(viTri, tvGiaSanPham);
-                }
+                tvSoLuong.setText(""+(Integer.parseInt(tvSoLuong.getText().toString())-1));
             }
         });
-        imgJust1.setOnClickListener(new View.OnClickListener() {
+
+        ckbMua_hang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvSoLuong.setText(""+1);
-                gioHang.setSoLuong(1);
-                if(gioHangDAO.suaSoLuong(gioHang) > 0){
-                    getSoLuong(viTri, tvGiaSanPham);
+
+            }
+        });
+
+    }
+
+    public void muaHang(){
+        context.btnMua_hang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                list = gioHangDAO.getDsGioHang(nguoiDung_id);
+                if(list.size() ==0){
+                    return;
                 }
+                Intent intent = new Intent(context, DiaChiNhanHangActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("tongTien", tongTien(list));
+                bundle.putSerializable("listGioHang", (Serializable) list);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }

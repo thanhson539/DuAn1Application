@@ -74,7 +74,7 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
         holder.imgGioHang_itemGrid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chonMua(list.get(holder.getAdapterPosition()).getSanPham_id(), 1);
+                chonMua(list.get(holder.getAdapterPosition()).getSanPham_id());
             }
         });
     }
@@ -101,14 +101,15 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
         }
     }
 
-    public void chonMua(int sanPham_id, int soLuong){
+    public void chonMua(int sanPham_id){
         GioHangDAO gioHangDAO = new GioHangDAO(context);
         GioHang gioHang = new GioHang();
         SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG",context.MODE_PRIVATE);
         int getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
         gioHang.setNguoiDung_id(getNguoiDung_id);
         gioHang.setSanPham_id(sanPham_id);
-        gioHang.setSoLuong(soLuong);
+        gioHang.setSoLuong(1);
+        gioHang.setTrangThaiMua(0);
         if(gioHangDAO.themVaoGioHang(gioHang) > 0){
             Toast.makeText(context, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
         }else{

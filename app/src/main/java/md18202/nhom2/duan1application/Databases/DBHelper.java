@@ -34,7 +34,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "thoiGian text not null)";
         db.execSQL(createBinhLuan);
 
-        String createGioHang = "create table GIOHANG(nguoiDung_id integer , sanPham_id integer ,soLuong integer not null," +
+        String createGioHang = "create table GIOHANG(nguoiDung_id integer ," +
+                " sanPham_id integer ," +
+                "soLuong integer not null, " +
+                "trangThaiMua integer not null," +
                 "foreign key (nguoiDung_id) references NGUOIDUNG(nguoiDung_id)," +
                 "foreign key (sanPham_id)  references SANPHAM(sanPham_id)," +
                 "primary key(nguoiDung_id, sanPham_id))";
@@ -103,9 +106,9 @@ public class DBHelper extends SQLiteOpenHelper {
          * 1- da mua */
 
         db.execSQL("insert into GIOHANG values" +
-                "(3, 1, 2)," +
-                "(3, 2, 1)," +
-                "(3, 3, 3)");
+                "(3, 1, 2, 0)," +
+                "(3, 2, 1, 0)," +
+                "(3, 3, 3, 0)");
 
         /*3: Bảng 'LOAISANPHAM'
         * Cấu trúc cột: loaiSanPham_id, tenLoai */

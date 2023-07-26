@@ -26,6 +26,7 @@ public class GioHangDAO{
         values.put("nguoiDung_id", gioHang.getNguoiDung_id());
         values.put("sanPham_id", gioHang.getSanPham_id());
         values.put("soLuong", gioHang.getSoLuong());
+        values.put("trangThaiMua", gioHang.getSoLuong());
 
         return sqLiteDatabase.insert("GIOHANG", null, values);
     }
@@ -48,7 +49,7 @@ public class GioHangDAO{
     public ArrayList<GioHang> getDsGioHang(int nguoiDung_id){
         ArrayList<GioHang> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select GIOHANG.nguoiDung_id, GIOHANG.sanPham_id, GIOHANG.soLuong as soLuong, (SANPHAM.giaSanPham * GIOHANG.soLuong) as giaSanPham," +
+        Cursor cursor = sqLiteDatabase.rawQuery("select GIOHANG.nguoiDung_id, GIOHANG.sanPham_id, GIOHANG.soLuong as soLuong, GIOHANG.trangThaiMua as trangThaiMua, SANPHAM.giaSanPham as giaSanPham," +
                 " SANPHAM.tenSanPham as tenSanPham, SANPHAM.anhSanPham as anhSanPham from GIOHANG inner join NGUOIDUNG on GIOHANG.nguoiDung_id = NGUOIDUNG.nguoiDung_id" +
                 " inner join SANPHAM on GIOHANG.sanPham_id = SANPHAM.sanPham_id where GIOHANG.nguoiDung_id = ?" , new String[]{String.valueOf(nguoiDung_id)});
         if (cursor.getCount() != 0){
@@ -58,6 +59,7 @@ public class GioHangDAO{
                         cursor.getInt(cursor.getColumnIndex("nguoiDung_id")),
                         cursor.getInt(cursor.getColumnIndex("sanPham_id")),
                         cursor.getInt(cursor.getColumnIndex("soLuong")),
+                        cursor.getInt(cursor.getColumnIndex("trangThaiMua")),
                         cursor.getInt(cursor.getColumnIndex("giaSanPham")),
                         cursor.getString(cursor.getColumnIndex("tenSanPham")),
                         cursor.getString(cursor.getColumnIndex("anhSanPham"))));
