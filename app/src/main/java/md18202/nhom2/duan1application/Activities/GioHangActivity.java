@@ -57,14 +57,6 @@ public class GioHangActivity extends AppCompatActivity {
 
     }
 /////////////////////////////////////////////////////////////////////////////////////////
-    public int tongTien(List<GioHang> listGioHang){
-        total = 0;
-        for(GioHang gioHang: listGioHang){
-            total += gioHang.getGiaSanPham();
-        }
-        tvTotal.setText(""+total);
-        return total;
-    }
 
     @Override
     public void onBackPressed() {finish();
@@ -83,6 +75,5 @@ public class GioHangActivity extends AppCompatActivity {
         }
         gioHangAdapter = new GioHangAdapter(listGioHang, this);
         recyclerView.setAdapter(gioHangAdapter);
-        tongTien(listGioHang);
     }
 }

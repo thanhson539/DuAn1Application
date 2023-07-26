@@ -26,7 +26,7 @@ public class GioHangDAO{
         values.put("nguoiDung_id", gioHang.getNguoiDung_id());
         values.put("sanPham_id", gioHang.getSanPham_id());
         values.put("soLuong", gioHang.getSoLuong());
-        values.put("trangThaiMua", gioHang.getSoLuong());
+        values.put("trangThaiMua", gioHang.getTrangThaiMua());
 
         return sqLiteDatabase.insert("GIOHANG", null, values);
     }
