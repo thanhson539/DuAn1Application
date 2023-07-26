@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DuAn1Application"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.DonHangActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.GioHangActivity"
             android:exported="false" />
         <activity
