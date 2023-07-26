@@ -3,6 +3,7 @@ package md18202.nhom2.duan1application.Adapters;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -42,19 +45,14 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
     private Context context;
     private ArrayList<SanPham> list;
     private SanPhamDAO sanPhamDAO;
-    private ImageView imgSuaAnhSP;
-    private static final int REQUEST_PICK_IMAGE = 101; // Mã yêu cầu để xử lý kết quả sau khi chọn ảnh
-    private Uri selectedImageUri;
-    private Activity activity;
-    private String duongDanAnh;
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
+    private AdapterView.OnItemClickListener mListener;
 
-    public SanPhamAdapter(Context context, ArrayList<SanPham> list) {
+
+    public SanPhamAdapter(Context context, ArrayList<SanPham> list, AdapterView.OnItemClickListener listener) {
         this.context = context;
         this.list = list;
+        this.mListener = listener;
 
     }
 
@@ -66,7 +64,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHover holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHover holder, @SuppressLint("RecyclerView") int position) {
         holder.tvID.setText("Loại: " + String.valueOf(list.get(position).getTenloaisanpham()));
         holder.tvTen.setText("Tên Sản Phẩm: " + list.get(position).getTenSanPham());
         holder.tvMota.setTextColor(Color.BLACK);
@@ -90,26 +88,15 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
         }
 
 
+        // ...
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(context, "tien"+mListener, Toast.LENGTH_SHORT).show();
+                mListener.onItemClick(null, v, position, v.getId());
+            }
+        });
 
-    }
-
-    public void setSelectedImageUri(Uri selectedImageUri) {
-        this.selectedImageUri = selectedImageUri;
-        if (selectedImageUri != null) {
-            duongDanAnh = selectedImageUri.toString();
-        } else {
-            // Xử lý trường hợp selectedImageUri bằng null (nếu cần)
-            duongDanAnh = ""; // hoặc một đường dẫn mặc định khác tùy thuộc vào yêu cầu của bạn.
-        }
-        notifyDataSetChanged();
-    }
-
-
-    private void pickImageFromGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if (activity != null) {
-            activity.startActivityForResult(intent, REQUEST_PICK_IMAGE);
-        }
     }
 
     @Override
@@ -124,6 +111,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
         TextView tvID, tvTen, tvGia, tvMota, tvSoLuong;
         ImageView imgSanPham;
         Spinner spnTen;
+        CardView cardView;
 
         public MyViewHover(@NonNull View itemView) {
             super(itemView);
@@ -133,7 +121,6 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
             tvMota = itemView.findViewById(R.id.idMoTaSanPham);
             tvSoLuong = itemView.findViewById(R.id.idSoLuongSanpham);
             imgSanPham = itemView.findViewById(R.id.imgSanPhamADM);
-
             // sửa thông tin
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,7 +130,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                     View view = inflater.inflate(R.layout.dialog_sua_sanpham, null);
                     builder.setView(view);
                     spnTen = view.findViewById(R.id.edSuaTenLoaiSP);
-                    imgSuaAnhSP = view.findViewById(R.id.imgSuaAnhSP);
+
                     EditText edten = view.findViewById(R.id.edSuaTenSP);
                     EditText edGia = view.findViewById(R.id.edSuaGiaSP);
                     EditText edMota = view.findViewById(R.id.edSuaMoTaSP);
@@ -159,14 +146,14 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                     edSoLuong.setText(String.valueOf(sanPham.getSoLuongConLai()));
 
 
-                    imgSuaAnhSP.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (activity != null) {
-                                pickImageFromGallery();
-                            }
-                        }
-                    });
+//                    imgSuaAnhSP.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            if (activity != null) {
+//                                pickImageFromGallery();
+//                            }
+//                        }
+//                    });
 
 
                     builder.setNegativeButton("Xoá Mềm", new DialogInterface.OnClickListener() {
@@ -192,12 +179,6 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                             String mota = edMota.getText().toString().trim();
                             String soluong = edSoLuong.getText().toString().trim();
 
-  //                          String duongDanAnh = selectedImageUri.toString();
-
-//                                imgSuaAnhSP.setImageURI(selectedImageUri);
-
-
-
                             boolean check = ten.isEmpty() || gia.isEmpty() || mota.isEmpty() || soluong.isEmpty();
                             if (check) {
                                 Toast.makeText(context, "Không Được Bỏ Chống", Toast.LENGTH_SHORT).show();
@@ -213,7 +194,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                                 sanPham.setMoTa(mota);
                                 sanPham.setSoLuongConLai(soluongconai);
                                 sanPham.setLoaiSanPham_id(tenLoaiSP);
-//                                sanPham.setAnhSanPham(duongDanAnh);
+                                //                             sanPham.setAnhSanPham(duongDanAnh);
                                 if (sanPhamDAO.SuaSanPham(sanPham) > 0) {
                                     Toast.makeText(context, "Sủa Thành Công", Toast.LENGTH_SHORT).show();
                                     list.clear();
@@ -224,8 +205,6 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                                 }
                             }
                         }
-
-
                     });
 
                     Dialog dialog = builder.create();
@@ -251,9 +230,4 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.MyViewHo
                 new int[]{android.R.id.text1});
         spnSach.setAdapter(simpleAdapter);
     }
-
-
-    // load ảnh sản phẩm lên
-
-
 }

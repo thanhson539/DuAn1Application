@@ -110,7 +110,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#E2BCB7"
-                android:text="NEXT"
+                android:text="TIẾP THEO"
                 android:textColor="#4E352F"
                 android:textSize="30sp" />
 

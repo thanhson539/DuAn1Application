@@ -41,7 +41,7 @@
                     android:id="@+id/edtName_frame3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name" />
+                    android:hint="Họ tên" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -52,7 +52,7 @@
                     android:id="@+id/edtPhoneNumber_frame3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone number"
+                    android:hint="Số điện thoại"
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,7 +76,7 @@
                     android:id="@+id/edtUsername_frame3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username" />
+                    android:hint="Tài khoản" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -87,7 +87,7 @@
                     android:id="@+id/edtPassword_frame3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password" />
+                    android:hint="Mật khẩu" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -98,7 +98,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:backgroundTint="#E2BCB7"
-                android:text="SIGN UP"
+                android:text="Đăng ký"
                 android:textColor="#4E352F"
                 android:textSize="30sp" />
         </LinearLayout>
