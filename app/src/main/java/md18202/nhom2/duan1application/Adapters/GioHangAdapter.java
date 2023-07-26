@@ -31,6 +31,7 @@ import md18202.nhom2.duan1application.R;
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder> {
     List<GioHang> list;
+    List<GioHang> listMuaHang;
     GioHangActivity context;
     GioHangDAO gioHangDAO;
     SharedPreferences sharedPreferences;
@@ -61,6 +62,11 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         holder.tvTen_san_pham.setText(list.get(position).getTenSanPham());
         holder.tvSo_luong_mua.setText(""+list.get(position).getSoLuong());
         holder.tvGia_san_pham.setText(""+list.get(position).getGiaSanPham());
+        if(list.get(holder.getAdapterPosition()).getTrangThaiMua() ==0){
+            holder.ckbMua_hang.setChecked(true);
+        }else{
+            holder.ckbMua_hang.setChecked(false);
+        }
         holder.imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +117,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         for(GioHang gioHang: listGioHang){
             total += gioHang.getGiaSanPham();
         }
-        context.tvTotal.setText(""+total);
         return total;
     }
 
@@ -136,7 +141,20 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         ckbMua_hang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                listMuaHang = gioHangDAO.getDsMuaHang(nguoiDung_id, 1);
+                if(ckbMua_hang.isChecked()){
+                    gioHang.setTrangThaiMua(1);
+                    if(gioHangDAO.suaTrangThaiMua(gioHang)>0){
+                        context.tvTotal.setText(""+tongTien(listMuaHang));
+                        Toast.makeText(context, "Thanh cong", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    gioHang.setTrangThaiMua(0);
+                    if(gioHangDAO.suaTrangThaiMua(gioHang)>0){
+                        context.tvTotal.setText(""+tongTien(listMuaHang));
+                        Toast.makeText(context, "Thanh cong", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
@@ -146,15 +164,14 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         context.btnMua_hang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                list = gioHangDAO.getDsGioHang(nguoiDung_id);
-                if(list.size() ==0){
+                listMuaHang = gioHangDAO.getDsMuaHang(nguoiDung_id, 1);
+                if(listMuaHang.size() == 0){
                     return;
                 }
                 Intent intent = new Intent(context, DiaChiNhanHangActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("tongTien", tongTien(list));
-                bundle.putSerializable("listGioHang", (Serializable) list);
+                bundle.putInt("tongTien", tongTien(listMuaHang));
+                bundle.putSerializable("listGioHang", (Serializable) listMuaHang);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
