@@ -150,4 +150,7 @@ public class BinhLuanDAO {
         long check = sqLiteDatabase.delete("BINHLUAN", "binhLuan_id = ?", new String[]{String.valueOf(binhLuan_id)});
         return check > 0;
     }
+
+
+    ///// tien
 }
