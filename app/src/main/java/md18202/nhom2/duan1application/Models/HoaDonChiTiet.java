@@ -4,6 +4,7 @@ public class HoaDonChiTiet {
     private int hoaDonChiTiet_id;
     private int hoaDon_id;
     private int sanPham_id;
+    private int soLuong;
     private int trangThaiDonHang;
     private int trangThaiThanhToan;
 
@@ -56,5 +57,13 @@ public class HoaDonChiTiet {
 
     public void setTrangThaiThanhToan(int trangThaiThanhToan) {
         this.trangThaiThanhToan = trangThaiThanhToan;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 }

@@ -1,5 +1,6 @@
 package md18202.nhom2.duan1application.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,5 +35,18 @@ public class HoaDonChiTietDAO {
             }while (cursor.moveToNext());
         }
         return listResult;
+    }
+
+    public long themHoaDonChiTiet(HoaDonChiTiet hdct){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("hoaDon_id", hdct.getHoaDon_id());
+        values.put("sanPham_id", hdct.getSanPham_id());
+        values.put("soLuong", hdct.getSoLuong());
+        values.put("trangThaiDonHang", hdct.getTrangThaiThanhToan());
+        values.put("trangThaiThanhToan", hdct.getTrangThaiDonHang());
+
+        return sqLiteDatabase.insert("HOADONCHITIET", null, values);
+
     }
 }

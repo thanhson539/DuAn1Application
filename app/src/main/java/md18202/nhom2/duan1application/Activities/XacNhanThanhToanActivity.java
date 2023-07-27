@@ -18,9 +18,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
+import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonDAO;
 import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.HoaDon;
+import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.R;
 
 public class XacNhanThanhToanActivity extends AppCompatActivity {
@@ -33,6 +35,8 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
     int tongTien, nguoiDung_id;
     String diaChi, tenNguoiNhan, sdt;
     List<GioHang> listGioHang;
+
+    HoaDonChiTietDAO hoaDonChiTietDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         nguoiDung_id = sharedPreferences.getInt("nguoiDung_id",-1);
 
         hoaDonDAO = new HoaDonDAO(this);
+        hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
 
         Intent intent = getIntent();
         tongTien = intent.getIntExtra("tongTien", 0);
@@ -106,6 +111,16 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                             for (GioHang gioHang : listGioHang) {
                                 if(gioHang.getTrangThaiMua()==1){
                                     gioHangDAO.xoaKhoiGioHang(gioHang.getSanPham_id(), nguoiDung_id);
+                                    HoaDonChiTiet hdct = new HoaDonChiTiet();
+                                    HoaDon hoaDon1 = hoaDonDAO.getHoaDonCuoiCung(nguoiDung_id);
+                                    hdct.setHoaDon_id(hoaDon1.getHoaDon_id());
+                                    hdct.setSanPham_id(gioHang.getSanPham_id());
+                                    hdct.setSoLuong(gioHang.getSoLuong());
+                                    hdct.setTrangThaiThanhToan(0);
+                                    hdct.setTrangThaiDonHang(0);
+                                    if(hoaDonChiTietDAO.themHoaDonChiTiet(hdct) > 0){
+                                        Toast.makeText(XacNhanThanhToanActivity.this, "Ok", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                                 startActivity(new Intent(XacNhanThanhToanActivity.this, MainActivity.class));
                                 finish();
