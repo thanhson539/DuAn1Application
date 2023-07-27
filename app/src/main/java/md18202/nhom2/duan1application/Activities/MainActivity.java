@@ -30,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
+import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
@@ -45,6 +46,7 @@ import md18202.nhom2.duan1application.Fragments.VoHoaTiet_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoLuoi_Fragment;
 import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.BinhLuan;
+import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.R;
 
@@ -76,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //        ArrayList<BinhLuan> list = binhLuanDAO.getDSBinhLuanCach1();
 //        Toast.makeText(this, list.size() + "", Toast.LENGTH_SHORT).show();
+
+        //check data HOADONCHITIET
+        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(MainActivity.this);
+        ArrayList<HoaDonChiTiet> listDonHangByHDCT = hoaDonChiTietDAO.getDonHangByHDCT(0);
+        Toast.makeText(this, listDonHangByHDCT.size() + "", Toast.LENGTH_SHORT).show();
 
 
         //Ánh xạ

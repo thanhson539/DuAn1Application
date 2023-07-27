@@ -189,6 +189,10 @@
                         android:textSize="16sp"
                         android:textColor="#3852B0"/>
                 </LinearLayout>
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="dp"-->
+<!--                    android:background="#"/>-->
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
