@@ -30,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
+import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
 import md18202.nhom2.duan1application.Fragments.Ql_NguoiDung_Fragment;
@@ -135,8 +136,11 @@ public class MainActivity extends AppCompatActivity {
                 } else if (menuId == R.id.menuVoHoaTiet) {
                     fragment = new VoHoaTiet_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menuQLNguoiDung){
+                } else if (menuId == R.id.menuQLNguoiDung) {
                     fragment = new Ql_NguoiDung_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuDonHang) {
+                    fragment = new DonHang_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 
@@ -155,10 +159,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Set thong tin nguoi dung cho header layout
         boolean isUri = imgSrc.startsWith("content://");
-        if (isUri){
+        if (isUri) {
             Picasso.get().load(Uri.parse(imgSrc)).into(imgAvatar_header);
-        }else {
-            int idResource = this.getResources().getIdentifier(imgSrc,"drawable",this.getPackageName());
+        } else {
+            int idResource = this.getResources().getIdentifier(imgSrc, "drawable", this.getPackageName());
             imgAvatar_header.setImageResource(idResource);
         }
         tvName_header.setText(hoTen);

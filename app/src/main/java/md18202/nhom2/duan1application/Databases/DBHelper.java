@@ -179,7 +179,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5, 5, '07/07/2023', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
-         * Cấu trúc bảng: hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan
+         * Cấu trúc bảng: soLuong, trangThaiDonHang, trangThaiThanhToan, hoaDon_id, sanPham_id
          * Ghi chú:
          * Trang thai don hang:
          * - 0: Order thanh con
