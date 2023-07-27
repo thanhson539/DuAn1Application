@@ -5,14 +5,6 @@
     android:background="#E2BCB7"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFEFE0"
-        android:gravity="center"
-        android:text="Đơn hàng đã giao"
-        android:textSize="25sp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
