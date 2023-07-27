@@ -29,6 +29,7 @@ public class QL_BinhLuan_Adapter extends RecyclerView.Adapter<QL_BinhLuan_Adapte
     public QL_BinhLuan_Adapter(Context context, ArrayList<BinhLuan> list) {
         this.context = context;
         this.list = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -55,10 +56,8 @@ public class QL_BinhLuan_Adapter extends RecyclerView.Adapter<QL_BinhLuan_Adapte
         }
 
 
-//        holder.tvTenND.setText(list.get(position).getNguoiDung());
+
         holder.tvTenSP.setText(list.get(position).getTenSanPham());
-//        holder.tvNoiDung.setText(list.get(position).getNoiDung());
-//        holder.tvThoiGian.setText(list.get(position).getThoiGian());
         holder.tvTongBL.setText("Tổng Bình Luận Là:  " + String.valueOf(list.get(position).getTongBinhLuan()) + "\n Xem Chi Tiết");
 
 
@@ -69,13 +68,13 @@ public class QL_BinhLuan_Adapter extends RecyclerView.Adapter<QL_BinhLuan_Adapte
                 LayoutInflater inflater  = ((Activity)context).getLayoutInflater();
                 View view = inflater.inflate(R.layout.dialog_hienthi_tongsp, null);
                 builder.setView(view);
+
                 RecyclerView recyclerView  =view.findViewById(R.id.recyc_ChiTiet_BinhLuan);
+
                 BinhLuanDAO binhLuanDAO  = new BinhLuanDAO(context);
                 ArrayList<BinhLuan> list1 = binhLuanDAO.getDsBinhLuanTheoSanPham_id(list.get(holder.getLayoutPosition()).getSanPham_id());
                 BinhLuan_ChiTiet_Adapter adapter  =new BinhLuan_ChiTiet_Adapter(context,list1);
                 recyclerView.setAdapter(adapter);
-
-
 
                 Dialog dialog = builder.create();
                 dialog.show();
@@ -92,15 +91,12 @@ public class QL_BinhLuan_Adapter extends RecyclerView.Adapter<QL_BinhLuan_Adapte
     }
 
     public class MyViewHover extends RecyclerView.ViewHolder {
-        TextView tvTenND, tvTenSP, tvNoiDung, tvThoiGian, tvTongBL;
+        TextView  tvTenSP, tvTongBL;
         ImageView imgAvata;
         public MyViewHover(@NonNull View itemView) {
             super(itemView);
             tvTongBL  =itemView.findViewById(R.id.tv_TongBinhLuan_BL);
-//            tvTenND  = itemView.findViewById(R.id.tv_TenND_BL);
             tvTenSP  = itemView.findViewById(R.id.tv_TenSP_BL);
-//            tvNoiDung  = itemView.findViewById(R.id.tv_NoiDung_BL);
-//            tvThoiGian  = itemView.findViewById(R.id.tv_ThoiGian_BL);
             imgAvata  = itemView.findViewById(R.id.img_Ql_BinhLuan);
 
         }

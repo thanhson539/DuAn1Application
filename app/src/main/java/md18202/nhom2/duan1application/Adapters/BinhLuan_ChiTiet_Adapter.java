@@ -30,6 +30,7 @@ public class BinhLuan_ChiTiet_Adapter extends RecyclerView.Adapter<BinhLuan_ChiT
     public BinhLuan_ChiTiet_Adapter(Context context, ArrayList<BinhLuan> list) {
         this.context = context;
         this.list = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -41,10 +42,10 @@ public class BinhLuan_ChiTiet_Adapter extends RecyclerView.Adapter<BinhLuan_ChiT
 
     @Override
     public void onBindViewHolder(@NonNull MyView holder, int position) {
-    holder.tvTen.setText(list.get(position).getTenNguoiDung());
-    holder.tvTenSP.setText(list.get(position).getTenSanPham());
-    holder.tvNoiDungBL.setText(list.get(position).getNoiDung());
-    holder.tvThoiGian.setText(list.get(position).getThoiGian());
+    holder.tvTen.setText("Tên Người Dùng: "+list.get(position).getTenNguoiDung());
+    holder.tvTenSP.setText("Tên Sản Phẩm: "+list.get(position).getTenSanPham());
+    holder.tvNoiDungBL.setText("Nội Dung: "+list.get(position).getNoiDung());
+    holder.tvThoiGian.setText("Thời Gian: "+list.get(position).getThoiGian());
 
         String srcImg = list.get(position).getAnhSanPham();
 
