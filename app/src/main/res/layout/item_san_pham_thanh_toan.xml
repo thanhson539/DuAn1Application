@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:backgroundTint="#FFEFE0"
+        android:backgroundTint="#EAD1CE"
         app:cardCornerRadius="20dp">
 
         <LinearLayout
@@ -25,8 +26,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/imgAnh_sp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/thanhtoan_san_pham_demo" />
 
                 <LinearLayout
@@ -37,6 +39,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvTen_sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Vớ cổ cao bèo trơn"
@@ -44,12 +47,14 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tvSo_luong_sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:text="SL: x1" />
 
                     <TextView
+                        android:id="@+id/tvTong_gia_san_pham"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"

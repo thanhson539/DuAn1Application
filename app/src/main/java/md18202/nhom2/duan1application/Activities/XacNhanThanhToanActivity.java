@@ -12,11 +12,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import md18202.nhom2.duan1application.Adapters.SanPhamThanhToanAdapter;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonDAO;
@@ -35,8 +37,9 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
     int tongTien, nguoiDung_id;
     String diaChi, tenNguoiNhan, sdt;
     List<GioHang> listGioHang;
-
+    RecyclerView recycleView_thanh_toan;
     HoaDonChiTietDAO hoaDonChiTietDAO;
+    SanPhamThanhToanAdapter sanPhamThanhToanAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         tvSdt_nguoi_nhan = findViewById(R.id.tvSdt_nguoi_nhan);
         tvGia_tam_tinh = findViewById(R.id.tvGia_tam_tinh);
         tvThanh_tien = findViewById(R.id.tvThanh_tien);
+        recycleView_thanh_toan = findViewById(R.id.recycler_view_don_hang_thanh_toan);
         tvDia_chi_nhan_hang = findViewById(R.id.tvDia_chi_nhan_hang);
         btnXac_nhan_dat_hang = findViewById(R.id.btnXac_nhan_dat_hang);
         sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
@@ -61,6 +65,9 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         tenNguoiNhan = intent.getStringExtra("nguoiNhan");
         sdt = intent.getStringExtra("sdt");
         listGioHang = (List<GioHang>) intent.getSerializableExtra("listGioHang");
+
+        sanPhamThanhToanAdapter = new SanPhamThanhToanAdapter(listGioHang, XacNhanThanhToanActivity.this);
+        recycleView_thanh_toan.setAdapter(sanPhamThanhToanAdapter);
 
         tvNguoi_nhan_hang.setText(tenNguoiNhan);
         tvSdt_nguoi_nhan.setText(sdt);

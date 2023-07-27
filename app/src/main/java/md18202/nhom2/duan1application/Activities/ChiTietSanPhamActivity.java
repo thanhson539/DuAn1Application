@@ -1,6 +1,8 @@
 package md18202.nhom2.duan1application.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
@@ -29,6 +31,8 @@ import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
+import md18202.nhom2.duan1application.Fragments.HomeFragment;
+import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.NguoiDung;
@@ -36,7 +40,7 @@ import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class ChiTietSanPhamActivity extends AppCompatActivity {
-    ImageView imgAnh_sanpham_chitiet, imgBack, imgGio_hang;
+    ImageView imgAnh_sanpham_chitiet, imgBack, imgGio_hang, imgYeu_thich, imgHome, imgThong_bao;
     TextView tvTen_sanpham_chitiet, tvGia_sanpham_chitiet, tvSo_luong;
     RecyclerView recyclerView_binh_luan;
     Button btnChon_mua;
@@ -58,6 +62,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         imgYeuThich_frameSPChiTiet2 = findViewById(R.id.imgYeuThich_frameSPChiTiet2);
         imgGio_hang = findViewById(R.id.imgGio_hang);
+        imgYeu_thich = findViewById(R.id.imgYeu_thich);
+        imgHome = findViewById(R.id.imgHome);
+        imgThong_bao = findViewById(R.id.imgThong_bao);
         edDialog_binh_luan = findViewById(R.id.edDialog_binh_luan);
         tvTen_sanpham_chitiet = findViewById(R.id.tvTen_sanpham_chitiet);
         tvGia_sanpham_chitiet = findViewById(R.id.tvGia_sanpham_chitiet);
@@ -65,7 +72,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         btnChon_mua = findViewById(R.id.btnChon_mua);
         recyclerView_binh_luan = findViewById(R.id.recycler_view_binh_luan);
         binhLuanDAO = new BinhLuanDAO(this);
-        sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
         getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
 
         //lay san pham tu ben adapter san pham 2, khi click vao san pham se lay san pham do va truyen qua chi tiet san pham
@@ -79,10 +86,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         Picasso.get().load(resourceId).into(imgAnh_sanpham_chitiet);
         tvTen_sanpham_chitiet.setText(sanPham.getTenSanPham());
         tvGia_sanpham_chitiet.setText("" + sanPham.getGiaSanPham() + " VND");
-        tvSo_luong.setText(""+sanPham.getSoLuongConLai());
-        if(sanPham.getIsYeuThich() == 0){
+        tvSo_luong.setText("" + sanPham.getSoLuongConLai());
+        if (sanPham.getIsYeuThich() == 0) {
             imgYeuThich_frameSPChiTiet2.setImageResource(R.drawable.frame4_trai_tim);
-        }else {
+        } else {
             imgYeuThich_frameSPChiTiet2.setImageResource(R.drawable.frame4_trai_tim2);
         }
         getDsBinhLuan(sanPham.getSanPham_id());
@@ -107,6 +114,32 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        imgHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChiTietSanPhamActivity.this, MainActivity.class));
+            }
+        });
+
+        imgYeu_thich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ChiTietSanPhamActivity.this, YeuThichAtivivty.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putSerializable("sanPham", sanPham);
+                intent1.putExtras(bundle1);
+                startActivity(intent1);
+                finish();
+            }
+        });
+
+        imgThong_bao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChiTietSanPhamActivity.this, "Chưa tồn tại màn hình thông báo", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -138,7 +171,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     }
 
-    public void binhLuan(){
+    public void binhLuan() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_binh_luan);
         EditText edBinh_luan = dialog.findViewById(R.id.edBinh_luan);
@@ -153,7 +186,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 //sanPham_id lay tu sanPham
                 int sanPham_id = sanPham.getSanPham_id();
                 //noiDung lay tu edBinh_luan
-                if(edBinh_luan.getText().length() == 0){
+                if (edBinh_luan.getText().length() == 0) {
                     Toast.makeText(ChiTietSanPhamActivity.this, "Binh luan trong tron a", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -162,30 +195,27 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd-MM-yyyy");
                 String currentTime = format.format(calendar.getTime());
-                imgBinh_luan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        BinhLuan binhLuan = new BinhLuan();
-                        binhLuan.setNguoiDung_id(getNguoiDung_id);
-                        binhLuan.setSanPham_id(sanPham_id);
-                        binhLuan.setNoiDung(binh_luan);
-                        binhLuan.setThoiGian(currentTime);
-                        if(binhLuanDAO.themBinhLuan(binhLuan) > 0){
-                            getDsBinhLuan(sanPham_id);
-                            dialog.cancel();
-                            Toast.makeText(ChiTietSanPhamActivity.this, "Da binh luan", Toast.LENGTH_LONG).show();
-                        }else {
-                            Toast.makeText(ChiTietSanPhamActivity.this, "Them binh luan khong thanh cong", Toast.LENGTH_SHORT).show();
-                        }
 
-                    }
-                });
+                BinhLuan binhLuan = new BinhLuan();
+                binhLuan.setNguoiDung_id(getNguoiDung_id);
+                binhLuan.setSanPham_id(sanPham_id);
+                binhLuan.setNoiDung(binh_luan);
+                binhLuan.setThoiGian(currentTime);
+                if (binhLuanDAO.themBinhLuan(binhLuan) > 0) {
+                    getDsBinhLuan(sanPham_id);
+                    dialog.cancel();
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Da binh luan", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(ChiTietSanPhamActivity.this, "Them binh luan khong thanh cong", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
         dialog.show();
     }
 
-    public void binhLuanDialog(EditText edDialog_binh_luan){
+    public void binhLuanDialog(EditText edDialog_binh_luan) {
         edDialog_binh_luan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,16 +242,16 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         getDsBinhLuan(sanPham.getSanPham_id());
     }
 
-    public void chonMua(int nguoiDung_id, int sanPham_id){
+    public void chonMua(int nguoiDung_id, int sanPham_id) {
         GioHangDAO gioHangDAO = new GioHangDAO(ChiTietSanPhamActivity.this);
         GioHang gioHang = new GioHang();
         gioHang.setNguoiDung_id(nguoiDung_id);
         gioHang.setSanPham_id(sanPham_id);
         gioHang.setSoLuong(1);
         gioHang.setTrangThaiMua(0);
-        if(gioHangDAO.themVaoGioHang(gioHang) > 0){
+        if (gioHangDAO.themVaoGioHang(gioHang) > 0) {
             Toast.makeText(this, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(this, "Mặt hàng này đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
         }
     }

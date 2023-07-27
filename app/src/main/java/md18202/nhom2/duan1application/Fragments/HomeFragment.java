@@ -2,6 +2,7 @@ package md18202.nhom2.duan1application.Fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import md18202.nhom2.duan1application.Activities.GioHangActivity;
 import md18202.nhom2.duan1application.Adapters.SanPhamAdapter1;
 import md18202.nhom2.duan1application.Adapters.SanPhamAdapter2;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
@@ -35,6 +40,7 @@ import md18202.nhom2.duan1application.R;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView_frame4;
+    private ImageView imgHome, imgYeu_thich, imgGio_hang, imgThong_bao;
     private SanPhamDAO sanPhamDAO;
     ArrayList<SanPham> listtemporary;
     ArrayList<SanPham> oriList;
@@ -48,7 +54,10 @@ public class HomeFragment extends Fragment {
 
         recyclerView_frame4 = view.findViewById(R.id.recyclerView_frame4);
         sanPhamDAO = new SanPhamDAO(getContext());
-        edTimkiem = view.findViewById(R.id.edTimKiem);
+        imgHome = view.findViewById(R.id.imgHome);
+        imgYeu_thich = view.findViewById(R.id.imgYeu_thich);
+        imgGio_hang = view.findViewById(R.id.imgGio_hang);
+        imgThong_bao = view.findViewById(R.id.imgThong_bao);
 
 
         oriList = sanPhamDAO.getDsSanPham();
@@ -67,6 +76,39 @@ public class HomeFragment extends Fragment {
         //load Data
 //        loadData(recyclerView_frame4);
         loadDataGridLayout(recyclerView_frame4);
+
+        imgHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        imgGio_hang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), GioHangActivity.class));
+            }
+        });
+
+        imgThong_bao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Chưa tồn tại màn hình thông báo", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        imgYeu_thich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YeuThich_Fragment fragment = new YeuThich_Fragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout_frame4, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+        });
         return view;
     }
 
