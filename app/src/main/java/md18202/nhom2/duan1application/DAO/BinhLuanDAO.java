@@ -152,8 +152,6 @@ public class BinhLuanDAO {
     }
 
 
-    ///// tien
-    public  void con(){
-        // ytess
-    }
+
+
 }
