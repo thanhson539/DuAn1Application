@@ -94,14 +94,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
 
-        // Chức năng yêu thích
-//        sanPhamYeuThich(imgYeuThich_frameSPChiTiet2);
+        //Chức năng bình luận
         binhLuanDialog(edDialog_binh_luan);
-        if (sanPham != null) {
-            Toast.makeText(this, "Id sản phẩm: " + sanPham.getSanPham_id() + " -IsYeuThich: " + sanPham.getIsYeuThich(), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Null", Toast.LENGTH_SHORT).show();
-        }
+
+        // Chức năng yêu thích
         int sanPham_id = sanPham.getSanPham_id();
         int isYeuThich = sanPham.getIsYeuThich();
         sanPhamYeuThich(sanPham_id, isYeuThich, imgYeuThich_frameSPChiTiet2);

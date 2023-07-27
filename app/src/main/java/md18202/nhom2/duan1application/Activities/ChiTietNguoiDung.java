@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.R;
 
@@ -31,7 +36,9 @@ public class ChiTietNguoiDung extends AppCompatActivity {
     private ImageView imgAvatar_chiTiet, imgEdit_chiTiet;
     private TextView tvName_chiTiet, tvPhoneNumber_chiTiet, tvEmail_chiTiet, tvDoiMatKhau_chiTiet, tvLoaiTaiKhoan_chiTiet;
     private Button btnLogout_chiTiet;
-    public boolean isVisiblePassword = false;
+
+    private Uri selectedImageUri;
+    private static final int REQUEST_CODE_PICK_IMAGE = 1;
 
 
     @Override
@@ -108,6 +115,14 @@ public class ChiTietNguoiDung extends AppCompatActivity {
                 finish(); // Đóng màn hình ChiTietNguoiDungActivity
             }
         });
+
+        //Cập nhật thông tin người dùng
+        imgEdit_chiTiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateNguoiDunng(imgEdit_chiTiet);
+            }
+        });
     }
 
     public void doiMatKhau(int nguoiDung_id) {
@@ -164,4 +179,125 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         }
         return false;
     }
+
+    public void updateNguoiDunng(ImageView imgEdit_chiTiet) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChiTietNguoiDung.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_cap_nhat_nguoi_dung, null);
+        ImageView imgNewAvt_update = view.findViewById(R.id.imgNewAvt_update);
+        EditText edtNewName_update = view.findViewById(R.id.edtNewName_update);
+        EditText edtNewPhome_update = view.findViewById(R.id.edtNewPhome_update);
+        EditText edtNewEmail_update = view.findViewById(R.id.edtNewEmail_update);
+        TextView tvXoaTaiKhoan_dialog_update = view.findViewById(R.id.tvXoaTaiKhoan_dialog_update);
+        Button btnCapNhat_dialog_update = view.findViewById(R.id.btnCapNhat_dialog_update);
+        builder.setView(view);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        //Get data nguoi dung tu sharePre da luu khi dang nhap
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+        String imgSrc = sharedPreferences.getString("imgSrc", "");
+        String hoTen = sharedPreferences.getString("hoTen", "");
+        String soDienThoai = sharedPreferences.getString("soDienThoai", "");
+        String email = sharedPreferences.getString("email", "");
+        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
+
+        //Set data cho cac widget
+        boolean isUri = imgSrc.startsWith("content://");
+        if (isUri) {
+            Picasso.get().load(Uri.parse(imgSrc)).into(imgNewAvt_update);
+        } else {
+            int idResource = this.getResources().getIdentifier(imgSrc, "drawable", this.getPackageName());
+            imgNewAvt_update.setImageResource(idResource);
+        }
+        edtNewName_update.setText(hoTen);
+        edtNewPhome_update.setText(soDienThoai);
+        edtNewEmail_update.setText(email);
+
+        //Get link Uri mới khi người dùng chọn ảnh mới
+        imgNewAvt_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChiTietNguoiDung.this, "Chưa câp nhật được ảnh nha cưng!", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
+            }
+        });
+
+        //Lấy dữ liệu mới từ các widget để cấp nhật
+        btnCapNhat_dialog_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newNguoiDung_id = nguoiDung_id;
+                String newImgSrc = imgSrc;
+                String newName = edtNewName_update.getText().toString();
+                String newPhone = edtNewPhome_update.getText().toString();
+                String newEmail = edtNewEmail_update.getText().toString();
+                NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getApplicationContext());
+                boolean check = nguoiDungDAO.capNhatThongTinNguoiDung(newNguoiDung_id, newImgSrc, newName, newPhone, newEmail);
+                if (check) {
+                    Toast.makeText(ChiTietNguoiDung.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+                }
+            }
+        });
+
+        //Xóa tài khoản người dùng
+        tvXoaTaiKhoan_dialog_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(ChiTietNguoiDung.this);
+                int nguoiDung_id_can_xoa = nguoiDung_id;
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(ChiTietNguoiDung.this);
+                builder1.setTitle("Thông báo!");
+                builder1.setMessage("Bạn thật sự muốn xóa tài khoản này?");
+                builder1.setNegativeButton("Xóa", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean check = nguoiDungDAO.actionIsXoaMem(nguoiDung_id_can_xoa, 1);
+                        if (check) {
+                            Toast.makeText(ChiTietNguoiDung.this, "Tài khoản của bạn đã xóa", Toast.LENGTH_SHORT).show();
+                            SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.clear();
+                            editor.apply();
+                            Intent intent = new Intent(ChiTietNguoiDung.this, DangNhapActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
+
+                builder1.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Đóng dialog
+                    }
+                });
+                AlertDialog alertDialog1 = builder1.create();
+                alertDialog1.show();
+            }
+        });
+    }
+
+//    Chưa hoàn thiện chức năng thêm ảnh
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null){
+//            selectedImageUri = data.getData();
+//        }
+//    }
+//
+//    private void showImageInImageView(Uri imageUri) {
+//        // Tạo Bitmap từ URI
+//        try {
+//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), imageUri);
+//            // Hiển thị ảnh lên ImageView
+//            imageView.setImageBitmap(bitmap);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

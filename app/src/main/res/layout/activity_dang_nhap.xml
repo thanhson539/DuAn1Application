@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign in"
+                android:text="Đăng nhập"
                 android:textSize="30sp" />
 
             <RelativeLayout
@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="#E2BCB7"
-                        android:hint="Username"/>
+                        android:hint="Tài khoản"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
-                        android:hint="Password"/>
+                        android:hint="Mật khẩu"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
@@ -100,7 +100,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Remember account" />
+                    android:text="Nhớ tài khoản" />
             </LinearLayout>
 
             <Button
@@ -110,12 +110,12 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#E2BCB7"
-                android:text="NEXT"
+                android:text="TIẾP THEO"
                 android:textColor="#4E352F"
                 android:textSize="30sp" />
 
             <LinearLayout
-                android:layout_width="250dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp">
@@ -123,17 +123,17 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:gravity="center"
-                    android:text="Already have an account?" />
+                    android:text="Bạn đã có một tài khoản chưa?" />
 
                 <TextView
                     android:id="@+id/tvSignIn_frame2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="SIGN UP"
+                    android:gravity="left"
+                    android:text="Đăng ký"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
