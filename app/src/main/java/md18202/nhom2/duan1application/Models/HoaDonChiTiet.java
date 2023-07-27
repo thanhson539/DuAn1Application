@@ -1,30 +1,84 @@
 package md18202.nhom2.duan1application.Models;
 
 public class HoaDonChiTiet {
-    private int hoaDonChiTiet_id;
     private int hoaDon_id;
     private int sanPham_id;
     private int soLuong;
     private int trangThaiDonHang;
     private int trangThaiThanhToan;
+    //---------
+    private String tenSanPham;
+    private String anhSanPham;
+    private int giaSanPham;
+    private String ngayMua;
+    private String diaChi;
+    private int tongTien;
 
-    public HoaDonChiTiet(int hoaDonChiTiet_id, int hoaDon_id, int sanPham_id, int trangThaiDonHang, int trangThaiThanhToan) {
-        this.hoaDonChiTiet_id = hoaDonChiTiet_id;
+    public HoaDonChiTiet(int hoaDon_id, int sanPham_id, int soLuong, int trangThaiDonHang, int trangThaiThanhToan,
+                         String tenSanPham, String anhSanPham, int giaSanPham,
+                         String ngayMua, String diaChi, int tongTien) {
         this.hoaDon_id = hoaDon_id;
         this.sanPham_id = sanPham_id;
+        this.soLuong = soLuong;
         this.trangThaiDonHang = trangThaiDonHang;
         this.trangThaiThanhToan = trangThaiThanhToan;
+        this.tenSanPham = tenSanPham;
+        this.anhSanPham = anhSanPham;
+        this.giaSanPham = giaSanPham;
+        this.ngayMua = ngayMua;
+        this.diaChi = diaChi;
+        this.tongTien = tongTien;
     }
 
     public HoaDonChiTiet() {
     }
 
-    public int getHoaDonChiTiet_id() {
-        return hoaDonChiTiet_id;
+    public int getTongTien() {
+        return tongTien;
     }
 
-    public void setHoaDonChiTiet_id(int hoaDonChiTiet_id) {
-        this.hoaDonChiTiet_id = hoaDonChiTiet_id;
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public String getAnhSanPham() {
+        return anhSanPham;
+    }
+
+    public void setAnhSanPham(String anhSanPham) {
+        this.anhSanPham = anhSanPham;
+    }
+
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
+
+    public int getGiaSanPham() {
+        return giaSanPham;
+    }
+
+    public void setGiaSanPham(int giaSanPham) {
+        this.giaSanPham = giaSanPham;
+    }
+
+    public String getNgayMua() {
+        return ngayMua;
+    }
+
+    public void setNgayMua(String ngayMua) {
+        this.ngayMua = ngayMua;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
     public int getHoaDon_id() {
