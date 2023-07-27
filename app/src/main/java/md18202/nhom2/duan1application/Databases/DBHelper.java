@@ -105,10 +105,7 @@ public class DBHelper extends SQLiteOpenHelper {
          * 0- chua mua
          * 1- da mua */
 
-        db.execSQL("insert into GIOHANG values" +
-                "(3, 1, 2, 0)," +
-                "(3, 2, 1, 0)," +
-                "(3, 3, 3, 0)");
+
 
         /*3: Bảng 'LOAISANPHAM'
         * Cấu trúc cột: loaiSanPham_id, tenLoai */

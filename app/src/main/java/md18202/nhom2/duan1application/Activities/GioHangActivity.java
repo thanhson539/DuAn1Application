@@ -45,6 +45,7 @@ public class GioHangActivity extends AppCompatActivity {
         gioHangDAO = new GioHangDAO(GioHangActivity.this);
         sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
         getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
+        tvTotal.setText(""+0);
 
         getDsGioHang();
 
