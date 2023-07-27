@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,13 +48,9 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //load anh
         String srcImg = list.get(position).getAnhSanPham();
-        boolean isUri = srcImg.startsWith("content://");
-        if (isUri) {
-            Picasso.get().load(Uri.parse(srcImg)).into(holder.imgSanPham_itemGrid);
-        } else {
-            int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
-            Picasso.get().load(resourceId).into(holder.imgSanPham_itemGrid);
-        }
+        int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
+        Picasso.get().load(resourceId).into(holder.imgSanPham_itemGrid);
+
         holder.tvGiaSanPham_itemGrid.setText(String.valueOf(list.get(position).getGiaSanPham()) + " vnd");
         holder.imgGioHang_itemGrid.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +65,7 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
                 SanPham sanPham = list.get(holder.getAdapterPosition());
                 Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("sanPham", sanPham);
+                bundle.putSerializable("sanPham",sanPham);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
@@ -79,7 +74,7 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
         holder.imgGioHang_itemGrid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chonMua(list.get(holder.getAdapterPosition()).getSanPham_id(), 1);
+                chonMua(list.get(holder.getAdapterPosition()).getSanPham_id());
             }
         });
     }
@@ -106,18 +101,19 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
         }
     }
 
-    public void chonMua(int sanPham_id, int soLuong) {
+    public void chonMua(int sanPham_id){
         GioHangDAO gioHangDAO = new GioHangDAO(context);
         GioHang gioHang = new GioHang();
-        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG",context.MODE_PRIVATE);
         int getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
         gioHang.setNguoiDung_id(getNguoiDung_id);
         gioHang.setSanPham_id(sanPham_id);
-        gioHang.setSoLuong(soLuong);
-        if (gioHangDAO.themVaoGioHang(gioHang) > 0) {
+        gioHang.setSoLuong(1);
+        gioHang.setTrangThaiMua(0);
+        if(gioHangDAO.themVaoGioHang(gioHang) > 0){
             Toast.makeText(context, "Da them vao gio hang", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Chua them vao gio hang", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Mặt hàng này đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -33,6 +33,18 @@
                 android:layout_marginLeft="30dp"/>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tvThong_bao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chưa có sản phẩm nào trong giỏ hàng"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#4E352F"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:visibility="gone"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_gio_hang"
             android:layout_width="match_parent"
@@ -50,7 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total"
-                android:textSize="20sp"
+                android:textSize="28sp"
+                android:textStyle="bold"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"/>
 
@@ -59,7 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100.000"
-                android:textSize="20sp"
+                android:textSize="28sp"
+                android:layout_gravity="end"
+                android:layout_marginRight="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="vnđ"
+                android:textSize="28sp"
                 android:layout_gravity="end"
                 android:layout_marginRight="15dp"/>
         </LinearLayout>

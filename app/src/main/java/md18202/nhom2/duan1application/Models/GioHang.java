@@ -1,10 +1,12 @@
 package md18202.nhom2.duan1application.Models;
 
-public class GioHang {
-    private int gioHang_id;
+import java.io.Serializable;
+
+public class GioHang implements Serializable {
     private int nguoiDung_id;
     private int sanPham_id;
     private int soLuong;
+    private int trangThaiMua;
     private int giaSanPham;
     private String tenSanPham;
     private String anhSanPham;
@@ -12,29 +14,25 @@ public class GioHang {
     public GioHang() {
     }
 
-    public GioHang(int gioHang_id, int nguoiDung_id, int sanPham_id, int soLuong) {
-        this.gioHang_id = gioHang_id;
+    public GioHang(int soLuong, int giaSanPham) {
+        this.soLuong = soLuong;
+        this.giaSanPham = giaSanPham;
+    }
+
+    public GioHang(int nguoiDung_id, int sanPham_id, int soLuong) {
         this.nguoiDung_id = nguoiDung_id;
         this.sanPham_id = sanPham_id;
         this.soLuong = soLuong;
     }
 
-    public GioHang(int gioHang_id, int nguoiDung_id, int sanPham_id, int soLuong, int giaSanPham, String tenSanPham, String anhSanPham) {
-        this.gioHang_id = gioHang_id;
+    public GioHang(int nguoiDung_id, int sanPham_id, int soLuong, int trangThaiMua, int giaSanPham, String tenSanPham, String anhSanPham) {
         this.nguoiDung_id = nguoiDung_id;
         this.sanPham_id = sanPham_id;
         this.soLuong = soLuong;
+        this.trangThaiMua = trangThaiMua;
         this.giaSanPham = giaSanPham;
         this.tenSanPham = tenSanPham;
         this.anhSanPham = anhSanPham;
-    }
-
-    public int getGioHang_id() {
-        return gioHang_id;
-    }
-
-    public void setGioHang_id(int gioHang_id) {
-        this.gioHang_id = gioHang_id;
     }
 
     public int getNguoiDung_id() {
@@ -59,6 +57,14 @@ public class GioHang {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public int getTrangThaiMua() {
+        return trangThaiMua;
+    }
+
+    public void setTrangThaiMua(int trangThaiMua) {
+        this.trangThaiMua = trangThaiMua;
     }
 
     public int getGiaSanPham() {
