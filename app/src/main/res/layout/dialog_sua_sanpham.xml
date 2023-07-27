@@ -22,7 +22,7 @@
 
     <ImageView
         android:id="@+id/imgSuaAnhSP"
-        android:src="@drawable/sanpham_iconxoaphong"
+        android:src="@drawable/avatar_mac_dinh"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_width="100dp"

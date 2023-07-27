@@ -76,6 +76,7 @@
                 android:title="Quản lý sản phẩm"
                 android:icon="@drawable/frame4_mui_ten"/>
             <item
+                android:id="@+id/menu_QL_BinhLuan"
                 android:title="Quản lý bình luận"
                 android:icon="@drawable/frame4_mui_ten"/>
             <item
