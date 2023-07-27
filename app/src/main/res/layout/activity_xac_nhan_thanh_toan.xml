@@ -77,8 +77,11 @@
                         android:textColor="#2D5714" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_don_hang_thanh_toan"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp" />
+                        android:layout_height="100dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
                     <View
                         android:layout_width="match_parent"

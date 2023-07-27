@@ -73,24 +73,28 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/imgHome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/frame4_home" />
 
         <ImageView
+            android:id="@+id/imgThong_bao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/frame4_thong_bao" />
 
         <ImageView
+            android:id="@+id/imgYeu_thich"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/frame4_trai_tim" />
 
         <ImageView
+            android:id="@+id/imgGio_hang"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
