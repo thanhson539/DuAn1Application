@@ -163,7 +163,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="15dp"
         android:backgroundTint="#FFEFE0"
-        android:text="Thanh toán"
+        android:text="Tiếp tục"
         android:textColor="#4E352F"
         android:textSize="26sp"
         android:textStyle="normal"
