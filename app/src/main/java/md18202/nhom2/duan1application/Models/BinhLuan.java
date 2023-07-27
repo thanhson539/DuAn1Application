@@ -8,6 +8,11 @@ public class BinhLuan {
     private String thoiGian;
     private String nguoiDung;
 
+    private String anhSanPham;
+    private String tenSanPham;
+    private String tenNguoiDung;
+    private int tongBinhLuan;
+
     public String getNguoiDung() {
         return nguoiDung;
     }
@@ -32,6 +37,60 @@ public class BinhLuan {
         this.sanPham_id = sanPham_id;
         this.noiDung = noiDung;
         this.thoiGian = thoiGian;
+    }
+
+    //Lay toan bo danh sach binh luan theo binhLLuan_id
+    public BinhLuan(int binhLuan_id, int nguoiDung_id, int sanPham_id, String noiDung, String thoiGian, String anhSanPham, String tenSanPham, String tenNguoiDung) {
+        this.binhLuan_id = binhLuan_id;
+        this.nguoiDung_id = nguoiDung_id;
+        this.sanPham_id = sanPham_id;
+        this.noiDung = noiDung;
+        this.thoiGian = thoiGian;
+        this.anhSanPham = anhSanPham;
+        this.tenSanPham = tenSanPham;
+        this.tenNguoiDung = tenNguoiDung;
+    }
+
+    //Lay danh binh luan nhóm theo sapPham_id
+    public BinhLuan(int binhLuan_id, int nguoiDung_id, int sanPham_id, String anhSanPham, String tenSanPham, int tongBinhLuan) {
+        this.binhLuan_id = binhLuan_id;
+        this.nguoiDung_id = nguoiDung_id;
+        this.sanPham_id = sanPham_id;
+        this.anhSanPham = anhSanPham;
+        this.tenSanPham = tenSanPham;
+        this.tongBinhLuan = tongBinhLuan;
+    }
+
+    public String getAnhSanPham() {
+        return anhSanPham;
+    }
+
+    public void setAnhSanPham(String anhSanPham) {
+        this.anhSanPham = anhSanPham;
+    }
+
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
+
+    public String getTenNguoiDung() {
+        return tenNguoiDung;
+    }
+
+    public void setTenNguoiDung(String tenNguoiDung) {
+        this.tenNguoiDung = tenNguoiDung;
+    }
+
+    public int getTongBinhLuan() {
+        return tongBinhLuan;
+    }
+
+    public void setTongBinhLuan(int tongBinhLuan) {
+        this.tongBinhLuan = tongBinhLuan;
     }
 
     public BinhLuan() {

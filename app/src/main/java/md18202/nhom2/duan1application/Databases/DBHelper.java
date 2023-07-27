@@ -91,7 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5,'avatar_mac_dinh', 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0,0)");
 
         /*2: Bang 'BINHLUAN'
-         * Cấu trúc cột: binhLuan_id, nguoiDung_id, noiDung, thoiGian */
+         * Cấu trúc cột: binhLuan_id, nguoiDung_id, sanPham_id, noiDung, thoiGian */
 
         db.execSQL("insert into BINHLUAN values" +
                 "(1,1, 3,'Thanh Son da comment ve san pham nay', '13:00 - 03/07/2023')," +

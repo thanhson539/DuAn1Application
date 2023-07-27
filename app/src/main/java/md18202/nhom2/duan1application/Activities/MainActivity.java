@@ -29,6 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
@@ -42,6 +43,7 @@ import md18202.nhom2.duan1application.Fragments.VoCoTrung_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoHoaTiet_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoLuoi_Fragment;
 import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
+import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.R;
 
@@ -60,6 +62,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Check data quan ly binh luan
+//        BinhLuanDAO binhLuanDAO = new BinhLuanDAO(MainActivity.this);
+//        ArrayList<BinhLuan> list1 = binhLuanDAO.getDSBinhLuanCach2();
+//        Toast.makeText(this, list1.size() + "", Toast.LENGTH_SHORT).show();
+//        ArrayList<BinhLuan> listTheoBinhLuan_id = binhLuanDAO.getDsBinhLuanTheoSanPham_id(2);
+//        Toast.makeText(this, listTheoBinhLuan_id.size() + "", Toast.LENGTH_SHORT).show();
+//        boolean check = binhLuanDAO.xoaBinhLuanTheoBinhLuan_id(5);
+//        if (check){
+//            Toast.makeText(this, "Thanh cong", Toast.LENGTH_SHORT).show();
+//        }
+//        ArrayList<BinhLuan> list = binhLuanDAO.getDSBinhLuanCach1();
+//        Toast.makeText(this, list.size() + "", Toast.LENGTH_SHORT).show();
+
 
         //Ánh xạ
         drawerLayout_frame4 = findViewById(R.id.drawerLayout_frame4);
