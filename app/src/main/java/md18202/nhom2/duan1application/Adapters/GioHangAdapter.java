@@ -38,7 +38,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
     GioHangDAO gioHangDAO;
     SharedPreferences sharedPreferences;
     int nguoiDung_id;
-    int itemPrice;
+    int price;
     public GioHangAdapter(List<GioHang> list, GioHangActivity context) {
         this.list = list;
         this.context = context;
@@ -82,9 +82,15 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 holder.tvSo_luong_mua.setText(""+(Integer.parseInt(holder.tvSo_luong_mua.getText().toString())+1));
-                if(gioHang.getTrangThaiMua()==1){
-                    context.tvTotal.setText(""+(tongTien(listMuaHang)+(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()))*gioHang.getGiaSanPham()));
+                gioHang.setSoLuong(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()));
+                gioHangDAO.suaSoLuong(gioHang);
+                    price = 0;
+                    for(GioHang gioHang1: list){
+                        if(gioHang1.getTrangThaiMua()==1){
+                            price += (gioHang1.getGiaSanPham()) * (gioHang1.getSoLuong());
+                        }
                 }
+                context.tvTotal.setText(""+price);
             }
         });
 
@@ -95,36 +101,45 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                     return;
                 }
                 holder.tvSo_luong_mua.setText(""+(Integer.parseInt(holder.tvSo_luong_mua.getText().toString())-1));
-                if(gioHang.getTrangThaiMua()==1){
-                    context.tvTotal.setText(""+(tongTien(listMuaHang)+(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()))*gioHang.getGiaSanPham()));
+                gioHang.setSoLuong(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()));
+                gioHangDAO.suaSoLuong(gioHang);
+                price = 0;
+                for(GioHang gioHang1: list){
+                    if(gioHang1.getTrangThaiMua()==1){
+                        price += (gioHang1.getGiaSanPham()) * (gioHang1.getSoLuong());
+                    }
                 }
+                context.tvTotal.setText(""+price);
             }
         });
 
         holder.ckbMua_hang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.ckbMua_hang.isChecked()){
+                if(gioHang.getTrangThaiMua()==0){
                     gioHang.setTrangThaiMua(1);
-                    listMuaHang = gioHangDAO.getDsMuaHang(nguoiDung_id, 1);
-                    itemPrice = (tongTien(listMuaHang)+(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()))*gioHang.getGiaSanPham());
-                    context.tvTotal.setText(""+itemPrice);
+                    gioHangDAO.suaTrangThaiMua(gioHang);
+                    price = 0;
+                    for(GioHang gioHang1: list){
+                        if(gioHang1.getTrangThaiMua()==1){
+                            price += (gioHang1.getGiaSanPham()) * (gioHang1.getSoLuong());
+                        }
+                    }
+                    context.tvTotal.setText(""+price);
                 }else{
                     gioHang.setTrangThaiMua(0);
-                    listMuaHang = gioHangDAO.getDsMuaHang(nguoiDung_id, 1);
-                    context.tvTotal.setText(""+(tongTien(listMuaHang)));
+                    gioHangDAO.suaTrangThaiMua(gioHang);
+                    price = 0;
+                    for(GioHang gioHang1: list){
+                        if(gioHang1.getTrangThaiMua()==1){
+                            price += (gioHang1.getGiaSanPham()) * (gioHang1.getSoLuong());
+                        }
+                    }
+                    context.tvTotal.setText(""+price);
                 }
-
-//                if(gioHang.getTrangThaiMua()==1){
-//                    listMuaHang = gioHangDAO.getDsMuaHang(nguoiDung_id, 1);
-//                    itemPrice = (tongTien(listMuaHang)+(Integer.parseInt(tvSoLuong.getText().toString()))*gioHang.getGiaSanPham());
-//                    context.tvTotal.setText(""+itemPrice);
-//                }else{
-//                    listMuaHang = gioHangDAO.getDsMuaHang(nguoiDung_id, 1);
-//                    context.tvTotal.setText(""+(tongTien(listMuaHang)));
-//                }
             }
         });
+
     }
 
     @Override
@@ -157,36 +172,10 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
 
             list.remove(viTri);
             notifyDataSetChanged();
-            tongTien(listMuaHang);
         }else{
             Toast.makeText(context, "Chua xoa khoi gio hang", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public int tongTien(List<GioHang> listGioHang){
-        int total = 0;
-        for(GioHang gioHang: listGioHang){
-            total += gioHang.getGiaSanPham();
-        }
-        return total;
-    }
-
-    public void muaHang(TextView tvSoluong){
-        context.btnMua_hang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listMuaHang = gioHangDAO.getDsMuaHang(nguoiDung_id, 1);
-                if(listMuaHang.size() == 0){
-                    return;
-                }
-                Intent intent = new Intent(context, DiaChiNhanHangActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("tongTien", tongTien(listMuaHang));
-                bundle.putSerializable("listGioHang", (Serializable) listMuaHang);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });
-    }
 
 }

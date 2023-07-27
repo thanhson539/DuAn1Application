@@ -104,7 +104,9 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                         if (hoaDonDAO.themHoaDon(hoaDon) > 0) {
                             GioHangDAO gioHangDAO = new GioHangDAO(XacNhanThanhToanActivity.this);
                             for (GioHang gioHang : listGioHang) {
-                                gioHangDAO.xoaKhoiGioHang(gioHang.getSanPham_id(), nguoiDung_id);
+                                if(gioHang.getTrangThaiMua()==1){
+                                    gioHangDAO.xoaKhoiGioHang(gioHang.getSanPham_id(), nguoiDung_id);
+                                }
                                 startActivity(new Intent(XacNhanThanhToanActivity.this, MainActivity.class));
                                 finish();
                             }

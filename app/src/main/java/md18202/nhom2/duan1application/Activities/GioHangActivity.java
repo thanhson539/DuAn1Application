@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,12 +27,13 @@ public class GioHangActivity extends AppCompatActivity {
     GioHangDAO gioHangDAO;
     GioHangAdapter gioHangAdapter;
     List<GioHang> listGioHang;
+    List<GioHang> listMuaHang;
     SharedPreferences sharedPreferences;
     int getNguoiDung_id;
     public TextView tvTotal, tvThong_bao;
     ImageView imgBack;
     public Button btnMua_hang;
-    int total =0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class GioHangActivity extends AppCompatActivity {
         gioHangDAO = new GioHangDAO(GioHangActivity.this);
         sharedPreferences = getSharedPreferences("NGUOIDUNG",MODE_PRIVATE);
         getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
-        tvTotal.setText(""+0);
 
         getDsGioHang();
 
@@ -55,6 +56,8 @@ public class GioHangActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        muaHang(btnMua_hang);
 
     }
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +77,37 @@ public class GioHangActivity extends AppCompatActivity {
         if(listGioHang.size() == 0){
             tvThong_bao.setVisibility(View.VISIBLE);
         }
+        tongTien(listGioHang);
         gioHangAdapter = new GioHangAdapter(listGioHang, this);
         recyclerView.setAdapter(gioHangAdapter);
+    }
+
+    public int tongTien(List<GioHang> listMuaHang){
+        int price = 0;
+        for(GioHang gioHang1: listMuaHang){
+            if(gioHang1.getTrangThaiMua()==1){
+                price += (gioHang1.getGiaSanPham()) * (gioHang1.getSoLuong());
+            }
+        }
+        tvTotal.setText(""+price);
+        return price;
+    }
+
+    public void muaHang(Button btnMua_hang){
+       btnMua_hang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listMuaHang = gioHangDAO.getDsMuaHang(getNguoiDung_id, 1);
+                if(listMuaHang.size() == 0){
+                    return;
+                }
+                Intent intent = new Intent(GioHangActivity.this, DiaChiNhanHangActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listGioHang", (Serializable) listMuaHang);
+                bundle.putInt("tongTien", tongTien(listMuaHang));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 }
