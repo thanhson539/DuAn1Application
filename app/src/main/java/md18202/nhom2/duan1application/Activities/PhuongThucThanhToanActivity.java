@@ -24,7 +24,7 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
     RadioButton radioButton_1;
     Button btnTiep_tuc;
     TextView tvTam_tinh, tvThanh_tien;
-    int tongTien;
+    int tongTien, hinhThucThanhToan;
     String diaChi, tenNguoiNhan, sdt;
     List<GioHang> listGioHang;
     @Override
@@ -58,12 +58,16 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radio_button_1){
+                    hinhThucThanhToan = 0;
                     Toast.makeText(PhuongThucThanhToanActivity.this, "Thanh toán tiền mặt", Toast.LENGTH_SHORT).show();
                 } else if (checkedId == R.id.radio_button_2) {
+                    hinhThucThanhToan = 1;
                     Toast.makeText(PhuongThucThanhToanActivity.this, "Thẻ ATM", Toast.LENGTH_SHORT).show();
                 } else if (checkedId == R.id.radio_button_3) {
+                    hinhThucThanhToan = 2;
                     Toast.makeText(PhuongThucThanhToanActivity.this, "Thêm thẻ tín dụng/Ghi nợ", Toast.LENGTH_SHORT).show();
                 } else if (checkedId == R.id.radio_button_4) {
+                    hinhThucThanhToan = 3;
                     Toast.makeText(PhuongThucThanhToanActivity.this, "Ví điện tử", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -76,6 +80,7 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("diaChi", diaChi);
                 bundle.putInt("tongTien", tongTien);
+                bundle.putInt("hinhThucThanhToan", hinhThucThanhToan);
                 bundle.putString("sdt", sdt);
                 bundle.putString("nguoiNhan", tenNguoiNhan);
                 bundle.putSerializable("listGioHang", (Serializable) listGioHang);
