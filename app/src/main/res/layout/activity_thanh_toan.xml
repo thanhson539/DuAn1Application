@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E2BCB7">
@@ -105,180 +106,217 @@
                 android:textSize="18sp"
                 android:textStyle="italic" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
 
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <ImageView
+                <RadioButton
+                    android:id="@+id/radio_button_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/thanhtoan_elip1" />
+                    android:drawableStart="@drawable/thanhtoan_account_cash"
+                    android:drawablePadding="20dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Thanh Toán tiền mặt"
+                    android:textColor="#4E352F"
+                    android:textSize="24sp" />
 
-                <ImageView
+                <RadioButton
+                    android:id="@+id/radio_button_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="25dp"
-                    android:src="@drawable/thanhtoan_account_cash" />
+                    android:drawableStart="@drawable/thanhtoan_atm_card"
+                    android:drawablePadding="20dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Thẻ ATM"
+                    android:textColor="#4E352F"
+                    android:textSize="24sp" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="110dp"
+                    android:text="Hỗ trợ internet banking"
+                    android:textColor="#9B7E76"
+                    android:textSize="15sp" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/thanhtoan_atm_card_person"
+                    android:drawablePadding="20dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Thêm thẻ tín dụng/Ghi nợ"
+                    android:textColor="#4E352F"
+                    android:textSize="24sp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="Thanh toán tiền mặt"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:orientation="horizontal">-->
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/thanhtoan_visa_logo" />
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="15dp"-->
-<!--                    android:src="@drawable/thanhtoan_elip1" />-->
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/thanhtoan_rectangle" />
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="25dp"-->
-<!--                    android:src="@drawable/thanhtoan_atm_card" />-->
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/thanhtoan_jcb" />
+                </LinearLayout>
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical">-->
+                <RadioButton
+                    android:id="@+id/radio_button_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/thanhtoan_wallet"
+                    android:drawablePadding="20dp"
+                    android:paddingHorizontal="20dp"
+                    android:text="Ví điện tử"
+                    android:textColor="#4E352F"
+                    android:textSize="24sp" />
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="15dp"-->
-<!--                        android:text="Thẻ ATM"-->
-<!--                        android:textSize="20sp" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="110dp"
+                    android:text="Ví Momo, ví ZaloPay"
+                    android:textColor="#9B7E76"
+                    android:textSize="15sp" />
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="15dp"-->
-<!--                        android:text="Hỗ trợ internet banking"-->
-<!--                        android:textColor="#9B7E76" />-->
-<!--                </LinearLayout>-->
-<!--            </LinearLayout>-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:orientation="horizontal">-->
+            </RadioGroup>
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="15dp"-->
-<!--                    android:src="@drawable/thanhtoan_elip1" />-->
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:orientation="horizontal">-->
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="25dp"-->
-<!--                    android:src="@drawable/thanhtoan_atm_card_person" />-->
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:layout_marginLeft="15dp"-->
+            <!--                    android:src="@drawable/thanhtoan_elip1" />-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical">-->
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:layout_marginLeft="25dp"-->
+            <!--                    android:src="@drawable/thanhtoan_atm_card" />-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="15dp"-->
-<!--                        android:text="Thêm thẻ tín dụng/Ghi nợ"-->
-<!--                        android:textSize="20sp" />-->
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical">-->
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:gravity="center"-->
-<!--                        android:orientation="horizontal">-->
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:text="Thẻ ATM"-->
+            <!--                        android:textSize="20sp" />-->
 
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:src="@drawable/thanhtoan_visa_logo" />-->
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:text="Hỗ trợ internet banking"-->
+            <!--                        android:textColor="#9B7E76" />-->
+            <!--                </LinearLayout>-->
+            <!--            </LinearLayout>-->
 
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="5dp"-->
-<!--                            android:src="@drawable/thanhtoan_rectangle" />-->
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:orientation="horizontal">-->
 
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:src="@drawable/thanhtoan_jcb" />-->
-<!--                    </LinearLayout>-->
-<!--                </LinearLayout>-->
-<!--            </LinearLayout>-->
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:layout_marginLeft="15dp"-->
+            <!--                    android:src="@drawable/thanhtoan_elip1" />-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:orientation="horizontal">-->
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:layout_marginLeft="25dp"-->
+            <!--                    android:src="@drawable/thanhtoan_atm_card_person" />-->
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="15dp"-->
-<!--                    android:src="@drawable/thanhtoan_elip1" />-->
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical">-->
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:layout_marginLeft="25dp"-->
-<!--                    android:src="@drawable/thanhtoan_wallet" />-->
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:text="Thêm thẻ tín dụng/Ghi nợ"-->
+            <!--                        android:textSize="20sp" />-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical">-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="15dp"-->
-<!--                        android:text="Thẻ ATM"-->
-<!--                        android:textSize="20sp" />-->
+            <!--                </LinearLayout>-->
+            <!--            </LinearLayout>-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginLeft="15dp"-->
-<!--                        android:text="Ví momo/Ví zalo pay"-->
-<!--                        android:textColor="#9B7E76" />-->
-<!--                </LinearLayout>-->
-<!--            </LinearLayout>-->
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:orientation="horizontal">-->
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:layout_marginLeft="15dp"-->
+            <!--                    android:src="@drawable/thanhtoan_elip1" />-->
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="center_vertical"-->
+            <!--                    android:layout_marginLeft="25dp"-->
+            <!--                    android:src="@drawable/thanhtoan_wallet" />-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical">-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:text="Thẻ ATM"-->
+            <!--                        android:textSize="20sp" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginLeft="15dp"-->
+            <!--                        android:text="Ví momo/Ví zalo pay"-->
+            <!--                        android:textColor="#9B7E76" />-->
+            <!--                </LinearLayout>-->
+            <!--            </LinearLayout>-->
 
         </LinearLayout>
 
@@ -304,6 +342,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/tvTam_tinh"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -359,6 +398,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/tvThanh_tien"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -370,6 +410,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btnTiep_tuc"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -382,9 +423,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
         android:background="#EAD1CE"
         android:gravity="center"
