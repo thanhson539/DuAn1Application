@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,10 +47,20 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        //load anh
+
         String srcImg = list.get(position).getAnhSanPham();
-        int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
-        Picasso.get().load(resourceId).into(holder.imgSanPham_itemGrid);
+
+        // Kiểm tra xem ảnh có phải là đường dẫn URI hay không
+        boolean isUri = srcImg.startsWith("content://");
+
+        if (isUri) {
+            // Nếu là đường dẫn URI, sử dụng Picasso để tải ảnh từ đường dẫn URI
+            Picasso.get().load(Uri.parse(srcImg)).into(holder.imgSanPham_itemGrid);
+        } else {
+            // Nếu không phải là đường dẫn URI, sử dụng cách khác để hiển thị ảnh (ví dụ: từ nguồn drawable)
+            int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
+            holder.imgSanPham_itemGrid.setImageResource(resourceId);
+        }
 
         holder.tvGiaSanPham_itemGrid.setText(String.valueOf(list.get(position).getGiaSanPham()) + " vnd");
         holder.imgGioHang_itemGrid.setOnClickListener(new View.OnClickListener() {
