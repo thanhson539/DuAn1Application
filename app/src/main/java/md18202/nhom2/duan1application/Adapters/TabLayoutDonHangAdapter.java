@@ -10,9 +10,9 @@ import md18202.nhom2.duan1application.childFrag_of_DonHangFrag.DaGiao_Fragment;
 import md18202.nhom2.duan1application.childFrag_of_DonHangFrag.DaXacNhan_Fragment;
 import md18202.nhom2.duan1application.childFrag_of_DonHangFrag.DangGiao_Fragment;
 
-public class TabLayoutAdapter extends FragmentStateAdapter {
+public class TabLayoutDonHangAdapter extends FragmentStateAdapter {
 
-    public TabLayoutAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public TabLayoutDonHangAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
