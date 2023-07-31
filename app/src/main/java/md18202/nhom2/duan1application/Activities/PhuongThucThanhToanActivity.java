@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
     RadioButton radioButton_1;
     Button btnTiep_tuc;
     TextView tvTam_tinh, tvThanh_tien;
+    ImageView imgBack;
     int tongTien, hinhThucThanhToan;
     String diaChi, tenNguoiNhan, sdt;
     List<GioHang> listGioHang;
@@ -36,6 +38,7 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
         btnTiep_tuc = findViewById(R.id.btnTiep_tuc);
         tvTam_tinh = findViewById(R.id.tvTam_tinh);
         tvThanh_tien = findViewById(R.id.tvThanh_tien);
+        imgBack = findViewById(R.id.imgBack);
 
         Intent intent = getIntent();
         tongTien = intent.getIntExtra("tongTien", 0);
@@ -88,5 +91,17 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -68,7 +68,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "diaChi text not null)";
         db.execSQL(createHoaDon);
 
-        String createHoaDonChiTiet = "create table HOADONCHITIET(hoaDon_id integer not null, sanPham_id integer not null," +
+        String createHoaDonChiTiet = "create table HOADONCHITIET(" +
+                "hoaDon_id integer not null," +
+                "sanPham_id integer not null," +
                 "soLuong integer not null," +
                 "trangThaiDonHang integer not null," +
                 "trangThaiThanhToan integer not null," +
@@ -179,7 +181,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5, 5, '07/07/2023', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
-         * Cấu trúc bảng: soLuong, trangThaiDonHang, trangThaiThanhToan, hoaDon_id, sanPham_id
+         * Cấu trúc bảng:hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan
          * Ghi chú:
          * Trang thai don hang:
          * - 0: Order thanh con
