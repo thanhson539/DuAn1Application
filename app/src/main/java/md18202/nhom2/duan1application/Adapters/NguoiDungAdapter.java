@@ -45,13 +45,35 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
     private ArrayList<NguoiDung> list;
     private NguoiDungDAO nguoidungdao;
 
-    private static final int REQUEST_PICK_IMAGE = 101;
+    private static final int REQUEST_CODE_GALLERY = 999;
+    private Uri newImageUri;
+    private int currentUserPosition;
+
+
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
     public NguoiDungAdapter(Context context, ArrayList<NguoiDung> list) {
         this.context = context;
         this.list = list;
+    }
+
+    public void updateImageForSelectedUser(Uri selectedImageUri) {
+        if (currentUserPosition != -1 && currentUserPosition < list.size() && selectedImageUri != null) {
+            NguoiDung currentUser = list.get(currentUserPosition);
+            currentUser.setImgSrc(selectedImageUri.toString());
+            notifyItemChanged(currentUserPosition);
+        }
+    }
+    private OnImagePickListener onImagePickListener;
+
+    public interface OnImagePickListener {
+        void onImagePick(Uri imageUri);
+    }
+
+
+    public void setOnImagePickListener(OnImagePickListener onImagePickListener) {
+        this.onImagePickListener = onImagePickListener;
     }
 
     @NonNull
@@ -101,6 +123,8 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
 
         TextView txtLoaiNguoiDung,txtTenNguoiDung,txtSDTNguoiDung,txtEmailNguoiDung,txtIsXoaMem;
         ImageView imgNguoiDung;
+
+
         public MyViewHover(@NonNull View itemView) {
             super(itemView);
             txtLoaiNguoiDung = itemView.findViewById(R.id.idLoaiNguoiDung);
@@ -151,11 +175,16 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
                     }
                     spinner_quyen.setAdapter(adapter);
 
+
+
                     imgNguoiDung.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (activity != null){
-                                pickImageFromGallery();
+                            currentUserPosition = getLayoutPosition();
+
+                            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            if (onImagePickListener != null && intent.resolveActivity(context.getPackageManager()) != null) {
+                                activity.startActivityForResult(intent, REQUEST_CODE_GALLERY);
                             }
                         }
                     });
@@ -189,29 +218,22 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.MyVi
 
 
                         }
+
                     });
                     Dialog dialog = builder.create();
                     dialog.show();
                 }
+
             });
 
-        }
-
-        private void pickImageFromGallery() {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            if (activity != null) {
-                activity.startActivityForResult(intent, REQUEST_PICK_IMAGE);
-            }
-        }
-
-
-        private void ShowDialogSuaTTNguoiDung() {
-
-
-
-            ;
 
         }
+
+
+
+
+
+
 
     }
     private  class CircleTransform implements Transformation {
