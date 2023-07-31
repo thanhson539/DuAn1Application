@@ -63,7 +63,8 @@
                 android:icon="@drawable/frame4_mui_ten"
                 app:showAsAction="ifRoom"/>
             <item
-                android:title="Quản lý hóa đơn"
+                android:id="@+id/menuQlDonHang"
+                android:title="Quản lý đơn hàng"
                 android:icon="@drawable/frame4_mui_ten"
                 app:showAsAction="always"/>
             <item

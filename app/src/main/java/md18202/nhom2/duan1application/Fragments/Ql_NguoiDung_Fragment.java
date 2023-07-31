@@ -7,11 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,13 +35,18 @@ import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.R;
 
 public class Ql_NguoiDung_Fragment extends Fragment {
+    private static final int REQUEST_CODE_GALLERY = 999;
     private RecyclerView recyclerView;
     private NguoiDungDAO nguoiDungDAO;
+    private NguoiDungAdapter adapter;
 
     private ArrayList<NguoiDung> list;
 
 
     private FloatingActionButton floatbtnAddNguoiDung;
+    private Uri selectedImageUri;
+
+
 
     public Ql_NguoiDung_Fragment() {
         // Required empty public constructor
@@ -84,7 +92,17 @@ public class Ql_NguoiDung_Fragment extends Fragment {
         list = nguoiDungDAO.getDsNguoiDung();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        NguoiDungAdapter adapter = new NguoiDungAdapter(getContext(),list);
+        adapter = new NguoiDungAdapter(getContext(),list);
+        adapter.setOnImagePickListener(new NguoiDungAdapter.OnImagePickListener() {
+            @Override
+            public void onImagePick(Uri imageUri) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), REQUEST_CODE_GALLERY);
+                Log.d("NguoiDungAdapter", "onImagePick called with imageUri: " + imageUri.toString());
+                if (adapter != null) {
+                    adapter.updateImageForSelectedUser(selectedImageUri);
+                }
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
@@ -101,6 +119,18 @@ public class Ql_NguoiDung_Fragment extends Fragment {
         EditText  edtAddPhone = view.findViewById(R.id.edtPhoneNumber_U_qlnd);
         EditText  edtAddUserName = view.findViewById(R.id.edtUsername_U_qlnd);
         EditText  edtAddPass = view.findViewById(R.id.edtPassword_U_qlnd);
+        ImageView imgUser = view.findViewById(R.id.imgAvatar_U_qlnd);
+
+        imgUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 1);
+            }
+        });
+
+
+
 
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
@@ -108,10 +138,11 @@ public class Ql_NguoiDung_Fragment extends Fragment {
 
             }
         });
+
         builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String imgSrc = "avatar_thanh_son";
+                String imgSrc = selectedImageUri != null ? selectedImageUri.toString() : "avatar_mac_dinh";
                 String edtAddName = edtAddname.getText().toString();
                 String edtAddEmail = edtAddemail.getText().toString();
                 String edtAddphone = edtAddPhone.getText().toString();
@@ -139,10 +170,39 @@ public class Ql_NguoiDung_Fragment extends Fragment {
 
 
             }
+
         });
+
+
+
         Dialog dialog = builder.create();
         dialog.show();
+
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == 1) {
+
+                // Lấy URI của hình ảnh đã chọn từ thư viện
+                selectedImageUri = data.getData();
+                // Gán tạm thời hình ảnh đã chọn vào ImageView để người dùng xem trước nếu muốn
+                ImageView imgAddAvatar = getView().findViewById(R.id.imgAvatar_U_qlnd);
+                if (imgAddAvatar != null) {
+                    imgAddAvatar.setImageURI(selectedImageUri);
+                }
+
+
+
+
+            }
+
+        }
+    }
+
     public boolean validateForm(String selectedImageUri, String name, String phoneNumber, String email, String username, String password) {
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getContext());
         boolean checkTonTai = nguoiDungDAO.checkTaiKhoanTonTai(username);

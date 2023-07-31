@@ -14,23 +14,23 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import md18202.nhom2.duan1application.Adapters.TabLayoutDonHangAdapter;
+import md18202.nhom2.duan1application.Adapters.TabLayoutQLDonHang_Adapter;
 import md18202.nhom2.duan1application.R;
 
-public class DonHang_Fragment extends Fragment {
-    private TabLayout tabLayout_donhang;
-    private ViewPager2 viewPager_donhang;
-    private TabLayoutDonHangAdapter TabLayoutDonHangAdapter;
-
+public class QL_DonHang_Fragment extends Fragment {
+    private TabLayout tabLayout_ql_donhang;
+    private ViewPager2 viewPager_ql_donhang;
+    private TabLayoutQLDonHang_Adapter tabLayoutQLDonHang_adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_don_hang, container, false);
-        tabLayout_donhang = view.findViewById(R.id.tabLayout_donhang);
-        viewPager_donhang = view.findViewById(R.id.viewPager_donhang);
-        TabLayoutDonHangAdapter = new TabLayoutDonHangAdapter(getActivity());
-        viewPager_donhang.setAdapter(TabLayoutDonHangAdapter);
+        View view = inflater.inflate(R.layout.fragment_ql_don_hang, container, false);
+        tabLayout_ql_donhang = view.findViewById(R.id.tabLayout_ql_donhang);
+        viewPager_ql_donhang = view.findViewById(R.id.viewPager_ql_donhang);
+        tabLayoutQLDonHang_adapter = new TabLayoutQLDonHang_Adapter(getActivity());
+        viewPager_ql_donhang.setAdapter(tabLayoutQLDonHang_adapter);
 
-        new TabLayoutMediator(tabLayout_donhang, viewPager_donhang, new TabLayoutMediator.TabConfigurationStrategy() {
+        new TabLayoutMediator(tabLayout_ql_donhang, viewPager_ql_donhang, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position) {
@@ -54,3 +54,4 @@ public class DonHang_Fragment extends Fragment {
         return view;
     }
 }
+
