@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ryc_choXacNhan"
+        android:id="@+id/ryc_ql_dangiao"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="InvalidId" />

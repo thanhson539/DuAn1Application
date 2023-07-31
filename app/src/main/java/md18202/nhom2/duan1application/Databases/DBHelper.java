@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createBinhLuan);
 
         String createGioHang = "create table GIOHANG(nguoiDung_id integer ," +
-                " sanPham_id integer ," +
+                "sanPham_id integer ," +
                 "soLuong integer not null, " +
                 "trangThaiMua integer not null," +
                 "foreign key (nguoiDung_id) references NGUOIDUNG(nguoiDung_id)," +
@@ -68,7 +68,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "diaChi text not null)";
         db.execSQL(createHoaDon);
 
-        String createHoaDonChiTiet = "create table HOADONCHITIET(hoaDon_id integer not null, sanPham_id integer not null," +
+        String createHoaDonChiTiet = "create table HOADONCHITIET(" +
+                "hoaDon_id integer not null, " +
+                "sanPham_id integer not null," +
                 "soLuong integer not null," +
                 "trangThaiDonHang integer not null," +
                 "trangThaiThanhToan integer not null," +
@@ -169,7 +171,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(30, 6, 'Vớ họa tiết nam nữ 04', 'sanpham_vohoatiet4', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0,0)");
 
         /*5: Bảng 'HOADON'
-        *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien */
+        *Cấu trúc cột: hoaDon_id, nguoiDung_id, ngayMua, tongTien, diaChi */
 
         db.execSQL("insert into HOADON values" +
                 "(1, 1, '03/07/2023', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
@@ -179,7 +181,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5, 5, '07/07/2023', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
-         * Cấu trúc bảng: soLuong, trangThaiDonHang, trangThaiThanhToan, hoaDon_id, sanPham_id
          * Ghi chú:
          * Trang thai don hang:
          * - 0: Order thanh con
@@ -188,14 +189,16 @@ public class DBHelper extends SQLiteOpenHelper {
          *
          * Trang thai thanh toan:
          * - 0: Chua thanh toan
-         * - 1: Da thanh toan */
+         * - 1: Da thanh toan
+         * Cấu trúc bảng: hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan */
+
         db.execSQL("insert into HOADONCHITIET values" +
-                "(1, 1, 1, 1, 0)," +
-                "(2, 2, 2, 2, 1)," +
-                "(3, 3, 1, 0, 0)," +
-                "(4, 4, 1, 1, 0)," +
-                "(5, 5, 1, 2, 0)," +
-                "(5, 5, 1, 2, 0)");
+                "(1, 2, 2, 0, 0)," +
+                "(1, 1, 3, 1, 1)," +
+                "(2, 3, 5, 2, 1)," +
+                "(3, 4, 4, 3, 0)," +
+                "(4, 20, 1, 0, 0)," +
+                "(5, 15, 4, 1, 1)");
     }
 
     @Override

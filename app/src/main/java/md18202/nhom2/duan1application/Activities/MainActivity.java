@@ -35,6 +35,7 @@ import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
+import md18202.nhom2.duan1application.Fragments.QL_DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.Ql_NguoiDung_Fragment;
 import md18202.nhom2.duan1application.Fragments.QuanLy_BL_Fragment;
 import md18202.nhom2.duan1application.Fragments.SanPham_Fragment;
@@ -168,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }else if (menuId == R.id.menu_QL_BinhLuan){
                     fragment = new QuanLy_BL_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }else if (menuId == R.id.menuQlDonHang){
+                    fragment = new QL_DonHang_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 

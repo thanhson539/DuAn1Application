@@ -26,7 +26,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imgAnhSanPham_donhang"
+                    android:id="@+id/imgAnhSanPham_ql_donhang"
                     android:layout_width="90dp"
                     android:layout_height="100dp"
                     android:src="@drawable/thanhtoan_san_pham_demo" />
@@ -51,7 +51,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvMaDonHang_donhang"
+                            android:id="@+id/tvMaDonHang_ql_donhang"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
@@ -73,7 +73,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvTenSanPham_donhang"
+                            android:id="@+id/tvTenSanPham_ql_donhang"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
@@ -95,7 +95,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvSoLuongSanPham_donhang"
+                            android:id="@+id/tvSoLuongSanPham_ql_donhang"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
@@ -117,7 +117,7 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/tvGiaSanPham_donhang"
+                            android:id="@+id/tvGiaSanPham_ql_donhang"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="4"
@@ -146,7 +146,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tvThoiGianDatHang_donhang"
+                        android:id="@+id/tvThoiGianDatHang_ql_donhang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
@@ -167,7 +167,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tvDiaChiGiaoHang_donhang"
+                        android:id="@+id/tvDiaChiGiaoHang_ql_donhang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
@@ -188,23 +188,24 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tvTrangThaiDonHang_donhang"
+                        android:id="@+id/tvTrangThaiDonHang_ql_donhang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Chờ xác nhận"
                         android:gravity="center"
-                        android:textSize="16sp"
-                        android:textColor="#3852B0"/>
+                        android:text="Chờ xác nhận"
+                        android:textColor="#3852B0"
+                        android:textSize="16sp" />
+
                     <TextView
-                        android:id="@+id/tvHuyDon_donhang"
+                        android:id="@+id/tvDongY_ql_donhang"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Hủy đơn"
+                        android:text="Đồng ý"
                         android:gravity="center"
-                        android:background="#BBA19A"
-                        android:textColor="#ff00"/>
+                        android:background="#f1b27b"
+                        android:textColor="#aa0011"/>
                 </LinearLayout>
                 <View
                     android:layout_margin="10dp"
@@ -225,7 +226,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tvTongTien_donhang"
+                        android:id="@+id/tvTongTien_ql_donhang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
