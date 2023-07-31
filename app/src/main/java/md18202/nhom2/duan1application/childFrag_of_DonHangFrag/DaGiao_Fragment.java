@@ -37,4 +37,10 @@ public class DaGiao_Fragment extends Fragment {
         DonHangAdapter adapter = new DonHangAdapter(getContext(),list);
         ryc_daGiao.setAdapter(adapter);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData(ryc_daGiao);
+    }
 }

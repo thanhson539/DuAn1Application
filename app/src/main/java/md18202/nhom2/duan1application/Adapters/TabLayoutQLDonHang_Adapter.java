@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_DaHuy_Fragment;
 import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_choXacNhan_Fragment;
 import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_daGiao_Fragment;
 import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_daXacNhan_Fragment;
@@ -28,12 +29,14 @@ public class TabLayoutQLDonHang_Adapter extends FragmentStateAdapter {
                 return new QL_dangGiao_Fragment();
             case 3:
                 return new QL_daGiao_Fragment();
+            case 4:
+                return new QL_DaHuy_Fragment();
         }
         return null;
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 }

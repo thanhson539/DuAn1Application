@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
+import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.R;
 
@@ -54,12 +56,45 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         holder.tvGiaSanPham_donhang.setText(String.valueOf(list.get(position).getGiaSanPham()));
         holder.tvThoiGianDatHang_donhang.setText(list.get(position).getNgayMua());
         holder.tvDiaChiGiaoHang_donhang.setText(list.get(position).getDiaChi());
+        if (list.get(position).getTrangThaiDonHang() > 1){
+            holder.tvHuyDon_donhang.setVisibility(View.GONE);
+        }
         switch (list.get(holder.getAdapterPosition()).getTrangThaiDonHang()){
             case 0:
                 holder.tvTrangThaiDonHang_donhang.setText("Chờ xác nhận");
+                holder.tvHuyDon_donhang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context.getApplicationContext());
+                        int newTrangThai = 4; //Hủy đơn hàng
+                        int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
+                        int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
+                        boolean check = hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThai, hoaDon_id, sanPham_id);
+                        if (check){
+                            list.clear();
+                            list = hoaDonChiTietDAO.getDonHangByHDCT(0);
+                            notifyDataSetChanged();
+                        }
+                    }
+                });
                 break;
             case 1:
                 holder.tvTrangThaiDonHang_donhang.setText("Đã xác nhận");
+                holder.tvHuyDon_donhang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context.getApplicationContext());
+                        int newTrangThai = 4; //Hủy đơn hàng
+                        int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
+                        int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
+                        boolean check = hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThai, hoaDon_id, sanPham_id);
+                        if (check){
+                            list.clear();
+                            list = hoaDonChiTietDAO.getDonHangByHDCT(1);
+                            notifyDataSetChanged();
+                        }
+                    }
+                });
                 break;
             case 2:
                 holder.tvTrangThaiDonHang_donhang.setText("Đang giao");
