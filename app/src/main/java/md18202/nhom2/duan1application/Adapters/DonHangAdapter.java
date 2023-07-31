@@ -103,7 +103,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 holder.tvTrangThaiDonHang_donhang.setText("Đã giao");
                 break;
         }
-        holder.tvTongTien_donhang.setText(String.valueOf(list.get(position).getTongTien()));
+        holder.tvTongTien_donhang.setText(String.valueOf(list.get(position).getTongTien()) +" vnđ");
     }
 
     @Override

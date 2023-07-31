@@ -52,9 +52,10 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
         holder.tvTenSanPham_ql_donhang.setText(list.get(position).getTenSanPham());
         holder.tvSoLuongSanPham_ql_donhang.setText(String.valueOf(list.get(position).getSoLuong()));
         holder.tvGiaSanPham_ql_donhang.setText(String.valueOf(list.get(position).getGiaSanPham()));
-        holder.tvGiaSanPham_ql_donhang.setText(list.get(position).getNgayMua());
+        holder.tvThoiGianDatHang_ql_donhang.setText(list.get(position).getNgayMua());
         holder.tvDiaChiGiaoHang_ql_donhang.setText(list.get(position).getDiaChi());
-        switch (list.get(holder.getAdapterPosition()).getTrangThaiDonHang()){
+        holder.tvTongTien_ql_donhang.setText(list.get(position).getTongTien() + " vnđ");
+        switch (list.get(holder.getAdapterPosition()).getTrangThaiDonHang()) {
             case 0:
                 holder.tvTrangThaiDonHang_ql_donhang.setText("Chờ xác nhận");
                 holder.tvDongY_ql_donhang.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +114,7 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
                         int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
                         boolean check = hoaDonChiTietDAO.xoaDonHang(hoaDon_id, sanPham_id);
-                        if (check){
+                        if (check) {
                             Toast.makeText(context, "Đã xóa", Toast.LENGTH_SHORT).show();
                             reloadData(4);
                         }
@@ -151,7 +152,8 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
             tvTongTien_ql_donhang = itemView.findViewById(R.id.tvTongTien_ql_donhang);
         }
     }
-    public void reloadData(int trangThaiDonHang){
+
+    public void reloadData(int trangThaiDonHang) {
         HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context);
         list.clear();
         list = hoaDonChiTietDAO.getDonHangByHDCT(trangThaiDonHang);
