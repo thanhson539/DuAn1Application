@@ -1,17 +1,21 @@
 package md18202.nhom2.duan1application.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -25,22 +29,29 @@ import md18202.nhom2.duan1application.R;
 public class QL_BinhLuan_Adapter extends RecyclerView.Adapter<QL_BinhLuan_Adapter.MyViewHover> {
     Context context;
     ArrayList<BinhLuan> list;
+    private int selectedPosition = RecyclerView.NO_POSITION;
 
-    public QL_BinhLuan_Adapter(Context context, ArrayList<BinhLuan> list) {
+    public interface OnitemClick{
+        void onItemClickDelete(int position);
+    }
+
+    private OnitemClick onItemClickListener;
+
+    public QL_BinhLuan_Adapter(Context context, ArrayList<BinhLuan> list, OnitemClick onItemClickListener) {
         this.context = context;
         this.list = list;
-        notifyDataSetChanged();
+        this.onItemClickListener= onItemClickListener;
     }
 
     @NonNull
     @Override
     public MyViewHover onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(context).inflate(R.layout.item_quanly_binhluan, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_quanly_binhluan, parent, false);
         return new MyViewHover(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHover holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHover holder, @SuppressLint("RecyclerView") int position) {
         String srcImg = list.get(position).getAnhSanPham();
 
         // Kiểm tra xem ảnh có phải là đường dẫn URI hay không
@@ -56,48 +67,45 @@ public class QL_BinhLuan_Adapter extends RecyclerView.Adapter<QL_BinhLuan_Adapte
         }
 
 
+        holder.tvTenSP.setText("Tên Sản Phẩm: "+list.get(position).getTenSanPham());
+      holder.tvThoiGian.setText("Thời Gian: "+list.get(position).getThoiGian());
+      holder.tvNoiDung.setText("Nội Dung: "+list.get(position).getNoiDung());
+      holder.tvTenND.setText("Người Dùng: "+list.get(position).getTenNguoiDung());
+      holder.itemView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+//             int Positio = position;
+              notifyDataSetChanged();
+              if (onItemClickListener != null){
+                  onItemClickListener.onItemClickDelete(position);
+              }else {
+                  Toast.makeText(context, "Nó là null", Toast.LENGTH_SHORT).show();
+              }
+          }
+      });
 
-        holder.tvTenSP.setText(list.get(position).getTenSanPham());
-        holder.tvTongBL.setText("Tổng Bình Luận Là:  " + String.valueOf(list.get(position).getTongBinhLuan()) + "\n Xem Chi Tiết");
 
-
-        holder.tvTongBL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder  = new AlertDialog.Builder(context);
-                LayoutInflater inflater  = ((Activity)context).getLayoutInflater();
-                View view = inflater.inflate(R.layout.dialog_hienthi_tongsp, null);
-                builder.setView(view);
-
-                RecyclerView recyclerView  =view.findViewById(R.id.recyc_ChiTiet_BinhLuan);
-
-                BinhLuanDAO binhLuanDAO  = new BinhLuanDAO(context);
-                ArrayList<BinhLuan> list1 = binhLuanDAO.getDsBinhLuanTheoSanPham_id(list.get(holder.getLayoutPosition()).getSanPham_id());
-                BinhLuan_ChiTiet_Adapter adapter  =new BinhLuan_ChiTiet_Adapter(context,list1);
-                recyclerView.setAdapter(adapter);
-
-                Dialog dialog = builder.create();
-                dialog.show();
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        if (list != null){
+        if (list != null) {
             return list.size();
         }
         return 0;
     }
 
     public class MyViewHover extends RecyclerView.ViewHolder {
-        TextView  tvTenSP, tvTongBL;
+        TextView tvTenSP, tvTenND, tvNoiDung, tvThoiGian;
         ImageView imgAvata;
+
         public MyViewHover(@NonNull View itemView) {
             super(itemView);
-            tvTongBL  =itemView.findViewById(R.id.tv_TongBinhLuan_BL);
-            tvTenSP  = itemView.findViewById(R.id.tv_TenSP_BL);
-            imgAvata  = itemView.findViewById(R.id.img_Ql_BinhLuan);
+            tvThoiGian = itemView.findViewById(R.id.tv_ThoiGian_BL);
+            tvNoiDung = itemView.findViewById(R.id.tv_NoiDung_BL);
+            tvTenND = itemView.findViewById(R.id.tv_TenND_BL);
+            tvTenSP = itemView.findViewById(R.id.tv_TenSP_BL);
+            imgAvata = itemView.findViewById(R.id.img_Ql_BinhLuan);
 
         }
     }
