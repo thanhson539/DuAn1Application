@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_DaHuy_Fragment;
-import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_choXacNhan_Fragment;
-import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_daGiao_Fragment;
-import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_daXacNhan_Fragment;
-import md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag.QL_dangGiao_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_QL_DonHangFrag.QL_DaHuy_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_QL_DonHangFrag.QL_choXacNhan_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_QL_DonHangFrag.QL_daGiao_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_QL_DonHangFrag.QL_daXacNhan_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_QL_DonHangFrag.QL_dangGiao_Fragment;
 
 
 public class TabLayoutQLDonHang_Adapter extends FragmentStateAdapter {

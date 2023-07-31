@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import md18202.nhom2.duan1application.childFrag_of_DonHangFrag.ChoXacNhan_Fragment;
-import md18202.nhom2.duan1application.childFrag_of_DonHangFrag.DaGiao_Fragment;
-import md18202.nhom2.duan1application.childFrag_of_DonHangFrag.DaXacNhan_Fragment;
-import md18202.nhom2.duan1application.childFrag_of_DonHangFrag.DangGiao_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.ChoXacNhan_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.DaGiao_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.DaXacNhan_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.DangGiao_Fragment;
 
 public class TabLayoutDonHangAdapter extends FragmentStateAdapter {
 

@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application.childFrag_of_QL_DonHangFrag;
+package md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,34 +13,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import md18202.nhom2.duan1application.Adapters.QLDonHangAdapter;
+import md18202.nhom2.duan1application.Adapters.DonHangAdapter;
 import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.R;
 
-public class QL_daGiao_Fragment extends Fragment {
-    private RecyclerView ryc_ql_daGiao;
+public class DaXacNhan_Fragment extends Fragment {
+    private RecyclerView ryc_daXacNhan;
     private HoaDonChiTietDAO hoaDonChiTietDAO;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ql_da_giao, container, false);
-        ryc_ql_daGiao = view.findViewById(R.id.ryc_ql_daGiao);
-        loadData(ryc_ql_daGiao);
+        View view = inflater.inflate(R.layout.fragment_da_xac_nhan, container, false);
+        ryc_daXacNhan = view.findViewById(R.id.ryc_daXacNhan);
+        loadData(ryc_daXacNhan);
         return view;
     }
-    public void loadData(RecyclerView recyclerView){
+    private void loadData(RecyclerView ryc_daXacNhan){
         hoaDonChiTietDAO = new HoaDonChiTietDAO(getContext());
-        ArrayList<HoaDonChiTiet> list = hoaDonChiTietDAO.getDonHangByHDCT(3);
+        ArrayList<HoaDonChiTiet> list = hoaDonChiTietDAO.getDonHangByHDCT(1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        QLDonHangAdapter adapter = new QLDonHangAdapter(getContext(), list);
-        recyclerView.setAdapter(adapter);
+        ryc_daXacNhan.setLayoutManager(linearLayoutManager);
+        DonHangAdapter adapter = new DonHangAdapter(getContext(),list);
+        ryc_daXacNhan.setAdapter(adapter);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadData(ryc_ql_daGiao);
+        loadData(ryc_daXacNhan);
     }
 }

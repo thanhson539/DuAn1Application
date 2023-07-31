@@ -1,4 +1,4 @@
-package md18202.nhom2.duan1application.childFrag_of_DonHangFrag;
+package md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
