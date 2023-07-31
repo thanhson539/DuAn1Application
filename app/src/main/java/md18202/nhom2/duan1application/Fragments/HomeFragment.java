@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
         imgYeu_thich = view.findViewById(R.id.imgYeu_thich);
         imgGio_hang = view.findViewById(R.id.imgGio_hang);
         imgThong_bao = view.findViewById(R.id.imgThong_bao);
-
+        edTimkiem = view.findViewById(R.id.edTimKiem);
 
         oriList = sanPhamDAO.getDsSanPham();
 
