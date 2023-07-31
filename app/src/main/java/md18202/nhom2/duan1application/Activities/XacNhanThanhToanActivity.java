@@ -121,7 +121,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         String currentTime = format.format(calendar.getTime());
 
                         hoaDon = new HoaDon();

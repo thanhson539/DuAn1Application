@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -31,10 +32,12 @@ import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
+import md18202.nhom2.duan1application.DAO.ThongKeDAO;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.GioHang;
+import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
@@ -74,6 +77,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         binhLuanDAO = new BinhLuanDAO(this);
         sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
         getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
+
+        ThongKeDAO thongKeDAO = new ThongKeDAO(getApplicationContext());
+        List<Integer> list;
+        list = thongKeDAO.getSoTienDaMua();
+        Toast.makeText(this, ""+list, Toast.LENGTH_LONG).show();
 
         //lay san pham tu ben adapter san pham 2, khi click vao san pham se lay san pham do va truyen qua chi tiet san pham
         Intent intent = getIntent();

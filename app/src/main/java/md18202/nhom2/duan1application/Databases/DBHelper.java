@@ -171,33 +171,32 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(30, 6, 'Vớ họa tiết nam nữ 04', 'sanpham_vohoatiet4', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0,0)");
 
         /*5: Bảng 'HOADON'
-        *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien */
+        *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien, diaChi */
 
         db.execSQL("insert into HOADON values" +
-                "(1, 1, '03/07/2023', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
-                "(2, 2, '04/07/2023', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
-                "(3, 3, '05/07/2023', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
-                "(4, 4, '06/07/2023', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
-                "(5, 5, '07/07/2023', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
+                "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
+                "(2, 2, '2023-07-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
+                "(3, 3, '2023-07-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
+                "(4, 4, '2023-07-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
+                "(5, 5, '2023-07-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
          * Cấu trúc bảng:hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan
          * Ghi chú:
          * Trang thai don hang:
-         * - 0: Order thanh con
-         * - 1: Dang giao hang
-         * - 2: da nhan hang
-         *
+         * - 0: xac nhan dat hang thanh cong
+         * - 1: don hang da duoc xac nhan
+         * - 2: dang giao hang
+         * - 3: da giao hang
          * Trang thai thanh toan:
          * - 0: Chua thanh toan
          * - 1: Da thanh toan */
         db.execSQL("insert into HOADONCHITIET values" +
-                "(1, 1, 1, 1, 0)," +
-                "(2, 2, 2, 2, 1)," +
-                "(3, 3, 1, 0, 0)," +
-                "(4, 4, 1, 1, 0)," +
-                "(5, 5, 1, 2, 0)," +
-                "(5, 5, 1, 2, 0)");
+                "(3, 1, 1, 3, 1)," +
+                "(3, 2, 2, 3, 1)," +
+                "(3, 3, 1, 3, 1)," +
+                "(3, 4, 1, 0, 0)," +
+                "(3, 5, 1, 0, 0)");
     }
 
     @Override

@@ -13,6 +13,15 @@ public class HoaDonChiTiet {
     private String ngayMua;
     private String diaChi;
     private int tongTien;
+    private int soTienDaMua;
+
+    public HoaDonChiTiet(int hoaDon_id, int soLuong, int giaSanPham, int trangThaiDonHang, int trangThaiThanhToan) {
+        this.hoaDon_id = hoaDon_id;
+        this.soLuong = soLuong;
+        this.giaSanPham = giaSanPham;
+        this.trangThaiDonHang = trangThaiDonHang;
+        this.trangThaiThanhToan = trangThaiThanhToan;
+    }
 
     public HoaDonChiTiet(int hoaDon_id, int sanPham_id, int soLuong, int trangThaiDonHang, int trangThaiThanhToan,
                          String tenSanPham, String anhSanPham, int giaSanPham,
@@ -119,5 +128,13 @@ public class HoaDonChiTiet {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public int getSoTienDaMua() {
+        return soTienDaMua;
+    }
+
+    public void setSoTienDaMua(int soTienDaMua) {
+        this.soTienDaMua = soTienDaMua;
     }
 }
