@@ -19,8 +19,8 @@ public class ThongKeDAO {
     }
 
     @SuppressLint("Range")
-    public List<Integer> getSoTienDaMua(){
-        List<Integer> list = new ArrayList<>();
+    public int getSoTienDaMua(){
+        int tongTien = 0;
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select HOADONCHITIET.hoaDon_id as hoaDon_id, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
                 " HOADON.nguoiDung_id as nguoiDung_id , " +
@@ -33,12 +33,42 @@ public class ThongKeDAO {
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
-                list.add(new Integer(cursor.getInt(cursor.getColumnIndex("tongTien"))));
-//                list.add(new HoaDonChiTiet(cursor.getInt(cursor.getColumnIndex("soLuong")),
-//                        cursor.getInt(cursor.getColumnIndex("trangThaiDonHang")),
-//                        cursor.getInt(cursor.getColumnIndex("trangThaiThanhToan"))));
+                tongTien = cursor.getInt(cursor.getColumnIndex("tongTien"));
             }while (cursor.moveToNext());
         }
-        return list;
+        return tongTien;
+    }
+
+    @SuppressLint("Range")
+    public int getDataInMonth(int nguoiDung_id, int month){
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        int tien = 0;
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.hoaDon_id, strftime('%m', HOADON.ngayMua) as month, " +
+                "strftime('%Y', HOADON.ngayMua) as year, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
+                "HOADON.nguoiDung_id as nguoiDung_id, " +
+                "sum((HOADONCHITIET.soLuong * SANPHAM.giaSanPham)) as tien, " +
+                "HOADONCHITIET.trangThaiDonHang as trangThaiDonHang, " +
+                "HOADONCHITIET.trangThaiThanhToan as trangThaiThanhToan " +
+                "from HOADONCHITIET " +
+                "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
+                "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
+                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 and nguoiDung_id = ? " +
+                "group by month, year", new String[]{String.valueOf(nguoiDung_id)});
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                list.add(new HoaDonChiTiet(cursor.getInt(cursor.getColumnIndex("month")),
+                        cursor.getInt(cursor.getColumnIndex("year")),
+                        cursor.getInt(cursor.getColumnIndex("tien"))));
+            }while (cursor.moveToNext());
+        }
+
+        for(HoaDonChiTiet hdct: list){
+            if(hdct.getMonth() == month){
+                tien = hdct.getGiaSanPham();
+            }
+        }
+        return tien;
     }
 }

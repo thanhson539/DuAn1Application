@@ -63,7 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String createHoaDon = "create table HOADON(" +
                 "hoaDon_id integer primary key autoincrement," +
                 "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
-                "ngayMua text not null," +
+                "ngayMua date not null," +
                 "tongTien integer not null," +
                 "diaChi text not null)";
         db.execSQL(createHoaDon);
@@ -175,10 +175,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("insert into HOADON values" +
                 "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
-                "(2, 2, '2023-07-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
-                "(3, 3, '2023-07-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
-                "(4, 4, '2023-07-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
-                "(5, 5, '2023-07-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
+                "(2, 2, '2023-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
+                "(3, 3, '2023-05-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
+                "(4, 3, '2023-03-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
+                "(5, 3, '2023-02-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
          * Cấu trúc bảng:hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan
@@ -192,11 +192,11 @@ public class DBHelper extends SQLiteOpenHelper {
          * - 0: Chua thanh toan
          * - 1: Da thanh toan */
         db.execSQL("insert into HOADONCHITIET values" +
-                "(3, 1, 1, 3, 1)," +
-                "(3, 2, 2, 3, 1)," +
-                "(3, 3, 1, 3, 1)," +
-                "(3, 4, 1, 0, 0)," +
-                "(3, 5, 1, 0, 0)");
+                "(4, 1, 1, 3, 1)," +
+                "(4, 2, 2, 3, 1)," +
+                "(4, 3, 1, 3, 1)," +
+                "(5, 4, 1, 3, 1)," +
+                "(5, 5, 1, 3, 1)");
     }
 
     @Override
