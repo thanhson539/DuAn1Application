@@ -17,11 +17,11 @@ public class SanPhamDAO {
         dbHelper = new DBHelper(context);
     }
 
-    public ArrayList<SanPham> getDsSanPham(){
+    public ArrayList<SanPham> getDsSanPham() {
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where isXoaMem=0", null);
-        if (cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
@@ -33,11 +33,10 @@ public class SanPhamDAO {
                         cursor.getString(5), //moTa
                         cursor.getInt(6)     //soLuongConLai
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
     }
-
 
 
     public ArrayList<SanPham> getDsSanPhamADM() {
@@ -67,11 +66,11 @@ public class SanPhamDAO {
     }
 
 
-    public ArrayList<SanPham> getDsVoCoThap(){
+    public ArrayList<SanPham> getDsVoCoThap() {
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM sp inner join LOAISANPHAM ls on sp.loaiSanPham_id = ls.loaiSanPham_id where ls.loaiSanPham_id=1", null);
-        if (cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
@@ -83,15 +82,16 @@ public class SanPhamDAO {
                         cursor.getString(5), //moTa
                         cursor.getInt(6)     //soLuongConLai
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
     }
-    public ArrayList<SanPham> getDSVoCoCao(){
+
+    public ArrayList<SanPham> getDSVoCoCao() {
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM sp inner join LOAISANPHAM ls on sp.loaiSanPham_id = ls.loaiSanPham_id where ls.loaiSanPham_id=2", null);
-        if (cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
@@ -103,15 +103,16 @@ public class SanPhamDAO {
                         cursor.getString(5), //moTa
                         cursor.getInt(6)     //soLuongConLai
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
     }
-    public ArrayList<SanPham> getDsVoCoTrung(){
+
+    public ArrayList<SanPham> getDsVoCoTrung() {
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM sp inner join LOAISANPHAM ls on sp.loaiSanPham_id = ls.loaiSanPham_id where ls.loaiSanPham_id=3", null);
-        if (cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
@@ -123,15 +124,16 @@ public class SanPhamDAO {
                         cursor.getString(5), //moTa
                         cursor.getInt(6)     //soLuongConLai
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
     }
-    public ArrayList<SanPham> getDsVoLuoi(){
+
+    public ArrayList<SanPham> getDsVoLuoi() {
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM sp inner join LOAISANPHAM ls on sp.loaiSanPham_id = ls.loaiSanPham_id where ls.loaiSanPham_id=4", null);
-        if (cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
@@ -143,15 +145,16 @@ public class SanPhamDAO {
                         cursor.getString(5), //moTa
                         cursor.getInt(6)     //soLuongConLai
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
     }
-    public ArrayList<SanPham> getDsVoBasic(){
+
+    public ArrayList<SanPham> getDsVoBasic() {
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM sp inner join LOAISANPHAM ls on sp.loaiSanPham_id = ls.loaiSanPham_id where ls.loaiSanPham_id=5", null);
-        if (cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
@@ -163,15 +166,16 @@ public class SanPhamDAO {
                         cursor.getString(5), //moTa
                         cursor.getInt(6)     //soLuongConLai
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
     }
-    public ArrayList<SanPham> getDsVoHoaTiet(){
+
+    public ArrayList<SanPham> getDsVoHoaTiet() {
         ArrayList<SanPham> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM sp inner join LOAISANPHAM ls on sp.loaiSanPham_id = ls.loaiSanPham_id where ls.loaiSanPham_id=6", null);
-        if (cursor.getCount() != 0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new SanPham(
@@ -183,7 +187,7 @@ public class SanPhamDAO {
                         cursor.getString(5), //moTa
                         cursor.getInt(6)     //soLuongConLai
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
     }
@@ -210,7 +214,7 @@ public class SanPhamDAO {
         return listResult;
     }
 
-    public long SuaSanPham(SanPham sanPham){
+    public long SuaSanPham(SanPham sanPham) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("loaiSanPham_id", sanPham.getLoaiSanPham_id());
@@ -219,23 +223,22 @@ public class SanPhamDAO {
         contentValues.put("giaSanPham", sanPham.getGiaSanPham());
         contentValues.put("moTa", sanPham.getMoTa());
         contentValues.put("soLuongConLai", sanPham.getSoLuongConLai());
-        return db.update("SANPHAM", contentValues,"sanPham_id=?", new String[]{String.valueOf(sanPham.getSanPham_id())});
-
+        return db.update("SANPHAM", contentValues, "sanPham_id=?", new String[]{String.valueOf(sanPham.getSanPham_id())});
     }
 
-    public boolean changeIsYeuThich(int sanPham_id, int newIsYeuThich){
+    public boolean changeIsYeuThich(int sanPham_id, int newIsYeuThich) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("sanPham_id", sanPham_id);
         contentValues.put("isYeuThich", newIsYeuThich);
-        long check = sqLiteDatabase.update("SANPHAM", contentValues,"sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
+        long check = sqLiteDatabase.update("SANPHAM", contentValues, "sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
         return check > 0;
     }
 
-    public long insertSanPham(SanPham sanPham){
-        SQLiteDatabase db  = dbHelper.getWritableDatabase();
-        ContentValues values  = new ContentValues();
-        values.put("loaiSanPham_id" , sanPham.getLoaiSanPham_id());
+    public long insertSanPham(SanPham sanPham) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("loaiSanPham_id", sanPham.getLoaiSanPham_id());
         values.put("tenSanPham", sanPham.getTenSanPham());
         values.put("anhSanPham", sanPham.getAnhSanPham());
         values.put("giaSanPham", sanPham.getGiaSanPham());
@@ -246,13 +249,21 @@ public class SanPhamDAO {
         return db.insert("SANPHAM", null, values);
     }
 
-
-
-    public int xoaMemSP(int xoamem){
-        SQLiteDatabase db  = dbHelper.getWritableDatabase();
-        ContentValues values  =  new ContentValues();
+    public int xoaMemSP(int xoamem) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
         values.put("isXoaMem", 1);
-        return  db.update("SANPHAM", values, "sanPham_id=?", new String[]{String.valueOf(xoamem)});
+        return db.update("SANPHAM", values, "sanPham_id=?", new String[]{String.valueOf(xoamem)});
     }
 
+    public int getTrangThaiYeuThichBySanPhamId(int sanPham_id) {
+        int trangThaiYeuThich = -1;
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            trangThaiYeuThich = cursor.getInt(7);
+        }
+        return trangThaiYeuThich;
+    }
 }

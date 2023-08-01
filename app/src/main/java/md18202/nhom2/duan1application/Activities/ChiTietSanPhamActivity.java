@@ -107,7 +107,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         // Chức năng yêu thích
         int sanPham_id = sanPham.getSanPham_id();
         int isYeuThich = sanPham.getIsYeuThich();
-        sanPhamYeuThich(sanPham_id, isYeuThich, imgYeuThich_frameSPChiTiet2);
+        sanPhamYeuThich(sanPham_id, imgYeuThich_frameSPChiTiet2);
 
         imgGio_hang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,9 +151,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    public void sanPhamYeuThich(int sanPham_id, int isYeuThich, ImageView imgIsYeuThich) {
+    public void sanPhamYeuThich(int sanPham_id, ImageView imgIsYeuThich) {
+        SanPhamDAO sanPhamDAO = new SanPhamDAO(getApplicationContext());
+        int isYeuThich = sanPhamDAO.getTrangThaiYeuThichBySanPhamId(sanPham_id);
         if (isYeuThich == 1) {
             imgIsYeuThich.setImageResource(R.drawable.frame4_trai_tim);
+        } else {
+            imgIsYeuThich.setImageResource(R.drawable.frame4_trai_tim2);
         }
         imgYeuThich_frameSPChiTiet2.setOnClickListener(new View.OnClickListener() {
             @Override
