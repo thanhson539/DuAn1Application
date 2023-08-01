@@ -46,7 +46,8 @@ public class QL_DonHang_Fragment extends Fragment {
                     case 3:
                         tab.setText("Đã giao");
                         break;
-
+                    case 4:
+                        tab.setText("Đã húy");
                 }
             }
         }).attach();
