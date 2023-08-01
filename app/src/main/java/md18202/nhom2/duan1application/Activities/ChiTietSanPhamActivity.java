@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -31,10 +32,12 @@ import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
+import md18202.nhom2.duan1application.DAO.ThongKeDAO;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.GioHang;
+import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
@@ -75,6 +78,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
         getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
 
+
         //lay san pham tu ben adapter san pham 2, khi click vao san pham se lay san pham do va truyen qua chi tiet san pham
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -87,11 +91,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         tvTen_sanpham_chitiet.setText(sanPham.getTenSanPham());
         tvGia_sanpham_chitiet.setText("" + sanPham.getGiaSanPham() + " VND");
         tvSo_luong.setText("" + sanPham.getSoLuongConLai());
-        if (sanPham.getIsYeuThich() == 0) {
-            imgYeuThich_frameSPChiTiet2.setImageResource(R.drawable.frame4_trai_tim);
-        } else {
-            imgYeuThich_frameSPChiTiet2.setImageResource(R.drawable.frame4_trai_tim2);
-        }
+
         getDsBinhLuan(sanPham.getSanPham_id());
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +107,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         // Chức năng yêu thích
         int sanPham_id = sanPham.getSanPham_id();
         int isYeuThich = sanPham.getIsYeuThich();
-        sanPhamYeuThich(sanPham_id, isYeuThich, imgYeuThich_frameSPChiTiet2);
+        sanPhamYeuThich(sanPham_id, imgYeuThich_frameSPChiTiet2);
 
         imgGio_hang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,9 +151,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
     }
 
-    public void sanPhamYeuThich(int sanPham_id, int isYeuThich, ImageView imgIsYeuThich) {
+    public void sanPhamYeuThich(int sanPham_id, ImageView imgIsYeuThich) {
+        SanPhamDAO sanPhamDAO = new SanPhamDAO(getApplicationContext());
+        int isYeuThich = sanPhamDAO.getTrangThaiYeuThichBySanPhamId(sanPham_id);
         if (isYeuThich == 1) {
             imgIsYeuThich.setImageResource(R.drawable.frame4_trai_tim);
+        } else {
+            imgIsYeuThich.setImageResource(R.drawable.frame4_trai_tim2);
         }
         imgYeuThich_frameSPChiTiet2.setOnClickListener(new View.OnClickListener() {
             @Override

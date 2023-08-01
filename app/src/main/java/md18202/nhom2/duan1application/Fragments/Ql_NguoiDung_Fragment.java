@@ -13,8 +13,11 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,7 +42,7 @@ public class Ql_NguoiDung_Fragment extends Fragment {
     private static final int REQUEST_CODE_GALLERY = 999;
     private RecyclerView recyclerView;
     private NguoiDungDAO nguoiDungDAO;
-    private NguoiDungAdapter adapter;
+
 
     private ArrayList<NguoiDung> list;
 
@@ -92,17 +96,115 @@ public class Ql_NguoiDung_Fragment extends Fragment {
         list = nguoiDungDAO.getDsNguoiDung();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new NguoiDungAdapter(getContext(),list);
-        adapter.setOnImagePickListener(new NguoiDungAdapter.OnImagePickListener() {
-            @Override
-            public void onImagePick(Uri imageUri) {
-                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), REQUEST_CODE_GALLERY);
-                Log.d("NguoiDungAdapter", "onImagePick called with imageUri: " + imageUri.toString());
-                if (adapter != null) {
-                    adapter.updateImageForSelectedUser(selectedImageUri);
-                }
-            }
-        });
+//        adapter = new NguoiDungAdapter(getContext(),list);
+
+       NguoiDungAdapter adapter = new NguoiDungAdapter(getContext(), list, new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
+                {
+                   AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                   LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+                   View view1 = inflater.inflate(R.layout.dialog_sua_tt_qlndung,null);
+                   builder.setView(view1);
+                   EditText edtTen = view1.findViewById(R.id.edtSuaTenNguoiDung);
+                   EditText edtSDT = view1.findViewById(R.id.edtSuaSDTNguoiDung);
+                   EditText edtEmail = view1.findViewById(R.id.edtSuaEmailNguoiDung);
+                   ImageView imgNguoiDung = view1.findViewById(R.id.imgSuaNguoiDung);
+                   Spinner spinner_quyen = view1.findViewById(R.id.Sp_Role_QlNDung);
+                   String[] roles = {"Admin", "Người Dùng"};
+
+                   ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, roles);
+
+
+                    spinner_quyen.setAdapter(adapter);
+                   NguoiDung nguoiDung = list.get(position);
+                   if (nguoiDung.getLoaiTaiKhoan() == 1){
+                       spinner_quyen.setSelection(0);
+                   }else {spinner_quyen.setSelection(1);}
+
+                   edtTen.setText(nguoiDung.getHoTen());
+                   edtSDT.setText(nguoiDung.getSoDienThoai());
+                   edtEmail.setText(nguoiDung.getEmail());
+
+                   String imgSrc = list.get(position).getImgSrc();
+
+                   // Kiểm tra xem ảnh có phải là đường dẫn URI hay không
+                   boolean isUri = imgSrc.startsWith("content://");
+
+                   if (isUri) {
+                       // Nếu là đường dẫn URI, sử dụng Picasso để tải ảnh từ đường dẫn URI
+                       Picasso.get().load(Uri.parse(imgSrc)).transform(new NguoiDungAdapter.CircleTransform()).into(imgNguoiDung);
+                   } else {
+                       // Nếu không phải là đường dẫn URI, sử dụng cách khác để hiển thị ảnh (ví dụ: từ nguồn drawable)
+                       int resourceId = getContext().getResources().getIdentifier(imgSrc, "drawable", getContext().getPackageName());
+                       Picasso.get().load(resourceId).transform(new NguoiDungAdapter.CircleTransform()).into(imgNguoiDung);
+                   }
+
+
+
+
+                   imgNguoiDung.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view) {
+                           Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                           startActivityForResult(intent, 1);
+                       }
+                   });
+
+                   builder.setNegativeButton("Xóa Mềm", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialogInterface, int i) {
+                            nguoiDungDAO = new NguoiDungDAO(getContext());
+
+                            int ischeck = nguoiDungDAO.xoaNguoiDungQL(list.get(position).getNguoiDung_id());
+                           if (ischeck > 0) {
+                               Toast.makeText(getContext(), "Xoá Mềm Thành Công", Toast.LENGTH_SHORT).show();
+                               nguoiDung.setIsXoaMem(0);
+                               reloadData();
+
+                           } else {
+                               Toast.makeText(getContext(), "Xoá Mềm Thất Bại", Toast.LENGTH_SHORT).show();
+                           }
+
+                       }
+                   }).setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialogInterface, int i) {
+                           String imgSrcU = selectedImageUri != null ? selectedImageUri.toString() : list.get(position).getImgSrc();
+                           String tenNDung = edtTen.getText().toString();
+                           String SDTNDung = edtSDT.getText().toString();
+                           String emailNDung = edtEmail.getText().toString();
+                           String spiner = (String) spinner_quyen.getSelectedItem();
+
+
+                           nguoiDungDAO = new NguoiDungDAO(getContext());
+                           if (spiner == "Admin"){
+                               nguoiDung.setLoaiTaiKhoan(1);
+                           }else {
+                               nguoiDung.setLoaiTaiKhoan(0);
+                           }
+
+                           nguoiDung.setImgSrc(imgSrcU);
+                           nguoiDung.setHoTen(tenNDung);
+                           nguoiDung.setSoDienThoai(SDTNDung);
+                           nguoiDung.setEmail(emailNDung);
+                           if (nguoiDungDAO.thayDoiThonTinQL(nguoiDung) > 0){
+                               Toast.makeText(getContext(), "Sủa Thành Công", Toast.LENGTH_SHORT).show();
+                               reloadData();
+
+                           }else {
+                               Toast.makeText(getContext(), "Sửa Thất Bại", Toast.LENGTH_SHORT).show();
+                           }
+
+
+                       }
+
+                   });
+                   Dialog dialog = builder.create();
+                   dialog.show();
+               }
+
+       });
         recyclerView.setAdapter(adapter);
     }
 
@@ -160,7 +262,7 @@ public class Ql_NguoiDung_Fragment extends Fragment {
                         // Cập nhật danh sách người dùng sau khi thêm mới
                         list.addAll(nguoiDungDAO.getDsNguoiDung());
                         // Thông báo cho adapter rằng dữ liệu đã thay đổi
-                        recyclerView.getAdapter().notifyDataSetChanged();
+                        reloadData();
 
 
                     }else {
@@ -202,6 +304,16 @@ public class Ql_NguoiDung_Fragment extends Fragment {
 
         }
     }
+    // Đầu tiên, tạo một hàm để tải lại dữ liệu
+    public void reloadData() {
+        // Xóa danh sách người dùng hiện tại
+        list.clear();
+        // Lấy lại danh sách người dùng từ database
+        list.addAll(nguoiDungDAO.getDsNguoiDung());
+        // Thông báo cho adapter rằng dữ liệu đã thay đổi
+        recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
 
     public boolean validateForm(String selectedImageUri, String name, String phoneNumber, String email, String username, String password) {
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getContext());

@@ -73,6 +73,12 @@ public class NguoiDungDAO {
         long check = sqLiteDatabase.insert("NGUOIDUNG", null, contentValues);
         return check > 0;
     }
+    public int xoaNguoiDungQL(int xoamem) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isXoaMem", 1);
+        return db.update("NGUOIDUNG", values, "nguoiDung_id=?", new String[]{String.valueOf(xoamem)});
+    }
 
     public int kiemTraDangNhap(String taikhoan, String matkhau) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
