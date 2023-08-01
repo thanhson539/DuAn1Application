@@ -73,7 +73,7 @@ public class ThongKeDAO {
     }
 
     @SuppressLint("Range")
-    public int tuNgayDenNgay(String tuNgay, String denNgay){
+    public int tuNgayDenNgay(String tuNgay, String denNgay, int nguoiDung_id){
         int tongTien = 0;
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.ngayMua as date, HOADONCHITIET.hoaDon_id as hoaDon_id, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
@@ -83,8 +83,8 @@ public class ThongKeDAO {
                 "from HOADONCHITIET " +
                 "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
                 "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
-                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 and date between ? and ? " +
-                "group by nguoiDung_id", new String[]{tuNgay, denNgay});
+                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 and date between ? and ? and nguoiDung_id = ? " +
+                "group by nguoiDung_id", new String[]{tuNgay, denNgay, String.valueOf(nguoiDung_id)});
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {

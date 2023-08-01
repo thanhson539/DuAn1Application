@@ -148,7 +148,7 @@ public class ThongKeFragment extends Fragment {
                 layout.setVisibility(View.VISIBLE);
                 tvTu_ngay.setText(edTu_ngay.getText().toString());
                 tvDen_ngay.setText(edDen_ngay.getText().toString());
-                int tienTrongkhoang = thongKeDAO.tuNgayDenNgay(edTu_ngay.getText().toString(), edDen_ngay.getText().toString());
+                int tienTrongkhoang = thongKeDAO.tuNgayDenNgay(edTu_ngay.getText().toString(), edDen_ngay.getText().toString(), nguoiDung_id);
                 if(tienTrongkhoang > 0){
                     tvSo_tien_trong_khoang.setText(""+tienTrongkhoang+" vnd");
                 }else{
@@ -171,7 +171,7 @@ public class ThongKeFragment extends Fragment {
                     layout.setVisibility(View.VISIBLE);
                     tvTu_ngay.setText(edTu_ngay.getText().toString());
                     tvDen_ngay.setText(edDen_ngay.getText().toString());
-                    int tienTrongkhoang = thongKeDAO.tuNgayDenNgay(edTu_ngay.getText().toString(), edDen_ngay.getText().toString());
+                    int tienTrongkhoang = thongKeDAO.tuNgayDenNgay(edTu_ngay.getText().toString(), edDen_ngay.getText().toString(), nguoiDung_id);
                     if(tienTrongkhoang > 0){
                         tvSo_tien_trong_khoang.setText(""+tienTrongkhoang+" vnd");
                     }else{
