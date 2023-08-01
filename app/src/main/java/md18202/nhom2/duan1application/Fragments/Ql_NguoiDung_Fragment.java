@@ -112,11 +112,15 @@ public class Ql_NguoiDung_Fragment extends Fragment {
                    ImageView imgNguoiDung = view1.findViewById(R.id.imgSuaNguoiDung);
                    Spinner spinner_quyen = view1.findViewById(R.id.Sp_Role_QlNDung);
                    String[] roles = {"Admin", "Người Dùng"};
+
                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, roles);
 
 
-
+                    spinner_quyen.setAdapter(adapter);
                    NguoiDung nguoiDung = list.get(position);
+                   if (nguoiDung.getLoaiTaiKhoan() == 1){
+                       spinner_quyen.setSelection(0);
+                   }else {spinner_quyen.setSelection(1);}
 
                    edtTen.setText(nguoiDung.getHoTen());
                    edtSDT.setText(nguoiDung.getSoDienThoai());
@@ -135,7 +139,7 @@ public class Ql_NguoiDung_Fragment extends Fragment {
                        int resourceId = getContext().getResources().getIdentifier(imgSrc, "drawable", getContext().getPackageName());
                        Picasso.get().load(resourceId).transform(new NguoiDungAdapter.CircleTransform()).into(imgNguoiDung);
                    }
-                   spinner_quyen.setAdapter(adapter);
+
 
 
 
@@ -166,12 +170,19 @@ public class Ql_NguoiDung_Fragment extends Fragment {
                    }).setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
                        @Override
                        public void onClick(DialogInterface dialogInterface, int i) {
-                           String imgSrcU = selectedImageUri != null ? selectedImageUri.toString() : "avatar_mac_dinh";
+                           String imgSrcU = selectedImageUri != null ? selectedImageUri.toString() : list.get(position).getImgSrc();
                            String tenNDung = edtTen.getText().toString();
                            String SDTNDung = edtSDT.getText().toString();
                            String emailNDung = edtEmail.getText().toString();
+                           String spiner = (String) spinner_quyen.getSelectedItem();
+
 
                            nguoiDungDAO = new NguoiDungDAO(getContext());
+                           if (spiner == "Admin"){
+                               nguoiDung.setLoaiTaiKhoan(1);
+                           }else {
+                               nguoiDung.setLoaiTaiKhoan(0);
+                           }
 
                            nguoiDung.setImgSrc(imgSrcU);
                            nguoiDung.setHoTen(tenNDung);
