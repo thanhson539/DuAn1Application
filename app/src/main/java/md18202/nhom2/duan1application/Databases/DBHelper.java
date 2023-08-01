@@ -78,6 +78,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "foreign key (sanPham_id) references SANPHAM(sanPham_id))";
         db.execSQL(createHoaDonChiTiet);
 
+        String createThongBao = "create table THONGBAO(" +
+                "thongBao_id integer primary key autoincrement," +
+                "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
+                "sanPham_id integer references SANPHAM(sanPham_id)," +
+                "tieuDe text not null," +
+                "noiDung text not null," +
+                "thoiGian text not null," +
+                "isRead integer not null," +
+                "loaiThongBao integer not null)";
+        db.execSQL(createThongBao);
+
         //DATA ẢO
 
         /*1: Bang 'NGUOIDUNG'

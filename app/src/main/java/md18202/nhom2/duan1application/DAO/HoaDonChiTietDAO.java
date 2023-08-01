@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import md18202.nhom2.duan1application.Databases.DBHelper;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
@@ -58,6 +59,7 @@ public class HoaDonChiTietDAO {
                 ));
             } while (cursor.moveToNext());
         }
+        Collections.reverse(listResult);
         return listResult;
     }
 
