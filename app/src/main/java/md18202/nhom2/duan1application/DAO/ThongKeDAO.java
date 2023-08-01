@@ -19,17 +19,17 @@ public class ThongKeDAO {
     }
 
     @SuppressLint("Range")
-    public int getSoTienDaMua(){
+    public int getSoTienDaMua(int nguoiDung_id){
         int tongTien = 0;
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("select HOADONCHITIET.hoaDon_id as hoaDon_id, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
-                " HOADON.nguoiDung_id as nguoiDung_id , " +
-                " sum(HOADONCHITIET.soLuong * SANPHAM.giaSanPham) as tongTien," +
-                " HOADONCHITIET.trangThaiDonHang as trangThaiDonHang, HOADONCHITIET.trangThaiThanhToan as trangThaiThanhToan from HOADONCHITIET" +
-                " inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
+                "HOADON.nguoiDung_id as nguoiDung_id , " +
+                "sum(HOADONCHITIET.soLuong * SANPHAM.giaSanPham) as tongTien, " +
+                "HOADONCHITIET.trangThaiDonHang as trangThaiDonHang, HOADONCHITIET.trangThaiThanhToan as trangThaiThanhToan from HOADONCHITIET " +
+                "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
                 "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
-                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1" +
-                " group by nguoiDung_id", null);
+                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 and nguoiDung_id = ? " +
+                "group by nguoiDung_id", new String[]{String.valueOf(nguoiDung_id)});
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
@@ -71,4 +71,27 @@ public class ThongKeDAO {
         }
         return tien;
     }
+
+    @SuppressLint("Range")
+    public int tuNgayDenNgay(String tuNgay, String denNgay){
+        int tongTien = 0;
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.ngayMua as date, HOADONCHITIET.hoaDon_id as hoaDon_id, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
+                "HOADON.nguoiDung_id as nguoiDung_id , " +
+                "sum(HOADONCHITIET.soLuong * SANPHAM.giaSanPham) as tongTien," +
+                "HOADONCHITIET.trangThaiDonHang as trangThaiDonHang, HOADONCHITIET.trangThaiThanhToan as trangThaiThanhToan " +
+                "from HOADONCHITIET " +
+                "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
+                "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
+                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 and date between ? and ? " +
+                "group by nguoiDung_id", new String[]{tuNgay, denNgay});
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                tongTien = cursor.getInt(cursor.getColumnIndex("tongTien"));
+            }while (cursor.moveToNext());
+        }
+        return tongTien;
+    }
+
 }

@@ -58,19 +58,22 @@
                 android:gravity="center"
                 android:clickable="false"
                 android:focusable="false"
-                android:cursorVisible="false"/>
+                android:cursorVisible="false"
+                android:focusableInTouchMode="false"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Từ ngày: "
-                android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:text="Đến ngày: "
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/edDen_ngay"
                 android:layout_width="match_parent"
@@ -79,15 +82,19 @@
                 android:gravity="center"
                 android:clickable="false"
                 android:focusable="false"
-                android:cursorVisible="false"/>
+                android:cursorVisible="false"
+                android:focusableInTouchMode="false"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:id="@+id/linear"
+            android:visibility="gone">
             <TextView
+                android:id="@+id/tvTu_ngay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2023-03-03 "
@@ -100,12 +107,14 @@
                 android:textStyle="bold"
                 android:textSize="20sp"/>
             <TextView
+                android:id="@+id/tvDen_ngay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2023-03-03 "
                 android:textStyle="bold"
                 android:textSize="20sp"/>
             <TextView
+                android:id="@+id/tvSo_tien_trong_khoang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="0"
