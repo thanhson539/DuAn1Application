@@ -114,7 +114,7 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
                     Intent getIntent = getIntent();
                     int tongTien = getIntent.getIntExtra("tongTien", 0);
                     List<GioHang> listGioHang = (List<GioHang>) getIntent.getSerializableExtra("listGioHang");
-                    Intent intent = new Intent(DiaChiNhanHangActivity.this, XacNhanThanhToanActivity.class);
+                    Intent intent = new Intent(DiaChiNhanHangActivity.this, PhuongThucThanhToanActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("diaChi", diaChi);
                     bundle.putInt("tongTien", tongTien);

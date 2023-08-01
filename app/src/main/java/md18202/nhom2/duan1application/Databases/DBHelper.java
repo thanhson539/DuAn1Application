@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createBinhLuan);
 
         String createGioHang = "create table GIOHANG(nguoiDung_id integer ," +
-                "sanPham_id integer ," +
+                " sanPham_id integer ," +
                 "soLuong integer not null, " +
                 "trangThaiMua integer not null," +
                 "foreign key (nguoiDung_id) references NGUOIDUNG(nguoiDung_id)," +
@@ -63,13 +63,13 @@ public class DBHelper extends SQLiteOpenHelper {
         String createHoaDon = "create table HOADON(" +
                 "hoaDon_id integer primary key autoincrement," +
                 "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
-                "ngayMua text not null," +
+                "ngayMua date not null," +
                 "tongTien integer not null," +
                 "diaChi text not null)";
         db.execSQL(createHoaDon);
 
         String createHoaDonChiTiet = "create table HOADONCHITIET(" +
-                "hoaDon_id integer not null, " +
+                "hoaDon_id integer not null," +
                 "sanPham_id integer not null," +
                 "soLuong integer not null," +
                 "trangThaiDonHang integer not null," +
@@ -171,28 +171,32 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(30, 6, 'Vớ họa tiết nam nữ 04', 'sanpham_vohoatiet4', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0,0)");
 
         /*5: Bảng 'HOADON'
-        *Cấu trúc cột: hoaDon_id, nguoiDung_id, ngayMua, tongTien, diaChi */
+        *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien, diaChi */
 
         db.execSQL("insert into HOADON values" +
-                "(1, 1, '03/07/2023', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
-                "(2, 2, '04/07/2023', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
-                "(3, 3, '05/07/2023', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
-                "(4, 4, '06/07/2023', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
-                "(5, 5, '07/07/2023', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
+                "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
+                "(2, 2, '2023-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
+                "(3, 3, '2023-05-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
+                "(4, 3, '2023-03-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
+                "(5, 3, '2023-02-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
+         * Cấu trúc bảng:hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan
          * Ghi chú:
          * Trang thai don hang:
-         * - 0: Order thanh con
-         * - 1: Dang giao hang
-         * - 2: da nhan hang
-         *
+         * - 0: xac nhan dat hang thanh cong
+         * - 1: don hang da duoc xac nhan
+         * - 2: dang giao hang
+         * - 3: da giao hang
          * Trang thai thanh toan:
          * - 0: Chua thanh toan
-         * - 1: Da thanh toan
-         * Cấu trúc bảng: hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan */
-
+         * - 1: Da thanh toan */
         db.execSQL("insert into HOADONCHITIET values" +
+                "(4, 1, 1, 3, 1)," +
+                "(4, 2, 2, 3, 1)," +
+                "(4, 3, 1, 3, 1)," +
+                "(5, 4, 1, 3, 1)," +
+                "(5, 5, 1, 3, 1)," +
                 "(1, 2, 2, 0, 0)," +
                 "(1, 1, 3, 1, 1)," +
                 "(2, 3, 5, 2, 1)," +

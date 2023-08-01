@@ -19,6 +19,11 @@
         android:icon="@drawable/donhang_icon"
         />
     <item
+        android:id="@+id/menu_ThongKe"
+        android:title="Quản lý tiêu dùng"
+        android:icon="@drawable/thongke_icon"
+        />
+    <item
         android:title="DANH MỤC SẢN PHẨM">
         <menu>
             <item

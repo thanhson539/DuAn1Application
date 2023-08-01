@@ -39,7 +39,7 @@ public class SanPhamThanhToanAdapter extends RecyclerView.Adapter<SanPhamThanhTo
     public void onBindViewHolder(@NonNull SanPhamThanhToanAdapter.ViewHolder holder, int position) {
         GioHang gioHang = list.get(position);
         holder.tvTen_sp.setText(gioHang.getTenSanPham());
-        holder.tvSo_luong_sp.setText("SL: "+gioHang.getSoLuong());
+        holder.tvSo_luong_sp.setText("SL: x "+gioHang.getSoLuong());
         holder.tvTong_gia_san_pham.setText("Giá mua: "+((gioHang.getGiaSanPham()) * (gioHang.getSoLuong())));
         String srcImg = gioHang.getAnhSanPham();
         int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
