@@ -29,7 +29,7 @@ public class HoaDonChiTietDAO {
     }
 
     //Lấy danh sách đơn hàng thông qua hóa đơn chi tiết
-    public ArrayList<HoaDonChiTiet> getDonHangByHDCT(int trangThaiDonHang){
+    public ArrayList<HoaDonChiTiet> getDonHangByHDCT(int trangThaiDonHang) {
         ArrayList<HoaDonChiTiet> listResult = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("" +
@@ -40,7 +40,7 @@ public class HoaDonChiTietDAO {
                 "inner join HOADON hd on hdct.hoaDon_id = hd.hoaDon_id " +
                 "inner join SANPHAM sp on hdct.sanPham_id = sp.sanPham_id " +
                 "where hdct.trangThaiDonHang = ? ", new String[]{String.valueOf(trangThaiDonHang)});
-        if (cursor.getCount()!=0){
+        if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
                 listResult.add(new HoaDonChiTiet(
@@ -56,8 +56,22 @@ public class HoaDonChiTietDAO {
                         cursor.getString(9),//diaChi
                         cursor.getInt(10)   //tongTien
                 ));
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return listResult;
+    }
+
+    public boolean thayDoiTrangThaiDonHang(int newTrangThai, int hoaDon_id, int sanPham_id) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("trangThaiDonHang", newTrangThai);
+        long check = sqLiteDatabase.update("HOADONCHITIET", contentValues, "hoaDon_id = ? AND sanPham_id = ?", new String[]{String.valueOf(hoaDon_id), String.valueOf(sanPham_id)});
+        return check > 0;
+    }
+
+    public boolean xoaDonHang(int hoaDon_id, int sanPham_id) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        long check = sqLiteDatabase.delete("HOADONCHITIET", "hoaDon_id = ? and sanPham_id = ?", new String[]{String.valueOf(hoaDon_id), String.valueOf(sanPham_id)});
+        return check > 0;
     }
 }
