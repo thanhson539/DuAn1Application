@@ -40,7 +40,7 @@ public class ThongKeDAO {
     }
 
     @SuppressLint("Range")
-    public int getDataInMonth(int nguoiDung_id, int month){
+    public int getDataInMonth(int nguoiDung_id, int month, int year){
         List<HoaDonChiTiet> list = new ArrayList<>();
         int tien = 0;
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
@@ -65,7 +65,7 @@ public class ThongKeDAO {
         }
 
         for(HoaDonChiTiet hdct: list){
-            if(hdct.getMonth() == month){
+            if(hdct.getMonth() == month && hdct.getYear() == year){
                 tien = hdct.getGiaSanPham();
             }
         }

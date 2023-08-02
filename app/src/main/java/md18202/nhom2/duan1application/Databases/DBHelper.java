@@ -175,7 +175,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("insert into HOADON values" +
                 "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
-                "(2, 2, '2023-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
+                "(2, 3, '2022-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
                 "(3, 3, '2023-05-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
                 "(4, 3, '2023-03-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
                 "(5, 3, '2023-02-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
@@ -199,7 +199,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5, 5, 1, 3, 1)," +
                 "(1, 2, 2, 0, 0)," +
                 "(1, 1, 3, 1, 1)," +
-                "(2, 3, 5, 2, 1)," +
+                "(2, 3, 5, 3, 1)," +
                 "(3, 4, 4, 3, 0)," +
                 "(4, 20, 1, 0, 0)," +
                 "(5, 15, 4, 1, 1)," +
