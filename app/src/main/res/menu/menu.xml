@@ -24,6 +24,11 @@
         android:icon="@drawable/thongke_icon"
         />
     <item
+        android:id="@+id/menu_ThongKeAdmin"
+        android:title="Thống kê"
+        android:icon="@drawable/thongke_icon"
+        />
+    <item
         android:title="DANH MỤC SẢN PHẨM">
         <menu>
             <item

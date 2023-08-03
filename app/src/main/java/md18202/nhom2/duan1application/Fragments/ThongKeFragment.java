@@ -47,7 +47,6 @@ public class ThongKeFragment extends Fragment {
     EditText edTu_ngay, edDen_ngay;
     LinearLayout layout;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
     boolean check;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +57,7 @@ public class ThongKeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_thong_ke, container, false);
     }
 
@@ -92,18 +92,20 @@ public class ThongKeFragment extends Fragment {
 
     private void getData(){
         list = new ArrayList();
-        list.add(new BarEntry(1f, thongKeDAO.getDataInMonth(nguoiDung_id, 1)));
-        list.add(new BarEntry(2f, thongKeDAO.getDataInMonth(nguoiDung_id, 2)));
-        list.add(new BarEntry(3f, thongKeDAO.getDataInMonth(nguoiDung_id, 3)));
-        list.add(new BarEntry(4f, thongKeDAO.getDataInMonth(nguoiDung_id, 4)));
-        list.add(new BarEntry(5f, thongKeDAO.getDataInMonth(nguoiDung_id, 5)));
-        list.add(new BarEntry(6f, thongKeDAO.getDataInMonth(nguoiDung_id, 6)));
-        list.add(new BarEntry(7f, thongKeDAO.getDataInMonth(nguoiDung_id, 7)));
-        list.add(new BarEntry(8f, thongKeDAO.getDataInMonth(nguoiDung_id, 8)));
-        list.add(new BarEntry(9f, thongKeDAO.getDataInMonth(nguoiDung_id, 9)));
-        list.add(new BarEntry(10f, thongKeDAO.getDataInMonth(nguoiDung_id, 10)));
-        list.add(new BarEntry(11f, thongKeDAO.getDataInMonth(nguoiDung_id, 11)));
-        list.add(new BarEntry(12f, thongKeDAO.getDataInMonth(nguoiDung_id, 12)));
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        list.add(new BarEntry(1f, thongKeDAO.getDataInMonth(nguoiDung_id, 1, year)));
+        list.add(new BarEntry(2f, thongKeDAO.getDataInMonth(nguoiDung_id, 2, year)));
+        list.add(new BarEntry(3f, thongKeDAO.getDataInMonth(nguoiDung_id, 3, year)));
+        list.add(new BarEntry(4f, thongKeDAO.getDataInMonth(nguoiDung_id, 4, year)));
+        list.add(new BarEntry(5f, thongKeDAO.getDataInMonth(nguoiDung_id, 5, year)));
+        list.add(new BarEntry(6f, thongKeDAO.getDataInMonth(nguoiDung_id, 6, year)));
+        list.add(new BarEntry(7f, thongKeDAO.getDataInMonth(nguoiDung_id, 7, year)));
+        list.add(new BarEntry(8f, thongKeDAO.getDataInMonth(nguoiDung_id, 8, year)));
+        list.add(new BarEntry(9f, thongKeDAO.getDataInMonth(nguoiDung_id, 9, year)));
+        list.add(new BarEntry(10f, thongKeDAO.getDataInMonth(nguoiDung_id, 10, year)));
+        list.add(new BarEntry(11f, thongKeDAO.getDataInMonth(nguoiDung_id, 11, year)));
+        list.add(new BarEntry(12f, thongKeDAO.getDataInMonth(nguoiDung_id, 12, year)));
     }
 
     private void muaHangTrongKhoang(){
