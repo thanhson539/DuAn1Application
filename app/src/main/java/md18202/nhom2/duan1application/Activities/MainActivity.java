@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
+import md18202.nhom2.duan1application.DAO.ThongBaoDAO;
 import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.LienHe_Fragment;
@@ -55,6 +56,7 @@ import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.Models.NguoiDung;
+import md18202.nhom2.duan1application.Models.ThongBao;
 import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -90,7 +92,11 @@ public class MainActivity extends AppCompatActivity {
 //        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(MainActivity.this);
 //        ArrayList<HoaDonChiTiet> listDonHangByHDCT = hoaDonChiTietDAO.getDonHangByHDCT(0);
 //        Toast.makeText(this, listDonHangByHDCT.size() + "", Toast.LENGTH_SHORT).show();
-
+        //check data thong bao
+//        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(getApplicationContext());
+//        ArrayList<ThongBao> list1 = thongBaoDAO.getAllListThongBao();
+//        ArrayList<ThongBao> list2 = thongBaoDAO.getDsThongBaoByNguoiDung_id(1);
+//        Toast.makeText(this, list1.size() + list2.size() + "", Toast.LENGTH_SHORT).show();
 
         //Ánh xạ
         drawerLayout_frame4 = findViewById(R.id.drawerLayout_frame4);
@@ -173,22 +179,22 @@ public class MainActivity extends AppCompatActivity {
                 } else if (menuId == R.id.menuDonHang) {
                     fragment = new DonHang_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menu_QL_BinhLuan){
+                } else if (menuId == R.id.menu_QL_BinhLuan) {
                     fragment = new QuanLy_BL_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menuQlDonHang){
+                } else if (menuId == R.id.menuQlDonHang) {
                     fragment = new QL_DonHang_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menu_ThongKe) {
                     fragment = new ThongKeFragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menu_ThongKeAdmin) {
+                } else if (menuId == R.id.menu_ThongKeAdmin) {
                     fragment = new ThongKeAdminFragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menuThongBao) {
+                } else if (menuId == R.id.menuThongBao) {
                     fragment = new ThongBao_fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menuLienHe) {
+                } else if (menuId == R.id.menuLienHe) {
                     fragment = new LienHe_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
@@ -230,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Phần quyền admin
         int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
-        if (loaiTaiKhoan == 1){
+        if (loaiTaiKhoan == 1) {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.menuTrangChu).setVisible(false);
             menu.findItem(R.id.menuThongBao).setVisible(false);
@@ -239,7 +245,11 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.menu_ThongKe).setVisible(false);
             menu.findItem(R.id.menuGroupDanhMuc).setVisible(false);
             menu.findItem(R.id.menuLienHe).setVisible(false);
-        }else {
+            //set fragmentHome mặc định
+            fragmentManager = getSupportFragmentManager();
+            fragment = new QL_DonHang_Fragment();
+            fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+        } else {
             Menu menu = navigationView.getMenu();
             menu.findItem(R.id.menuQlForAdmin).setVisible(false);
         }

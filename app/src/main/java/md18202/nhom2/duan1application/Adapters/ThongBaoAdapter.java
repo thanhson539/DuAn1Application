@@ -85,7 +85,6 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.MyView
                 holder.linear_itemThongBao.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, mListener + "", Toast.LENGTH_SHORT).show();
                         holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#ECE1E0"));
                         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
                         boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());

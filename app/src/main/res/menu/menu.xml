@@ -63,7 +63,7 @@
         android:icon="@drawable/frame4_lien_he"/>
     <item
         android:id="@+id/menuQlForAdmin"
-        android:title="Quản lý dành cho admin">
+        android:title="QUẢN LÝ DÀNH CHO ADMIN">
         <menu>
             <item
                 android:id="@+id/menuQLNguoiDung"

@@ -36,7 +36,7 @@ public class HoaDonChiTietDAO {
         Cursor cursor = sqLiteDatabase.rawQuery("" +
                 "select hdct.hoaDon_id, hdct.sanPham_id, hdct.soLuong, hdct.trangThaiDonHang, hdct.trangThaiThanhToan, " +
                 "sp.tenSanPham, sp.anhSanPham, sp.giaSanPham, " +
-                "hd.ngayMua, hd.diaChi, (sp.giaSanPham * hdct.soLuong) as tongTien " +
+                "hd.ngayMua, hd.diaChi, (sp.giaSanPham * hdct.soLuong) as tongTien, hd.nguoiDung_id " +
                 "from HOADONCHITIET hdct " +
                 "inner join HOADON hd on hdct.hoaDon_id = hd.hoaDon_id " +
                 "inner join SANPHAM sp on hdct.sanPham_id = sp.sanPham_id " +
@@ -55,7 +55,8 @@ public class HoaDonChiTietDAO {
                         cursor.getInt(7),   //giaSanPham
                         cursor.getString(8),//ngayMua
                         cursor.getString(9),//diaChi
-                        cursor.getInt(10)   //tongTien
+                        cursor.getInt(10),   //tongTien
+                        cursor.getInt(11)    //nguoiDung_id
                 ));
             } while (cursor.moveToNext());
         }
@@ -70,7 +71,7 @@ public class HoaDonChiTietDAO {
         Cursor cursor = sqLiteDatabase.rawQuery("" +
                 "select hdct.hoaDon_id, hdct.sanPham_id, hdct.soLuong, hdct.trangThaiDonHang, hdct.trangThaiThanhToan, " +
                 "sp.tenSanPham, sp.anhSanPham, sp.giaSanPham, " +
-                "hd.ngayMua, hd.diaChi, (sp.giaSanPham * hdct.soLuong) as tongTien " +
+                "hd.ngayMua, hd.diaChi, (sp.giaSanPham * hdct.soLuong) as tongTien, hd.nguoiDung_id " +
                 "from HOADONCHITIET hdct " +
                 "inner join HOADON hd on hdct.hoaDon_id = hd.hoaDon_id " +
                 "inner join SANPHAM sp on hdct.sanPham_id = sp.sanPham_id " +
@@ -89,7 +90,8 @@ public class HoaDonChiTietDAO {
                         cursor.getInt(7),   //giaSanPham
                         cursor.getString(8),//ngayMua
                         cursor.getString(9),//diaChi
-                        cursor.getInt(10)   //tongTien
+                        cursor.getInt(10),   //tongTien
+                        cursor.getInt(11)   //nguoiDung_id
                 ));
             } while (cursor.moveToNext());
         }
