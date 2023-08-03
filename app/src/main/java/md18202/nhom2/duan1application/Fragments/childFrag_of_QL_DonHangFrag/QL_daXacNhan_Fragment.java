@@ -31,7 +31,7 @@ public class QL_daXacNhan_Fragment extends Fragment {
     }
     public void loadData(RecyclerView recyclerView){
         hoaDonChiTietDAO = new HoaDonChiTietDAO(getContext());
-        ArrayList<HoaDonChiTiet> list = hoaDonChiTietDAO.getDonHangByHDCT(1);
+        ArrayList<HoaDonChiTiet> list = hoaDonChiTietDAO.getDonHangByHDCTForAdmin(1);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         QLDonHangAdapter adapter = new QLDonHangAdapter(getContext(), list);

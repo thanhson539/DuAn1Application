@@ -2,6 +2,7 @@ package md18202.nhom2.duan1application.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.SplittableRandom;
 
 import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
+import md18202.nhom2.duan1application.DAO.ThongBaoDAO;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
+import md18202.nhom2.duan1application.Models.ThongBao;
 import md18202.nhom2.duan1application.R;
 
 public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyViewHolder> {
@@ -66,6 +71,21 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
                         int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
                         hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThai, hoaDon_id, sanPham_id);
+
+                        //Them thong bao
+                        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+                        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+                        String tieuDe = "Thông báo đơn hàng";
+                        String noiDung = "Đơn hàng của bạn đã được xác nhận!";
+                        String thoiGian = getTimeNow();
+                        int loaiThongBao = 0;
+                        int isRead = 0;
+                        String anhSanPham = list.get(holder.getAdapterPosition()).getAnhSanPham();
+                        ThongBao thongBao = new ThongBao(nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, loaiThongBao, isRead, anhSanPham);
+                        thongBaoDAO.themThongBao(thongBao);
+
+                        //reload Data
                         reloadData(0);
                     }
                 });
@@ -81,6 +101,22 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
                         int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
                         hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThai, hoaDon_id, sanPham_id);
+
+                        //Them thong bao
+                        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+                        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+                        Toast.makeText(context, nguoiDung_id + "", Toast.LENGTH_SHORT).show();
+                        String tieuDe = "Thông báo đơn hàng";
+                        String noiDung = "Bạn có đơn hàng đang giao";
+                        String thoiGian = getTimeNow();
+                        int loaiThongBao = 1;
+                        int isRead = 0;
+                        String anhSanPham = list.get(holder.getAdapterPosition()).getAnhSanPham();
+                        ThongBao thongBao = new ThongBao(nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, loaiThongBao, isRead, anhSanPham);
+                        thongBaoDAO.themThongBao(thongBao);
+
+                        //Load lai data
                         reloadData(1);
                     }
                 });
@@ -96,6 +132,22 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
                         int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
                         hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThai, hoaDon_id, sanPham_id);
+
+                        //Them thong bao
+                        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+                        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+                        Toast.makeText(context, nguoiDung_id + "", Toast.LENGTH_SHORT).show();
+                        String tieuDe = "Thông báo đơn hàng";
+                        String noiDung = "Vui lòng xác nhận đã nhận hàng";
+                        String thoiGian = getTimeNow();
+                        int loaiThongBao = 2;
+                        int isRead = 0;
+                        String anhSanPham = list.get(holder.getAdapterPosition()).getAnhSanPham();
+                        ThongBao thongBao = new ThongBao(nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, loaiThongBao, isRead, anhSanPham);
+                        thongBaoDAO.themThongBao(thongBao);
+
+                        //load lại data
                         reloadData(2);
                     }
                 });
@@ -156,7 +208,22 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
     public void reloadData(int trangThaiDonHang) {
         HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context);
         list.clear();
-        list = hoaDonChiTietDAO.getDonHangByHDCT(trangThaiDonHang);
+        list = hoaDonChiTietDAO.getDonHangByHDCTForAdmin(trangThaiDonHang);
         notifyDataSetChanged();
+    }
+
+    public String getTimeNow() {
+        Calendar calendar = Calendar.getInstance();
+
+        // Lấy thông tin giờ, phút, ngày, tháng, năm
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); // Lấy giờ (24 giờ)
+        int minute = calendar.get(Calendar.MINUTE); // Lấy phút
+        int day = calendar.get(Calendar.DAY_OF_MONTH); // Lấy ngày
+        int month = calendar.get(Calendar.MONTH) + 1; // Lấy tháng (tháng bắt đầu từ 0 nên cần +1)
+        int year = calendar.get(Calendar.YEAR); // Lấy năm
+
+        // Tạo chuỗi String từ thông tin giờ và ngày
+        String currentDateTime = "Ngày " + day + "/" + month + "/" + year + " " + String.format("%02d", hour) + ":" + String.format("%02d", minute);
+        return currentDateTime;
     }
 }

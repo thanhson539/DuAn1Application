@@ -78,8 +78,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 "foreign key (sanPham_id) references SANPHAM(sanPham_id))";
         db.execSQL(createHoaDonChiTiet);
 
-        //DATA ẢO
+        String createThongBao = "create table THONGBAO(" +
+                "thongBao_id integer primary key autoincrement," +
+                "nguoiDung_id integer references NGUOIDUNG(nguoiDung_id)," +
+                "sanPham_id integer references SANPHAM(sanPham_id)," +
+                "tieuDe text not null," +
+                "noiDung text not null," +
+                "thoiGian text not null," +
+                "isRead integer not null," +
+                "loaiThongBao integer not null)";
+        db.execSQL(createThongBao);
 
+        //DATA ẢO
         /*1: Bang 'NGUOIDUNG'
          * Cấu trúc cột: nguoiDung_id, hoTen, soDienThoai, email, taiKhoan, matKhau, loaiTaiKhoan
          * Ghi chú:
@@ -204,6 +214,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(4, 20, 1, 0, 0)," +
                 "(5, 15, 4, 1, 1)," +
                 "(5, 16, 2, 4, 0)");
+
+        /*7: Bảng 'THONGBAO'
+         * Câu trúc cột: thongBao_id, nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, isRead, loaiThongBao */
+        db.execSQL("insert into THONGBAO values" +
+                "(1, 1, 10,'Thông báo trạng thái đơn hàng','Đơn hàng của bạn đã được xác nhận','Ngày 02/08/2023 15:25',0,0)," +
+                "(2, 1, 12,'Thông báo trạng thái đơn hàng','Bạn có đơn hàng đang giao','Ngày 05/08/2023 09:25',1,1)");
     }
 
     @Override
@@ -214,6 +230,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists LOAISANPHAM");
         db.execSQL("drop table if exists SANPHAM");
         db.execSQL("drop table if exists HOADONCHITIET");
+        db.execSQL("drop table if exists THONGBAO");
         onCreate(db);
     }
 }
