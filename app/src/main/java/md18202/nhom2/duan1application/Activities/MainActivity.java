@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new LienHe_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
+                //ok
 
                 drawerLayout_frame4.closeDrawer(GravityCompat.START);
                 toolbar_frame4.setTitle(item.getTitle());
@@ -225,11 +226,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        //Phần quyền admin
-//        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
-//        if (loaiTaiKhoan == 0){
-////            Menu menu =
-//        }
+        //Phần quyền admin
+        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
+        if (loaiTaiKhoan == 1){
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.menuTrangChu).setVisible(false);
+            menu.findItem(R.id.menuThongBao).setVisible(false);
+            menu.findItem(R.id.menuYeuThich).setVisible(false);
+            menu.findItem(R.id.menuDonHang).setVisible(false);
+            menu.findItem(R.id.menu_ThongKe).setVisible(false);
+        }else {
+            Menu menu = navigationView.getMenu();
+            menu.findItem(R.id.menuQLNguoiDung).setVisible(false);
+
+        }
     }
 
     @Override
