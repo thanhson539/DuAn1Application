@@ -79,41 +79,58 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.MyView
         } else {
             holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#E2BCB7"));
         }
-        final int loaiThongBao = list.get(position).getLoaiThongBao();
-        switch (loaiThongBao) {
-            case 0:
-                holder.linear_itemThongBao.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#ECE1E0"));
-                        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
-                        boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
-                        if (check) {
-                            loadData();
-                        }
-                        if (mListener != null) {
-                            mListener.onItemClick(holder.getAdapterPosition());
-                        }
-                        //Code chức năng chuyển fragment khi ấn vài itemThongBao
-                    }
-                });
-                break;
-            case 1:
-                holder.linear_itemThongBao.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#ECE1E0"));
-                        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
-                        boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
-                        loadData();
-                        if (mListener != null) {
-                            mListener.onItemClick(holder.getAdapterPosition());
-                        }
-                        //Code chức năng chuyển fragment khi ấn vài itemThongBao
-                    }
-                });
-                break;
-        }
+        holder.linear_itemThongBao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#ECE1E0"));
+                ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
+                boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
+                if (check) {
+                    loadData();
+                }
+                if (mListener != null) {
+                    mListener.onItemClick(holder.getAdapterPosition());
+                }
+                //Code chức năng chuyển fragment khi ấn vài itemThongBao
+            }
+        });
+
+//        //Chưa làm được phần chuyển tablayout DonHang theo trạng loại thông báo tương ứng
+//        final int loaiThongBao = list.get(position).getLoaiThongBao();
+//        switch (loaiThongBao) {
+//            case 0:
+//                holder.linear_itemThongBao.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#ECE1E0"));
+//                        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
+//                        boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
+//                        if (check) {
+//                            loadData();
+//                        }
+//                        if (mListener != null) {
+//                            mListener.onItemClick(holder.getAdapterPosition());
+//                        }
+//                        //Code chức năng chuyển fragment khi ấn vài itemThongBao
+//                    }
+//                });
+//                break;
+//            case 1:
+//                holder.linear_itemThongBao.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#ECE1E0"));
+//                        ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
+//                        boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
+//                        loadData();
+//                        if (mListener != null) {
+//                            mListener.onItemClick(holder.getAdapterPosition());
+//                        }
+//                        //Code chức năng chuyển fragment khi ấn vài itemThongBao
+//                    }
+//                });
+//                break;
+//        }
     }
 
     @Override

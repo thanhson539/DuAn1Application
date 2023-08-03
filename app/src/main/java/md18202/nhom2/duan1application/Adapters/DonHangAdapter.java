@@ -57,7 +57,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         holder.tvGiaSanPham_donhang.setText(String.valueOf(list.get(position).getGiaSanPham()));
         holder.tvThoiGianDatHang_donhang.setText(list.get(position).getNgayMua());
         holder.tvDiaChiGiaoHang_donhang.setText(list.get(position).getDiaChi());
-        if (list.get(position).getTrangThaiDonHang() > 1){
+        if (list.get(position).getTrangThaiDonHang() == 1 || list.get(position).getTrangThaiDonHang() == 2 || list.get(position).getTrangThaiThanhToan() == 1){
             holder.tvHuyDon_donhang.setVisibility(View.GONE);
         }
         switch (list.get(holder.getAdapterPosition()).getTrangThaiDonHang()){
@@ -95,7 +95,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                             list.clear();
                             SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
                             int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
-                            list = hoaDonChiTietDAO.getDonHangByHDCT(0, nguoiDung_id);
+                            list = hoaDonChiTietDAO.getDonHangByHDCT(1, nguoiDung_id);
                             notifyDataSetChanged();
                         }
                     }
@@ -106,6 +106,26 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                 break;
             case 3:
                 holder.tvTrangThaiDonHang_donhang.setText("Đã giao");
+                holder.tvHuyDon_donhang.setText("Xác nhận");
+                holder.tvHuyDon_donhang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context.getApplicationContext());
+                        int newTrangThaiThanhToan = 1; //Xác nhận đơn hàng
+                        int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
+                        int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
+                        boolean check = hoaDonChiTietDAO.thayDoiTrangThaiThanhToan(newTrangThaiThanhToan, hoaDon_id, sanPham_id);
+                        if (check){
+                            list.clear();
+                            SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+                            int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+                            list = hoaDonChiTietDAO.getDonHangByHDCT(3, nguoiDung_id);
+                            Toast.makeText(context, "Đã xác nhận nhận hàng", Toast.LENGTH_SHORT).show();
+                            holder.tvHuyDon_donhang.setVisibility(View.GONE);
+                            notifyDataSetChanged();
+                        }
+                    }
+                });
                 break;
         }
         holder.tvTongTien_donhang.setText(String.valueOf(list.get(position).getTongTien()) +" vnđ");

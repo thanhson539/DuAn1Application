@@ -112,4 +112,11 @@ public class HoaDonChiTietDAO {
         long check = sqLiteDatabase.delete("HOADONCHITIET", "hoaDon_id = ? and sanPham_id = ?", new String[]{String.valueOf(hoaDon_id), String.valueOf(sanPham_id)});
         return check > 0;
     }
+    public boolean thayDoiTrangThaiThanhToan(int newTrangThaiThanhToan, int hoaDon_id, int sanPham_id){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("trangThaiThanhToan", newTrangThaiThanhToan);
+        long check = sqLiteDatabase.update("HOADONCHITIET",contentValues,"hoaDon_id = ? and sanPham_id = ?", new String[]{String.valueOf(hoaDon_id), String.valueOf(sanPham_id)});
+        return check > 0;
+    }
 }
