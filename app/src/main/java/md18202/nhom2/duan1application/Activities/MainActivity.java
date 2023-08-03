@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ThongKeAdminFragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
-                //ok
+                //ok ok
 
                 drawerLayout_frame4.closeDrawer(GravityCompat.START);
                 toolbar_frame4.setTitle(item.getTitle());
