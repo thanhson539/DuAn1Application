@@ -3,6 +3,7 @@ package md18202.nhom2.duan1application.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +43,17 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
         String srcImg = list.get(position).getAnhSanPham();
         int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
         Picasso.get().load(resourceId).into(holder.imgSanPham_item);
 
         holder.tvTenSanPham_item.setText(list.get(position).getTenSanPham());
         holder.tvGiaSanPham_item.setText(String.valueOf(list.get(position).getGiaSanPham()) + " vnđ");
-
+        if (nguoiDung_id == 1) {
+            holder.imgYeuThich_item.setVisibility(View.GONE);
+        }
         if (list.get(position).getIsYeuThich() == 1) {
             holder.imgYeuThich_item.setImageResource(R.drawable.frame4_trai_tim);
         }

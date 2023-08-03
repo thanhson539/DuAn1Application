@@ -25,6 +25,7 @@
         />
 
     <item
+        android:id="@+id/menuGroupDanhMuc"
         android:title="DANH MỤC SẢN PHẨM">
         <menu>
             <item
@@ -61,6 +62,7 @@
         android:title="Liên hệ"
         android:icon="@drawable/frame4_lien_he"/>
     <item
+        android:id="@+id/menuQlForAdmin"
         android:title="Quản lý dành cho admin">
         <menu>
             <item
