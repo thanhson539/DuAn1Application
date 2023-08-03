@@ -35,11 +35,13 @@ import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
 import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
+import md18202.nhom2.duan1application.Fragments.LienHe_Fragment;
 import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
 import md18202.nhom2.duan1application.Fragments.QL_DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.Ql_NguoiDung_Fragment;
 import md18202.nhom2.duan1application.Fragments.QuanLy_BL_Fragment;
 import md18202.nhom2.duan1application.Fragments.SanPham_Fragment;
+import md18202.nhom2.duan1application.Fragments.ThongBao_fragment;
 import md18202.nhom2.duan1application.Fragments.ThongKeAdminFragment;
 import md18202.nhom2.duan1application.Fragments.ThongKeFragment;
 import md18202.nhom2.duan1application.Fragments.VoBasic_Fragment;
@@ -182,6 +184,12 @@ public class MainActivity extends AppCompatActivity {
                 }else if (menuId == R.id.menu_ThongKeAdmin) {
                     fragment = new ThongKeAdminFragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }else if (menuId == R.id.menuThongBao) {
+                    fragment = new ThongBao_fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }else if (menuId == R.id.menuLienHe) {
+                    fragment = new LienHe_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
                 //ok ok
 
@@ -228,10 +236,11 @@ public class MainActivity extends AppCompatActivity {
             menu.findItem(R.id.menuYeuThich).setVisible(false);
             menu.findItem(R.id.menuDonHang).setVisible(false);
             menu.findItem(R.id.menu_ThongKe).setVisible(false);
+            menu.findItem(R.id.menuGroupDanhMuc).setVisible(false);
+            menu.findItem(R.id.menuLienHe).setVisible(false);
         }else {
             Menu menu = navigationView.getMenu();
-            menu.findItem(R.id.menuQLNguoiDung).setVisible(false);
-
+            menu.findItem(R.id.menuQlForAdmin).setVisible(false);
         }
     }
 
