@@ -89,6 +89,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "loaiThongBao integer not null)";
         db.execSQL(createThongBao);
 
+        db.execSQL("create table SANPHAMYEUTHICH(sanPham_id integer not null," +
+                "nguoiDung_id integer not null, " +
+                "foreign key (sanPham_id) references SANPHAM(sanPham_id)," +
+                "foreign key (nguoiDung_id) references NGUOIDUNG(nguoiDung_id))");
+
+        db.execSQL("insert into SANPHAMYEUTHICH values (1,3), (2,3)");
+
         //DATA ẢO
         /*1: Bang 'NGUOIDUNG'
          * Cấu trúc cột: nguoiDung_id, hoTen, soDienThoai, email, taiKhoan, matKhau, loaiTaiKhoan

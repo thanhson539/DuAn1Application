@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
+import md18202.nhom2.duan1application.Fragments.SanPhamYeuThichFragment;
 import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
@@ -18,7 +19,7 @@ public class YeuThichAtivivty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yeu_thich_ativivty);
-        YeuThich_Fragment fragment = new YeuThich_Fragment();
+        SanPhamYeuThichFragment fragment = new SanPhamYeuThichFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);

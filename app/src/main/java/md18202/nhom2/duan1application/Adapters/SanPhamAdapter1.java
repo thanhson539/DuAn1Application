@@ -21,16 +21,22 @@ import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.Activities.ChiTietSanPhamActivity;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
+import md18202.nhom2.duan1application.DAO.SanPhamYeuThichDAO;
 import md18202.nhom2.duan1application.Models.SanPham;
+import md18202.nhom2.duan1application.Models.SanPhamYeuThich;
 import md18202.nhom2.duan1application.R;
 
 public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myViewHolder> {
     private Context context;
     private ArrayList<SanPham> list;
+    SharedPreferences sharedPreferences;
+    int nguoiDung_id;
 
     public SanPhamAdapter1(Context context, ArrayList<SanPham> list) {
         this.context = context;
         this.list = list;
+        sharedPreferences= context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+        nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
     }
 
     @NonNull
@@ -43,26 +49,26 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
-        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+
+        SanPham sanPham = list.get(position);
+
         String srcImg = list.get(position).getAnhSanPham();
         int resourceId = context.getResources().getIdentifier(srcImg, "drawable", context.getPackageName());
         Picasso.get().load(resourceId).into(holder.imgSanPham_item);
 
         holder.tvTenSanPham_item.setText(list.get(position).getTenSanPham());
         holder.tvGiaSanPham_item.setText(String.valueOf(list.get(position).getGiaSanPham()) + " vnđ");
+
         if (nguoiDung_id == 1) {
             holder.imgYeuThich_item.setVisibility(View.GONE);
         }
-        if (list.get(position).getIsYeuThich() == 1) {
+        if (validate(list.get(holder.getAdapterPosition()).getSanPham_id()) < 0) {
             holder.imgYeuThich_item.setImageResource(R.drawable.frame4_trai_tim);
         }
 
         //Sự kiện yêu thích cho sản phẩm
-        int sanPham_id = list.get(position).getSanPham_id();
-        int isYeuThich = list.get(position).getIsYeuThich();
         ImageView imgYeuThich_item = holder.imgYeuThich_item;
-        setImgYeuThich(sanPham_id, isYeuThich, imgYeuThich_item);
+        setImgYeuThich(holder.getAdapterPosition(), holder.imgYeuThich_item);
 
         //Xem chi tiết sản phẩm
         xemChiTiet(holder.tvChiTiet_item, list.get(position));
@@ -90,23 +96,22 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
         }
     }
 
-    public void setImgYeuThich(int sanPham_id, int isYeuThich, ImageView imgYeuThich) {
-        int isYeuThichDefault = 0;
-        if (isYeuThich == 1) {
-            imgYeuThich.setImageResource(R.drawable.frame4_trai_tim);
-        }
+    public void setImgYeuThich(int position, ImageView imgYeuThich) {
+        SanPham sanPham = list.get(position);
+//        if (sanPham.getIsYeuThich() == 1) {
+//            imgYeuThich.setImageResource(R.drawable.frame4_trai_tim);
+//        }
         imgYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imgYeuThich.setImageResource(R.drawable.frame4_trai_tim2);
+//                imgYeuThich.setImageResource(R.drawable.frame4_trai_tim2);
                 //code chuc năng cập nhật isYeuThich
-                SanPhamDAO sanPhamDAO = new SanPhamDAO(context);
-                boolean check = sanPhamDAO.changeIsYeuThich(sanPham_id, 0);
-                if (check) {
+                SanPhamYeuThichDAO sanPhamYeuThichDAO = new SanPhamYeuThichDAO(context);
+                if (sanPhamYeuThichDAO.boYeuThichSanPham(sanPham.getSanPham_id(), nguoiDung_id) > 0) {
                     Toast.makeText(context, "Thanh cong", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                     list.clear();
-                    list = sanPhamDAO.getDsSanPhamYeuThich();
+                    list = sanPhamYeuThichDAO.getSanPhamYeuThich(nguoiDung_id);
                 } else {
                     Toast.makeText(context, "That bai", Toast.LENGTH_SHORT).show();
                 }
@@ -125,5 +130,17 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
                 context.startActivity(intent);
             }
         });
+    }
+
+    public int validate(int sanPham_id){
+        int check = 1;
+        SanPhamYeuThichDAO spytd = new SanPhamYeuThichDAO(context);
+        ArrayList<SanPham> list1 = spytd.getSanPhamYeuThich(nguoiDung_id);
+        for (SanPham sp: list1){
+            if(sp.getSanPham_id() == sanPham_id){
+                check = -1;
+            }
+        }
+        return check;
     }
 }
