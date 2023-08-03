@@ -14,6 +14,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import md18202.nhom2.duan1application.Adapters.TabLayoutDonHangAdapter;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.ChoXacNhan_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.DaGiao_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.DaXacNhan_Fragment;
+import md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag.DangGiao_Fragment;
 import md18202.nhom2.duan1application.R;
 
 public class DonHang_Fragment extends Fragment {

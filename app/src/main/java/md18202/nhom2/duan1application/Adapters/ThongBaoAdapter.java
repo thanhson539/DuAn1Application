@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +35,17 @@ import md18202.nhom2.duan1application.R;
 public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ThongBao> list;
+
+    //    private AdapterView.OnItemClickListener listener;
+    public interface onItemClickSelected {
+        void onItemClick(int position);
+    }
+
+    private onItemClickSelected mListener;
+
+    public void setOnItemClickSelected(onItemClickSelected listener) {
+        this.mListener = listener;
+    }
 
     public ThongBaoAdapter(Context context, ArrayList<ThongBao> list) {
         this.context = context;
@@ -73,11 +85,15 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.MyView
                 holder.linear_itemThongBao.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Toast.makeText(context, mListener + "", Toast.LENGTH_SHORT).show();
                         holder.linear_itemThongBao.setBackgroundColor(Color.parseColor("#ECE1E0"));
                         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
                         boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
-                        if (check){
+                        if (check) {
                             loadData();
+                        }
+                        if (mListener != null) {
+                            mListener.onItemClick(holder.getAdapterPosition());
                         }
                         //Code chức năng chuyển fragment khi ấn vài itemThongBao
                     }
@@ -91,6 +107,9 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.MyView
                         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
                         boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
                         loadData();
+                        if (mListener != null) {
+                            mListener.onItemClick(holder.getAdapterPosition());
+                        }
                         //Code chức năng chuyển fragment khi ấn vài itemThongBao
                     }
                 });
