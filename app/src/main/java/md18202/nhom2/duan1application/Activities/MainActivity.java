@@ -39,6 +39,7 @@ import md18202.nhom2.duan1application.Fragments.QL_DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.Ql_NguoiDung_Fragment;
 import md18202.nhom2.duan1application.Fragments.QuanLy_BL_Fragment;
 import md18202.nhom2.duan1application.Fragments.SanPham_Fragment;
+import md18202.nhom2.duan1application.Fragments.ThongKeAdminFragment;
 import md18202.nhom2.duan1application.Fragments.ThongKeFragment;
 import md18202.nhom2.duan1application.Fragments.VoBasic_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoCao_Fragment;
@@ -176,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menu_ThongKe) {
                     fragment = new ThongKeFragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }else if (menuId == R.id.menu_ThongKeAdmin) {
+                    fragment = new ThongKeAdminFragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 

@@ -47,7 +47,6 @@ public class ThongKeFragment extends Fragment {
     EditText edTu_ngay, edDen_ngay;
     LinearLayout layout;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
     boolean check;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +57,7 @@ public class ThongKeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_thong_ke, container, false);
     }
 
