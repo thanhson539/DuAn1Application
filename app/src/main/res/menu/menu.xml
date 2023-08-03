@@ -23,11 +23,7 @@
         android:title="Quản lý tiêu dùng"
         android:icon="@drawable/thongke_icon"
         />
-    <item
-        android:id="@+id/menu_ThongKeAdmin"
-        android:title="Thống kê"
-        android:icon="@drawable/thongke_icon"
-        />
+
     <item
         android:title="DANH MỤC SẢN PHẨM">
         <menu>
@@ -93,6 +89,11 @@
             <item
                 android:title="Thông kê doanh thu"
                 android:icon="@drawable/frame4_mui_ten"/>
+            <item
+                android:id="@+id/menu_ThongKeAdmin"
+                android:title="Thống kê"
+                android:icon="@drawable/thongke_icon"
+                />
         </menu>
     </item>
 </menu>
