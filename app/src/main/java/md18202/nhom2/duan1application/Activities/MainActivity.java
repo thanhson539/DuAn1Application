@@ -40,6 +40,7 @@ import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
 import md18202.nhom2.duan1application.Fragments.QL_DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.Ql_NguoiDung_Fragment;
 import md18202.nhom2.duan1application.Fragments.QuanLy_BL_Fragment;
+import md18202.nhom2.duan1application.Fragments.SanPhamYeuThichFragment;
 import md18202.nhom2.duan1application.Fragments.SanPham_Fragment;
 import md18202.nhom2.duan1application.Fragments.ThongBao_fragment;
 import md18202.nhom2.duan1application.Fragments.ThongKeAdminFragment;
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new VoCoThap_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuYeuThich) {
-                    fragment = new YeuThich_Fragment();
+                    fragment = new SanPhamYeuThichFragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuLoaiSanPham) {
                     fragment = new Loai_San_Pham_Fragment();

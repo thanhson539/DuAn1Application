@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
         imgYeu_thich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                YeuThich_Fragment fragment = new YeuThich_Fragment();
+                SanPhamYeuThichFragment fragment = new SanPhamYeuThichFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frameLayout_frame4, fragment);
