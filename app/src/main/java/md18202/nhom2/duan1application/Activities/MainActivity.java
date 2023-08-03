@@ -183,14 +183,15 @@ public class MainActivity extends AppCompatActivity {
                 } else if (menuId == R.id.menu_ThongKe) {
                     fragment = new ThongKeFragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                } else if (menuId == R.id.menuThongBao) {
-                    fragment = new ThongBao_fragment();
-                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                } else if (menuId == R.id.menuLienHe) {
-                    fragment = new LienHe_Fragment();
-                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
-                //ok
+//                else if (menuId == R.id.menuThongBao) {
+//                    fragment = new ThongBao_fragment();
+//                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+//                } else if (menuId == R.id.menuLienHe) {
+//                    fragment = new LienHe_Fragment();
+//                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+//                }
+                //ok ok
 
                 drawerLayout_frame4.closeDrawer(GravityCompat.START);
                 toolbar_frame4.setTitle(item.getTitle());
