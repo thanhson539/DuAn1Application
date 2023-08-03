@@ -78,7 +78,6 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.MyView
                         boolean check = thongBaoDAO.thayDoiTrangThaiIsRead(list.get(holder.getAdapterPosition()).getThongBao_id());
                         if (check){
                             loadData();
-                            Toast.makeText(context, "Loại thông báo: " + loaiThongBao, Toast.LENGTH_SHORT).show();
                         }
                         //Code chức năng chuyển fragment khi ấn vài itemThongBao
                     }
