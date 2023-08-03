@@ -186,4 +186,22 @@ public class ThongKeDAO {
         }
         return donHangThanhCong;
     }
+
+    @SuppressLint("Range")
+    public int donHangDaHuy(){
+        int donHangThanhCong = 0;
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select " +
+                "count(HOADONCHITIET.hoaDon_id) as donHangDaHuy, " +
+                "HOADONCHITIET.trangThaiDonHang as trangThaiDonHang, HOADONCHITIET.trangThaiThanhToan as trangThaiThanhToan from HOADONCHITIET " +
+                "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id "+
+                "where trangThaiDonHang = 4 ", null);
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                donHangThanhCong = cursor.getInt(cursor.getColumnIndex("donHangDaHuy"));
+            }while (cursor.moveToNext());
+        }
+        return donHangThanhCong;
+    }
 }

@@ -60,5 +60,6 @@ public class ThongKeAdminFragment extends Fragment {
 
         tvTong_tien.setText(thongKeDAO.tongTien()+" vnd");
         tvDonHang_thanhcong.setText(""+thongKeDAO.donHangThanhCong());
+        tvDonHang_dahuy.setText(""+thongKeDAO.donHangDaHuy());
     }
 }

@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this, list.size() + "", Toast.LENGTH_SHORT).show();
 
         //check data HOADONCHITIET
-        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(MainActivity.this);
-        ArrayList<HoaDonChiTiet> listDonHangByHDCT = hoaDonChiTietDAO.getDonHangByHDCT(0);
-        Toast.makeText(this, listDonHangByHDCT.size() + "", Toast.LENGTH_SHORT).show();
+//        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(MainActivity.this);
+//        ArrayList<HoaDonChiTiet> listDonHangByHDCT = hoaDonChiTietDAO.getDonHangByHDCT(0);
+//        Toast.makeText(this, listDonHangByHDCT.size() + "", Toast.LENGTH_SHORT).show();
 
 
         //Ánh xạ
