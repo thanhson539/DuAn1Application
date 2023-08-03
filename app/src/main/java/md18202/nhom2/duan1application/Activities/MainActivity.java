@@ -32,8 +32,10 @@ import java.util.ArrayList;
 import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
+import md18202.nhom2.duan1application.DAO.ThongBaoDAO;
 import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
+import md18202.nhom2.duan1application.Fragments.LienHe_Fragment;
 import md18202.nhom2.duan1application.Fragments.Loai_San_Pham_Fragment;
 import md18202.nhom2.duan1application.Fragments.QL_DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.Ql_NguoiDung_Fragment;
@@ -51,6 +53,7 @@ import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.Models.NguoiDung;
+import md18202.nhom2.duan1application.Models.ThongBao;
 import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,9 +86,10 @@ public class MainActivity extends AppCompatActivity {
 //        Toast.makeText(this, list.size() + "", Toast.LENGTH_SHORT).show();
 
         //check data HOADONCHITIET
-        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(MainActivity.this);
-        ArrayList<HoaDonChiTiet> listDonHangByHDCT = hoaDonChiTietDAO.getDonHangByHDCT(0);
-        Toast.makeText(this, listDonHangByHDCT.size() + "", Toast.LENGTH_SHORT).show();
+//        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+//        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+//        HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(MainActivity.this);
+//        ArrayList<HoaDonChiTiet> listDonHangByHDCT = hoaDonChiTietDAO.getDonHangByHDCT(0, nguoiDung_id);
 
 
         //Ánh xạ
@@ -169,10 +173,10 @@ public class MainActivity extends AppCompatActivity {
                 } else if (menuId == R.id.menuDonHang) {
                     fragment = new DonHang_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menu_QL_BinhLuan){
+                } else if (menuId == R.id.menu_QL_BinhLuan) {
                     fragment = new QuanLy_BL_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-                }else if (menuId == R.id.menuQlDonHang){
+                } else if (menuId == R.id.menuQlDonHang) {
                     fragment = new QL_DonHang_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menu_ThongKe) {
@@ -180,6 +184,9 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 } else if (menuId == R.id.menuThongBao) {
                     fragment = new ThongBao_fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                } else if (menuId == R.id.menuLienHe) {
+                    fragment = new LienHe_Fragment();
                     fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
                 }
 
@@ -256,5 +263,28 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Hiển thị thông tin sharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        String imgSrc = sharedPreferences.getString("imgSrc", "");
+        String hoTen = sharedPreferences.getString("hoTen", "");
+        String soDienThoai = sharedPreferences.getString("soDienThoai", "");
+        String email = sharedPreferences.getString("email", "");
+
+        //Set thong tin nguoi dung cho header layout
+        boolean isUri = imgSrc.startsWith("content://");
+        if (isUri) {
+            Picasso.get().load(Uri.parse(imgSrc)).into(imgAvatar_header);
+        } else {
+            int idResource = this.getResources().getIdentifier(imgSrc, "drawable", this.getPackageName());
+            imgAvatar_header.setImageResource(idResource);
+        }
+        tvName_header.setText(hoTen);
+        tvPhoneNumber_header.setText(soDienThoai);
+        tvEmail_header.setText(email);
     }
 }

@@ -1,5 +1,7 @@
 package md18202.nhom2.duan1application.Fragments.childFrag_of_DonHangFrag;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,9 @@ public class DaGiao_Fragment extends Fragment {
     }
     private void loadData(RecyclerView ryc_daGiao){
         hoaDonChiTietDAO = new HoaDonChiTietDAO(getContext());
-        ArrayList<HoaDonChiTiet> list = hoaDonChiTietDAO.getDonHangByHDCT(3);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
+        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+        ArrayList<HoaDonChiTiet> list = hoaDonChiTietDAO.getDonHangByHDCT(3,nguoiDung_id);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         ryc_daGiao.setLayoutManager(linearLayoutManager);
         DonHangAdapter adapter = new DonHangAdapter(getContext(),list);

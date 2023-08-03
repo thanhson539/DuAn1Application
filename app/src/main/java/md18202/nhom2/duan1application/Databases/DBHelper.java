@@ -90,7 +90,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createThongBao);
 
         //DATA ẢO
-
         /*1: Bang 'NGUOIDUNG'
          * Cấu trúc cột: nguoiDung_id, hoTen, soDienThoai, email, taiKhoan, matKhau, loaiTaiKhoan
          * Ghi chú:
@@ -186,7 +185,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("insert into HOADON values" +
                 "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
-                "(2, 2, '2023-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
+                "(2, 3, '2022-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
                 "(3, 3, '2023-05-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
                 "(4, 3, '2023-03-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
                 "(5, 3, '2023-02-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
@@ -210,11 +209,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(5, 5, 1, 3, 1)," +
                 "(1, 2, 2, 0, 0)," +
                 "(1, 1, 3, 1, 1)," +
-                "(2, 3, 5, 2, 1)," +
+                "(2, 3, 5, 3, 1)," +
                 "(3, 4, 4, 3, 0)," +
                 "(4, 20, 1, 0, 0)," +
                 "(5, 15, 4, 1, 1)," +
                 "(5, 16, 2, 4, 0)");
+
+        /*7: Bảng 'THONGBAO'
+         * Câu trúc cột: thongBao_id, nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, isRead, loaiThongBao */
+        db.execSQL("insert into THONGBAO values" +
+                "(1, 1, 10,'Thông báo trạng thái đơn hàng','Đơn hàng của bạn đã được xác nhận','Ngày 02/08/2023 15:25',0,0)," +
+                "(2, 1, 12,'Thông báo trạng thái đơn hàng','Bạn có đơn hàng đang giao','Ngày 05/08/2023 09:25',1,1)");
     }
 
     @Override
@@ -225,6 +230,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists LOAISANPHAM");
         db.execSQL("drop table if exists SANPHAM");
         db.execSQL("drop table if exists HOADONCHITIET");
+        db.execSQL("drop table if exists THONGBAO");
         onCreate(db);
     }
 }

@@ -9,7 +9,7 @@ public class ThongBao {
     private String thoiGian;
     private int loaiThongBao;
     private int isRead;
-
+    private String anhSanPham;
     public ThongBao() {
     }
 
@@ -22,6 +22,37 @@ public class ThongBao {
         this.thoiGian = thoiGian;
         this.loaiThongBao = loaiThongBao;
         this.isRead = isRead;
+    }
+
+    public ThongBao(int thongBao_id, int nguoiDung_id, int sanPham_id, String tieuDe, String noiDung, String thoiGian, int loaiThongBao, int isRead, String anhSanPham) {
+        this.thongBao_id = thongBao_id;
+        this.nguoiDung_id = nguoiDung_id;
+        this.sanPham_id = sanPham_id;
+        this.tieuDe = tieuDe;
+        this.noiDung = noiDung;
+        this.thoiGian = thoiGian;
+        this.loaiThongBao = loaiThongBao;
+        this.isRead = isRead;
+        this.anhSanPham = anhSanPham;
+    }
+
+    public ThongBao(int nguoiDung_id, int sanPham_id, String tieuDe, String noiDung, String thoiGian, int loaiThongBao, int isRead, String anhSanPham) {
+        this.nguoiDung_id = nguoiDung_id;
+        this.sanPham_id = sanPham_id;
+        this.tieuDe = tieuDe;
+        this.noiDung = noiDung;
+        this.thoiGian = thoiGian;
+        this.loaiThongBao = loaiThongBao;
+        this.isRead = isRead;
+        this.anhSanPham = anhSanPham;
+    }
+
+    public String getAnhSanPham() {
+        return anhSanPham;
+    }
+
+    public void setAnhSanPham(String anhSanPham) {
+        this.anhSanPham = anhSanPham;
     }
 
     public int getSanPham_id() {

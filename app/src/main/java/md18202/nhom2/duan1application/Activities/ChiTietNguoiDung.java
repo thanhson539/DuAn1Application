@@ -237,7 +237,15 @@ public class ChiTietNguoiDung extends AppCompatActivity {
                 NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getApplicationContext());
                 boolean check = nguoiDungDAO.capNhatThongTinNguoiDung(newNguoiDung_id, newImgSrc, newName, newPhone, newEmail);
                 if (check) {
+                    SharedPreferences sharedPreferences1 = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences1.edit();
+                    editor.putString("imgSrc", newImgSrc);
+                    editor.putString("hoTen", newName);
+                    editor.putString("soDienThoai", newPhone);
+                    editor.putString("email", newEmail);
+                    editor.commit();
                     Toast.makeText(ChiTietNguoiDung.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    onResume();
                     alertDialog.dismiss();
                 }
             }
@@ -281,7 +289,36 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         });
     }
 
-//    Chưa hoàn thiện chức năng thêm ảnh
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Get data nguoi dung tu sharePre da luu khi dang nhap
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+        String imgSrc = sharedPreferences.getString("imgSrc", "");
+        String hoTen = sharedPreferences.getString("hoTen", "");
+        String soDienThoai = sharedPreferences.getString("soDienThoai", "");
+        String email = sharedPreferences.getString("email", "");
+        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
+
+        //Set data cho cac widget
+        boolean isUri = imgSrc.startsWith("content://");
+        if (isUri) {
+            Picasso.get().load(Uri.parse(imgSrc)).into(imgAvatar_chiTiet);
+        } else {
+            int idResource = this.getResources().getIdentifier(imgSrc, "drawable", this.getPackageName());
+            imgAvatar_chiTiet.setImageResource(idResource);
+        }
+        tvName_chiTiet.setText(hoTen);
+        tvPhoneNumber_chiTiet.setText(soDienThoai);
+        tvEmail_chiTiet.setText(email);
+        if (loaiTaiKhoan == 0) {
+            tvLoaiTaiKhoan_chiTiet.setText("Người dùng");
+        } else {
+            tvLoaiTaiKhoan_chiTiet.setText("Admin");
+        }
+    }
+    //    Chưa hoàn thiện chức năng thêm ảnh
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
