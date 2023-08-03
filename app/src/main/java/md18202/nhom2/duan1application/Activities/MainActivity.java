@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -216,6 +217,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        //Phần quyền admin
+//        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
+//        if (loaiTaiKhoan == 0){
+////            Menu menu =
+//        }
     }
 
     @Override
