@@ -204,4 +204,37 @@ public class ThongKeDAO {
         }
         return donHangThanhCong;
     }
+
+    @SuppressLint("Range")
+    public int getDataInMonthForAdmin(int month, int year){
+        List<HoaDonChiTiet> list = new ArrayList<>();
+        int tien = 0;
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.hoaDon_id, strftime('%m', HOADON.ngayMua) as month, " +
+                "strftime('%Y', HOADON.ngayMua) as year, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
+                "HOADON.nguoiDung_id as nguoiDung_id, " +
+                "sum((HOADONCHITIET.soLuong * SANPHAM.giaSanPham)) as tien, " +
+                "HOADONCHITIET.trangThaiDonHang as trangThaiDonHang, " +
+                "HOADONCHITIET.trangThaiThanhToan as trangThaiThanhToan " +
+                "from HOADONCHITIET " +
+                "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
+                "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
+                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 " +
+                "group by month, year", null);
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                list.add(new HoaDonChiTiet(cursor.getInt(cursor.getColumnIndex("month")),
+                        cursor.getInt(cursor.getColumnIndex("year")),
+                        cursor.getInt(cursor.getColumnIndex("tien"))));
+            }while (cursor.moveToNext());
+        }
+
+        for(HoaDonChiTiet hdct: list){
+            if(hdct.getMonth() == month && hdct.getYear() == year){
+                tien = hdct.getGiaSanPham();
+            }
+        }
+        return tien;
+    }
 }
