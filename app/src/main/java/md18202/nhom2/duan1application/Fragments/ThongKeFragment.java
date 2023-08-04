@@ -90,10 +90,6 @@ public class ThongKeFragment extends Fragment {
         barDataSet.setValueTextSize(18f);
         barChart.getDescription().setEnabled(true);
 
-//        HoaDonDAO hoaDonDAO =new HoaDonDAO(getContext());
-//        ArrayList<HoaDon> listHoaDon = hoaDonDAO.getMonth(nguoiDung_id);
-//        Toast.makeText(getContext(), ""+listHoaDon, Toast.LENGTH_SHORT).show();
-
     }
 
     private void getData(){

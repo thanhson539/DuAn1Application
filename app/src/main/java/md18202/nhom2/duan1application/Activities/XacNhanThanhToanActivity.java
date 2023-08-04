@@ -148,9 +148,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                                     if(hoaDonChiTietDAO.themHoaDonChiTiet(hdct) > 0){
                                         SanPham sanPham = sanPhamDAO.getSanPham(gioHang.getSanPham_id());
                                         sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai())-(gioHang.getSoLuong())))));
-                                        if(sanPhamDAO.soLuongConLai(sanPham) > 0){
-                                            Toast.makeText(XacNhanThanhToanActivity.this, "so luong ok", Toast.LENGTH_SHORT).show();
-                                        }
+                                        sanPhamDAO.soLuongConLai(sanPham);
                                     }
                                 }
                                 startActivity(new Intent(XacNhanThanhToanActivity.this, MainActivity.class));
