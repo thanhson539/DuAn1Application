@@ -104,10 +104,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL("insert into NGUOIDUNG values" +
                 "(1,'avatar_thanh_son', 'Nguyen Thanh Son', '0963943774', 'hoasua050399@mail.com','thanhson539','123456', 1,0)," +
-                "(2,'avatar_mac_dinh', 'Nguyen Duy Tien', '0123456789', 'nguyenduytienbgg3@gmail.com','duytienbgg3','123456', 0,0)," +
-                "(3,'avatar_mac_dinh', 'Phi Dinh Long', '0123456789', 'philongpdl@gmail.com','philongpdl','123456', 0,0)," +
-                "(4,'avatar_mac_dinh', 'Hoang Minh Quan', '0123456789', 'mquann139@gmail.com','mquann139','123456', 0,0)," +
-                "(5,'avatar_mac_dinh', 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0,0)");
+                "(2,'avatar_tien', 'Nguyen Duy Tien', '0123456789', 'nguyenduytienbgg3@gmail.com','duytienbgg3','123456', 0,0)," +
+                "(3,'avatar_long', 'Phi Dinh Long', '0123456789', 'philongpdl@gmail.com','philongpdl','123456', 0,0)," +
+                "(4,'avatar_quan', 'Hoang Minh Quan', '0123456789', 'mquann139@gmail.com','mquann139','123456', 0,0)," +
+                "(5,'avatar_dung', 'Ha Manh Dung', '0375816024', 'hmdung26@gmail.com','hmdung26','123456', 0,0)");
 
         /*2: Bang 'BINHLUAN'
          * Cấu trúc cột: binhLuan_id, nguoiDung_id, sanPham_id, noiDung, thoiGian */
@@ -127,7 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         /*3: Bảng 'LOAISANPHAM'
-        * Cấu trúc cột: loaiSanPham_id, tenLoai */
+         * Cấu trúc cột: loaiSanPham_id, tenLoai */
 
         db.execSQL("insert into LOAISANPHAM values" +
                 "(1, 'Vớ cố thấp')," +
@@ -138,7 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(6, 'Vớ basic nam/nữ')");
 
         /*4: Bảng 'SANPHAM'
-        * Cấu trúc cột: sanPham_id, loaiSanPham_id, tenSanPham, anhSanPham, giaSanPham, moTa, soLuongConLai, isYeuThich*/
+         * Cấu trúc cột: sanPham_id, loaiSanPham_id, tenSanPham, anhSanPham, giaSanPham, moTa, soLuongConLai, isYeuThich*/
 
         db.execSQL("insert into SANPHAM values" +
                 // vo co thap
@@ -188,7 +188,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(30, 6, 'Vớ họa tiết nam nữ 04', 'sanpham_vohoatiet4', 20000, 'Vớ họa tiết nam/nũ chất liệu cao cấp',60, 0,0)");
 
         /*5: Bảng 'HOADON'
-        *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien, diaChi */
+         *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien, diaChi */
 
         db.execSQL("insert into HOADON values" +
                 "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +

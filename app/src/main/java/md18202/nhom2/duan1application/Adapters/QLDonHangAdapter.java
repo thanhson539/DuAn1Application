@@ -74,8 +74,7 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
 
                         //Them thong bao
                         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
-                        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+                        int nguoiDung_id = list.get(holder.getAdapterPosition()).getNguoiDung_id();
                         String tieuDe = "Thông báo đơn hàng";
                         String noiDung = "Đơn hàng của bạn đã được xác nhận!";
                         String thoiGian = getTimeNow();
@@ -83,8 +82,8 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         int isRead = 0;
                         String anhSanPham = list.get(holder.getAdapterPosition()).getAnhSanPham();
                         ThongBao thongBao = new ThongBao(nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, loaiThongBao, isRead, anhSanPham);
-                        thongBaoDAO.themThongBao(thongBao);
-
+                        boolean check = thongBaoDAO.themThongBao(thongBao);
+                        Toast.makeText(context, check + "", Toast.LENGTH_SHORT).show();
                         //reload Data
                         reloadData(0);
                     }
@@ -104,8 +103,7 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
 
                         //Them thong bao
                         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
-                        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+                        int nguoiDung_id = list.get(holder.getAdapterPosition()).getNguoiDung_id();
                         Toast.makeText(context, nguoiDung_id + "", Toast.LENGTH_SHORT).show();
                         String tieuDe = "Thông báo đơn hàng";
                         String noiDung = "Bạn có đơn hàng đang giao";
@@ -135,8 +133,7 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
 
                         //Them thong bao
                         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
-                        SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
-                        int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+                        int nguoiDung_id = list.get(holder.getAdapterPosition()).getNguoiDung_id();
                         Toast.makeText(context, nguoiDung_id + "", Toast.LENGTH_SHORT).show();
                         String tieuDe = "Thông báo đơn hàng";
                         String noiDung = "Vui lòng xác nhận đã nhận hàng";

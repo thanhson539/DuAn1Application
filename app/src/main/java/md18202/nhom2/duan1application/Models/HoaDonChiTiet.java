@@ -12,6 +12,7 @@ public class HoaDonChiTiet {
     private String ngayMua;
     private String diaChi;
     private int tongTien;
+    private int nguoiDung_id;
     private int soTienDaMua;
     private int month;
     private int year;
@@ -24,7 +25,7 @@ public class HoaDonChiTiet {
 
     public HoaDonChiTiet(int hoaDon_id, int sanPham_id, int soLuong, int trangThaiDonHang, int trangThaiThanhToan,
                          String tenSanPham, String anhSanPham, int giaSanPham,
-                         String ngayMua, String diaChi, int tongTien) {
+                         String ngayMua, String diaChi, int tongTien, int nguoiDung_id) {
         this.hoaDon_id = hoaDon_id;
         this.sanPham_id = sanPham_id;
         this.soLuong = soLuong;
@@ -36,6 +37,7 @@ public class HoaDonChiTiet {
         this.ngayMua = ngayMua;
         this.diaChi = diaChi;
         this.tongTien = tongTien;
+        this.nguoiDung_id = nguoiDung_id;
     }
 
     public HoaDonChiTiet() {
@@ -151,5 +153,13 @@ public class HoaDonChiTiet {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public int getNguoiDung_id() {
+        return nguoiDung_id;
+    }
+
+    public void setNguoiDung_id(int nguoiDung_id) {
+        this.nguoiDung_id = nguoiDung_id;
     }
 }

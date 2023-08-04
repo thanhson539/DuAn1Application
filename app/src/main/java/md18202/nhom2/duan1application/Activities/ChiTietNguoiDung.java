@@ -109,7 +109,7 @@ public class ChiTietNguoiDung extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
-                editor.apply();
+                editor.commit();
                 Intent intent = new Intent(ChiTietNguoiDung.this, DangNhapActivity.class);
                 startActivity(intent);
                 finish(); // Đóng màn hình ChiTietNguoiDungActivity
@@ -151,6 +151,10 @@ public class ChiTietNguoiDung extends AppCompatActivity {
                     boolean check = nguoiDungDAO.doiMatKhau(nguoiDung_id, reNewPass);
                     if (check) {
                         Toast.makeText(ChiTietNguoiDung.this, "Thay đổi mật khẩu thành công!", Toast.LENGTH_SHORT).show();
+                        SharedPreferences sharedPreferences1 = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences1.edit();
+                        editor.putString("matKhau", reNewPass);
+                        editor.commit();
                         alertDialog.dismiss();
                     }
                 }
