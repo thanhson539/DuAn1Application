@@ -54,18 +54,19 @@ public class ThongKeDAO {
                 "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
                 "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
                 "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 and nguoiDung_id = ? " +
-                "group by month, year", new String[]{String.valueOf(nguoiDung_id)});
+                "group by month", new String[]{String.valueOf(nguoiDung_id)});
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
-                list.add(new HoaDonChiTiet(cursor.getInt(cursor.getColumnIndex("month")),
+                list.add(new HoaDonChiTiet(
+                        cursor.getInt(cursor.getColumnIndex("month")),
                         cursor.getInt(cursor.getColumnIndex("year")),
                         cursor.getInt(cursor.getColumnIndex("tien"))));
             }while (cursor.moveToNext());
         }
 
         for(HoaDonChiTiet hdct: list){
-            if(hdct.getMonth() == month && hdct.getYear() == year){
+            if(hdct.getYear() == year){
                 tien = hdct.getGiaSanPham();
             }
         }

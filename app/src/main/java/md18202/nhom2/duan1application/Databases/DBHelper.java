@@ -96,7 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "foreign key (sanPham_id) references SANPHAM(sanPham_id)," +
                 "foreign key (nguoiDung_id) references NGUOIDUNG(nguoiDung_id))");
 
-        db.execSQL("insert into SANPHAMYEUTHICH values (1,3), (2,3)");
+//        db.execSQL("insert into SANPHAMYEUTHICH values (1,3), (2,3)");
 
         //DATA ẢO
         /*1: Bang 'NGUOIDUNG'
@@ -114,12 +114,12 @@ public class DBHelper extends SQLiteOpenHelper {
         /*2: Bang 'BINHLUAN'
          * Cấu trúc cột: binhLuan_id, nguoiDung_id, sanPham_id, noiDung, thoiGian */
 
-        db.execSQL("insert into BINHLUAN values" +
-                "(1,1, 3,'Thanh Son da comment ve san pham nay', '13:00 - 03/07/2023')," +
-                "(2,2, 3,'Duy Tien da comment ve san pham nay', '14:00 - 04/07/2023')," +
-                "(3,3, 4,'Dinh Long da comment ve san pham nay', '15:00 - 05/07/2023')," +
-                "(4,4, 1,'Minh Quan da comment ve san pham nay', '16:00 - 06/07/2023')," +
-                "(5,5, 2,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
+//        db.execSQL("insert into BINHLUAN values" +
+//                "(1,1, 3,'Thanh Son da comment ve san pham nay', '13:00 - 03/07/2023')," +
+//                "(2,2, 3,'Duy Tien da comment ve san pham nay', '14:00 - 04/07/2023')," +
+//                "(3,3, 4,'Dinh Long da comment ve san pham nay', '15:00 - 05/07/2023')," +
+//                "(4,4, 1,'Minh Quan da comment ve san pham nay', '16:00 - 06/07/2023')," +
+//                "(5,5, 2,'Manh Dung da comment ve san pham nay', '17:00 - 07/07/2023')");
 
         /*2: Bang 'GIOHANG'
          * Cấu trúc cột:nguoiDung_id, sanPham_id, soLuong, trangThai
@@ -192,12 +192,12 @@ public class DBHelper extends SQLiteOpenHelper {
         /*5: Bảng 'HOADON'
          *Cấu trúc cột: hoaDon_id, nguoiDung_id, thoiGian, tongTien, diaChi */
 
-        db.execSQL("insert into HOADON values" +
-                "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
-                "(2, 3, '2022-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
-                "(3, 3, '2023-05-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
-                "(4, 3, '2023-03-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
-                "(5, 3, '2023-02-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
+//        db.execSQL("insert into HOADON values" +
+//                "(1, 1, '2023-07-31', 15000,'diachi1 - thi tran - Da Bac - Hoa Binh')," +
+//                "(2, 3, '2022-04-27', 25000,'diachi2 - thi tran - Da Bac - Hoa Binh')," +
+//                "(3, 3, '2023-05-28', 20000,'tk Tay mang - thi tran Da Bac - Da Bac - Hoa Binh')," +
+//                "(4, 3, '2023-03-29', 30000,'diachi4 - thi tran - Da Bac - Hoa Binh')," +
+//                "(5, 3, '2023-02-30', 35000,'diachi5 - thi tran - Da Bac - Hoa Binh')");
 
         /*6: Bảng 'HOADONCHITIET':
          * Cấu trúc bảng:hoaDon_id, sanPham_id, soLuong, trangThaiDonHang, trangThaiThanhToan
@@ -210,25 +210,25 @@ public class DBHelper extends SQLiteOpenHelper {
          * Trang thai thanh toan:
          * - 0: Chua thanh toan
          * - 1: Da thanh toan */
-        db.execSQL("insert into HOADONCHITIET values" +
-                "(4, 1, 1, 3, 1)," +
-                "(4, 2, 2, 3, 1)," +
-                "(4, 3, 1, 3, 1)," +
-                "(5, 4, 1, 3, 1)," +
-                "(5, 5, 1, 3, 1)," +
-                "(1, 2, 2, 0, 0)," +
-                "(1, 1, 3, 1, 1)," +
-                "(2, 3, 5, 3, 1)," +
-                "(3, 4, 4, 3, 0)," +
-                "(4, 20, 1, 0, 0)," +
-                "(5, 15, 4, 1, 1)," +
-                "(5, 16, 2, 4, 0)");
+//        db.execSQL("insert into HOADONCHITIET values" +
+//                "(4, 1, 1, 3, 1)," +
+//                "(4, 2, 2, 3, 1)," +
+//                "(4, 3, 1, 3, 1)," +
+//                "(5, 4, 1, 3, 1)," +
+//                "(5, 5, 1, 3, 1)," +
+//                "(1, 2, 2, 0, 0)," +
+//                "(1, 1, 3, 1, 1)," +
+//                "(2, 3, 5, 3, 1)," +
+//                "(3, 4, 4, 3, 0)," +
+//                "(4, 20, 1, 0, 0)," +
+//                "(5, 15, 4, 1, 1)," +
+//                "(5, 16, 2, 4, 0)");
 
         /*7: Bảng 'THONGBAO'
          * Câu trúc cột: thongBao_id, nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, isRead, loaiThongBao */
-        db.execSQL("insert into THONGBAO values" +
-                "(1, 1, 10,'Thông báo trạng thái đơn hàng','Đơn hàng của bạn đã được xác nhận','Ngày 02/08/2023 15:25',0,0)," +
-                "(2, 1, 12,'Thông báo trạng thái đơn hàng','Bạn có đơn hàng đang giao','Ngày 05/08/2023 09:25',1,1)");
+//        db.execSQL("insert into THONGBAO values" +
+//                "(1, 1, 10,'Thông báo trạng thái đơn hàng','Đơn hàng của bạn đã được xác nhận','Ngày 02/08/2023 15:25',0,0)," +
+//                "(2, 1, 12,'Thông báo trạng thái đơn hàng','Bạn có đơn hàng đang giao','Ngày 05/08/2023 09:25',1,1)");
     }
 
     @Override

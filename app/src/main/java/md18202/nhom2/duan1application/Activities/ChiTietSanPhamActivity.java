@@ -170,16 +170,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         if (validate(sanPham_id) < 0) {
             if (sanPhamYeuThichDAO.boYeuThichSanPham(sanPham_id, nguoiDung_id) > 0) {
                 imageView.setImageResource(R.drawable.frame4_trai_tim2);
-                Toast.makeText(getApplicationContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "That bai", Toast.LENGTH_SHORT).show();
             }
         } else {
             if (sanPhamYeuThichDAO.yeuThichSanPham(spyt) > 0) {
                 imageView.setImageResource(R.drawable.frame4_trai_tim);
-                Toast.makeText(getApplicationContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "That bai", Toast.LENGTH_SHORT).show();
             }
         }
 
