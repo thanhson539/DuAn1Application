@@ -5,6 +5,7 @@ public class HoaDon {
     private int nguoiDung_id;
     private String thoiGian;
     private int tongTien;
+    private String month;
     private String diaChi;
 
     public HoaDon(int hoaDon_id, int nguoiDung_id, String thoiGian, int tongTien) {
@@ -12,6 +13,18 @@ public class HoaDon {
         this.nguoiDung_id = nguoiDung_id;
         this.thoiGian = thoiGian;
         this.tongTien = tongTien;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public HoaDon(String month) {
+        this.month = month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public HoaDon(int hoaDon_id, int nguoiDung_id, String thoiGian, int tongTien, String diaChi) {

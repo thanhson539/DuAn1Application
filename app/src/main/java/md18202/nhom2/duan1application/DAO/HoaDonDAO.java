@@ -49,6 +49,22 @@ public class HoaDonDAO {
         return listResult;
     }
 
+    @SuppressLint("Range")
+    public ArrayList<HoaDon> getMonth(int nguoiDung_id){
+        ArrayList<HoaDon> listResult = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("select strftime('%m', ngayMua) as month from HOADON where nguoiDung_id = ?", new String[]{String.valueOf(nguoiDung_id)});
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                listResult.add(new HoaDon(
+                        cursor.getString(cursor.getColumnIndex("month"))
+                ));
+            }while (cursor.moveToNext());
+        }
+        return listResult;
+    }
+
     public HoaDon getHoaDonCuoiCung(int nguoiDung_id){
         ArrayList<HoaDon> list = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
