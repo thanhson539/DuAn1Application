@@ -12,12 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.Adapters.SanPhamAdapter1;
+import md18202.nhom2.duan1application.DAO.HoaDonDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamYeuThichDAO;
+import md18202.nhom2.duan1application.Models.HoaDon;
+import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.Models.SanPhamYeuThich;
 import md18202.nhom2.duan1application.R;

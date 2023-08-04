@@ -93,7 +93,12 @@ public class HomeFragment extends Fragment {
         imgThong_bao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Chưa tồn tại màn hình thông báo", Toast.LENGTH_SHORT).show();
+                ThongBao_fragment fragment = new ThongBao_fragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout_frame4, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

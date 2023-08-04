@@ -192,27 +192,27 @@ public class SanPhamDAO {
         return listResult;
     }
 
-    public ArrayList<SanPham> getDsSanPhamYeuThich() {
-        ArrayList<SanPham> listResult = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where isYeuThich = 1", null);
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            do {
-                listResult.add(new SanPham(
-                        cursor.getInt(0), //sanPham_id
-                        cursor.getInt(1), //loaiSanPham_id=
-                        cursor.getString(2), //tenSanPham
-                        cursor.getString(3), //anhSanPham
-                        cursor.getInt(4),    //giaSanPham
-                        cursor.getString(5), //moTa
-                        cursor.getInt(6),     //soLuongConLai
-                        cursor.getInt(7)     //isYeuThich
-                ));
-            } while (cursor.moveToNext());
-        }
-        return listResult;
-    }
+//    public ArrayList<SanPham> getDsSanPhamYeuThich() {
+//        ArrayList<SanPham> listResult = new ArrayList<>();
+//        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+//        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where isYeuThich = 1", null);
+//        if (cursor.getCount() != 0) {
+//            cursor.moveToFirst();
+//            do {
+//                listResult.add(new SanPham(
+//                        cursor.getInt(0), //sanPham_id
+//                        cursor.getInt(1), //loaiSanPham_id=
+//                        cursor.getString(2), //tenSanPham
+//                        cursor.getString(3), //anhSanPham
+//                        cursor.getInt(4),    //giaSanPham
+//                        cursor.getString(5), //moTa
+//                        cursor.getInt(6),     //soLuongConLai
+//                        cursor.getInt(7)     //isYeuThich
+//                ));
+//            } while (cursor.moveToNext());
+//        }
+//        return listResult;
+//    }
 
     public long SuaSanPham(SanPham sanPham) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -226,14 +226,14 @@ public class SanPhamDAO {
         return db.update("SANPHAM", contentValues, "sanPham_id=?", new String[]{String.valueOf(sanPham.getSanPham_id())});
     }
 
-    public boolean changeIsYeuThich(int sanPham_id, int newIsYeuThich) {
-        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("sanPham_id", sanPham_id);
-        contentValues.put("isYeuThich", newIsYeuThich);
-        long check = sqLiteDatabase.update("SANPHAM", contentValues, "sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
-        return check > 0;
-    }
+//    public boolean changeIsYeuThich(int sanPham_id, int newIsYeuThich) {
+//        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("sanPham_id", sanPham_id);
+//        contentValues.put("isYeuThich", newIsYeuThich);
+//        long check = sqLiteDatabase.update("SANPHAM", contentValues, "sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
+//        return check > 0;
+//    }
 
     public long insertSanPham(SanPham sanPham) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -256,15 +256,43 @@ public class SanPhamDAO {
         return db.update("SANPHAM", values, "sanPham_id=?", new String[]{String.valueOf(xoamem)});
     }
 
-    public int getTrangThaiYeuThichBySanPhamId(int sanPham_id) {
-        int trangThaiYeuThich = -1;
+//    public int getTrangThaiYeuThichBySanPhamId(int sanPham_id) {
+//        int trangThaiYeuThich = -1;
+//        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+//        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
+//        if (cursor.getCount() != 0) {
+//            cursor.moveToFirst();
+//            trangThaiYeuThich = cursor.getInt(7);
+//        }
+//        return trangThaiYeuThich;
+//    }
+
+    public int soLuongConLai(SanPham sanPham) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("soLuongConLai", sanPham.getSoLuongConLai());
+        return db.update("SANPHAM", values, "sanPham_id=?", new String[]{String.valueOf(sanPham.getSanPham_id())});
+    }
+
+    public SanPham getSanPham(int sanPham_id) {
+        SanPham sanPham = new SanPham();
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from SANPHAM where isXoaMem=0 and sanPham_id = ?", new String[]{String.valueOf(sanPham_id)});
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
-            trangThaiYeuThich = cursor.getInt(7);
+            do {
+                sanPham = new SanPham(
+                        cursor.getInt(0), //sanPham_id
+                        cursor.getInt(1), //loaiSanPham_id
+                        cursor.getString(2), //tenSanPham
+                        cursor.getString(3), //anhSanPham
+                        cursor.getInt(4),    //giaSanPham
+                        cursor.getString(5), //moTa
+                        cursor.getInt(6)     //soLuongConLai
+                );
+            } while (cursor.moveToNext());
         }
-        return trangThaiYeuThich;
+        return sanPham;
     }
 
 }

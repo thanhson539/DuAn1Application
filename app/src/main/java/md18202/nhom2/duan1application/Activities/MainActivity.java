@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.appcompat.widget.Toolbar;
@@ -28,12 +27,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
-import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
-import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
-import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
-import md18202.nhom2.duan1application.DAO.ThongBaoDAO;
 import md18202.nhom2.duan1application.Fragments.DonHang_Fragment;
 import md18202.nhom2.duan1application.Fragments.HomeFragment;
 import md18202.nhom2.duan1application.Fragments.LienHe_Fragment;
@@ -52,11 +45,6 @@ import md18202.nhom2.duan1application.Fragments.VoCoThap_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoCoTrung_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoHoaTiet_Fragment;
 import md18202.nhom2.duan1application.Fragments.VoLuoi_Fragment;
-import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
-import md18202.nhom2.duan1application.Models.BinhLuan;
-import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
-import md18202.nhom2.duan1application.Models.NguoiDung;
-import md18202.nhom2.duan1application.Models.ThongBao;
 import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
