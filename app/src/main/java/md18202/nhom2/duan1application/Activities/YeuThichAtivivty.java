@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import md18202.nhom2.duan1application.Fragments.SanPhamYeuThichFragment;
-import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 

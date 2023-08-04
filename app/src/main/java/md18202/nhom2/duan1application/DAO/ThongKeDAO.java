@@ -44,7 +44,7 @@ public class ThongKeDAO {
         List<HoaDonChiTiet> list = new ArrayList<>();
         int tien = 0;
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.hoaDon_id, strftime('%m', HOADON.ngayMua) as month, " +
+        Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.hoaDon_id, strftime('%M', HOADON.ngayMua) as month, " +
                 "strftime('%Y', HOADON.ngayMua) as year, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
                 "HOADON.nguoiDung_id as nguoiDung_id, " +
                 "sum((HOADONCHITIET.soLuong * SANPHAM.giaSanPham)) as tien, " +

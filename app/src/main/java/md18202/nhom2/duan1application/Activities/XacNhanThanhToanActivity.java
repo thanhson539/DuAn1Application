@@ -22,9 +22,11 @@ import md18202.nhom2.duan1application.Adapters.SanPhamThanhToanAdapter;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonDAO;
+import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.HoaDon;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
+import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class XacNhanThanhToanActivity extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
     RecyclerView recycleView_thanh_toan;
     HoaDonChiTietDAO hoaDonChiTietDAO;
     SanPhamThanhToanAdapter sanPhamThanhToanAdapter;
+    SanPhamDAO sanPhamDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
 
         hoaDonDAO = new HoaDonDAO(this);
         hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
+        sanPhamDAO = new SanPhamDAO(this);
 
         Intent intent = getIntent();
         tongTien = intent.getIntExtra("tongTien", 0);
@@ -142,7 +146,11 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                                     hdct.setTrangThaiThanhToan(0);
                                     hdct.setTrangThaiDonHang(0);
                                     if(hoaDonChiTietDAO.themHoaDonChiTiet(hdct) > 0){
-                                        Toast.makeText(XacNhanThanhToanActivity.this, "Ok", Toast.LENGTH_SHORT).show();
+                                        SanPham sanPham = sanPhamDAO.getSanPham(gioHang.getSanPham_id());
+                                        sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai())-(gioHang.getSoLuong())))));
+                                        if(sanPhamDAO.soLuongConLai(sanPham) > 0){
+                                            Toast.makeText(XacNhanThanhToanActivity.this, "so luong ok", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                                 startActivity(new Intent(XacNhanThanhToanActivity.this, MainActivity.class));
