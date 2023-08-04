@@ -52,11 +52,5 @@ public class SanPhamYeuThichFragment extends Fragment {
         sanPhamAdapter1 = new SanPhamAdapter1(getContext(), list);
 
         ryc_sanPhamYeuThich.setAdapter(sanPhamAdapter1);
-
-
-        HoaDonDAO hoaDonDAO = new HoaDonDAO(getContext());
-        ArrayList<HoaDon> listHoaDon = hoaDonDAO.getDsHoaDon(nguoiDung_id);
-        ArrayList<HoaDonChiTiet> listHoaDonChiTiet = hoaDonDAO.getDsHoaDonChiTiet(nguoiDung_id);
-        Toast.makeText(getContext(), ""+ listHoaDon + " | "+listHoaDonChiTiet , Toast.LENGTH_SHORT).show();
     }
 }

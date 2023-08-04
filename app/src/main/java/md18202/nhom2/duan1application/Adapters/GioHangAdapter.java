@@ -27,6 +27,7 @@ import java.util.List;
 import md18202.nhom2.duan1application.Activities.DiaChiNhanHangActivity;
 import md18202.nhom2.duan1application.Activities.GioHangActivity;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
+import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
@@ -37,6 +38,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
     GioHangActivity context;
     GioHangDAO gioHangDAO;
     SharedPreferences sharedPreferences;
+    SanPhamDAO sanPhamDAO;
     int nguoiDung_id;
     int price;
     public GioHangAdapter(List<GioHang> list, GioHangActivity context) {
@@ -45,6 +47,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         gioHangDAO = new GioHangDAO(context);
         sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
         nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+        sanPhamDAO = new SanPhamDAO(context);
         notifyDataSetChanged();
     }
 
@@ -81,6 +84,10 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         holder.imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SanPham sanPham = sanPhamDAO.getSanPham(list.get(holder.getAdapterPosition()).getSanPham_id());
+                if(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()) == sanPham.getSoLuongConLai()){
+                    return;
+                }
                 holder.tvSo_luong_mua.setText(""+(Integer.parseInt(holder.tvSo_luong_mua.getText().toString())+1));
                 gioHang.setSoLuong(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()));
                 gioHangDAO.suaSoLuong(gioHang);

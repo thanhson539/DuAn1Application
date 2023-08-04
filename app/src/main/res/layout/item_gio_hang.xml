@@ -14,11 +14,13 @@
             android:id="@+id/imgAnh_san_pham"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_weight="0.2"
             android:src="@drawable/sanpham_co_ngan1"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical">
@@ -30,8 +32,8 @@
                 android:textSize="20sp"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginTop="30dp">
                 <ImageView
@@ -41,7 +43,7 @@
                     android:src="@drawable/minus"/>
                 <TextView
                     android:id="@+id/tvSo_luong_mua"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="2"
@@ -50,8 +52,7 @@
                     android:id="@+id/imgPlus"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/plus"
-                    android:layout_marginLeft="25dp"/>
+                    android:src="@drawable/plus" />
                 <CheckBox
                     android:id="@+id/ckbMua_hang"
                     android:layout_width="30dp"
@@ -71,7 +72,7 @@
             android:id="@+id/imgCancel"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:src="@drawable/cancel"/>
     </LinearLayout>
 

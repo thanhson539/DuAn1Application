@@ -1,8 +1,6 @@
 package md18202.nhom2.duan1application.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
@@ -22,24 +20,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.SimpleTimeZone;
-import java.util.Timer;
 
 import md18202.nhom2.duan1application.Adapters.BinhLuanAdapter;
 import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
-import md18202.nhom2.duan1application.DAO.NguoiDungDAO;
-import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamYeuThichDAO;
-import md18202.nhom2.duan1application.DAO.ThongKeDAO;
-import md18202.nhom2.duan1application.Fragments.HomeFragment;
-import md18202.nhom2.duan1application.Fragments.YeuThich_Fragment;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.GioHang;
-import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
-import md18202.nhom2.duan1application.Models.NguoiDung;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.Models.SanPhamYeuThich;
 import md18202.nhom2.duan1application.R;

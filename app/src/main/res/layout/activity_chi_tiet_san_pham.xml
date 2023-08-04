@@ -186,7 +186,7 @@
                     android:id="@+id/edDialog_binh_luan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="leave a comment"
+                    android:hint="Để lại bình luận"
                     android:paddingLeft="10dp"
                     android:clickable="false"
                     android:focusable="false"
