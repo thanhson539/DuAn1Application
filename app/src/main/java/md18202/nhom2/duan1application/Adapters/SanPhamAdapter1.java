@@ -108,12 +108,9 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
                 //code chuc năng cập nhật isYeuThich
                 SanPhamYeuThichDAO sanPhamYeuThichDAO = new SanPhamYeuThichDAO(context);
                 if (sanPhamYeuThichDAO.boYeuThichSanPham(sanPham.getSanPham_id(), nguoiDung_id) > 0) {
-                    Toast.makeText(context, "Thanh cong", Toast.LENGTH_SHORT).show();
                     notifyDataSetChanged();
                     list.clear();
                     list = sanPhamYeuThichDAO.getSanPhamYeuThich(nguoiDung_id);
-                } else {
-                    Toast.makeText(context, "That bai", Toast.LENGTH_SHORT).show();
                 }
             }
         });

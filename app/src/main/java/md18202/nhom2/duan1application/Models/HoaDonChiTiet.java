@@ -40,6 +40,13 @@ public class HoaDonChiTiet {
         this.nguoiDung_id = nguoiDung_id;
     }
 
+    public HoaDonChiTiet(int hoaDon_id, int sanPham_id, int trangThaiDonHang, int trangThaiThanhToan, int nguoiDung_id){
+        this.hoaDon_id = hoaDon_id;
+        this.sanPham_id = sanPham_id;
+        this.trangThaiDonHang = trangThaiDonHang;
+        this.trangThaiThanhToan = trangThaiThanhToan;
+        this.nguoiDung_id = nguoiDung_id;
+    }
     public HoaDonChiTiet() {
     }
 
