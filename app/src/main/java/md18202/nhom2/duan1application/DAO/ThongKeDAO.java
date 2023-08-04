@@ -66,7 +66,7 @@ public class ThongKeDAO {
         }
 
         for(HoaDonChiTiet hdct: list){
-            if(hdct.getYear() == year){
+            if(hdct.getMonth() == month && hdct.getYear() == year){
                 tien = hdct.getGiaSanPham();
             }
         }
