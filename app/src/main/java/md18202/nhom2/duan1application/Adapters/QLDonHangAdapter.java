@@ -138,7 +138,7 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         int nguoiDung_id = list.get(holder.getAdapterPosition()).getNguoiDung_id();
                         Toast.makeText(context, nguoiDung_id + "", Toast.LENGTH_SHORT).show();
                         String tieuDe = "Thông báo đơn hàng";
-                        String noiDung = "Vui lòng xác nhận đã nhận hàng";
+                        String noiDung = "Bạn có đơn hàng đã giao, vui lòng xác nhận đã nhận hàng";
                         String thoiGian = getTimeNow();
                         int loaiThongBao = 2;
                         int isRead = 0;
@@ -170,10 +170,11 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                                     int newTrangThaiThanhToan = 1;
                                     int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
                                     int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
-                                    boolean check = hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThaiThanhToan, hoaDon_id, sanPham_id);
+                                    boolean check = hoaDonChiTietDAO.thayDoiTrangThaiThanhToan(newTrangThaiThanhToan, hoaDon_id, sanPham_id);
                                     if (check) {
                                         Toast.makeText(context, "Đơn hàng đã được xác nhận thanh toán", Toast.LENGTH_SHORT).show();
                                         holder.tvDongY_ql_donhang.setVisibility(View.GONE);
+                                        reloadData(3);
                                     }
                                 }
                             });
@@ -242,6 +243,7 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
         HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context);
         list.clear();
         list = hoaDonChiTietDAO.getDonHangByHDCTForAdmin(trangThaiDonHang);
+        Toast.makeText(context, list.size() + "", Toast.LENGTH_SHORT).show();
         notifyDataSetChanged();
     }
 
