@@ -21,8 +21,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.SplittableRandom;
 
+import md18202.nhom2.duan1application.Activities.XacNhanThanhToanActivity;
+import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.DAO.HoaDonChiTietDAO;
+import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.Models.HoaDonChiTiet;
+import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
 
 public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHolder> {
@@ -81,6 +85,13 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                                     SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
                                     int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
                                     list = hoaDonChiTietDAO.getDonHangByHDCT(0, nguoiDung_id);
+
+                                    //Thay đổi sl của sp khi ấn hủy
+                                    SanPhamDAO sanPhamDAO = new SanPhamDAO(context);
+                                    int slSpCuaDH = list.get(holder.getAdapterPosition()).getSoLuong();
+                                    SanPham sanPham = sanPhamDAO.getSanPham(list.get(holder.getAdapterPosition()).getSanPham_id());
+                                    sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai())+(slSpCuaDH)))));
+                                    sanPhamDAO.soLuongConLai(sanPham);
                                     notifyDataSetChanged();
                                 }
                             }
@@ -117,6 +128,13 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                                     SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
                                     int nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
                                     list = hoaDonChiTietDAO.getDonHangByHDCT(0, nguoiDung_id);
+
+                                    //Thay đổi sl của sp khi ấn hủy
+                                    SanPhamDAO sanPhamDAO = new SanPhamDAO(context);
+                                    int slSpCuaDH = list.get(holder.getAdapterPosition()).getSoLuong();
+                                    SanPham sanPham = sanPhamDAO.getSanPham(list.get(holder.getAdapterPosition()).getSanPham_id());
+                                    sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai())+(slSpCuaDH)))));
+                                    sanPhamDAO.soLuongConLai(sanPham);
                                     notifyDataSetChanged();
                                 }
                             }
