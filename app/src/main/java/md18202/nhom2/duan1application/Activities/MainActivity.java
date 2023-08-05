@@ -223,24 +223,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Phần quyền admin
-        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
-        if (loaiTaiKhoan == 1) {
-            Menu menu = navigationView.getMenu();
-            menu.findItem(R.id.menuTrangChu).setVisible(false);
-            menu.findItem(R.id.menuThongBao).setVisible(false);
-            menu.findItem(R.id.menuYeuThich).setVisible(false);
-            menu.findItem(R.id.menuDonHang).setVisible(false);
-            menu.findItem(R.id.menu_ThongKe).setVisible(false);
-            menu.findItem(R.id.menuGroupDanhMuc).setVisible(false);
-            menu.findItem(R.id.menuLienHe).setVisible(false);
-            //set fragmentHome mặc định
-            fragmentManager = getSupportFragmentManager();
-            fragment = new QL_DonHang_Fragment();
-            fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
-        } else {
-            Menu menu = navigationView.getMenu();
-            menu.findItem(R.id.menuQlForAdmin).setVisible(false);
-        }
+//        int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
+//        if (loaiTaiKhoan == 1) {
+//            Menu menu = navigationView.getMenu();
+//            menu.findItem(R.id.menuTrangChu).setVisible(false);
+//            menu.findItem(R.id.menuThongBao).setVisible(false);
+//            menu.findItem(R.id.menuYeuThich).setVisible(false);
+//            menu.findItem(R.id.menuDonHang).setVisible(false);
+//            menu.findItem(R.id.menu_ThongKe).setVisible(false);
+//            menu.findItem(R.id.menuGroupDanhMuc).setVisible(false);
+//            menu.findItem(R.id.menuLienHe).setVisible(false);
+//            //set fragmentHome mặc định
+//            fragmentManager = getSupportFragmentManager();
+//            fragment = new QL_DonHang_Fragment();
+//            fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+//        } else {
+//            Menu menu = navigationView.getMenu();
+//            menu.findItem(R.id.menuQlForAdmin).setVisible(false);
+//        }
     }
 
     @Override

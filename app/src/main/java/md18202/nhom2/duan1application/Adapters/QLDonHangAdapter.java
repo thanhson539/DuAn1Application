@@ -1,7 +1,9 @@
 package md18202.nhom2.duan1application.Adapters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -151,7 +153,41 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                 break;
             case 3:
                 holder.tvTrangThaiDonHang_ql_donhang.setText("Đã giao");
-                holder.tvDongY_ql_donhang.setVisibility(View.GONE);
+                if (list.get(holder.getAdapterPosition()).getTrangThaiThanhToan() == 1) {
+                    holder.tvDongY_ql_donhang.setVisibility(View.GONE);
+                } else {
+                    holder.tvDongY_ql_donhang.setText("Xác nhận thanh toán");
+                    holder.tvDongY_ql_donhang.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("Thông báo");
+                            builder.setMessage("Xác nhận thanh toán cho đơn hàng này?");
+                            builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context.getApplicationContext());
+                                    int newTrangThaiThanhToan = 1;
+                                    int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
+                                    int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
+                                    boolean check = hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThaiThanhToan, hoaDon_id, sanPham_id);
+                                    if (check) {
+                                        Toast.makeText(context, "Đơn hàng đã được xác nhận thanh toán", Toast.LENGTH_SHORT).show();
+                                        holder.tvDongY_ql_donhang.setVisibility(View.GONE);
+                                    }
+                                }
+                            });
+                            builder.setNegativeButton("Đóng", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+                    });
+                }
                 break;
             case 4:
                 holder.tvTrangThaiDonHang_ql_donhang.setText("Đã húy");
