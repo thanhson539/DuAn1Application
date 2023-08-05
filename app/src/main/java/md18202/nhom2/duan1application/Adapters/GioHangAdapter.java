@@ -85,7 +85,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 SanPham sanPham = sanPhamDAO.getSanPham(list.get(holder.getAdapterPosition()).getSanPham_id());
-                if(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()) == sanPham.getSoLuongConLai()){
+                if(Integer.parseInt(holder.tvSo_luong_mua.getText().toString()) == sanPham.getSoLuongConLai()
+                || sanPham.getSoLuongConLai() == 0){
                     return;
                 }
                 holder.tvSo_luong_mua.setText(""+(Integer.parseInt(holder.tvSo_luong_mua.getText().toString())+1));
