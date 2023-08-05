@@ -85,7 +85,6 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         String anhSanPham = list.get(holder.getAdapterPosition()).getAnhSanPham();
                         ThongBao thongBao = new ThongBao(nguoiDung_id, sanPham_id, tieuDe, noiDung, thoiGian, loaiThongBao, isRead, anhSanPham);
                         boolean check = thongBaoDAO.themThongBao(thongBao);
-                        Toast.makeText(context, check + "", Toast.LENGTH_SHORT).show();
                         //reload Data
                         reloadData(0);
                     }
@@ -106,7 +105,6 @@ public class QLDonHangAdapter extends RecyclerView.Adapter<QLDonHangAdapter.MyVi
                         //Them thong bao
                         ThongBaoDAO thongBaoDAO = new ThongBaoDAO(context.getApplicationContext());
                         int nguoiDung_id = list.get(holder.getAdapterPosition()).getNguoiDung_id();
-                        Toast.makeText(context, nguoiDung_id + "", Toast.LENGTH_SHORT).show();
                         String tieuDe = "Thông báo đơn hàng";
                         String noiDung = "Bạn có đơn hàng đang giao";
                         String thoiGian = getTimeNow();

@@ -75,7 +75,7 @@ public class ThongBaoDAO {
                         cursor.getString(4),//noiDung
                         cursor.getString(5),//thoiGian
                         cursor.getInt(6),   //isRead
-                        cursor.getInt(7)   //loaiThongBao
+                        cursor.getInt(7)    //loaiThongBao
                 ));
             } while (cursor.moveToNext());
         }
