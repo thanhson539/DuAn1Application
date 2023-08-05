@@ -75,10 +75,12 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                         builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //Thay đổi trạng thái đơn háng
                                 HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context.getApplicationContext());
                                 int newTrangThai = 4; //Hủy đơn hàng
                                 int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
                                 int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
+                                int slSpCuaDH = list.get(holder.getAdapterPosition()).getSoLuong();
                                 boolean check = hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThai, hoaDon_id, sanPham_id);
                                 if (check) {
                                     list.clear();
@@ -88,8 +90,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
 
                                     //Thay đổi sl của sp khi ấn hủy
                                     SanPhamDAO sanPhamDAO = new SanPhamDAO(context);
-                                    int slSpCuaDH = list.get(holder.getAdapterPosition()).getSoLuong();
-                                    SanPham sanPham = sanPhamDAO.getSanPham(list.get(holder.getAdapterPosition()).getSanPham_id());
+                                    SanPham sanPham = sanPhamDAO.getSanPham(sanPham_id);
                                     sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai())+(slSpCuaDH)))));
                                     sanPhamDAO.soLuongConLai(sanPham);
                                     notifyDataSetChanged();
@@ -118,10 +119,12 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
                         builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                //Thay đổi trạng thái đơn háng
                                 HoaDonChiTietDAO hoaDonChiTietDAO = new HoaDonChiTietDAO(context.getApplicationContext());
                                 int newTrangThai = 4; //Hủy đơn hàng
                                 int hoaDon_id = list.get(holder.getAdapterPosition()).getHoaDon_id();
                                 int sanPham_id = list.get(holder.getAdapterPosition()).getSanPham_id();
+                                int slSpCuaDH = list.get(holder.getAdapterPosition()).getSoLuong();
                                 boolean check = hoaDonChiTietDAO.thayDoiTrangThaiDonHang(newTrangThai, hoaDon_id, sanPham_id);
                                 if (check) {
                                     list.clear();
@@ -131,8 +134,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
 
                                     //Thay đổi sl của sp khi ấn hủy
                                     SanPhamDAO sanPhamDAO = new SanPhamDAO(context);
-                                    int slSpCuaDH = list.get(holder.getAdapterPosition()).getSoLuong();
-                                    SanPham sanPham = sanPhamDAO.getSanPham(list.get(holder.getAdapterPosition()).getSanPham_id());
+                                    SanPham sanPham = sanPhamDAO.getSanPham(sanPham_id);
                                     sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai())+(slSpCuaDH)))));
                                     sanPhamDAO.soLuongConLai(sanPham);
                                     notifyDataSetChanged();
