@@ -44,34 +44,39 @@ public class ThongKeDAO {
         List<HoaDonChiTiet> list = new ArrayList<>();
         int tien = 0;
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.hoaDon_id, strftime('%M', HOADON.ngayMua) as month, " +
-                "strftime('%Y', HOADON.ngayMua) as year, HOADONCHITIET.soLuong as soLuong, SANPHAM.giaSanPham as giaSanPham, " +
-                "HOADON.nguoiDung_id as nguoiDung_id, " +
+        Cursor cursor = sqLiteDatabase.rawQuery("select HOADON.hoaDon_id, " +
+                "strftime('%m', HOADON.ngayMua) as month, " +
+                "strftime('%Y', HOADON.ngayMua) as year, " +
+                "HOADONCHITIET.soLuong, " +
+                "SANPHAM.giaSanPham, " +
+                "HOADON.nguoiDung_id, " +
                 "sum((HOADONCHITIET.soLuong * SANPHAM.giaSanPham)) as tien, " +
-                "HOADONCHITIET.trangThaiDonHang as trangThaiDonHang, " +
-                "HOADONCHITIET.trangThaiThanhToan as trangThaiThanhToan " +
+                "HOADONCHITIET.trangThaiDonHang, " +
+                "HOADONCHITIET.trangThaiThanhToan " +
                 "from HOADONCHITIET " +
                 "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
                 "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
-                "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 and nguoiDung_id = ? " +
-                "group by month", new String[]{String.valueOf(nguoiDung_id)});
+                "where HOADONCHITIET.trangThaiDonHang = 3 and HOADONCHITIET.trangThaiThanhToan = 1 and HOADON.nguoiDung_id = ? " +
+                "group by strftime('%m-%Y', HOADON.ngayMua)", new String[]{String.valueOf(nguoiDung_id)});
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
                 list.add(new HoaDonChiTiet(
-                        cursor.getInt(cursor.getColumnIndex("month")),
-                        cursor.getInt(cursor.getColumnIndex("year")),
+                        cursor.getString(cursor.getColumnIndex("month")),
+                        cursor.getString(cursor.getColumnIndex("year")),
                         cursor.getInt(cursor.getColumnIndex("tien"))));
             }while (cursor.moveToNext());
         }
 
         for(HoaDonChiTiet hdct: list){
-            if(hdct.getMonth() == month && hdct.getYear() == year){
-                tien = hdct.getGiaSanPham();
+            if(Integer.parseInt(hdct.getMonth()) == month && Integer.parseInt(hdct.getYear()) == year){
+                tien = hdct.getTien();
             }
         }
         return tien;
     }
+
+
 
     @SuppressLint("Range")
     public int tuNgayDenNgay(String tuNgay, String denNgay, int nguoiDung_id){
@@ -225,14 +230,14 @@ public class ThongKeDAO {
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
-                list.add(new HoaDonChiTiet(cursor.getInt(cursor.getColumnIndex("month")),
-                        cursor.getInt(cursor.getColumnIndex("year")),
+                list.add(new HoaDonChiTiet(cursor.getString(cursor.getColumnIndex("month")),
+                        cursor.getString(cursor.getColumnIndex("year")),
                         cursor.getInt(cursor.getColumnIndex("tien"))));
             }while (cursor.moveToNext());
         }
 
         for(HoaDonChiTiet hdct: list){
-            if(hdct.getMonth() == month && hdct.getYear() == year){
+            if(Integer.parseInt(hdct.getMonth()) == month && Integer.parseInt(hdct.getYear()) == year){
                 tien = hdct.getGiaSanPham();
             }
         }
