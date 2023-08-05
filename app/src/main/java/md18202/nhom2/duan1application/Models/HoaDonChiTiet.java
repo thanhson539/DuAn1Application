@@ -14,13 +14,14 @@ public class HoaDonChiTiet {
     private int tongTien;
     private int nguoiDung_id;
     private int soTienDaMua;
-    private int month;
-    private int year;
+    private String month;
+    private String year;
+    private int tien;
 
-    public HoaDonChiTiet(int month, int year, int giaSanPham) {
+    public HoaDonChiTiet(String month, String year, int tien) {
         this.month = month;
         this.year = year;
-        this.giaSanPham = giaSanPham;
+        this.tien = tien;
     }
 
     public HoaDonChiTiet(int hoaDon_id, int sanPham_id, int soLuong, int trangThaiDonHang, int trangThaiThanhToan,
@@ -146,19 +147,19 @@ public class HoaDonChiTiet {
         this.soTienDaMua = soTienDaMua;
     }
 
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -168,5 +169,13 @@ public class HoaDonChiTiet {
 
     public void setNguoiDung_id(int nguoiDung_id) {
         this.nguoiDung_id = nguoiDung_id;
+    }
+
+    public int getTien() {
+        return tien;
+    }
+
+    public void setTien(int tien) {
+        this.tien = tien;
     }
 }
