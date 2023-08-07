@@ -124,8 +124,10 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         holder.ckbMua_hang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(gioHang.getSoLuong()==0){
+                SanPham sanPham = sanPhamDAO.getSanPham(list.get(holder.getAdapterPosition()).getSanPham_id());
+                if(sanPham.getSoLuongConLai() == 0){
                     Toast.makeText(context, "Sản phẩm đã hết hàng", Toast.LENGTH_SHORT).show();
+                    holder.ckbMua_hang.setChecked(false);
                     return;
                 }
                 if(gioHang.getTrangThaiMua()==0){
