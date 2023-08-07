@@ -25,6 +25,7 @@ import java.util.List;
 import md18202.nhom2.duan1application.Adapters.BinhLuanAdapter;
 import md18202.nhom2.duan1application.DAO.BinhLuanDAO;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
+import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.DAO.SanPhamYeuThichDAO;
 import md18202.nhom2.duan1application.Models.BinhLuan;
 import md18202.nhom2.duan1application.Models.GioHang;
@@ -261,6 +262,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     public void chonMua(int nguoiDung_id, int sanPham_id) {
+        SanPhamDAO sanPhamDAO = new SanPhamDAO(ChiTietSanPhamActivity.this);
+        SanPham sanPham = sanPhamDAO.getSanPham(sanPham_id);
+        if(sanPham.getSoLuongConLai() == 0){
+            Toast.makeText(ChiTietSanPhamActivity.this, "Sản phẩm hết hàng", Toast.LENGTH_SHORT).show();
+            return;
+        }
         GioHangDAO gioHangDAO = new GioHangDAO(ChiTietSanPhamActivity.this);
         GioHang gioHang = new GioHang();
         gioHang.setNguoiDung_id(nguoiDung_id);
