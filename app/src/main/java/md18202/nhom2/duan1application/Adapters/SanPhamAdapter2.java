@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import md18202.nhom2.duan1application.Activities.ChiTietSanPhamActivity;
 import md18202.nhom2.duan1application.DAO.GioHangDAO;
+import md18202.nhom2.duan1application.DAO.SanPhamDAO;
 import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.Models.SanPham;
 import md18202.nhom2.duan1application.R;
@@ -113,6 +114,12 @@ public class SanPhamAdapter2 extends RecyclerView.Adapter<SanPhamAdapter2.MyView
     }
 
     public void chonMua(int sanPham_id){
+        SanPhamDAO sanPhamDAO = new SanPhamDAO(context);
+        SanPham sanPham = sanPhamDAO.getSanPham(sanPham_id);
+        if(sanPham.getSoLuongConLai() == 0){
+            Toast.makeText(context, "Sản phẩm hết hàng", Toast.LENGTH_SHORT).show();
+            return;
+        }
         GioHangDAO gioHangDAO = new GioHangDAO(context);
         GioHang gioHang = new GioHang();
         SharedPreferences sharedPreferences = context.getSharedPreferences("NGUOIDUNG",context.MODE_PRIVATE);
