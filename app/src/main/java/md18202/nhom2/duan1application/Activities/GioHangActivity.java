@@ -63,7 +63,14 @@ public class GioHangActivity extends AppCompatActivity {
 /////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public void onBackPressed() {finish();
+    public void onBackPressed() {
+        listGioHang = gioHangDAO.getDsGioHang(getNguoiDung_id);
+
+        for(GioHang gioHang:listGioHang){
+            gioHang.setTrangThaiMua(0);
+            gioHangDAO.suaTrangThaiMua(gioHang);
+        }
+        finish();
     }
 
     @Override
