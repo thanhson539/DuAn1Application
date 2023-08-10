@@ -31,12 +31,14 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
     private ArrayList<SanPham> list;
     SharedPreferences sharedPreferences;
     int nguoiDung_id;
+    int loaiTaiKhoan;
 
     public SanPhamAdapter1(Context context, ArrayList<SanPham> list) {
         this.context = context;
         this.list = list;
         sharedPreferences= context.getSharedPreferences("NGUOIDUNG", Context.MODE_PRIVATE);
         nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
+        loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
     }
 
     @NonNull
@@ -64,6 +66,10 @@ public class SanPhamAdapter1 extends RecyclerView.Adapter<SanPhamAdapter1.myView
         }
         if (validate(list.get(holder.getAdapterPosition()).getSanPham_id()) < 0) {
             holder.imgYeuThich_item.setImageResource(R.drawable.frame4_trai_tim);
+        }
+
+        if(loaiTaiKhoan == 1){
+            holder.tvChiTiet_item.setVisibility(View.GONE);
         }
 
         //Sự kiện yêu thích cho sản phẩm

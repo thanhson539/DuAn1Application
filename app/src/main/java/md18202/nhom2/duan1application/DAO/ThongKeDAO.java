@@ -226,7 +226,7 @@ public class ThongKeDAO {
                 "inner join SANPHAM on HOADONCHITIET.sanPham_id = SANPHAM.sanPham_id " +
                 "inner join HOADON on HOADONCHITIET.hoaDon_id = HOADON.hoaDon_id " +
                 "where trangThaiDonHang = 3 and trangThaiThanhToan = 1 " +
-                "group by month, year", null);
+                "group by strftime('%m-%Y', HOADON.ngayMua)", null);
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
@@ -238,7 +238,7 @@ public class ThongKeDAO {
 
         for(HoaDonChiTiet hdct: list){
             if(Integer.parseInt(hdct.getMonth()) == month && Integer.parseInt(hdct.getYear()) == year){
-                tien = hdct.getGiaSanPham();
+                tien = hdct.getTien();
             }
         }
         return tien;
