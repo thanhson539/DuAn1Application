@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -327,15 +328,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         int resourceId = getResources().getIdentifier(srcImg, "drawable", getPackageName());
         Picasso.get().load(resourceId).into(imgAnh);
 
-        tvGia.setText(""+sanPham.getGiaSanPham());
+        tvGia.setText(""+sanPham.getGiaSanPham()+" vnđ");
         tvKho.setText("Kho: "+sanPham.getSoLuongConLai());
 
         GioHangDAO gioHangDAO = new GioHangDAO(ChiTietSanPhamActivity.this);
         GioHang gioHang = new GioHang();
-        gioHang.setTrangThaiMua(1);
-        gioHang.setSanPham_id(sanPham.getSanPham_id());
-        gioHang.setNguoiDung_id(getNguoiDung_id);
-        gioHangDAO.themVaoGioHang(gioHang);
 
         imgMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -345,10 +342,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 }
                 tvSoluongmua.setText(""+(Integer.parseInt(tvSoluongmua.getText().toString())-1));
                 gioHang.setSoLuong(Integer.parseInt(tvSoluongmua.getText().toString()));
-                gioHangDAO.suaSoLuong(gioHang);
 
-                int price = gioHang.getSoLuong() * sanPham.getGiaSanPham();
-                tvGia.setText(""+price);
+                int price = ((Integer.parseInt(tvSoluongmua.getText().toString())) * sanPham.getGiaSanPham());
+                tvGia.setText(""+price+" vnđ");
             }
         });
 
@@ -361,19 +357,28 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 }
                 tvSoluongmua.setText(""+(Integer.parseInt(tvSoluongmua.getText().toString())+1));
                 gioHang.setSoLuong(Integer.parseInt(tvSoluongmua.getText().toString()));
-                gioHangDAO.suaSoLuong(gioHang);
 
-                int price = gioHang.getSoLuong() * sanPham.getGiaSanPham();
-                tvGia.setText(""+price);
+                int price = ((Integer.parseInt(tvSoluongmua.getText().toString())) * sanPham.getGiaSanPham());
+                tvGia.setText(""+price+" vnđ");
             }
         });
 
         btnMua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<GioHang> listMuaHang = gioHangDAO.getDsMuaHang(getNguoiDung_id, 1);
-                int tongTien = (sanPham.getGiaSanPham() * Integer.parseInt(tvSoluongmua.getText().toString()));
+                gioHang.setSanPham_id(sanPham.getSanPham_id());
+                gioHang.setNguoiDung_id(getNguoiDung_id);
                 gioHang.setSoLuong(Integer.parseInt(tvSoluongmua.getText().toString()));
+                gioHang.setGiaSanPham(sanPham.getGiaSanPham());
+                gioHang.setAnhSanPham(sanPham.getAnhSanPham());
+                gioHang.setTenSanPham(sanPham.getTenSanPham());
+//                gioHangDAO.themVaoGioHang(gioHang);
+
+                int tongTien = (sanPham.getGiaSanPham() * Integer.parseInt(tvSoluongmua.getText().toString()));
+//                List<GioHang> listMuaHang = gioHangDAO.getDsMuaHang(getNguoiDung_id, 1);
+                List<GioHang> listMuaHang = new ArrayList<>();
+                listMuaHang.add(gioHang);
+
                 Intent intent = new Intent(ChiTietSanPhamActivity.this, DiaChiNhanHangActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("listGioHang", (Serializable) listMuaHang);

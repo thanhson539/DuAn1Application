@@ -1,6 +1,7 @@
 package md18202.nhom2.duan1application.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.Serializable;
 import java.util.List;
 
+import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.R;
 
@@ -29,6 +31,8 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
     int tongTien, hinhThucThanhToan;
     String diaChi, tenNguoiNhan, sdt;
     List<GioHang> listGioHang;
+    SharedPreferences sharedPreferences;
+    int nguoiDung_id;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,9 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
         tvTam_tinh = findViewById(R.id.tvTam_tinh);
         tvThanh_tien = findViewById(R.id.tvThanh_tien);
         imgBack = findViewById(R.id.imgBack);
+
+        sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
 
         Intent intent = getIntent();
         tongTien = intent.getIntExtra("tongTien", 0);
@@ -103,5 +110,6 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
     }
 }

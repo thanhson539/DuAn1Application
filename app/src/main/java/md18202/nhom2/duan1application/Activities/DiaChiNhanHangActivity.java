@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.List;
 
+import md18202.nhom2.duan1application.DAO.GioHangDAO;
 import md18202.nhom2.duan1application.Models.GioHang;
 import md18202.nhom2.duan1application.R;
 
@@ -132,6 +133,7 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         finish();
     }
 
@@ -278,4 +280,5 @@ public class DiaChiNhanHangActivity extends AppCompatActivity {
         }
         return check;
     }
+
 }

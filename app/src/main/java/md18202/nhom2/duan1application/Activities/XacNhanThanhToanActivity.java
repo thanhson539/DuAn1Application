@@ -43,6 +43,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
     HoaDonChiTietDAO hoaDonChiTietDAO;
     SanPhamThanhToanAdapter sanPhamThanhToanAdapter;
     SanPhamDAO sanPhamDAO;
+    GioHang gioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         tvDia_chi_nhan_hang = findViewById(R.id.tvDia_chi_nhan_hang);
         btnXac_nhan_dat_hang = findViewById(R.id.btnXac_nhan_dat_hang);
         sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
-        nguoiDung_id = sharedPreferences.getInt("nguoiDung_id",-1);
+        nguoiDung_id = sharedPreferences.getInt("nguoiDung_id", -1);
 
         hoaDonDAO = new HoaDonDAO(this);
         hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
@@ -76,12 +77,13 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         sanPhamThanhToanAdapter = new SanPhamThanhToanAdapter(listGioHang, XacNhanThanhToanActivity.this);
         recycleView_thanh_toan.setAdapter(sanPhamThanhToanAdapter);
 
+
         tvNguoi_nhan_hang.setText(tenNguoiNhan);
         tvSdt_nguoi_nhan.setText(sdt);
-        tvThanh_tien.setText(""+tongTien);
-        tvGia_tam_tinh.setText(""+tongTien);
+        tvThanh_tien.setText("" + tongTien);
+        tvGia_tam_tinh.setText("" + tongTien);
         tvDia_chi_nhan_hang.setText(diaChi);
-        if (hinhThucThanhToan == 0){
+        if (hinhThucThanhToan == 0) {
             imgHinh_thuc_thanh_toan.setImageResource(R.drawable.thanhtoan_account_cash);
             tvHinh_thuc_thanh_toan.setText("Thanh toán tiền mặt");
         } else if (hinhThucThanhToan == 1) {
@@ -107,7 +109,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 xacNhanDatHang();
-                }
+            }
         });
 
     }
@@ -118,7 +120,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         finish();
     }
 
-    public void xacNhanDatHang(){
+    public void xacNhanDatHang() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xác nhận")
                 .setPositiveButton("Đặt hàng", new DialogInterface.OnClickListener() {
@@ -136,8 +138,8 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                         if (hoaDonDAO.themHoaDon(hoaDon) > 0) {
                             GioHangDAO gioHangDAO = new GioHangDAO(XacNhanThanhToanActivity.this);
                             for (GioHang gioHang : listGioHang) {
-                                if(gioHang.getTrangThaiMua()==1){
-                                    gioHangDAO.xoaKhoiGioHang(gioHang.getSanPham_id(), nguoiDung_id);
+//                                if (gioHang.getTrangThaiMua() == 1) {
+                                    gioHangDAO.xoaSauKhiDatHang(gioHang.getSanPham_id(), nguoiDung_id, 1);
                                     HoaDonChiTiet hdct = new HoaDonChiTiet();
                                     HoaDon hoaDon1 = hoaDonDAO.getHoaDonCuoiCung(nguoiDung_id);
                                     hdct.setHoaDon_id(hoaDon1.getHoaDon_id());
@@ -145,12 +147,12 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                                     hdct.setSoLuong(gioHang.getSoLuong());
                                     hdct.setTrangThaiThanhToan(0);
                                     hdct.setTrangThaiDonHang(0);
-                                    if(hoaDonChiTietDAO.themHoaDonChiTiet(hdct) > 0){
+                                    if (hoaDonChiTietDAO.themHoaDonChiTiet(hdct) > 0) {
                                         SanPham sanPham = sanPhamDAO.getSanPham(gioHang.getSanPham_id());
-                                        sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai())-(gioHang.getSoLuong())))));
+                                        sanPham.setSoLuongConLai(Integer.parseInt(String.valueOf(((sanPham.getSoLuongConLai()) - (gioHang.getSoLuong())))));
                                         sanPhamDAO.soLuongConLai(sanPham);
                                     }
-                                }
+//                                }
                                 startActivity(new Intent(XacNhanThanhToanActivity.this, MainActivity.class));
                                 finish();
                             }

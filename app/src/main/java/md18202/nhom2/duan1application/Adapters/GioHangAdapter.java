@@ -77,7 +77,20 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
         holder.imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                xoaSanPhamKhoiGioHang(holder.getAdapterPosition(), holder.tvSo_luong_mua);
+                if(gioHangDAO.xoaKhoiGioHang(list.get(holder.getAdapterPosition()).getSanPham_id(), list.get(holder.getAdapterPosition()).getNguoiDung_id()) > 0){
+                    Toast.makeText(context, "Da xoa khoi gio hang", Toast.LENGTH_SHORT).show();
+                    list.remove(holder.getAdapterPosition());
+                    notifyDataSetChanged();
+                    price = 0;
+                    for(GioHang gioHang1: list){
+                        if(gioHang1.getTrangThaiMua()==1){
+                            price += (gioHang1.getGiaSanPham()) * (gioHang1.getSoLuong());
+                        }
+                    }
+                    context.tvTotal.setText(""+price);
+                }else{
+                    Toast.makeText(context, "Chua xoa khoi gio hang", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -183,7 +196,13 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
     public void xoaSanPhamKhoiGioHang(int viTri, TextView tvSoluong){
         if(gioHangDAO.xoaKhoiGioHang(list.get(viTri).getSanPham_id(), list.get(viTri).getNguoiDung_id()) > 0){
             Toast.makeText(context, "Da xoa khoi gio hang", Toast.LENGTH_SHORT).show();
-
+            price = 0;
+            for(GioHang gioHang1: list){
+                if(gioHang1.getTrangThaiMua()==1){
+                    price += (gioHang1.getGiaSanPham()) * (gioHang1.getSoLuong());
+                }
+            }
+            context.tvTotal.setText(""+price);
             list.remove(viTri);
             notifyDataSetChanged();
         }else{
