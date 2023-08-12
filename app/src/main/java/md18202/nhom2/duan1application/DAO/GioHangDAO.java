@@ -47,6 +47,12 @@ public class GioHangDAO{
         return sqLiteDatabase.update("GIOHANG", values, "sanPham_id = ? and nguoiDung_id = ?", new String[]{String.valueOf(gioHang.getSanPham_id()), String.valueOf(gioHang.getNguoiDung_id())});
     }
 
+    public long xoaSauKhiDatHang(int sanPham_id, int nguoiDung_id, int trangThaiMua){
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+
+        return sqLiteDatabase.delete("GIOHANG", "sanPham_id = ? and nguoiDung_id = ? and trangThaiMua = ?", new String[]{String.valueOf(sanPham_id), String.valueOf(nguoiDung_id), String.valueOf(trangThaiMua)});
+    }
+
     public long xoaKhoiGioHang(int sanPham_id, int nguoiDung_id){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
 

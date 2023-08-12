@@ -199,17 +199,42 @@
         </LinearLayout>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/btnChon_mua"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="15dp"
-        android:backgroundTint="#FFEFE0"
-        android:text="Chọn mua"
-        android:textColor="#4E352F"
-        android:textSize="26sp"
-        android:textStyle="normal"
-        android:layout_marginBottom="20dp"/>
+        >
+        <Button
+            android:id="@+id/btnThem_vao_gio_hang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#FFEFE0"
+            android:text="Thêm vào giỏ hàng"
+            android:textColor="#4E352F"
+            android:textSize="22sp"
+            android:textStyle="normal"
+            android:layout_marginBottom="20dp"/>
+        <Button
+            android:id="@+id/btnChon_mua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#FFEFE0"
+            android:text="Chọn mua"
+            android:textColor="#4E352F"
+            android:textSize="22sp"
+            android:textStyle="normal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
 </RelativeLayout>

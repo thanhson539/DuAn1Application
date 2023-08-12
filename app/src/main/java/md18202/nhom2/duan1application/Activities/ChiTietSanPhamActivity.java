@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,9 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,7 +41,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     ImageView imgAnh_sanpham_chitiet, imgBack, imgGio_hang, imgYeu_thich, imgHome, imgThong_bao;
     TextView tvTen_sanpham_chitiet, tvGia_sanpham_chitiet, tvSo_luong;
     RecyclerView recyclerView_binh_luan;
-    Button btnChon_mua;
+    Button btnChon_mua, btnThem_vao_gio_hang;
     EditText edDialog_binh_luan;
     SanPham sanPham;
     ImageView imgYeuThich_frameSPChiTiet2;
@@ -65,6 +69,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         tvGia_sanpham_chitiet = findViewById(R.id.tvGia_sanpham_chitiet);
         tvSo_luong = findViewById(R.id.tvSo_luong);
         btnChon_mua = findViewById(R.id.btnChon_mua);
+        btnThem_vao_gio_hang = findViewById(R.id.btnThem_vao_gio_hang);
         recyclerView_binh_luan = findViewById(R.id.recycler_view_binh_luan);
         binhLuanDAO = new BinhLuanDAO(this);
         sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
@@ -146,13 +151,23 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         });
 
         if(loaiTaiKhoan != 1){
-            btnChon_mua.setOnClickListener(new View.OnClickListener() {
+            btnThem_vao_gio_hang.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     chonMua(getNguoiDung_id, sanPham_id);
                 }
             });
+
+            if(sanPham.getSoLuongConLai()>0){
+                btnChon_mua.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogMuaNgay(sanPham);
+                    }
+                });
+            }
         }
+
 
     }
 
@@ -296,5 +311,83 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         }
         return check;
+    }
+
+    public void dialogMuaNgay(SanPham sanPham){
+        Dialog dialog = new Dialog(ChiTietSanPhamActivity.this);
+        dialog.setContentView(R.layout.dialog_mua_ngay);
+        TextView tvGia = dialog.findViewById(R.id.tvGia);
+        ImageView imgAnh = dialog.findViewById(R.id.imgAnh);
+        TextView tvKho = dialog.findViewById(R.id.tvKho);
+        TextView tvSoluongmua = dialog.findViewById(R.id.tvSo_luong_mua);
+        Button btnMua = dialog.findViewById(R.id.btnMua);
+        ImageView imgMinus = dialog.findViewById(R.id.imgMinus);
+        ImageView imgPlus = dialog.findViewById(R.id.imgPlus);
+
+        String srcImg = sanPham.getAnhSanPham();
+        int resourceId = getResources().getIdentifier(srcImg, "drawable", getPackageName());
+        Picasso.get().load(resourceId).into(imgAnh);
+
+        tvGia.setText(""+sanPham.getGiaSanPham()+" vnđ");
+        tvKho.setText("Kho: "+sanPham.getSoLuongConLai());
+
+        GioHangDAO gioHangDAO = new GioHangDAO(ChiTietSanPhamActivity.this);
+        GioHang gioHang = new GioHang();
+
+        imgMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tvSoluongmua.getText().toString().matches("1")){
+                    return;
+                }
+                tvSoluongmua.setText(""+(Integer.parseInt(tvSoluongmua.getText().toString())-1));
+                gioHang.setSoLuong(Integer.parseInt(tvSoluongmua.getText().toString()));
+
+                int price = ((Integer.parseInt(tvSoluongmua.getText().toString())) * sanPham.getGiaSanPham());
+                tvGia.setText(""+price+" vnđ");
+            }
+        });
+
+        imgPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Integer.parseInt(tvSoluongmua.getText().toString()) == sanPham.getSoLuongConLai()
+                        || sanPham.getSoLuongConLai() == 0){
+                    return;
+                }
+                tvSoluongmua.setText(""+(Integer.parseInt(tvSoluongmua.getText().toString())+1));
+                gioHang.setSoLuong(Integer.parseInt(tvSoluongmua.getText().toString()));
+
+                int price = ((Integer.parseInt(tvSoluongmua.getText().toString())) * sanPham.getGiaSanPham());
+                tvGia.setText(""+price+" vnđ");
+            }
+        });
+
+        btnMua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gioHang.setSanPham_id(sanPham.getSanPham_id());
+                gioHang.setNguoiDung_id(getNguoiDung_id);
+                gioHang.setSoLuong(Integer.parseInt(tvSoluongmua.getText().toString()));
+                gioHang.setGiaSanPham(sanPham.getGiaSanPham());
+                gioHang.setAnhSanPham(sanPham.getAnhSanPham());
+                gioHang.setTenSanPham(sanPham.getTenSanPham());
+//                gioHangDAO.themVaoGioHang(gioHang);
+
+                int tongTien = (sanPham.getGiaSanPham() * Integer.parseInt(tvSoluongmua.getText().toString()));
+//                List<GioHang> listMuaHang = gioHangDAO.getDsMuaHang(getNguoiDung_id, 1);
+                List<GioHang> listMuaHang = new ArrayList<>();
+                listMuaHang.add(gioHang);
+
+                Intent intent = new Intent(ChiTietSanPhamActivity.this, DiaChiNhanHangActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listGioHang", (Serializable) listMuaHang);
+                bundle.putInt("tongTien", tongTien);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        dialog.show();
     }
 }

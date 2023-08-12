@@ -1,6 +1,7 @@
 package md18202.nhom2.duan1application.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class GioHang implements Serializable {
     private int nguoiDung_id;
@@ -30,6 +31,15 @@ public class GioHang implements Serializable {
         this.sanPham_id = sanPham_id;
         this.soLuong = soLuong;
         this.trangThaiMua = trangThaiMua;
+        this.giaSanPham = giaSanPham;
+        this.tenSanPham = tenSanPham;
+        this.anhSanPham = anhSanPham;
+    }
+
+    public GioHang(int nguoiDung_id, int sanPham_id, int soLuong, int giaSanPham, String tenSanPham, String anhSanPham) {
+        this.nguoiDung_id = nguoiDung_id;
+        this.sanPham_id = sanPham_id;
+        this.soLuong = soLuong;
         this.giaSanPham = giaSanPham;
         this.tenSanPham = tenSanPham;
         this.anhSanPham = anhSanPham;
