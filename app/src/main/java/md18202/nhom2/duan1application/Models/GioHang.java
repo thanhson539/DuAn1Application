@@ -1,8 +1,9 @@
 package md18202.nhom2.duan1application.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class GioHang implements Serializable {
+public class GioHang extends ArrayList<GioHang> implements Serializable {
     private int nguoiDung_id;
     private int sanPham_id;
     private int soLuong;
