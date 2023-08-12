@@ -57,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
     boolean isSelected;
     private ImageView imgAvatar_header, imgMuiTen_header;
     private TextView tvName_header, tvPhoneNumber_header, tvEmail_header;
+    int loaiTaiKhoan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
+        loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan",-1);
         //Check data quan ly binh luan
 //        BinhLuanDAO binhLuanDAO = new BinhLuanDAO(MainActivity.this);
 //        ArrayList<BinhLuan> list1 = binhLuanDAO.getDSBinhLuanCach2();
@@ -260,9 +262,16 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout_frame4.openDrawer(GravityCompat.START); // nếu isSelected = true, hiển thị NavigationView khi ấn back
                 isSelected = false; // reset lại giá trị của biến isSelected
             } else {
-                fragmentManager = getSupportFragmentManager();
-                fragment = new HomeFragment();
-                fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                if(loaiTaiKhoan == 0){
+                    fragmentManager = getSupportFragmentManager();
+                    fragment = new HomeFragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }else{
+                    fragmentManager = getSupportFragmentManager();
+                    fragment = new QL_DonHang_Fragment();
+                    fragmentManager.beginTransaction().replace(R.id.frameLayout_frame4, fragment).commit();
+                }
+
             }
         }
     }

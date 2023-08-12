@@ -46,6 +46,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     BinhLuanAdapter binhLuanAdapter;
     SharedPreferences sharedPreferences;
     int getNguoiDung_id;
+    int loaiTaiKhoan;
 
 
     @Override
@@ -68,6 +69,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         binhLuanDAO = new BinhLuanDAO(this);
         sharedPreferences = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
         getNguoiDung_id = sharedPreferences.getInt("nguoiDung_id", 0);
+        loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
 
 
         //lay san pham tu ben adapter san pham 2, khi click vao san pham se lay san pham do va truyen qua chi tiet san pham
@@ -143,12 +145,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
 
-        btnChon_mua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chonMua(getNguoiDung_id, sanPham_id);
-            }
-        });
+        if(loaiTaiKhoan != 1){
+            btnChon_mua.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chonMua(getNguoiDung_id, sanPham_id);
+                }
+            });
+        }
+
     }
 
     public void sanPhamYeuThich(int sanPham_id, int nguoiDung_id, ImageView imageView) {
