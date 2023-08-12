@@ -49,7 +49,7 @@ import md18202.nhom2.duan1application.R;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout_frame4;
-    private Toolbar toolbar_frame4;
+    public Toolbar toolbar_frame4;
     private FrameLayout frameLayout_frame4;
     private NavigationView navigationView_frame4;
     private FragmentManager fragmentManager;

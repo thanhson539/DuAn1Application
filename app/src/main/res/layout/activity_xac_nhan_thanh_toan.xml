@@ -68,13 +68,13 @@
                     android:layout_margin="10dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvThongTinThanhToan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Giao vào thứ 2 ngày 20/10"
-                        android:textSize="16sp"
-                        android:textColor="#2D5714" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvThongTinThanhToan"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Giao vào thứ 2 ngày 20/10"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textColor="#2D5714" />-->
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view_don_hang_thanh_toan"
@@ -136,13 +136,13 @@
                     android:textSize="16sp"
                     android:textColor="#4E352F" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Thay đổi"
-                    android:textSize="16sp"
-                    android:textColor="#3852B0" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Thay đổi"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="#3852B0" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -203,13 +203,13 @@
                     android:textSize="16sp"
                     android:textColor="#4E352F" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Thay đổi"
-                    android:textSize="16sp"
-                    android:textColor="#3852B0" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Thay đổi"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="#3852B0" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -258,13 +258,13 @@
                     android:textSize="16sp"
                     android:textColor="#4E352F" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Thay đổi"
-                    android:textSize="16sp"
-                    android:textColor="#3852B0" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="Thay đổi"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="#3852B0" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -335,13 +335,13 @@
                     android:textSize="16sp"
                     android:text="Phí vận chuyển" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Chi tiết"
-                    android:textSize="16sp"
-                    android:textColor="#3852B0" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.5"-->
+<!--                    android:text="Chi tiết"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="#3852B0" />-->
 
                 <TextView
                     android:layout_width="0dp"

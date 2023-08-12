@@ -69,16 +69,16 @@ public class PhuongThucThanhToanActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radio_button_1){
                     hinhThucThanhToan = 0;
-                    Toast.makeText(PhuongThucThanhToanActivity.this, "Thanh toán tiền mặt", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(PhuongThucThanhToanActivity.this, "Thanh toán tiền mặt", Toast.LENGTH_SHORT).show();
                 } else if (checkedId == R.id.radio_button_2) {
                     hinhThucThanhToan = 1;
-                    Toast.makeText(PhuongThucThanhToanActivity.this, "Thẻ ATM", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(PhuongThucThanhToanActivity.this, "Thẻ ATM", Toast.LENGTH_SHORT).show();
                 } else if (checkedId == R.id.radio_button_3) {
                     hinhThucThanhToan = 2;
-                    Toast.makeText(PhuongThucThanhToanActivity.this, "Thêm thẻ tín dụng/Ghi nợ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(PhuongThucThanhToanActivity.this, "Thêm thẻ tín dụng/Ghi nợ", Toast.LENGTH_SHORT).show();
                 } else if (checkedId == R.id.radio_button_4) {
                     hinhThucThanhToan = 3;
-                    Toast.makeText(PhuongThucThanhToanActivity.this, "Ví điện tử", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(PhuongThucThanhToanActivity.this, "Ví điện tử", Toast.LENGTH_SHORT).show();
                 }
             }
         });

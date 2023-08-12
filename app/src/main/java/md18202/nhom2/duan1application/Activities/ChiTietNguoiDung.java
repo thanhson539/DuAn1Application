@@ -1,6 +1,7 @@
 package md18202.nhom2.duan1application.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +40,10 @@ public class ChiTietNguoiDung extends AppCompatActivity {
 
     private Uri selectedImageUri;
     private static final int REQUEST_CODE_PICK_IMAGE = 1;
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    private ImageView imgNewAvt_update;
+    private Uri uriImgNewAvt_update;
 
 
     @Override
@@ -66,9 +71,11 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         int loaiTaiKhoan = sharedPreferences.getInt("loaiTaiKhoan", -1);
 
         //Set data cho cac widget
-        boolean isUri = imgSrc.startsWith("content://");
-        if (isUri) {
-            Picasso.get().load(Uri.parse(imgSrc)).into(imgAvatar_chiTiet);
+        Toast.makeText(this, imgSrc + "", Toast.LENGTH_LONG).show();
+//        boolean isUri = imgSrc.startsWith("content://");
+        if (imgSrc.startsWith("content://")) {
+            Uri uri = Uri.parse(imgSrc);
+            Picasso.get().load(uri).into(imgAvatar_chiTiet);
         } else {
             int idResource = this.getResources().getIdentifier(imgSrc, "drawable", this.getPackageName());
             imgAvatar_chiTiet.setImageResource(idResource);
@@ -89,14 +96,6 @@ public class ChiTietNguoiDung extends AppCompatActivity {
             public void onClick(View v) {
                 //code
                 doiMatKhau(nguoiDung_id);
-            }
-        });
-
-        //Đổi thông tin người dùng
-        imgEdit_chiTiet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //code here
             }
         });
 
@@ -188,7 +187,7 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(ChiTietNguoiDung.this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_cap_nhat_nguoi_dung, null);
-        ImageView imgNewAvt_update = view.findViewById(R.id.imgNewAvt_update);
+        imgNewAvt_update = view.findViewById(R.id.imgNewAvt_update);
         EditText edtNewName_update = view.findViewById(R.id.edtNewName_update);
         EditText edtNewPhome_update = view.findViewById(R.id.edtNewPhome_update);
         EditText edtNewEmail_update = view.findViewById(R.id.edtNewEmail_update);
@@ -223,9 +222,10 @@ public class ChiTietNguoiDung extends AppCompatActivity {
         imgNewAvt_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChiTietNguoiDung.this, "Chưa câp nhật được ảnh nha cưng!", Toast.LENGTH_LONG).show();
+//                Toast.makeText(ChiTietNguoiDung.this, "Chưa câp nhật được ảnh nha cưng!", Toast.LENGTH_LONG).show();
 //                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
+                openGallery();
             }
         });
 
@@ -234,11 +234,13 @@ public class ChiTietNguoiDung extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int newNguoiDung_id = nguoiDung_id;
-                String newImgSrc = imgSrc;
+                String newImgSrc = String.valueOf(selectedImageUri);
+                Toast.makeText(ChiTietNguoiDung.this, newImgSrc + "", Toast.LENGTH_SHORT).show();
                 String newName = edtNewName_update.getText().toString();
                 String newPhone = edtNewPhome_update.getText().toString();
                 String newEmail = edtNewEmail_update.getText().toString();
                 NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(getApplicationContext());
+//                Toast.makeText(ChiTietNguoiDung.this, newImgSrc + "", Toast.LENGTH_LONG).show();
                 boolean check = nguoiDungDAO.capNhatThongTinNguoiDung(newNguoiDung_id, newImgSrc, newName, newPhone, newEmail);
                 if (check) {
                     SharedPreferences sharedPreferences1 = getSharedPreferences("NGUOIDUNG", MODE_PRIVATE);
@@ -322,23 +324,19 @@ public class ChiTietNguoiDung extends AppCompatActivity {
             tvLoaiTaiKhoan_chiTiet.setText("Admin");
         }
     }
-    //    Chưa hoàn thiện chức năng thêm ảnh
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null){
-//            selectedImageUri = data.getData();
-//        }
-//    }
-//
-//    private void showImageInImageView(Uri imageUri) {
-//        // Tạo Bitmap từ URI
-//        try {
-//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), imageUri);
-//            // Hiển thị ảnh lên ImageView
-//            imageView.setImageBitmap(bitmap);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            selectedImageUri = data.getData();
+            imgNewAvt_update.setImageURI(selectedImageUri);
+//            Toast.makeText(this, requestCode + "/" + resultCode + "/" + data.getData().getHost(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 }
