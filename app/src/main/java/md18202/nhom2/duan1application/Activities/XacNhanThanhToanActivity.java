@@ -156,9 +156,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                                 startActivity(new Intent(XacNhanThanhToanActivity.this, MainActivity.class));
                                 finish();
                             }
-                            Toast.makeText(XacNhanThanhToanActivity.this, "Đã thêm đơn hàng", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(XacNhanThanhToanActivity.this, "Thêm đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(XacNhanThanhToanActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
                     }

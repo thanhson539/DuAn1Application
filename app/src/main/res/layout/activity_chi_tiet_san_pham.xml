@@ -229,7 +229,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginTop="15dp"
             android:backgroundTint="#FFEFE0"
-            android:text="Chọn mua"
+            android:text="Mua ngay"
             android:textColor="#4E352F"
             android:textSize="22sp"
             android:textStyle="normal"
