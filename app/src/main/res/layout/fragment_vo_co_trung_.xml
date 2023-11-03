@@ -5,20 +5,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragments.VoCoCao_Fragment">
+
     <ImageView
-        android:background="#EEEEEE"
-        android:src="@drawable/sanpham_cotrung_xoaphong"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        android:background="#EEEEEE"
+        android:src="@drawable/sanpham_cotrung_xoaphong" />
+
     <TextView
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Vớ Cổ Trung" />
+        android:gravity="center"
+        android:text="Vớ Cổ Trung"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_vocotrung"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

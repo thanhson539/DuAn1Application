@@ -3,12 +3,33 @@ package md18202.nhom2.duan1application.Models;
 public class BinhLuan {
     private int binhLuan_id;
     private int nguoiDung_id;
+    private int sanPham_id;
     private String noiDung;
     private String thoiGian;
+    private String nguoiDung;
 
-    public BinhLuan(int binhLuan_id, int nguoiDung_id, String noiDung, String thoiGian) {
+    public String getNguoiDung() {
+        return nguoiDung;
+    }
+
+    public void setNguoiDung(String nguoiDung) {
+        this.nguoiDung = nguoiDung;
+    }
+
+
+    public BinhLuan(int binhLuan_id, int nguoiDung_id, int sanPham_id, String noiDung, String thoiGian, String nguoiDung) {
         this.binhLuan_id = binhLuan_id;
         this.nguoiDung_id = nguoiDung_id;
+        this.sanPham_id = sanPham_id;
+        this.noiDung = noiDung;
+        this.thoiGian = thoiGian;
+        this.nguoiDung = nguoiDung;
+    }
+
+    public BinhLuan(int binhLuan_id, int nguoiDung_id, int sanPham_id, String noiDung, String thoiGian) {
+        this.binhLuan_id = binhLuan_id;
+        this.nguoiDung_id = nguoiDung_id;
+        this.sanPham_id = sanPham_id;
         this.noiDung = noiDung;
         this.thoiGian = thoiGian;
     }
@@ -30,6 +51,14 @@ public class BinhLuan {
 
     public void setNguoiDung_id(int nguoiDung_id) {
         this.nguoiDung_id = nguoiDung_id;
+    }
+
+    public int getSanPham_id() {
+        return sanPham_id;
+    }
+
+    public void setSanPham_id(int sanPham_id) {
+        this.sanPham_id = sanPham_id;
     }
 
     public String getNoiDung() {
